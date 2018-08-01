@@ -1,0 +1,221 @@
+*, *:before, *:after {
+  margin: 0; padding: 0; box-sizing: border-box; font: inherit;
+  color: inherit; text-decoration: none;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Raleway', sans-serif; /*Global font properties*/
+  font-weight: 400;
+  font-display: optional;
+  color: #f2f2f2; /* standar color */
+
+}
+
+html{
+  position: absolute;
+  background-color: white;
+}
+
+body{
+  position: relative;
+  background-color: transparent;
+}
+
+
+
+
+
+
+
+
+
+/* header --------------------------------------------------------------------*/
+#top_nav_container{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height:40px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 20px;
+  /*structure*/
+  background-color:rgba(26, 26, 26, 0.4);
+  border-top: 2px solid #347B98;
+}
+
+#header_title{
+  flex-grow: 1;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: default;
+  transition: all 0.3s ease 0s;
+}
+
+.nav_layer{
+  position: fixed;
+  top: 40px;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color:rgba(26, 26, 26, 0.4);
+  z-index: -500;
+}
+
+/* nav_sub_container ---------------------*/
+#nav_sub_container{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  padding: 80px 20px 20px 20px;
+  background-color: #1a1a1a;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -250;
+}
+
+.nav_button{
+  width: 100%;
+  display: block;
+  text-transform: capitalize;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.3s ease 0s;
+  opacity: 0;
+}
+
+.nav_button:hover{
+  color: #FF6D62;
+}
+
+
+.nav_container_divider{
+  width:100%;
+}
+
+.nav_divider{
+  width: 30px;
+  margin: 20px 0;
+  height: 2px;
+  border: 1px solid;
+}
+
+#nav_events_button, #nav_sites_button{
+  font-size: 26px;
+  font-weight: bold;
+  margin: 7px 0;
+}
+
+#nav_blog_button, #nav_about_button{
+  font-size: 22px;
+  margin: 4px 0;
+}
+
+#nav_login_button, #nav_signup_button{
+  font-size: 20px;
+  margin: 2.5px 0;
+}
+
+/* header icons -----------*/
+.header_icon{
+  font-size: 30px;
+  cursor: pointer;
+  transition: color 0.3s ease 0s;
+}
+
+.flip_out_left{
+  transform: rotate(-180deg);
+  transition: transform 0.4s ease-in;
+}
+
+.flip_out_right{
+  transform: rotate(90deg);
+  transition: transform 0.2s ease-in;
+}
+
+@media only screen and (max-height: 400px){
+  #nav_sub_container{
+    overflow-y: scroll;
+  }
+}
+
+@media only screen and (min-width: 426px) and (max-width: 1023px){
+  #nav_sub_container{
+    max-width: 300px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #top_nav_container{
+    height: 55px;
+  }
+
+  #header_title{
+    font-size: 24px;
+    flex-grow: 0;
+  }
+
+  #nav_sub_container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background-color: transparent;
+    opacity: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: -250;
+  }
+
+  #nav_sites_button, #nav_events_button, #nav_blog_button,
+  #nav_about_button, #nav_signup_button, #nav_login_button{
+    font-size: 19px;
+    font-weight: bold;
+    margin: 0 0 0 30px;
+  }
+
+  #nav_login_button{
+    order: 1;
+  }
+
+  .nav_button{
+    width: auto;
+    display: auto;
+    text-transform: capitalize;
+    white-space: auto;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    opacity: 1;
+  }
+
+  #nav_login_button{
+    background-color: #F2F2F2;
+    color: #347B98;
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 18px;
+  }
+
+  #nav_login_button:hover{
+    background-color: #ececec;
+    border-radius: 10px;
+    color: #FF6D62;
+  }
+}
+
+/* --------- END HEADER ------------------------------------------------------*/
+
+/* --------- BODY SECTIONS ---------------------------------------------------*/
