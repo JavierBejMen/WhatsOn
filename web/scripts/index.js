@@ -65,68 +65,45 @@ const leave_locks = () => {
 
 //Global param object
 //Constructor
-const Info = () => ({
-  windowHeight: 0,
-  sections: [],
-  nSections: 6,
-  currentSection: 0,
-  touchStartY: 0,
-  touchStartT: 0,
-  currentY: 0,
-  fitCurrentY() {
-    this.currentY = this.sections[this.currentSection];
-  },
-  isNotCurrentSectionFirst() {
-    return (this.currentSection !== 0);
-  },
-  currentYAdd(sum) {
-    this.currentY += sum;
-    if(this.currentY < 0){
-      this.currentY = 0;
-    }else if(this.currentY > this.sections[this.nSections-1]){
-      this.currentY = this.sections[this.nSections-1];
-    }
-  },
-  isNotCurrentSectionLast() {
-    return (this.currentSection !== (this.nSections-1));
-  },
-  fitWindowHeight() {
-    if(this.windowHeight !== $(window).height()){
-      this.windowHeight = $(window).height();
-      return true;
-    }else{
-      return false;
-    }
-  },
-  fitSections() {
-    for(let i = 0; i < this.nSections; ++i){
-      this.sections[i] = i*this.windowHeight;
-    }
-  },
-  get_sections(i) {
-    if(i < 0 || i >= this.nSections){
-      console.log("Err on access sections[i], i: "+i+", out of range");
-    }else{
-      return this.sections[i];
-    }
-  },
-  log() {
-    console.log("windowHeight: " + this.windowHeight + "\n" +
-      "sections: " + this.sections +"\n"+
-      "currentSection: " + this.currentSection +"\n"+
-      "nSections: " + this.nSections +"\n"+
-      "touchStartY: " + this.touchStartY +"\n"+
-      "touchStartT: " + this.touchStartT +"\n"+
-      "currentY: " + this.currentY);
-  },
-});
 
-//Object
-const global = Info();
 
 
 /* scroll handler functions --------------------------------------------------*/
+const keys = {37: 1, 38: 1, 39: 1, 40: 1};
 
+const preventDefault = (e) => {
+  e = e || window.event;
+  if (e.preventDefault)
+      e.preventDefault();
+  e.returnValue = false;
+}
+
+const preventDefaultForScrollKeys = (e) => {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+const disableScroll = () => {
+  if (window.addEventListener) // older FF
+      window.addEventListener('DOMMouseScroll', preventDefault, false);
+  window.addEventListener("wheel", preventDefault); // modern standard
+  window.addEventListener("mousewheel", preventDefault); // older browsers, IE
+  window.addEventListener("touchmove", preventDefault); // mobile
+  document.onkeydown  = preventDefaultForScrollKeys;
+  document.body.style.touchAction = "none";
+}
+
+const enableScroll = () => {
+    if (window.removeEventListener)
+        window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    window.removeEventListener("wheel", preventDefault);
+    window.removeEventListener("mousewheel", preventDefault);
+    window.removeEventListener("touchmove", preventDefault);
+    document.onkeydown = null;
+    document.body.style.touchAction = "auto";
+}
 
 const scroll_spy_handler = (e) => {
   console.log(e);
@@ -203,16 +180,7 @@ touch_end_scroll_handler = (e) => {
 }*/
 
 /* resize handler functions --------------------------------------------------*/
-const resize_height_handler = () => {
-    if(global.fitWindowHeight()){
-      global.log();
-      global.fitSections();
-      if(scroll_lock.enter(5, true)){
-        //section_scroll_to(global.currentSection, 0, false);
-        scroll_lock.leave(5, true);
-      }
-    }
-}
+
 
 const reset_desktop_css = () => {
   $('.header_icon').hide();
@@ -220,8 +188,8 @@ const reset_desktop_css = () => {
   $('.nav_button').show().css("opacity", "1");
   $('#nav_layer').hide();
   $('.nav_container_divider').hide();
-  //animate_in_section_scroll_nav(88, 0);
   $('#top_nav_container').show();
+  enableScroll();
 }
 
 const reset_mobile_css = () => {
@@ -269,7 +237,7 @@ const resize_desktop_handler = () => {
 
 const display_mobile_nav = () => {
   if(nav_display_lock.enter()){
-    scroll_lock.enter(2, true); //Block scrolling
+    disableScroll();
 
 
      //500 t
@@ -316,6 +284,7 @@ const close_mobile_nav = () =>{
     width: 'toggle', opacity: 0}, 200,$.bez([.75,.15,1,.15]), function(){
       $('#close_icon').toggleClass('flip_out_right');
       //animate_in_section_scroll_nav(3); //Free scrolling & animation
+      enableScroll();
       window.setTimeout(function(){nav_display_lock.leave();}, 100);
     });
   }
@@ -325,29 +294,7 @@ const close_mobile_nav = () =>{
 
 
 /*parallax*/
-const parallax = () =>{
-  if(global.currentSection === 0){
-    //$('#top_nav_container').css("background-color", "rgba(26, 26, 26, 0.4)");
-$('.section_icon').css("color", "#f2f2f2");
-    $('#parallax_0').show();
-    $('#parallax_1').hide();
-    $('#parallax_2').hide();
-  }else if(global.currentSection === 2){
-    $('#top_nav_container').css("background-color", "rgba(26, 26, 26, 0.4)");
-$('.section_icon').css("color", "#f2f2f2");
-    $('#parallax_0').hide();
-    $('#parallax_1').show();
-    $('#parallax_2').hide();
-  }else if(global.currentSection === 4){
-    //$('#top_nav_container').css("background-color", "rgba(26, 26, 26, 0.4)");
-$('.section_icon').css("color", "#f2f2f2");
-    $('#parallax_2').show();
-    $('#parallax_1').hide();
-    $('#parallax_0').hide();
-  }else{
-    $('.section_icon').css("color", "#1a1a1a");
-  }
-}
+
 
 
 /* ------------------- MAIN --------------------------------------------------*/
@@ -363,8 +310,7 @@ $(document).ready(function(){
       $(window).on('resize', resize_mobile_handler);
     }
 
-    resize_height_handler();
-    $(window).on('resize', resize_height_handler);
+
 
     // Mobile nav handler
     $('#display_icon').on('click', display_mobile_nav);
@@ -387,7 +333,7 @@ $(document).ready(function(){
       parallax();
     });*/
 
-    global.log();
+
 
     //Custom evenst debug
     $('#event_emmiter').on("nav_animation_start", function(){

@@ -25,14 +25,6 @@ body{
   background-color: transparent;
 }
 
-
-
-
-
-
-
-
-
 /* header --------------------------------------------------------------------*/
 #top_nav_container{
   position: fixed;
@@ -131,6 +123,7 @@ body{
   font-size: 30px;
   cursor: pointer;
   transition: color 0.3s ease 0s;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .flip_out_left{
@@ -219,3 +212,30 @@ body{
 /* --------- END HEADER ------------------------------------------------------*/
 
 /* --------- BODY SECTIONS ---------------------------------------------------*/
+
+#intro_section{
+  width: 100%;
+  height: 100%;
+
+}
+
+.prueba_section{
+  width: 100%;
+  height: 100%;
+}
+
+#prueba1_section{
+  background-color: black;
+}
+
+#prueba2_section{
+  background-color: red;
+}
+
+#prueba3_section{
+  background-color: yellow;
+}
+
+#prueba4_section{
+
+}
