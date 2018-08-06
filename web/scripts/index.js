@@ -359,7 +359,7 @@ $(document).ready(function(){
 $(document).ready(function(){
   // Attach resize handler and set responsive properties on web landing
 
-
+  window.addEventListener("scroll", scroll_spy_handler);
   /*//Mobile
   window.addEventListener('touchmove',function(e){
     touch_move_scroll_handler(e.touches[0].pageY);
