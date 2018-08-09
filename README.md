@@ -23,5 +23,5 @@ La carpeta de web es para el blog, y la de app lo que habia en el drive de alex,
 - [Django and PWAPPS](https://www.quora.com/Is-there-a-way-to-create-a-progressive-web-app-with-Django#MoreAnswers)
 - [FrontEnd and PWAPPS](https://medium.com/progressive-web-apps/2018-state-of-progressive-web-apps-f7517d43ba70)
 - [FrontEnd Jquery vs Angular vs Vue vs React](https://www.academind.com/learn/javascript/jquery-future-angular-react-vue/)
-- [Python general 1](https://datafloq.com/read/advantages-and-disadvantages-of-using-django/3050)
-- [Python general 2](https://hackernoon.com/advantages-and-disadvantages-of-django-499b1e20a2c5)
+- [Django general 1](https://datafloq.com/read/advantages-and-disadvantages-of-using-django/3050)
+- [Django general 2](https://hackernoon.com/advantages-and-disadvantages-of-django-499b1e20a2c5)
