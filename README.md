@@ -27,4 +27,3 @@ La carpeta de web es para el blog, y la de app lo que habia en el drive de alex,
 - [Django general 2](https://hackernoon.com/advantages-and-disadvantages-of-django-499b1e20a2c5)
 - [Patrones de diseño PHP](https://diego.com.es/patrones-de-diseno-en-php)
 - [NodeJS vs PHP](https://www.netguru.co/blog/nodejs-vs-php)
-- 
