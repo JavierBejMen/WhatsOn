@@ -25,3 +25,6 @@ La carpeta de web es para el blog, y la de app lo que habia en el drive de alex,
 - [FrontEnd Jquery vs Angular vs Vue vs React](https://www.academind.com/learn/javascript/jquery-future-angular-react-vue/)
 - [Django general 1](https://datafloq.com/read/advantages-and-disadvantages-of-using-django/3050)
 - [Django general 2](https://hackernoon.com/advantages-and-disadvantages-of-django-499b1e20a2c5)
+- [Patrones de diseño PHP](https://diego.com.es/patrones-de-diseno-en-php)
+- [NodeJS vs PHP](https://www.netguru.co/blog/nodejs-vs-php)
+- 
