@@ -18,7 +18,7 @@ La carpeta de web es para el blog, y la de app lo que habia en el drive de alex,
 
 
 
-## Reunion
+## Reunión
 - [Top 10 Django](https://www.linkedin.com/pulse/top-10-sites-built-django-framework-vladimir-bogdanov)
 - [Django and PWAPPS](https://www.quora.com/Is-there-a-way-to-create-a-progressive-web-app-with-Django#MoreAnswers)
 - [FrontEnd and PWAPPS](https://medium.com/progressive-web-apps/2018-state-of-progressive-web-apps-f7517d43ba70)
