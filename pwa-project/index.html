@@ -1,70 +1,91 @@
 <!doctype html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="./styles/bootstrap-4.1.3/css/bootstrap.css">
-        <!-- <link rel="stylesheet" href="./styles/stylesheet.css"> -->
-        <link rel="stylesheet" href="./styles/material-design-icons-2.2.0/material-icons.css">
-        <title>WhatsOn</title>
-    </head>
-    <body>
-        <header class="fixed-top">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white-50" id="menuBar">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./styles/bootstrap-4.1.3/css/bootstrap.css">
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="./styles/material-design-icons-2.2.0/material-icons.css">
+    <link rel="stylesheet" href="./styles/stylesheet.css">
+    <title>WhatsOn PWA</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark text-white-50" id="idMenuBar">
             <button class="navbar-toggler" type="button" data-toggle="collapse" 
-            data-target="#menuBarContent" aria-controls="menuBarContent" aria-expanded="false" 
+            data-target="#idMenuBarContent" aria-controls="idMenuBarContent" aria-expanded="false" 
             aria-label="Mostrar/Ocultar barra de menú">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="menuBarContent">
+            <div class="collapse navbar-collapse" id="idMenuBarContent">
                 <ul class="navbar-nav w-100 justify-content-between">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="Menú">
+                        <a class="nav-link btn btn-dark" href="#" title="Menú">
                             <i class="material-icons">menu</i>
                         </a>
                     </li>
-                    <li class="nav-item">GRANADA</li>
+                    <li class="nav-item"><p>GRANADA</p></li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="Buscar">
+                        <a class="nav-link btn btn-dark" href="#" title="Buscar">
                             <i class="material-icons">search</i>
                         </a>
                     </li>
                 </ul>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white-50" id="navigationBar">
+        <nav class="navbar navbar-expand sticky-top navbar-dark bg-dark text-white-50" id="idNavigationBar">
             <button class="navbar-toggler" type="button" data-toggle="collapse" 
-            data-target="#navigationBarContent" aria-controls="navigationBarContent" aria-expanded="false" 
+            data-target="#idNavigationBarContent" aria-controls="idNavigationBarContent" aria-expanded="false" 
             aria-label="Mostrar/Ocultar barra de navegación">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navigationBarContent">
+            <div class="collapse navbar-collapse" id="idNavigationBarContent">
                 <ul class="navbar-nav w-100 nav-justified">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="material-icons" title="Mapa de locales">map</i>
+                        <a class="nav-link btn btn-dark" href="#" title="Mapa de locales" 
+                        onclick="setClassAsSelectedNavigationItem(this)">
+                            <i class="material-icons">map</i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="material-icons" title="Locales">local_bar music_video</i>
+                        <a class="nav-link btn btn-dark" href="#" title="Locales" 
+                        onclick="setClassAsSelectedNavigationItem(this)">
+                            <i class="material-icons">local_bar music_video</i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="material-icons" title="Eventos de locales">event</i>
+                        <a class="nav-link btn btn-dark" href="#" title="Eventos de locales" 
+                        onclick="setClassAsSelectedNavigationItem(this)">
+                            <i class="material-icons">event</i>
                         </a>
                     </li>
                 </ul>
             </div>
         </nav>
-        </header>
+    </header>
+    <main role="main"></main>
+    <footer class="container-expand bg-dark text-white-50"></footer>
+    
+    <!-- JQuery, Popper.js and Bootstrap JS -->
+    <script src="./styles/jquery-3.3.1/jquery-3.3.1.js"></script>
+    <script src="./styles/popper-1.14.4/popper.js" ></script>
+    <script src="./styles/bootstrap-4.1.3/js/bootstrap.js"></script>
+    <script>
+        const selecteNavigationElementClass = "classSelectedNavigationItem";
         
-        <!-- JQuery, Popper.js and Bootstrap JS -->
-        <script src="./styles/jquery-3.3.1/jquery-3.3.1.js"></script>
-        <script src="./styles/popper-1.14.4/popper.js" ></script>
-        <script src="./styles/bootstrap-4.1.3/js/bootstrap.js"></script>
-    </body>
+        function setClassAsSelectedNavigationItem(htmlElement) {
+            document.getElementsByClassName(selecteNavigationElementClass)[0].
+            classList.remove(selecteNavigationElementClass);
+            htmlElement.classList.add(selecteNavigationElementClass);
+        }
+        function loadHtmlContentInHtmlTag(htmlTag, htmlFilePath) {
+            $(htmlTag).load(htmlFilePath);
+        }
+        
+        document.getElementById("idNavigationBar").getElementsByTagName("a")[1]
+        .classList.add(selecteNavigationElementClass);
+        loadHtmlContentInHtmlTag("main","./views/categories.html");
+    </script>
+</body>
 </html>
-
