@@ -1,23 +1,33 @@
-#idNavigationBar {
-    margin-top: 56px;
+.btn {
+    text-transform: none;
 }
 
-/*#idNavigationBar a.border-bottom {
+.invisible {
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.classRoundNavigationLink {
+    border-radius: 1rem;
+}
+
+#idMainNavigationBar {
+    margin-top: 62px;
+}
+
+#idMainNavigationBar a {
+    border-bottom: 5px solid #1d2124;
+}
+
+#idMainNavigationBar a.classSelectedItemInNavigationBar {
     border-bottom: 5px solid !important;
 }
 
-.classSelectedNavigationItem {
-    border-bottom: 5px solid;
-}*/
-
 main {
-    padding-top: 10px;
+    padding-top: 10px;    
     padding-bottom: 10px;
-}
-
-footer {
-    min-height: 56px;
-    margin: 0;
 }
 
 .classHorizontalListContainer {
@@ -29,24 +39,68 @@ footer {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  padding-bottom: 5px;
 }
 
 .classHorizontalListCol {
     flex: 0 0 auto;
-}
-
-.classHorizontalLocalsList .card-body {
-    padding-bottom: 0;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 720px) {
     .classHorizontalLocalsList .card-body {
-        min-height: 180px;
+        min-height: 150px;
     }
 }
 
 @media screen and (min-width: 720px) {
     .classHorizontalLocalsList .card-body {
-        min-height: 175px;
+        min-height: 195px;
     }
+}
+
+.classFloatingButton {
+    position: fixed;
+    padding: 15px 0 0 0;
+	width: 55px;
+	height: 55px;
+	bottom: 20px;
+    right: 20px;
+    border-radius: 2rem;
+    z-index: 1;
+}
+
+#idLocalMenuBar {
+    margin-top: 52px;
+}
+
+#idLocalViewContainer > img {
+    max-height: 300px;
+}
+
+#idLocalViewCategoriesList {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#idLocalViewCategoriesList div span {
+    border-radius: 2rem;
+    cursor: auto;
+}
+
+#idLocalNameInDescription {
+    font-size: 120%;
+}
+
+#idLocalNavigationBar a {
+    border-bottom: 5px solid #e0e0e0;
+}
+
+#idLocalNavigationBar a.classSelectedItemInNavigationBar {
+    border-bottom: 5px solid !important;
+}
+
+footer {
+    min-height: 56px;
+    margin: 0;
 }

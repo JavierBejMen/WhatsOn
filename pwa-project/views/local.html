@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark text-white" id="idLocalMenuBar">
+    <ul class="navbar-nav w-100 justify-content-between">
+        <li class="nav-item">
+            <a class="nav-link classRoundNavigationLink" title="Volver atrás"
+            onclick="showMainNavigationBar(); loadHtmlFileInHtmlMainTag('./views/categories.html');">
+                <i class="material-icons">arrow_back</i>
+            </a>
+        </li>
+        <li class="nav-item"><h3><small>Lemon Rock</small></h3></li>
+        <li class="nav-item">
+            <a class="nav-link classRoundNavigationLink" href="#" title="Más sobre Lemon Rock">
+                <i class="material-icons">more_vert</i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<div class="container-fluid" id="idLocalViewContainer">
+<img class="img-fluid w-100" src="./assets/images/local-lemon-rock.jpg" alt="Imagen de Lemon Rock"
+aria-label="Imagen de Lemon Rock">
+<nav class="navbar navbar-expand navbar-light bg-light" id="idLocalNavigationBar">
+    <ul class="navbar-nav w-100 nav-justified">
+        <li class="nav-item">
+            <a class="nav-link" href="#" title="Información de Lemon Rock" 
+            onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdLocalNavigationBar,this)">INFO</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" title="Eventos de Lemon Rock" 
+            onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdLocalNavigationBar,this)">EVENTOS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" title="Fotogracías de Lemon Rock" 
+            onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdLocalNavigationBar,this)">FOTOS</a>
+        </li>
+    </ul>
+</nav>
+<div class="row" id="idLocalViewCategoriesList">
+    <div class="col"><span class="btn btn-elegant" disabled>En directo</span></div>
+    <div class="col"><span class="btn btn-elegant" disabled>Jazz</span></div>
+    <div class="col"><span class="btn btn-elegant" disabled>Rock</span></div>
+    <div class="col"><span class="btn btn-elegant" disabled>Terraza</span></div>
+    <div class="col"><span class="btn btn-elegant" disabled>Tapas</span></div>
+    <div class="col"><span class="btn btn-elegant" disabled>Restaurante</span></div>
+</div>
+<div class="container-fluid">
+    <p>
+        <span class="font-weight-bold" id="idLocalNameInDescription">Lemon Rock</span> es un hostal situado en el centro de Granada conocido por su ambiente relajado y sus conciertos en directo. Cada semana vienen 4 o 5 grupos a tocar música variada que suele oscilar...
+    </p>
+</div>
+<div class="container-fluid">
+    <h5 class="font-weight-bold">Precios</h5>
+    <p>Entrada: gratuita</p>
+    <p>Copa: 6 - 8 €</p>
+    <p>Cerveza: 2,40 €</p>
+    <p>Chupito: 1,50 €</p>
+</div>
+<div class="container-fluid">
+    <h5 class="font-weight-bold">Ubicación</h5>
+</div>
+<!-- <div class="dropdown">
+    <i class="material-icons">access_time</i>
+    <button class="btn bg-light text-dark dropdown-toggle" id="idLocalTimetableDropdownButton"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Hoy: 09:00 A.M. - 04:00 A.M.
+    </button>
+    <div class="dropdown-menu" aria-labelledby="idLocalTimetableDropdownButton">
+        <span class="dropdown-item">Mañana: 09:00 A.M. - 04:00 A.M.</button>
+        <span class="dropdown-item">Lunes: 09:00 A.M. - 03:00 A.M.</button>
+        <span class="dropdown-item">Martes: 09:00 A.M. - 03:00 A.M.</button>
+    </div>
+</div> -->
+</div>
+<script>
+    document.getElementById(htmlIdLocalNavigationBar).getElementsByTagName("a")[0]
+    .classList.add(htmlClassSelectedItemInNavigationBar);
+</script>
