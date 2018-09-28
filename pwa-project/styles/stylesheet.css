@@ -21,7 +21,7 @@
     border-bottom: 5px solid #1d2124;
 }
 
-#idMainNavigationBar a.classSelectedItemInNavigationBar {
+#idMainNavigationBar a.classSelectedNavigationItem {
     border-bottom: 5px solid !important;
 }
 
@@ -70,11 +70,21 @@ main {
     z-index: 1;
 }
 
+#filterCategoriesModal .filterOfferButton, #filterCategoriesModal .filterEventButton,
+#filterCategoriesModal .filterCategorieButton {
+    border: 2px solid !important;
+}
+
+#filterCategoriesModal .filterCategorieButton:not([disabled]) {
+    color: #2e2e2e !important;
+    background-color: white !important;
+}
+
 #idLocalMenuBar {
     margin-top: 52px;
 }
 
-#idLocalViewContainer > img {
+#idLocalHeader > img {
     max-height: 300px;
 }
 
@@ -96,7 +106,7 @@ main {
     border-bottom: 5px solid #e0e0e0;
 }
 
-#idLocalNavigationBar a.classSelectedItemInNavigationBar {
+#idLocalNavigationBar a.classSelectedNavigationItem {
     border-bottom: 5px solid !important;
 }
 

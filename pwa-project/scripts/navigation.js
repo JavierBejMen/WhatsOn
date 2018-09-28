@@ -1,12 +1,18 @@
-const htmlClassSelectedItemInNavigationBar = "classSelectedItemInNavigationBar";
+
+const cssCharIdSelector = "#";
+const filePathCategoriesView = "./views/categories.html";
+const filePathLocalView = "./views/local.html";
+const filePathLocalInfoSubView = "./views/local-subviews/info.html";
+const htmlClassSelectedItemInNavigationBar = "classSelectedNavigationItem";
 const htmlIdMainNavigationBar = "idMainNavigationBar";
+const htmlTagMain = "main";
 const htmlIdLocalNavigationBar = "idLocalNavigationBar";
-const htmlMainTag = "main";
+const htmlIdLocalMain = "idLocalMain";
 
 function showMainNavigationBar() {
     document.getElementById(htmlIdMainNavigationBar).classList.remove("invisible");
 }
-function hideNavigationBar() {
+function hideMainNavigationBar() {
     document.getElementById(htmlIdMainNavigationBar).classList.add("invisible");
 }
 function setNavigationItemAsSelectedInNavigationBar(htmlIdNavigationBar, htmlElement) {
@@ -15,6 +21,20 @@ function setNavigationItemAsSelectedInNavigationBar(htmlIdNavigationBar, htmlEle
     classList.remove(htmlClassSelectedItemInNavigationBar);
     htmlElement.classList.add(htmlClassSelectedItemInNavigationBar);
 }
-function loadHtmlFileInHtmlMainTag(htmlFilePath) {
-    $(htmlMainTag).load(htmlFilePath);
+function loadCategoriesView() {
+    showMainNavigationBar();
+    loadHtmlFileInHtmlNodeByTag(htmlTagMain,filePathCategoriesView);
+}
+function loadLocalView() {
+    hideMainNavigationBar();
+    loadHtmlFileInHtmlNodeByTag(htmlTagMain,filePathLocalView);
+}
+function loadLocalSubView(filePathSubView) {
+    loadHtmlFileInHtmlNodeById(htmlIdLocalMain,filePathSubView);
+}
+function loadHtmlFileInHtmlNodeByTag(htmlNodeTag,htmlFilePath) {
+    $(htmlNodeTag).load(htmlFilePath);
+}
+function loadHtmlFileInHtmlNodeById(htmlNodeId,htmlFilePath) {
+    $(cssCharIdSelector + htmlNodeId).load(htmlFilePath);
 }

@@ -16,13 +16,13 @@
         <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark text-white" id="idMainMenuBar">
             <ul class="navbar-nav w-100 justify-content-between">
                 <li class="nav-item">
-                    <a class="nav-link classRoundNavigationLink" href="#" title="Menú">
+                    <a class="nav-link classRoundNavigationLink" href="#" title="Menú" aria-label="Menú">
                         <i class="material-icons">menu</i>
                     </a>
                 </li>
                 <li class="nav-item"><h2><small>GRANADA</small></h2></li>
                 <li class="nav-item">
-                    <a class="nav-link classRoundNavigationLink" href="#" title="Buscar">
+                    <a class="nav-link classRoundNavigationLink" href="#" title="Buscar" aria-label="Buscar">
                         <i class="material-icons">search</i>
                     </a>
                 </li>
@@ -31,19 +31,19 @@
         <nav class="navbar navbar-expand navbar-dark bg-dark text-white" id="idMainNavigationBar">
             <ul class="navbar-nav w-100 nav-justified">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Mapa de locales" 
+                    <a class="nav-link" href="#" title="Mapa de locales" aria-label="Mapa de locales" 
                     onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdMainNavigationBar,this)">
                         <i class="material-icons">map</i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Locales" 
+                    <a class="nav-link" href="#" title="Locales" aria-label="Locales" 
                     onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdMainNavigationBar,this)">
                         <i class="material-icons">apps</i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Eventos de locales" 
+                    <a class="nav-link" href="#" title="Eventos de locales" aria-label="Eventos de locales" 
                     onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdMainNavigationBar,this)">
                         <i class="material-icons">event</i>
                     </a>
@@ -63,8 +63,7 @@
     <script>
         document.getElementById(htmlIdMainNavigationBar).getElementsByTagName("a")[1]
         .classList.add(htmlClassSelectedItemInNavigationBar);
-        showMainNavigationBar();
-        loadHtmlFileInHtmlMainTag("./views/categories.html");
+        loadCategoriesView();
     </script>
 </body>
 </html>

@@ -1,12 +1,74 @@
 <div class="container-fluid" id="idCategoriesViewDiv">
-<a class="btn btn-mdb-color classFloatingButton" href="#">
+<!-- Button to activate modal window for categories filter -->
+<a class="btn btn-mdb-color waves-effect waves-light classFloatingButton" href="#filterCategoriesModal" 
+title="Filtro de categorías" data-toggle="modal">
     <i class="material-icons">filter_list</i>
 </a>
+<!-- Modal window for categories filter -->
+<div class="modal fade" id="filterCategoriesModal" tabindex="-1" role="dialog" 
+aria-labelledby="filterCategoriesModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterCategoriesModalLabel">Filtro de locales</h5>
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row text-center" aria-label="Filtro de locales">
+                    <div class="col-12">
+                        <span class="btn btn-outline-success waves-effect ml-0 filterOfferButton" 
+                        onclick="toggleFilterButton(typeOfFilterButton.Offers,this)" disabled>Ofertas</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="btn btn-warning waves-effect filterEventButton"
+                        onclick="toggleFilterButton(typeOfFilterButton.Events,this)">Eventos</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="btn btn-elegant waves-effect filterCategorieButton" 
+                        onclick="toggleFilterButton(typeOfFilterButton.Categorie,this)">Música en directo</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="btn btn-elegant waves-effect filterCategorieButton" 
+                        onclick="toggleFilterButton(typeOfFilterButton.Categorie,this)" disabled>Pub</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="btn btn-elegant waves-effect filterCategorieButton" 
+                        onclick="toggleFilterButton(typeOfFilterButton.Categorie,this)">Discoteca</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="btn btn-elegant waves-effect filterCategorieButton" 
+                        onclick="toggleFilterButton(typeOfFilterButton.Categorie,this)">Pop</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="btn btn-elegant waves-effect filterCategorieButton" 
+                        onclick="toggleFilterButton(typeOfFilterButton.Categorie,this)" disabled>Rock</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="btn btn-elegant waves-effect filterCategorieButton" 
+                        onclick="toggleFilterButton(typeOfFilterButton.Categorie,this)" disabled>Electrónica</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="btn btn-elegant waves-effect filterCategorieButton" 
+                        onclick="toggleFilterButton(typeOfFilterButton.Categorie,this)" disabled>Alternativo</span>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success waves-effect">Aplicar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid classHorizontalListContainer classHorizontalLocalsList">
     <h3 class="classHorizontalListTitle">Música en directo</h3>
     <div class="row classHorizontalListRow">
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/disco.jpg" 
                 alt="Imagen de local" aria-label="Imagen de local">
@@ -18,7 +80,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-lemon-rock.jpg" 
                 alt="Imagen de Lemon Rock" aria-label="Imagen de Lemon Rock">
@@ -30,7 +92,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-planta-baja.jpg" 
                 alt="Imagen de Plantabaja" aria-label="Imagen de Plantabaja">
@@ -42,7 +104,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-boogaclub.jpg" 
                 alt="Imagen de Boogaclub" aria-label="Imagen de Boogaclub">
@@ -54,7 +116,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-la-tertulia.jpg" 
                 alt="Imagen de La Tertulia" aria-label="Imagen de La Tertulia">
@@ -71,7 +133,7 @@
     <h3 class="classHorizontalListTitle">Rock</h3>
     <div class="row classHorizontalListRow">
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-industrial-copera.jpg" 
                 alt="Imagen de Industrial Copera" aria-label="Imagen de Industrial Copera">
@@ -83,7 +145,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-lemon-rock.jpg" 
                 alt="Imagen de Lemon Rock" aria-label="Imagen de Lemon Rock">
@@ -95,7 +157,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-perro-andaluz.jpg" 
                 alt="Imagen de Perro Andaluz" aria-label="Imagen de Perro Andaluz">
@@ -107,7 +169,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-la-rocka.jpg" 
                 alt="Imagen de La Rocka" aria-label="Imagen de La Rocka">
@@ -119,7 +181,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-rocknrolla-club.jpg" 
                 alt="Imagen de Rocknrolla Club" aria-label="Imagen de Rocknrolla Club">
@@ -136,7 +198,7 @@
     <h3 class="classHorizontalListTitle">Discoteca</h3>
     <div class="row classHorizontalListRow">
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-boom-boom-room.jpg" 
                 alt="Imagen de Boom Boom Room" aria-label="Imagen de Boom Boom Room">
@@ -148,7 +210,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-industrial-copera.jpg" 
                 alt="Imagen de Industrial Copera" aria-label="Imagen de Industrial Copera">
@@ -160,7 +222,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-mae-west.jpg" 
                 alt="Imagen de Mae West" aria-label="Imagen de Mae West">
@@ -172,7 +234,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-sala-el-tren.jpg" 
                 alt="Imagen de Sala El Tren" aria-label="Imagen de Sala El Tren">
@@ -184,7 +246,7 @@
             </div>
         </div>
         <div class="col-8 col-xs-8 col-sm-4 col-md-3 col-lg-2 classHorizontalListCol" 
-		onclick="hideNavigationBar(); loadHtmlFileInHtmlMainTag('./views/local.html');">
+		onclick="loadLocalView()">
             <div class="card">
                 <img class="card-img-top img-thumbnail" src="./assets/images/local-sala-vogue.jpg" 
                 alt="Imagen de Sala Vogue" aria-label="Imagen de Sala Vogue">
@@ -197,4 +259,5 @@
         </div>
     </div>
 </div>
+<script src="./scripts/categories-filter.js"></script>
 </div>
