@@ -1,40 +1,40 @@
 
-const cssCharIdSelector = "#";
-const filePathCategoriesView = "./views/categories.html";
-const filePathLocalView = "./views/local.html";
-const filePathLocalInfoSubView = "./views/local-subviews/info.html";
-const htmlClassSelectedItemInNavigationBar = "classSelectedNavigationItem";
-const htmlIdMainNavigationBar = "idMainNavigationBar";
-const htmlTagMain = "main";
-const htmlIdLocalNavigationBar = "idLocalNavigationBar";
-const htmlIdLocalMain = "idLocalMain";
+const CSS_CHAR_ID_SELECTOR = "#";
+const FILE_PATH_CATEGORIES_VIEW = "./views/categories.html";
+const FILE_PATH_LOCAL_VIEW = "./views/local.html";
+const FILE_PATH_LOCAL_INFO_SUBVIEW = "./views/local-subviews/info.html";
+const HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR = "classSelectedNavigationItem";
+const HTML_ID_MAIN_NAVIGATION_BAR = "idMainNavigationBar";
+const HTML_TAG_MAIN = "main";
+const HTML_ID_LOCAL_NAVIGATION_BAR = "idLocalNavigationBar";
+const HTML_ID_LOCAL_MAIN = "idLocalMain";
 
 function showMainNavigationBar() {
-    document.getElementById(htmlIdMainNavigationBar).classList.remove("invisible");
+    document.getElementById(HTML_ID_MAIN_NAVIGATION_BAR).classList.remove("invisible");
 }
 function hideMainNavigationBar() {
-    document.getElementById(htmlIdMainNavigationBar).classList.add("invisible");
+    document.getElementById(HTML_ID_MAIN_NAVIGATION_BAR).classList.add("invisible");
 }
 function setNavigationItemAsSelectedInNavigationBar(htmlIdNavigationBar, htmlElement) {
     document.getElementById(htmlIdNavigationBar)
-    .getElementsByClassName(htmlClassSelectedItemInNavigationBar)[0].
-    classList.remove(htmlClassSelectedItemInNavigationBar);
-    htmlElement.classList.add(htmlClassSelectedItemInNavigationBar);
+    .getElementsByClassName(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR)[0].
+    classList.remove(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
+    htmlElement.classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
 }
 function loadCategoriesView() {
     showMainNavigationBar();
-    loadHtmlFileInHtmlNodeByTag(htmlTagMain,filePathCategoriesView);
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_CATEGORIES_VIEW);
 }
 function loadLocalView() {
     hideMainNavigationBar();
-    loadHtmlFileInHtmlNodeByTag(htmlTagMain,filePathLocalView);
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_LOCAL_VIEW);
 }
 function loadLocalSubView(filePathSubView) {
-    loadHtmlFileInHtmlNodeById(htmlIdLocalMain,filePathSubView);
+    loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,filePathSubView);
 }
 function loadHtmlFileInHtmlNodeByTag(htmlNodeTag,htmlFilePath) {
     $(htmlNodeTag).load(htmlFilePath);
 }
 function loadHtmlFileInHtmlNodeById(htmlNodeId,htmlFilePath) {
-    $(cssCharIdSelector + htmlNodeId).load(htmlFilePath);
+    $(CSS_CHAR_ID_SELECTOR + htmlNodeId).load(htmlFilePath);
 }

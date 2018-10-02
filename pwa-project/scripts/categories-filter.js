@@ -1,42 +1,42 @@
-const typeOfFilterButton = {
-    Offers: 1,
-    Events: 2,
-    Categorie: 3
+const TYPE_OF_FILTER_BUTTON = {
+    OFFERS: 1,
+    EVENTS: 2,
+    CATEGORIE: 3
 };
-const htmlDisabledAttribute = "disabled";
-const htmlEmptyAttributeValue = "";
-const htmlDisabledOffersClassValue = "btn-outline-success";
-const htmlEnabledOffersClassValue = "btn-success";
-const htmlDisabledEventsClassValue = "btn-outline-warning";
-const htmlEnabledEventsClassValue = "btn-warning";
+const HTML_DISABLED_ATTRIBUTE = "disabled";
+const HTML_EMPTY_ATTRIBUTE_VALUE = "";
+const HTML_DISABLED_OFFERS_CLASS_VALUE = "btn-outline-success";
+const HTML_ENABLED_OFFERS_CLASS_VALUE = "btn-success";
+const HTML_DISABLED_EVENTS_CLASS_VALUE = "btn-outline-warning";
+const HTML_ENABLED_EVENTS_CLASS_VALUE = "btn-warning";
 
 function toggleFilterButton(typeOfFilterButtonValue,htmlElement) {
-    if(htmlElement.hasAttribute(htmlDisabledAttribute))
+    if(htmlElement.hasAttribute(HTML_DISABLED_ATTRIBUTE))
     {
-        if(typeOfFilterButtonValue == typeOfFilterButton.Offers)
+        if(typeOfFilterButtonValue == TYPE_OF_FILTER_BUTTON.OFFERS)
         {
-            htmlElement.classList.remove(htmlDisabledOffersClassValue);
-            htmlElement.classList.add(htmlEnabledOffersClassValue);
+            htmlElement.classList.remove(HTML_DISABLED_OFFERS_CLASS_VALUE);
+            htmlElement.classList.add(HTML_ENABLED_OFFERS_CLASS_VALUE);
         }
-        else if(typeOfFilterButtonValue == typeOfFilterButton.Events)
+        else if(typeOfFilterButtonValue == TYPE_OF_FILTER_BUTTON.EVENTS)
         {
-            htmlElement.classList.remove(htmlDisabledEventsClassValue);
-            htmlElement.classList.add(htmlEnabledEventsClassValue);
+            htmlElement.classList.remove(HTML_DISABLED_EVENTS_CLASS_VALUE);
+            htmlElement.classList.add(HTML_ENABLED_EVENTS_CLASS_VALUE);
         }
-        htmlElement.removeAttribute(htmlDisabledAttribute);
+        htmlElement.removeAttribute(HTML_DISABLED_ATTRIBUTE);
     }
     else
     {
-        if(typeOfFilterButtonValue == typeOfFilterButton.Offers)
+        if(typeOfFilterButtonValue == TYPE_OF_FILTER_BUTTON.OFFERS)
         {
-            htmlElement.classList.remove(htmlEnabledOffersClassValue);
-            htmlElement.classList.add(htmlDisabledOffersClassValue);
+            htmlElement.classList.remove(HTML_ENABLED_OFFERS_CLASS_VALUE);
+            htmlElement.classList.add(HTML_DISABLED_OFFERS_CLASS_VALUE);
         }
-        else if(typeOfFilterButtonValue == typeOfFilterButton.Events)
+        else if(typeOfFilterButtonValue == TYPE_OF_FILTER_BUTTON.EVENTS)
         {
-            htmlElement.classList.remove(htmlEnabledEventsClassValue);
-            htmlElement.classList.add(htmlDisabledEventsClassValue);
+            htmlElement.classList.remove(HTML_ENABLED_EVENTS_CLASS_VALUE);
+            htmlElement.classList.add(HTML_DISABLED_EVENTS_CLASS_VALUE);
         }
-        htmlElement.setAttribute(htmlDisabledAttribute,htmlEmptyAttributeValue);
+        htmlElement.setAttribute(HTML_DISABLED_ATTRIBUTE,HTML_EMPTY_ATTRIBUTE_VALUE);
     }
 }

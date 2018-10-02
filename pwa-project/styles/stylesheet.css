@@ -110,6 +110,10 @@ main {
     border-bottom: 5px solid !important;
 }
 
+#idLocalMapContainer {
+    height: 300px;
+}
+
 footer {
     min-height: 56px;
     margin: 0;

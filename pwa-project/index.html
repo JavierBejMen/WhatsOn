@@ -32,19 +32,19 @@
             <ul class="navbar-nav w-100 nav-justified">
                 <li class="nav-item">
                     <a class="nav-link" href="#" title="Mapa de locales" aria-label="Mapa de locales" 
-                    onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdMainNavigationBar,this)">
+                    onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this)">
                         <i class="material-icons">map</i>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" title="Locales" aria-label="Locales" 
-                    onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdMainNavigationBar,this)">
+                    onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this)">
                         <i class="material-icons">apps</i>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" title="Eventos de locales" aria-label="Eventos de locales" 
-                    onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdMainNavigationBar,this)">
+                    onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this)">
                         <i class="material-icons">event</i>
                     </a>
                 </li>
@@ -61,8 +61,8 @@
     <script src="./styles/material-design-for-bootstrap-free-4.5.10/js/mdb.min.js"></script>
     <script src="./scripts/navigation.js"></script>
     <script>
-        document.getElementById(htmlIdMainNavigationBar).getElementsByTagName("a")[1]
-        .classList.add(htmlClassSelectedItemInNavigationBar);
+        document.getElementById(HTML_ID_MAIN_NAVIGATION_BAR).getElementsByTagName("a")[1]
+        .classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
         loadCategoriesView();
     </script>
 </body>

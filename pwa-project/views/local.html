@@ -23,25 +23,25 @@ aria-label="Imagen de Lemon Rock">
         <li class="nav-item">
             <a class="nav-link waves-effect" href="#" title="Información de Lemon Rock" 
             aria-label="Información de Lemon Rock" 
-            onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdLocalNavigationBar,this)">INFO</a>
+            onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,this)">INFO</a>
         </li>
         <li class="nav-item">
             <a class="nav-link waves-effect" href="#" title="Eventos de Lemon Rock" 
             aria-label="Eventos de Lemon Rock" 
-            onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdLocalNavigationBar,this)">EVENTOS</a>
+            onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,this)">EVENTOS</a>
         </li>
         <li class="nav-item waves-effect">
             <a class="nav-link" href="#" title="Fotografías de Lemon Rock" 
             aria-label="Fotografías de Lemon Rock" 
-            onclick="setNavigationItemAsSelectedInNavigationBar(htmlIdLocalNavigationBar,this)">FOTOS</a>
+            onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,this)">FOTOS</a>
         </li>
     </ul>
 </nav>
 <div class="container-fluid" id="idLocalMain"></div>
 <script>
-    document.getElementById(htmlIdLocalNavigationBar).getElementsByTagName("a")[0]
-    .classList.add(htmlClassSelectedItemInNavigationBar);
-    loadLocalSubView(filePathLocalInfoSubView);
+    document.getElementById(HTML_ID_LOCAL_NAVIGATION_BAR).getElementsByTagName("a")[0]
+    .classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
+    loadLocalSubView(FILE_PATH_LOCAL_INFO_SUBVIEW);
 </script>
 <!-- <div class="dropdown">
     <i class="material-icons">access_time</i>
