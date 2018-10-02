@@ -1,5 +1,6 @@
 
 const CSS_CHAR_ID_SELECTOR = "#";
+const FILE_PATH_MAP_VIEW = "./views/map.html";
 const FILE_PATH_CATEGORIES_VIEW = "./views/categories.html";
 const FILE_PATH_LOCAL_VIEW = "./views/local.html";
 const FILE_PATH_LOCAL_INFO_SUBVIEW = "./views/local-subviews/info.html";
@@ -20,6 +21,9 @@ function setNavigationItemAsSelectedInNavigationBar(htmlIdNavigationBar, htmlEle
     .getElementsByClassName(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR)[0].
     classList.remove(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
     htmlElement.classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
+}
+function loadMapView() {
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_MAP_VIEW);
 }
 function loadCategoriesView() {
     showMainNavigationBar();

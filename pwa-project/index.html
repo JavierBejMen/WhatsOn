@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="./styles/material-design-icons-2.2.0/material-icons.css">
     <link rel="stylesheet" href="./styles/material-design-for-bootstrap-free-4.5.10/css/bootstrap.min.css">
     <link rel="stylesheet" href="./styles/material-design-for-bootstrap-free-4.5.10/css/mdb.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" 
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" 
+    crossorigin=""/>
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="./styles/stylesheet.css">
     <title>WhatsOn PWA</title>
@@ -32,13 +36,13 @@
             <ul class="navbar-nav w-100 nav-justified">
                 <li class="nav-item">
                     <a class="nav-link" href="#" title="Mapa de locales" aria-label="Mapa de locales" 
-                    onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this)">
+                    onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this); loadMapView();">
                         <i class="material-icons">map</i>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" title="Locales" aria-label="Locales" 
-                    onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this)">
+                    onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this); loadCategoriesView();">
                         <i class="material-icons">apps</i>
                     </a>
                 </li>
@@ -59,7 +63,14 @@
     <script src="./styles/material-design-for-bootstrap-free-4.5.10/js/popper.min.js" ></script>
     <script src="./styles/material-design-for-bootstrap-free-4.5.10/js/bootstrap.min.js" ></script>
     <script src="./styles/material-design-for-bootstrap-free-4.5.10/js/mdb.min.js"></script>
+    <!-- Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" 
+    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" 
+    crossorigin=""></script>
+    <!-- Custom scripts -->
     <script src="./scripts/navigation.js"></script>
+    <script src="./scripts/maps.js"></script>
+    <script src="./scripts/categories-filter.js"></script>
     <script>
         document.getElementById(HTML_ID_MAIN_NAVIGATION_BAR).getElementsByTagName("a")[1]
         .classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);

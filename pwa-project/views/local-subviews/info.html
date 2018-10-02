@@ -1,10 +1,10 @@
-<div class="row" id="idLocalViewCategoriesList" aria-label="Categorías de Lemon Rock">
-    <div class="col"><span class="btn btn-elegant" disabled>En directo</span></div>
-    <div class="col"><span class="btn btn-elegant" disabled>Jazz</span></div>
-    <div class="col"><span class="btn btn-elegant" disabled>Rock</span></div>
-    <div class="col"><span class="btn btn-elegant" disabled>Terraza</span></div>
-    <div class="col"><span class="btn btn-elegant" disabled>Tapas</span></div>
-    <div class="col"><span class="btn btn-elegant" disabled>Restaurante</span></div>
+<div class="row my-4" id="idLocalViewCategoriesList" aria-label="Categorías de Lemon Rock">
+    <div><span class="btn btn-elegant" disabled>En directo</span></div>
+    <div><span class="btn btn-elegant" disabled>Jazz</span></div>
+    <div><span class="btn btn-elegant" disabled>Rock</span></div>
+    <div><span class="btn btn-elegant" disabled>Terraza</span></div>
+    <div><span class="btn btn-elegant" disabled>Tapas</span></div>
+    <div><span class="btn btn-elegant" disabled>Restaurante</span></div>
 </div>
 <div class="container-fluid" aria-label="Descripción de Lemon Rock">
     <p>
@@ -22,6 +22,19 @@
     <h5 class="font-weight-bold">Ubicación</h5>
     <div class="container-fluid" id="idLocalMapContainer"></div>
 </div>
-<script src="./scripts/maps.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcNyXtpE6iOxla32ptV-6SvCcANAmxM50&callback=loadLocalInDatainGoogleMapsApi" 
-async defer></script>
+<div class="container-fluid mt-3" id="idLocalRecommendationContainer" aria-label="Recomienda Lemon Rock">
+    <h5 class="font-weight-bold">Recomienda Lemon Rock a tus amigos</h5>
+    <div class="row d-flex flex-row justify-content-around" id="idLocalViewCategoriesList">
+        <div><a class="btn btn-elegant">Whatsapp</a></div>
+        <div><a class="btn btn-elegant">Facebook</a></div>
+        <div><a class="btn btn-elegant">Messenger</a></div>
+        <div><a class="btn btn-elegant">Instagram</a></div>
+    </div>
+    <img class="img-fluid w-100" src="./assets/images/local-lemon-rock.jpg" alt="Imagen de Lemon Rock"
+    aria-label="Imagen de Lemon Rock">
+</div>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcNyXtpE6iOxla32ptV-6SvCcANAmxM50&callback=loadLocalDataInGoogleMapsApi" 
+async defer></script> -->
+<script>
+    loadLocalDataInLeafletApi("Lemon Rock",37.1770273,-3.6045047,17);
+</script>

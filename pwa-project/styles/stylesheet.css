@@ -25,21 +25,14 @@
     border-bottom: 5px solid !important;
 }
 
-main {
-    padding-top: 10px;    
-    padding-bottom: 10px;
-}
-
-.classHorizontalListContainer {
-    padding-top: 15px;
-    padding-bottom: 15px;
+#idMapViewContainer {
+    height: 500px;
 }
 
 .classHorizontalListRow {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  padding-bottom: 5px;
 }
 
 .classHorizontalListCol {
@@ -81,16 +74,11 @@ main {
 }
 
 #idLocalMenuBar {
-    margin-top: 52px;
+    margin-top: 62px;
 }
 
 #idLocalHeader > img {
     max-height: 300px;
-}
-
-#idLocalViewCategoriesList {
-    margin-top: 30px;
-    margin-bottom: 30px;
 }
 
 #idLocalViewCategoriesList div span {
@@ -114,7 +102,10 @@ main {
     height: 300px;
 }
 
+#idLocalRecommendationContainer > img {
+    max-height: 300px;
+}
+
 footer {
     min-height: 56px;
-    margin: 0;
 }
