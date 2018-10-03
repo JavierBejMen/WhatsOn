@@ -18,45 +18,43 @@
 <body>
     <header>
         <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark text-white" id="idMainMenuBar">
-            <ul class="navbar-nav w-100 justify-content-between">
+            <ul class="navbar-nav w-100">
+                <li class="nav-item mr-auto pl-5"><h2><small>Granada</small></h2></li>
                 <li class="nav-item">
-                    <a class="nav-link classRoundNavigationLink" href="#" title="Menú" aria-label="Menú">
-                        <i class="material-icons">menu</i>
-                    </a>
-                </li>
-                <li class="nav-item"><h2><small>GRANADA</small></h2></li>
-                <li class="nav-item">
-                    <a class="nav-link classRoundNavigationLink" href="#" title="Buscar" aria-label="Buscar">
+                    <a class="nav-link classRoundNavigationLink" href="#" title="Buscar" 
+                    aria-label="Buscar">
                         <i class="material-icons">search</i>
                     </a>
                 </li>
-            </ul>
-        </nav>
-        <nav class="navbar navbar-expand navbar-dark bg-dark text-white" id="idMainNavigationBar">
-            <ul class="navbar-nav w-100 nav-justified">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Mapa de locales" aria-label="Mapa de locales" 
-                    onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this); loadMapView();">
-                        <i class="material-icons">map</i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" title="Locales" aria-label="Locales" 
-                    onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this); loadCategoriesView();">
-                        <i class="material-icons">apps</i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" title="Eventos de locales" aria-label="Eventos de locales" 
-                    onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this)">
-                        <i class="material-icons">event</i>
+                    <a class="nav-link classRoundNavigationLink" href="#" title="Más acciones" 
+                    aria-label="Más acciones">
+                        <i class="material-icons">more_vert</i>
                     </a>
                 </li>
             </ul>
         </nav>
     </header>
     <main role="main"></main>
-    <footer class="container-expand bg-dark text-white"></footer>
+    <nav class="navbar navbar-expand fixed-bottom navbar-dark bg-dark text-white" id="idMainNavigationBar">
+        <ul class="navbar-nav w-100 nav-justified">
+            <li class="nav-item">
+                <a class="nav-link" href="#" title="Perfil de usuario" aria-label="Perfil de usuario">
+                    <i class="material-icons">contacts</i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" title="Búsqueda de locales" aria-label="Búsqueda de locales">
+                    <i class="material-icons">search</i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" title="Eventos de locales" aria-label="Eventos de locales">
+                    <i class="material-icons">event</i>
+                </a>
+            </li>
+        </ul>
+    </nav>
     
     <!-- JQuery, Popper.js, Bootstrap JS and MDBootstrap JS-->
     <script src="./styles/material-design-for-bootstrap-free-4.5.10/js/jquery-3.3.1.min.js"></script>
@@ -72,9 +70,7 @@
     <script src="./scripts/maps.js"></script>
     <script src="./scripts/categories-filter.js"></script>
     <script>
-        document.getElementById(HTML_ID_MAIN_NAVIGATION_BAR).getElementsByTagName("a")[1]
-        .classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
-        loadCategoriesView();
+        loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_SEARCH_LOCAL_VIEW);
     </script>
 </body>
 </html>

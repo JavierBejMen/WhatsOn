@@ -13,20 +13,68 @@
     border-radius: 1rem;
 }
 
-#idMainNavigationBar {
+#idSearchLocalNavigationBar {
     margin-top: 62px;
 }
 
-#idMainNavigationBar a {
+#idSearchLocalNavigationBar a {
     border-bottom: 5px solid #1d2124;
 }
 
-#idMainNavigationBar a.classSelectedNavigationItem {
+#idSearchLocalNavigationBar a.classSelectedNavigationItem {
     border-bottom: 5px solid !important;
 }
 
-#idMapViewContainer {
-    height: 500px;
+/* Please keep this margin and do not try to perform with my-* Bootstrap classes */
+#idSearchLocalMain {
+    margin-top: 120px;
+    margin-bottom: 60px;
+}
+
+#idSearchLocalMapContainer {
+    margin: 0;
+    padding: 0;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (min-height: 270px) and (max-height: 371.98px) {
+    #idSearchLocalMapContainer {
+        height: 200px;
+    }
+}
+@media (min-height: 372px) and (max-height: 473.98px) {
+    #idSearchLocalMapContainer {
+        height: 300px;
+    }
+}
+@media (min-height: 474px) and (max-height: 575.98px) {
+    #idSearchLocalMapContainer {
+        height: 400px;
+    }
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-height: 576px) and (max-height: 767.98px) {
+    #idSearchLocalMapContainer {
+        height: 500px;
+    }
+}
+/* Medium devices (tablets, 768px and up) */
+@media (min-height: 768px) and (max-height: 991.98px) {
+    #idSearchLocalMapContainer {
+        height: 700px;
+    }
+}
+/* Large devices (desktops, 992px and up) */
+@media (min-height: 992px) and (max-height: 1199.98px) {
+    #idSearchLocalMapContainer {
+        height: 900px;
+    }
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-height: 1200px) {
+    #idSearchLocalMapContainer {
+        height: 1000px;
+    }
 }
 
 .classHorizontalListRow {
@@ -45,7 +93,6 @@
         min-height: 150px;
     }
 }
-
 @media screen and (min-width: 720px) {
     .classHorizontalLocalsList .card-body {
         min-height: 195px;
@@ -57,10 +104,10 @@
     padding: 15px 0 0 0;
 	width: 55px;
 	height: 55px;
-	bottom: 20px;
+	bottom: 70px;
     right: 20px;
     border-radius: 2rem;
-    z-index: 1;
+    z-index: 1000;
 }
 
 #filterCategoriesModal .filterOfferButton, #filterCategoriesModal .filterEventButton,
@@ -73,11 +120,7 @@
     background-color: white !important;
 }
 
-#idLocalMenuBar {
-    margin-top: 62px;
-}
-
-#idLocalHeader > img {
+#idLocalHeaderImage {
     max-height: 300px;
 }
 
