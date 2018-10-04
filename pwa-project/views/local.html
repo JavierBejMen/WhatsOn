@@ -8,7 +8,7 @@
         </li>
         <li class="nav-item"><h3><small>Lemon Rock</small></h3></li>
         <li class="nav-item">
-            <a class="nav-link waves-effect waves-light classRoundNavigationLink" href="#" 
+            <a class="nav-link waves-effect waves-light classRoundNavigationLink" 
             title="Más sobre Lemon Rock" aria-label="Más sobre Lemon Rock">
                 <i class="material-icons">more_vert</i>
             </a>
@@ -20,27 +20,30 @@ aria-label="Imagen de Lemon Rock">
 <nav class="navbar navbar-expand navbar-light bg-light" id="idLocalNavigationBar">
     <ul class="navbar-nav w-100 nav-justified">
         <li class="nav-item">
-            <a class="nav-link waves-effect" href="#" title="Información de Lemon Rock" 
+            <a class="nav-link waves-effect" title="Información de Lemon Rock" 
             aria-label="Información de Lemon Rock" 
-            onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,this)">INFO</a>
+            onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,this); 
+            loadLocalInfoSubview();">INFO</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link waves-effect" href="#" title="Eventos de Lemon Rock" 
+            <a class="nav-link waves-effect" title="Eventos de Lemon Rock" 
             aria-label="Eventos de Lemon Rock" 
             onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,this)">EVENTOS</a>
         </li>
         <li class="nav-item waves-effect">
-            <a class="nav-link" href="#" title="Fotografías de Lemon Rock" 
+            <a class="nav-link" title="Fotografías de Lemon Rock" 
             aria-label="Fotografías de Lemon Rock" 
-            onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,this)">FOTOS</a>
+            onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,this); 
+            loadLocalPhotosSubview();">FOTOS</a>
         </li>
     </ul>
 </nav>
 <div class="container-fluid" id="idLocalMain"></div>
 <script>
-    document.getElementById(HTML_ID_LOCAL_NAVIGATION_BAR).getElementsByTagName("a")[0]
-    .classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
-    loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,FILE_PATH_LOCAL_INFO_SUBVIEW);
+    hideMainMenuBar();
+    hideMainNavigationBar();
+    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,0);
+    loadLocalInfoSubview();
 </script>
 <!-- <div class="dropdown">
     <i class="material-icons">access_time</i>

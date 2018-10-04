@@ -21,13 +21,13 @@
             <ul class="navbar-nav w-100">
                 <li class="nav-item mr-auto pl-5"><h2><small>Granada</small></h2></li>
                 <li class="nav-item">
-                    <a class="nav-link classRoundNavigationLink" href="#" title="Buscar" 
+                    <a class="nav-link classRoundNavigationLink" title="Buscar" 
                     aria-label="Buscar">
                         <i class="material-icons">search</i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link classRoundNavigationLink" href="#" title="Más acciones" 
+                    <a class="nav-link classRoundNavigationLink" title="Más acciones" 
                     aria-label="Más acciones">
                         <i class="material-icons">more_vert</i>
                     </a>
@@ -39,17 +39,18 @@
     <nav class="navbar navbar-expand fixed-bottom navbar-dark bg-dark text-white" id="idMainNavigationBar">
         <ul class="navbar-nav w-100 nav-justified">
             <li class="nav-item">
-                <a class="nav-link" href="#" title="Perfil de usuario" aria-label="Perfil de usuario">
+                <a class="nav-link" title="Perfil de usuario" aria-label="Perfil de usuario">
                     <i class="material-icons">contacts</i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" title="Búsqueda de locales" aria-label="Búsqueda de locales">
+                <a class="nav-link" title="Búsqueda de locales" aria-label="Búsqueda de locales" 
+                onclick="loadSearchLocalView()">
                     <i class="material-icons">search</i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" title="Eventos de locales" aria-label="Eventos de locales">
+                <a class="nav-link" title="Eventos de locales" aria-label="Eventos de locales">
                     <i class="material-icons">event</i>
                 </a>
             </li>
@@ -69,8 +70,9 @@
     <script src="./scripts/navigation.js"></script>
     <script src="./scripts/maps.js"></script>
     <script src="./scripts/categories-filter.js"></script>
+    <script src="./scripts/photos.js"></script>
     <script>
-        loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_SEARCH_LOCAL_VIEW);
+        loadSearchLocalView();
     </script>
 </body>
 </html>

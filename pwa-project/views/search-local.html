@@ -2,14 +2,14 @@
 id="idSearchLocalNavigationBar">
     <ul class="navbar-nav w-100 nav-justified">
         <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" href="#" title="Mapa de locales" aria-label="Mapa de locales" 
+            <a class="nav-link waves-effect waves-light" title="Mapa de locales" aria-label="Mapa de locales" 
             onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR,this); 
             loadSearchLocalMapSubview();">
                 MAPAS
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" href="#" title="Categorías de locales" aria-label="Categorías de locales" 
+            <a class="nav-link waves-effect waves-light" title="Categorías de locales" aria-label="Categorías de locales" 
             onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR,this); 
             loadSearchLocalCategoriesSubview();">
                 CATEGORÍAS
@@ -19,23 +19,22 @@ id="idSearchLocalNavigationBar">
 </nav>
 <div class="container-fluid" id="idSearchLocalMain"></div>
 <!-- Button to activate modal window for categories filter -->
-<a class="btn btn-mdb-color waves-effect waves-light classFloatingButton" href="#filterCategoriesModal" 
+<a class="btn btn-mdb-color waves-effect waves-light classFloatingButton" href="#idFilterCategoriesModal" 
 title="Filtro de categorías" data-toggle="modal">
     <i class="material-icons">filter_list</i>
 </a>
 <!-- Modal window for categories filter -->
-<div class="modal fade" id="filterCategoriesModal" tabindex="-1" role="dialog" 
-aria-labelledby="filterCategoriesModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="idFilterCategoriesModal" tabindex="-1" role="dialog" 
+aria-labelledby="idFilterCategoriesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content bg-dark text-light">
             <div class="modal-header">
-                <h5 class="modal-title" id="filterCategoriesModalLabel">Filtro de locales</h5>
+                <h5 class="modal-title" id="idFilterCategoriesModalLabel">Filtro de locales</h5>
                 <button type="button" class="close text-light" data-dismiss="modal" aria-label="Cerrar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-            <div class="container-fluid">
                 <div class="row text-center" aria-label="Filtro de locales">
                     <div class="col-12">
                         <span class="btn btn-outline-success waves-effect ml-0 filterOfferButton" 
@@ -75,7 +74,6 @@ aria-labelledby="filterCategoriesModalLabel" aria-hidden="true">
                     </div>
                 </div>
             </div>
-            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-success waves-effect">Aplicar</button>
@@ -84,7 +82,8 @@ aria-labelledby="filterCategoriesModalLabel" aria-hidden="true">
     </div>
 </div>
 <script>
-    document.getElementById(HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR).getElementsByTagName("a")[1]
-    .classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
-    loadHtmlFileInHtmlNodeById(HTML_ID_SEARCH_LOCAL_MAIN,FILE_PATH_SEARCH_LOCAL_CATEGORIES_SUBVIEW);
+    showMainMenuBar();
+    showMainNavigationBar();
+    setSelectedNavigationItemInNavigationBar(HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR,1);
+    loadSearchLocalCategoriesSubview();
 </script>

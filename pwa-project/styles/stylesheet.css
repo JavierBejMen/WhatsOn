@@ -27,8 +27,8 @@
 
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
 #idSearchLocalMain {
-    margin-top: 120px;
-    margin-bottom: 60px;
+    margin-top: 124px;
+    margin-bottom: 62px;
 }
 
 #idSearchLocalMapContainer {
@@ -110,21 +110,22 @@
     z-index: 1000;
 }
 
-#filterCategoriesModal .filterOfferButton, #filterCategoriesModal .filterEventButton,
-#filterCategoriesModal .filterCategorieButton {
+#idFilterCategoriesModal .filterOfferButton, #idFilterCategoriesModal .filterEventButton,
+#idFilterCategoriesModal .filterCategorieButton {
     border: 2px solid !important;
 }
 
-#filterCategoriesModal .filterCategorieButton:not([disabled]) {
+#idFilterCategoriesModal .filterCategorieButton:not([disabled]) {
     color: #2e2e2e !important;
     background-color: white !important;
 }
-
+/* Please keep this margin and do not try to perform with my-* Bootstrap classes */
 #idLocalHeaderImage {
+    margin-top: 62px;
     max-height: 300px;
 }
 
-#idLocalViewCategoriesList div span {
+#idLocalViewCategoriesList span {
     border-radius: 2rem;
     cursor: auto;
 }
@@ -147,8 +148,4 @@
 
 #idLocalRecommendationContainer > img {
     max-height: 300px;
-}
-
-footer {
-    min-height: 56px;
 }
