@@ -173,6 +173,10 @@
     z-index: 1;
 }
 
+#idLocalRecommendationContainer #idLocalViewSocialButtonsList a {
+    border-radius: 10rem;
+}
+
 #idLocalRecommendationContainer > img {
     position: relative;
     max-height: 300px;
