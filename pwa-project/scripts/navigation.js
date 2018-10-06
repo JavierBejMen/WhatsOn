@@ -8,12 +8,15 @@ const FILE_PATH_LOCAL_VIEW = "./views/local.html";
 const FILE_PATH_LOCAL_INFO_SUBVIEW = "./views/local-subviews/info.html";
 const FILE_PATH_LOCAL_PHOTOS_SUBVIEW = "./views/local-subviews/photos.html";
 const HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR = "classSelectedNavigationItem";
+const HTML_CLASS_INVISIBLE = "invisible";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
 const HTML_ID_MAIN_NAVIGATION_BAR = "idMainNavigationBar";
 const HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR = "idSearchLocalNavigationBar";
 const HTML_ID_SEARCH_LOCAL_MAIN = "idSearchLocalMain";
 const HTML_ID_LOCAL_NAVIGATION_BAR = "idLocalNavigationBar";
 const HTML_ID_LOCAL_MAIN = "idLocalMain";
+const HTML_ID_LOCAL_DESCRIPTION_SHOW_BUTTON = "idLocalDescriptionShowButton";
+const HTML_ID_LOCAL_DESCRIPTION_HIDE_BUTTON = "idLocalDescriptionHideButton";
 
 function setSelectedNavigationItemInNavigationBar(htmlIdNavigationBar,indexOfElement){
     document.getElementById(htmlIdNavigationBar)
@@ -53,14 +56,32 @@ function loadHtmlFileInHtmlNodeByTag(htmlNodeTag,htmlFilePath) {
     $(htmlNodeTag).load(htmlFilePath);
 }
 function hideMainMenuBar() {
-    document.getElementById(HTML_ID_MAIN_MENU_BAR).classList.add("invisible");
+    document.getElementById(HTML_ID_MAIN_MENU_BAR).classList.add(HTML_CLASS_INVISIBLE);
 }
 function hideMainNavigationBar() {
-    document.getElementById(HTML_ID_MAIN_NAVIGATION_BAR).classList.add("invisible");
+    document.getElementById(HTML_ID_MAIN_NAVIGATION_BAR).classList.add(HTML_CLASS_INVISIBLE);
 }
 function showMainMenuBar() {
-    document.getElementById(HTML_ID_MAIN_MENU_BAR).classList.remove("invisible");
+    document.getElementById(HTML_ID_MAIN_MENU_BAR).classList.remove(HTML_CLASS_INVISIBLE);
 }
 function showMainNavigationBar() {
-    document.getElementById(HTML_ID_MAIN_NAVIGATION_BAR).classList.remove("invisible");
+    document.getElementById(HTML_ID_MAIN_NAVIGATION_BAR).classList.remove(HTML_CLASS_INVISIBLE);
+}
+function toggleShowAndHideLocalDescriptionButtons()
+{
+    if(!document.getElementById(HTML_ID_LOCAL_DESCRIPTION_SHOW_BUTTON).classList
+    .contains(HTML_CLASS_INVISIBLE))
+    {
+        document.getElementById(HTML_ID_LOCAL_DESCRIPTION_SHOW_BUTTON).classList
+        .add(HTML_CLASS_INVISIBLE);
+        document.getElementById(HTML_ID_LOCAL_DESCRIPTION_HIDE_BUTTON).classList
+        .remove(HTML_CLASS_INVISIBLE);
+    }
+    else
+    {
+        document.getElementById(HTML_ID_LOCAL_DESCRIPTION_HIDE_BUTTON).classList
+        .add(HTML_CLASS_INVISIBLE);
+        document.getElementById(HTML_ID_LOCAL_DESCRIPTION_SHOW_BUTTON).classList
+        .remove(HTML_CLASS_INVISIBLE);
+    }
 }

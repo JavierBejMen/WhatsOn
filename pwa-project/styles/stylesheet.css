@@ -10,11 +10,13 @@
 }
 
 .classRoundNavigationLink {
-    border-radius: 1rem;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    border-radius: 2rem;
 }
 
 #idSearchLocalNavigationBar {
-    margin-top: 62px;
+    margin-top: 61px;
 }
 
 #idSearchLocalNavigationBar a {
@@ -121,7 +123,7 @@
 }
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
 #idLocalHeaderImage {
-    margin-top: 62px;
+    margin-top: 56px;
     max-height: 300px;
 }
 
@@ -130,8 +132,26 @@
     cursor: auto;
 }
 
+#idLocalDescriptionContainer #idLocalDescriptionParagraph.collapse {
+    display: block;
+    height: 100px;
+    overflow: hidden;
+}
+
+#idLocalDescriptionContainer #idLocalDescriptionParagraph.collapsing {
+    height: 100px;
+}
+
+#idLocalDescriptionContainer #idLocalDescriptionParagraph.collapse.show {
+    height: auto;
+}
+
 #idLocalNameInDescription {
     font-size: 120%;
+}
+
+.classShowHideLocalDescription {
+    border-radius: 2rem;
 }
 
 #idLocalNavigationBar a {
@@ -146,6 +166,14 @@
     height: 300px;
 }
 
+#idLocalRecommendationContainer #idLocalViewSocialButtonsList {
+    position: absolute;
+    margin-top: 75px;
+    background: white;
+    z-index: 1;
+}
+
 #idLocalRecommendationContainer > img {
+    position: relative;
     max-height: 300px;
 }

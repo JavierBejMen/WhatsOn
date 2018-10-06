@@ -6,10 +6,25 @@
     <span class="btn btn-elegant" disabled>Tapas</span>
     <span class="btn btn-elegant" disabled>Restaurante</span>
 </div>
-<div aria-label="Descripción de Lemon Rock">
-    <p>
-        <span class="font-weight-bold" id="idLocalNameInDescription">Lemon Rock</span> es un hostal situado en el centro de Granada conocido por su ambiente relajado y sus conciertos en directo. Cada semana vienen 4 o 5 grupos a tocar música variada que suele oscilar...
+<div id="idLocalDescriptionContainer" aria-label="Descripción de Lemon Rock">
+    <p class="collapse" id="idLocalDescriptionParagraph" aria-expanded="false">
+        <span class="font-weight-bold" id="idLocalNameInDescription">Lemon Rock</span> es un hostal situado en el centro de Granada conocido por su ambiente relajado y sus conciertos en directo. Cada semana vienen 4 o 5 grupos a tocar música variada. LemonRock Bar & Hostel es un premium Hostel, alojamiento tipo backpackers vinculado con un bar y restaurante dentro del mismo edificio. Situado en el centro de Granada.
+        El Hostel cuenta con 73 plazas de alojamiento y amplias zonas comunes, las cuales son también zona de bar-restaurante en las que se juntarán turistas y grupos de amigos que se alojen allí como gente de Granada. También dispone de dos terrazas chill out en el torreón muy soleadas. Todas las habitaciones tienen baño privado con bastante número de duchas y cada cliente tiene una taquilla privada y la cama tiene un cabecero con enchufe individual y luz de lectura. Todos los detalles están pensados para la comodidad de nuestros clientes. Está enfocado para gente joven tanto extranjeros como nacionales que visiten Granada y que quieren alojarse en un sitio en el centro de Granada, junto a la facultad de derecho, turismo y traductores.El Bar situado en la planta baja nos ofrece una cocina renovada basada en platos tradicionales para servirte el concepto de Lemon Rock Bar & Hostel en tu paladar.
     </p>
+    <div class="d-flex justify-content-center">
+        <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
+        classShowHideLocalDescription" id="idLocalDescriptionShowButton" type="button" 
+        data-toggle="collapse" href="#idLocalDescriptionParagraph" aria-expanded="false" 
+        aria-controls="idLocalDescriptionParagraph" onclick="toggleShowAndHideLocalDescriptionButtons()">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
+        classShowHideLocalDescription invisible" id="idLocalDescriptionHideButton" type="button" 
+        data-toggle="collapse" href="#idLocalDescriptionParagraph" aria-expanded="false" 
+        aria-controls="idLocalDescriptionParagraph" onclick="toggleShowAndHideLocalDescriptionButtons()">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </div>
 </div>
 <div aria-label="Precios de Lemon Rock">
     <h5 class="font-weight-bold">Precios</h5>
@@ -24,11 +39,19 @@
 </div>
 <div class="mt-3" id="idLocalRecommendationContainer" aria-label="Recomienda Lemon Rock">
     <h5 class="font-weight-bold">Recomienda Lemon Rock a tus amigos</h5>
-    <div class="row justify-content-around" id="idLocalViewCategoriesList">
-        <a class="btn btn-elegant">Whatsapp</a>
-        <a class="btn btn-elegant">Facebook</a>
-        <a class="btn btn-elegant">Messenger</a>
-        <a class="btn btn-elegant">Instagram</a>
+    <div class="row w-100 justify-content-around" id="idLocalViewSocialButtonsList">
+        <a class="btn btn-elegant waves-effect" aria-label="Whatsapp">
+            <i class="fab fa-whatsapp fa-2x"></i>
+        </a>
+        <a class="btn btn-elegant waves-effect" aria-label="Facebook">
+            <i class="fab fa-facebook-f fa-2x"></i>
+        </a>
+        <a class="btn btn-elegant waves-effect" aria-label="Messenger">
+            <i class="fab fa-facebook-messenger fa-2x"></i>
+        </a>
+        <a class="btn btn-elegant waves-effect" aria-label="Instagram">
+            <i class="fab fa-instagram fa-2x"></i>
+        </a>
     </div>
     <img class="img-fluid w-100" src="./assets/images/local-lemon-rock.jpg" alt="Imagen de Lemon Rock"
     aria-label="Imagen de Lemon Rock">
