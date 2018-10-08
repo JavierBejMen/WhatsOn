@@ -2,14 +2,16 @@
 id="idSearchLocalNavigationBar">
     <ul class="navbar-nav w-100 nav-justified">
         <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" title="Mapa de locales" aria-label="Mapa de locales" 
+            <a class="nav-link waves-effect waves-light" title="Mapa de locales" 
+            aria-label="Mapa de locales" 
             onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR,this); 
             loadSearchLocalMapSubview();">
                 MAPAS
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" title="Categorías de locales" aria-label="Categorías de locales" 
+            <a class="nav-link waves-effect waves-light" title="Categorías de locales" 
+            aria-label="Categorías de locales" 
             onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR,this); 
             loadSearchLocalCategoriesSubview();">
                 CATEGORÍAS
@@ -19,10 +21,11 @@ id="idSearchLocalNavigationBar">
 </nav>
 <div class="container-fluid" id="idSearchLocalMain"></div>
 <!-- Button to activate modal window for categories filter -->
-<a class="btn btn-mdb-color waves-effect waves-light classFloatingButton" href="#idFilterCategoriesModal" 
-title="Filtro de categorías" data-toggle="modal">
+<button type="button" class="btn btn-mdb-color waves-effect waves-light classRoundedFloatingButton" 
+data-toggle="modal" data-target="#idFilterCategoriesModal" title="Filtro de categorías" 
+aria-label="Filtro de categorías">
     <i class="fas fa-filter fa-2x"></i>
-</a>
+</button>
 <!-- Modal window for categories filter -->
 <div class="modal fade" id="idFilterCategoriesModal" tabindex="-1" role="dialog" 
 aria-labelledby="idFilterCategoriesModalLabel" aria-hidden="true">
