@@ -116,9 +116,23 @@
     z-index: 1000;
 }
 
+#idFilterCategoriesModal .modal-content {
+    background-color: rgba(0,0,0,0.8) !important;
+}
+
 #idFilterCategoriesModal .filterOfferButton, #idFilterCategoriesModal .filterEventButton,
 #idFilterCategoriesModal .filterCategorieButton {
     border: 2px solid !important;
+}
+
+#idFilterCategoriesModal .filterOfferButton:not([disabled]), 
+#idFilterCategoriesModal .filterEventButton:not([disabled]) {
+    color: #2e2e2e !important;
+    border: 0 !important;
+}
+
+#idFilterCategoriesModal .filterCategorieButton[disabled] {
+    background-color: rgba(0,0,0,0) !important;
 }
 
 #idFilterCategoriesModal .filterCategorieButton:not([disabled]) {
