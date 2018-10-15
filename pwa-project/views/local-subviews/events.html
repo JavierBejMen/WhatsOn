@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-around border-bottom pt-3" id="idLocalEventsNavigationBar">
+    <div class="w-100">
+        <div class="row" id="idDaysOfTheWeekRow">
+            <p class="col text-center" title="Lunes" aria-label="Lunes">L</p>
+            <p class="col text-center" title="Martes" aria-label="Martes">M</p>
+            <p class="col text-center" title="Miércoles" aria-label="Miércoles">X</p>
+            <p class="col text-center" title="Jueves" aria-label="Jueves">J</p>
+            <p class="col text-center" title="Viernes" aria-label="Viernes">V</p>
+            <p class="col text-center" title="Sábado" aria-label="Sábado">S</p>
+            <p class="col text-center" title="Domingo" aria-label="Domingo">D</p>
+        </div>
+        <div class="row" id="idNumericDaysOfTheMonthRow">
+            <p class="col px-0 text-center"></p>
+            <p class="col px-0 text-center"></p>
+            <p class="col px-0 text-center"></p>
+            <p class="col px-0 text-center"></p>
+            <p class="col px-0 text-center"></p>
+            <p class="col px-0 text-center"></p>
+            <p class="col px-0 text-center"></p>
+        </div>
+    </div>
+    <div class="ml-3 pt-2">
+        <i class="far fa-calendar fa-3x"></i>
+    </div>
+</div>
+<div class="classLocalEventContainer mt-5">
+    <div aria-label="Fecha y hora del evento Lemon Jazz">
+        <p><i class="far fa-calendar fa-lg pr-2"></i>Hoy: Lemon Jazz</p>
+        <p><i class="far fa-clock fa-lg pr-2"></i>18:30 - 22:00</p>
+    </div>
+    <div class="row justify-content-start my-4 classCategoriesList" 
+    aria-label="Categorías del evento Lemon Jazz">
+        <span class="btn btn-elegant" disabled>En directo</span>
+        <span class="btn btn-elegant" disabled>Jazz</span>
+        <span class="btn btn-elegant" disabled>Rock</span>
+    </div>
+    <div class="classDescriptionContainer" id="idEvent1DescriptionContainer" 
+    aria-label="Descripción del evento Lemon Jazz">
+        <p class="collapse classDescriptionParagraph" id="idEvent1DescriptionParagraph"
+        aria-expanded="false">
+            Lemon JAZZ con Carlos Ligero Trío un joven saxofonista andaluz muy ligado a la tradición pero a raiz de su ultimo
+            viaje en Paris, meses de estudio y una profunda busqueda con su istrumento, cambia completamente su forma de tocar
+            y nos trae nuevas sonoridades acompañado de Alejandro Tamayo al contrabajo y Alfredo Sarno a la batería. ENTRADA
+            GRATUITA. Consumiciones +1€ para colaborar con los músicos.
+        </p>
+        <div class="d-flex justify-content-center">
+            <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
+            classShowHideDescriptionButton" type="button" data-toggle="collapse" 
+            href="#idEvent1DescriptionParagraph" aria-expanded="false" 
+            aria-controls="idEvent1DescriptionParagraph" title="Ver descripción" aria-label="Ver descripción" 
+            onclick="toggleShowAndHideDescriptionButtons('idEvent1DescriptionContainer')">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
+            classShowHideDescriptionButton invisible" type="button" data-toggle="collapse" 
+            href="#idEvent1DescriptionParagraph" aria-expanded="false" 
+            aria-controls="idEvent1DescriptionParagraph" title="Ocultar descripción" aria-label="Ocultar descripción" 
+            onclick="toggleShowAndHideDescriptionButtons('idEvent1DescriptionContainer')">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+        </div>
+    </div>
+    <img class="img-fluid w-100" src="./assets/images/events-lemon-rock/lemon-jazz.jpg" 
+    alt="Imagen del evento Lemon Jazz" aria-label="Imagen del evento Lemon Jazz">
+    <a class="btn btn-lg btn-default waves-effect w-100" title="Ver ofertas" 
+    aria-label="Ver ofertas">VER OFERTAS</a>
+</div>
+<div class="classLocalEventContainer mt-5">
+    <div aria-label="Fecha y hora del evento Guillermo Crovetto">
+        <p><i class="far fa-calendar fa-lg pr-2"></i>Hoy: Guillermo Crovetto</p>
+        <p><i class="far fa-clock fa-lg pr-2"></i>20:30 - 23:00</p>
+    </div>
+    <div class="row justify-content-start my-4 classCategoriesList" 
+    aria-label="Categorías del evento Guillermo Crovetto">
+        <span class="btn btn-elegant" disabled>En directo</span>
+        <span class="btn btn-elegant" disabled>Indie</span>
+        <span class="btn btn-elegant" disabled>Rock</span>
+    </div>
+    <div class="classDescriptionContainer" id="idEvent2DescriptionContainer" 
+    aria-label="Descripción del evento Guillermo Crovetto">
+        <p class="collapse classDescriptionParagraph" id="idEvent2DescriptionParagraph" 
+        aria-expanded="false">
+            Vuelve Guillermo Crovetto a dar guerra. Artista carismático donde los haya, reune todas las cualidades para hacer
+            pasar un buen rato a cualquiera con sus versiones de pop rock en acústico. ENTRADA GRATUITA
+        </p>
+        <div class="d-flex justify-content-center">
+            <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
+            classShowHideDescriptionButton" type="button" data-toggle="collapse" 
+            href="#idEvent2DescriptionParagraph" aria-expanded="false" 
+            aria-controls="idEvent2DescriptionParagraph" title="Ver descripción" aria-label="Ver descripción" 
+            onclick="toggleShowAndHideDescriptionButtons('idEvent2DescriptionContainer')">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
+            classShowHideDescriptionButton invisible" type="button" data-toggle="collapse" 
+            href="#idEvent2DescriptionParagraph" aria-expanded="false" 
+            aria-controls="idEvent2DescriptionParagraph" title="Ocultar descripción" aria-label="Ocultar descripción" 
+            onclick="toggleShowAndHideDescriptionButtons('idEvent2DescriptionContainer')">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+        </div>
+    </div>
+    <img class="img-fluid w-100" src="./assets/images/events-lemon-rock/guillermo-crovetto.jpg" 
+    alt="Imagen del evento Guillermo Crovetto" aria-label="Imagen del evento Guillermo Crovetto">
+    <a class="btn btn-lg btn-default waves-effect w-100" title="Ver ofertas" 
+    aria-label="Ver ofertas">VER OFERTAS</a>
+</div>
+<script>
+    fillNumericDaysOfTheMonthRowInLocalEventsNavigationBar();
+    setCurrentNumericDayAsSelectedInLocalEventsNavigationBar();
+</script>

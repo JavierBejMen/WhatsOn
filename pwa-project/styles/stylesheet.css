@@ -15,6 +15,48 @@
     border-radius: 2rem;
 }
 
+.classCategoriesList span {
+    border-radius: 2rem;
+    cursor: auto;
+}
+
+.classDescriptionContainer .classDescriptionParagraph.collapse {
+    display: block;
+    height: 100px;
+    overflow: hidden;
+}
+
+.classDescriptionContainer .classDescriptionParagraph.collapsing {
+    height: 100px;
+}
+
+.classDescriptionContainer .classDescriptionParagraph.collapse.show {
+    height: auto;
+}
+
+.classShowHideDescriptionButton {
+    border-radius: 2rem;
+}
+
+.classRoundedFloatingButton {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    padding: 5px 0 0 0;
+	width: 55px;
+	height: 55px;
+    border-radius: 2rem;
+    z-index: 1000;
+}
+
+.classFloatingButton {
+    position: fixed;
+    bottom: 10px;
+    right: 0.5%;
+    width: 97% !important;
+    z-index: 2000;
+}
+
 #idSearchLocalNavigationBar {
     margin-top: 61px;
 }
@@ -105,17 +147,6 @@
     }
 }
 
-.classRoundedFloatingButton {
-    position: fixed;
-    bottom: 70px;
-    right: 20px;
-    padding: 5px 0 0 0;
-	width: 55px;
-	height: 55px;
-    border-radius: 2rem;
-    z-index: 1000;
-}
-
 #idFilterCategoriesModal .modal-content {
     background-color: rgba(0,0,0,0.8) !important;
 }
@@ -145,31 +176,8 @@
     max-height: 300px;
 }
 
-#idLocalViewCategoriesList span {
-    border-radius: 2rem;
-    cursor: auto;
-}
-
-#idLocalDescriptionContainer #idLocalDescriptionParagraph.collapse {
-    display: block;
-    height: 100px;
-    overflow: hidden;
-}
-
-#idLocalDescriptionContainer #idLocalDescriptionParagraph.collapsing {
-    height: 100px;
-}
-
-#idLocalDescriptionContainer #idLocalDescriptionParagraph.collapse.show {
-    height: auto;
-}
-
 #idLocalNameInDescription {
     font-size: 120%;
-}
-
-.classShowHideLocalDescription {
-    border-radius: 2rem;
 }
 
 #idLocalNavigationBar a {
@@ -200,10 +208,8 @@
     max-height: 300px;
 }
 
-.classFloatingButton {
-    position: fixed;
-    bottom: 10px;
-    right: 0.5%;
-    width: 97% !important;
-    z-index: 2000;
+#idNumericDaysOfTheMonthRow p.classSelectedNavigationItem {
+    color: white;
+    background: #1d2124;
+    border-radius: 2rem;
 }

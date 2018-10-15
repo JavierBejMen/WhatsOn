@@ -28,7 +28,8 @@ aria-label="Imagen de Lemon Rock">
         <li class="nav-item">
             <a class="nav-link waves-effect" title="Eventos de Lemon Rock" 
             aria-label="Eventos de Lemon Rock" 
-            onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,this)">EVENTOS</a>
+            onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,this); 
+            loadLocalEventsSubview();">EVENTOS</a>
         </li>
         <li class="nav-item waves-effect">
             <a class="nav-link" title="Fotografías de Lemon Rock" 
@@ -45,15 +46,3 @@ aria-label="Imagen de Lemon Rock">
     setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,0);
     loadLocalInfoSubview();
 </script>
-<!-- <div class="dropdown">
-    <i class="far fa-clock"></i>
-    <button class="btn bg-light text-dark dropdown-toggle" id="idLocalTimetableDropdownButton"
-    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Hoy: 09:00 A.M. - 04:00 A.M.
-    </button>
-    <div class="dropdown-menu" aria-labelledby="idLocalTimetableDropdownButton">
-        <span class="dropdown-item">Mañana: 09:00 A.M. - 04:00 A.M.</button>
-        <span class="dropdown-item">Lunes: 09:00 A.M. - 03:00 A.M.</button>
-        <span class="dropdown-item">Martes: 09:00 A.M. - 03:00 A.M.</button>
-    </div>
-</div> -->
