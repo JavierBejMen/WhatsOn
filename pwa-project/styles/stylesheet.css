@@ -57,6 +57,16 @@
     z-index: 2000;
 }
 
+/* Please keep this margin and do not try to perform with my-* Bootstrap classes */
+#idUserProfileMain {
+    margin-top: 62px;
+    margin-bottom: 62px;
+}
+
+#idUserProfileMain .btn {
+    border: none;
+}
+
 #idSearchLocalNavigationBar {
     margin-top: 61px;
 }

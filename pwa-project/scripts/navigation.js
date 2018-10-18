@@ -1,6 +1,7 @@
 const CSS_CHAR_ID_SELECTOR = "#";
 const HTML_TAG_MAIN = "main";
 const HTML_TAG_NAVIGATION_ITEM = "a";
+const FILE_PATH_USER_PROFILE_VIEW = "./views/user-profile.html";
 const FILE_PATH_SEARCH_LOCAL_VIEW = "./views/search-local.html";
 const FILE_PATH_SEARCH_LOCAL_MAP_SUBVIEW = "./views/search-local-subviews/map.html";
 const FILE_PATH_SEARCH_LOCAL_CATEGORIES_SUBVIEW = "./views/search-local-subviews/categories.html";
@@ -30,7 +31,12 @@ function setNavigationItemAsSelectedInNavigationBar(htmlIdNavigationBar,htmlElem
     classList.remove(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
     htmlElement.classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
 }
-function loadSearchLocalView() {
+function loadUserProfileView()
+{
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_VIEW);
+}
+function loadSearchLocalView()
+{
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_SEARCH_LOCAL_VIEW);
 }
 function loadSearchLocalMapSubview()
