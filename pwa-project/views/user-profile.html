@@ -1,11 +1,48 @@
-<div class="container-fluid" id="idUserProfileMain">
+<nav class="navbar navbar-expand fixed-top navbar-dark bg-dark text-white" id="idUserProfileMenuBar">
+    <ul class="navbar-nav w-100 justify-content-between">
+        <li class="nav-item mr-auto pl-5"><h2><small>Perfil</small></h2></li>
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light classRoundNavigationLink" 
+            title="Más acciones" aria-label="Más acciones">
+                <i class="fas fa-ellipsis-v fa-sm"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<button type="button" class="btn text-black-50 waves-effect 
+classRoundedTopRightFloatingButton" id="idEditUserProfileButton" 
+title="Editar perfil de usuario" aria-label="Editar perfil de usuario">
+    <i class="fas fa-pen fa-2x"></i>
+</button>
+<div class="container-fluid bg-light pt-3 pb-2" id="idUserProfilePictureContainer">
     <img class="mx-auto d-block" src="./assets/images/user-profile-picture.png" 
     alt="Imágen de perfil de usuario" aria-label="Imágen de perfil de usuario"/>
-    <p class="text-center">Nombre de usuario</p>
-    <div class="container-fluid">
-        <a class="btn waves-effect shadow-none"><i class="fas fa-shopping-cart fa-lg pr-4"></i>Mis ofertas (2)</a>
-        <a class="btn waves-effect shadow-none"><i class="fas fa-cog fa-lg pr-4"></i>Ajustes</a>
-        <a class="btn waves-effect shadow-none"><i class="fas fa-info-circle fa-lg pr-4"></i>Ayuda</a>
-        <a class="btn waves-effect shadow-none"><i class="fas fa-power-off fa-lg pr-4"></i>Cerrar sesión</a>
-    </div>
+    <p class="text-center pt-3">Nombre de usuario</p>
 </div>
+<div class="container-fluid" id="idUserProfileNavigationContainer">
+    <ul class="list-unstyled">
+        <li>
+            <a class="btn waves-effect shadow-none">
+                <i class="fas fa-shopping-cart fa-lg pr-4"></i>Mis ofertas (2)
+            </a>
+        </li>
+        <li>
+            <a class="btn waves-effect shadow-none">
+                <i class="fas fa-cog fa-lg pr-4"></i>Ajustes
+            </a>
+        </li>
+        <li>
+            <a class="btn waves-effect shadow-none">
+                <i class="fas fa-info-circle fa-lg pr-4"></i>Ayuda
+            </a>
+        </li>
+        <li>
+            <a class="btn waves-effect shadow-none">
+                <i class="fas fa-power-off fa-lg pr-4"></i>Cerrar sesión
+            </a>
+        </li>
+    </ul>
+</div>
+<script>
+    hideMainMenuBar();
+</script>

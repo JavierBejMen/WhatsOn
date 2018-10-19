@@ -38,7 +38,18 @@
     border-radius: 2rem;
 }
 
-.classRoundedFloatingButton {
+.classRoundedTopRightFloatingButton {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    padding: 5px 0 0 0;
+	width: 55px;
+	height: 55px;
+    border-radius: 2rem;
+    z-index: 1000;
+}
+
+.classRoundedBottomRightFloatingButton {
     position: fixed;
     bottom: 70px;
     right: 20px;
@@ -49,7 +60,7 @@
     z-index: 1000;
 }
 
-.classFloatingButton {
+.classFloatingBottomButton {
     position: fixed;
     bottom: 10px;
     right: 0.5%;
@@ -57,14 +68,23 @@
     z-index: 2000;
 }
 
-/* Please keep this margin and do not try to perform with my-* Bootstrap classes */
-#idUserProfileMain {
-    margin-top: 62px;
-    margin-bottom: 62px;
+#idEditUserProfileButton {
+    background-color: white;
 }
 
-#idUserProfileMain .btn {
-    border: none;
+/* Please keep this margin and do not try to perform with my-* Bootstrap classes */
+#idUserProfilePictureContainer {
+    margin-top: 62px;
+}
+
+#idUserProfilePictureContainer img {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+}
+
+#idUserProfileNavigationContainer {
+    margin-bottom: 62px;
 }
 
 #idSearchLocalNavigationBar {
