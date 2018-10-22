@@ -14,34 +14,28 @@ classRoundedTopRightFloatingButton" id="idEditUserProfileButton"
 title="Editar perfil de usuario" aria-label="Editar perfil de usuario">
     <i class="fas fa-pen fa-2x"></i>
 </button>
-<div class="container-fluid bg-light pt-3 pb-2" id="idUserProfilePictureContainer">
+<div class="container-fluid bg-light pt-4 pb-2" id="idUserProfilePictureContainer">
     <img class="mx-auto d-block" src="./assets/images/user-profile-picture.png" 
     alt="Imágen de perfil de usuario" aria-label="Imágen de perfil de usuario"/>
     <p class="text-center pt-3">Nombre de usuario</p>
 </div>
-<div class="container-fluid" id="idUserProfileNavigationContainer">
-    <ul class="list-unstyled">
-        <li>
-            <a class="btn waves-effect shadow-none">
+<div class="container-fluid pt-3" id="idUserProfileNavigationContainer">
+    <div class="row">
+        <div class="col-8 col-xs-8 col-sm-6 col-md-3 col-lg-3">
+            <a class="btn btn-block text-left waves-effect shadow-none">
                 <i class="fas fa-shopping-cart fa-lg pr-4"></i>Mis ofertas (2)
             </a>
-        </li>
-        <li>
-            <a class="btn waves-effect shadow-none">
+            <a class="btn btn-block text-left waves-effect shadow-none">
                 <i class="fas fa-cog fa-lg pr-4"></i>Ajustes
             </a>
-        </li>
-        <li>
-            <a class="btn waves-effect shadow-none">
+            <a class="btn btn-block text-left waves-effect shadow-none">
                 <i class="fas fa-info-circle fa-lg pr-4"></i>Ayuda
             </a>
-        </li>
-        <li>
-            <a class="btn waves-effect shadow-none">
+            <a class="btn btn-block text-left waves-effect shadow-none">
                 <i class="fas fa-power-off fa-lg pr-4"></i>Cerrar sesión
             </a>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>
 <script>
     hideMainMenuBar();
