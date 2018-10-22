@@ -20,6 +20,10 @@
     cursor: auto;
 }
 
+.classCategoriesListInCardBody span {
+    padding: 5px 10px !important;
+}
+
 .classDescriptionContainer .classDescriptionParagraph.collapse {
     display: block;
     height: 100px;
@@ -81,10 +85,6 @@
     max-width: 100px;
     max-height: 100px;
     border-radius: 50%;
-}
-
-#idUserProfileNavigationContainer {
-    margin-bottom: 62px;
 }
 
 #idSearchLocalNavigationBar {
@@ -167,12 +167,12 @@
 }
 
 @media screen and (max-width: 720px) {
-    .classHorizontalLocalsList .card-body {
+    .classHorizontalListCol .card-body {
         min-height: 150px;
     }
 }
 @media screen and (min-width: 720px) {
-    .classHorizontalLocalsList .card-body {
+    .classHorizontalListCol .card-body {
         min-height: 195px;
     }
 }
