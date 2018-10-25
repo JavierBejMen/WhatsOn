@@ -1,4 +1,5 @@
 const CSS_CHAR_ID_SELECTOR = "#";
+const HTML_TAG_BODY = "body";
 const HTML_TAG_MAIN = "main";
 const HTML_TAG_NAVIGATION_ITEM = "a";
 const FILE_PATH_USER_PROFILE_VIEW = "./views/user-profile.html";
@@ -9,16 +10,21 @@ const FILE_PATH_LOCAL_VIEW = "./views/local.html";
 const FILE_PATH_LOCAL_INFO_SUBVIEW = "./views/local-subviews/info.html";
 const FILE_PATH_LOCAL_EVENTS_SUBVIEW = "./views/local-subviews/events.html";
 const FILE_PATH_LOCAL_PHOTOS_SUBVIEW = "./views/local-subviews/photos.html";
+const HTML_ATTRIBUTE_ID = "id";
 const HTML_CLASS_INVISIBLE = "invisible";
 const HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR = "classSelectedNavigationItem";
 const HTML_CLASS_SHOW_HIDE_DESCRIPTION_BUTTON = "classShowHideDescriptionButton";
+const HTML_CLASS_LOCAL_EVENTS_LIST = "classLocalEventsList";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
 const HTML_ID_MAIN_NAVIGATION_BAR = "idMainNavigationBar";
 const HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR = "idSearchLocalNavigationBar";
 const HTML_ID_SEARCH_LOCAL_MAIN = "idSearchLocalMain";
 const HTML_ID_LOCAL_NAVIGATION_BAR = "idLocalNavigationBar";
 const HTML_ID_LOCAL_MAIN = "idLocalMain";
-const HTML_ID_LOCAL_EVENTS_NUMERIC_DAYS_OF_MOTH_ROW = "idNumericDaysOfTheMonthRow";
+const HTML_ID_LOCAL_EVENTS_NAVIGATION_BAR = "idLocalEventsNavigationBar";
+const HTML_IDS_LIST_FOR_LOCAL_EVENTS_LISTS = ["idLocalEventsOnMonday","idLocalEventsOnTuesday",
+"idLocalEventsOnWednesday","idLocalEventsOnThursday","idLocalEventsOnFriday","idLocalEventsOnSaturday",
+"idLocalEventsOnSunday"];
 
 function setSelectedNavigationItemInNavigationBar(htmlIdNavigationBar,indexOfElement){
     document.getElementById(htmlIdNavigationBar)
@@ -95,10 +101,10 @@ function toggleShowAndHideDescriptionButtons(htmlIdDescriptionContainer)
 }
 function fillNumericDaysOfTheMonthRowInLocalEventsNavigationBar()
 {
-    var listOfNumericDaysOfTheMonth = document.getElementById(HTML_ID_LOCAL_EVENTS_NUMERIC_DAYS_OF_MOTH_ROW)
-    .getElementsByTagName("p");
+    var listOfNumericDaysOfTheMonth = document.getElementById(HTML_ID_LOCAL_EVENTS_NAVIGATION_BAR)
+    .getElementsByTagName(HTML_TAG_NAVIGATION_ITEM);
+    var todayAsNumericDayOfTheWeek = getTodayAsNumericDayOfTheWeek();
     var today = new Date();
-    var todayAsNumericDayOfTheWeek = today.getDay() - 1;
     var firstNumericDayOfTheWeek = today.getDate() - todayAsNumericDayOfTheWeek;
     for (var indexOfNumericDayOfTheWeek = 0; indexOfNumericDayOfTheWeek < 7; indexOfNumericDayOfTheWeek++)
     { 
@@ -106,10 +112,25 @@ function fillNumericDaysOfTheMonthRowInLocalEventsNavigationBar()
         firstNumericDayOfTheWeek + indexOfNumericDayOfTheWeek;
     }
 }
-function setCurrentNumericDayAsSelectedInLocalEventsNavigationBar()
+function setIdsInLocalEventsLists()
+{
+    var todayAsNumericDayOfTheWeek = getTodayAsNumericDayOfTheWeek();
+    var eventsLists = document.getElementsByClassName(HTML_CLASS_LOCAL_EVENTS_LIST);
+    for(var indexOfEventsLists = 0; indexOfEventsLists < eventsLists.length; indexOfEventsLists++)
+    {
+        if((idForLocalEventsList = todayAsNumericDayOfTheWeek + indexOfEventsLists) < 7)
+        {
+            eventsLists[indexOfEventsLists].setAttribute(HTML_ATTRIBUTE_ID,
+            HTML_IDS_LIST_FOR_LOCAL_EVENTS_LISTS[idForLocalEventsList]);
+        }
+    }
+}
+function getTodayAsNumericDayOfTheWeek()
 {
     var today = new Date();
-    document.getElementById(HTML_ID_LOCAL_EVENTS_NUMERIC_DAYS_OF_MOTH_ROW).
-    getElementsByTagName("p")[today.getDay() - 1].classList
-    .add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
+    return (today.getDay() > 0)?(today.getDay()-1):6;
+}
+function setScrollspyInNavigationBarById(htmlIdNavigationBar,offsetValue)
+{
+    $(HTML_TAG_BODY).scrollspy({target: CSS_CHAR_ID_SELECTOR + htmlIdNavigationBar,offset: offsetValue});
 }

@@ -240,11 +240,15 @@
 }
 
 #idLocalEventsWeekCalendar {
-    margin-top: 5px;
     top: 62px;
 }
 
-#idNumericDaysOfTheMonthRow p.classSelectedNavigationItem {
+#idLocalEventsNavigationBar a {
+    color: black;
+    text-decoration: none;
+}
+
+#idLocalEventsNavigationBar a.active {
     color: white;
     background: #1d2124;
     border-radius: 2rem;

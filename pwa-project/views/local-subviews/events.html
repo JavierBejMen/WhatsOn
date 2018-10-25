@@ -1,30 +1,78 @@
-<div class="d-flex justify-content-center border-bottom bg-white sticky-top pt-3" 
+<div class="d-flex justify-content-center border-bottom bg-white sticky-top mt-2 py-2" 
 id="idLocalEventsWeekCalendar">
     <div>
-        <div class="row" id="idDaysOfTheWeekRow">
-            <p class="col text-center" title="Lunes" aria-label="Lunes">L</p>
-            <p class="col text-center" title="Martes" aria-label="Martes">M</p>
-            <p class="col text-center" title="Miércoles" aria-label="Miércoles">X</p>
-            <p class="col text-center" title="Jueves" aria-label="Jueves">J</p>
-            <p class="col text-center" title="Viernes" aria-label="Viernes">V</p>
-            <p class="col text-center" title="Sábado" aria-label="Sábado">S</p>
-            <p class="col text-center" title="Domingo" aria-label="Domingo">D</p>
-        </div>
-        <div class="row" id="idNumericDaysOfTheMonthRow">
-            <p class="col px-0 text-center"></p>
-            <p class="col px-0 text-center"></p>
-            <p class="col px-0 text-center"></p>
-            <p class="col px-0 text-center"></p>
-            <p class="col px-0 text-center"></p>
-            <p class="col px-0 text-center"></p>
-            <p class="col px-0 text-center"></p>
-        </div>
+        <ul class="nav nav-pills" id="idLocalEventsNavigationBar">
+            <li class="nav-item">
+                <div class="col">
+                    <div class="row px-2 px-md-3 px-lg-5 px-xl-5" title="Lunes" aria-label="Lunes">
+                        L
+                    </div>
+                    <div class="row"><a class="nav-link px-2 px-md-3 px-lg-5 px-xl-5 py-1" 
+                    href="#idLocalEventsOnMonday"></a></div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="col">
+                    <div class="row px-2 px-md-3 px-lg-5 px-xl-5" title="Martes" aria-label="Martes">
+                        M
+                    </div>
+                    <div class="row"><a class="nav-link px-2 px-md-3 px-lg-5 px-xl-5 py-1" 
+                    href="#idLocalEventsOnTuesday"></a></div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="col">
+                    <div class="row px-2 px-md-3 px-lg-5 px-xl-5" title="Miércoles" 
+                    aria-label="Miércoles">
+                        X
+                    </div>
+                    <div class="row"><a class="nav-link px-2 px-md-3 px-lg-5 px-xl-5 py-1" 
+                    href="#idLocalEventsOnWednesday"></a></div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="col">
+                    <div class="row px-2 px-md-3 px-lg-5 px-xl-5" title="Jueves" aria-label="Jueves">
+                        J
+                    </div>
+                    <div class="row"><a class="nav-link px-2 px-md-3 px-lg-5 px-xl-5 py-1" 
+                    href="#idLocalEventsOnThursday"></a></div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="col">
+                    <div class="row px-2 px-md-3 px-lg-5 px-xl-5" title="Viernes" aria-label="Viernes">
+                        V
+                    </div>
+                    <div class="row"><a class="nav-link px-2 px-md-3 px-lg-5 px-xl-5 py-1" 
+                    href="#idLocalEventsOnFriday"></a></div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="col">
+                    <div class="row px-2 px-md-3 px-lg-5 px-xl-5" title="Sábado" aria-label="Sábado">
+                        S
+                    </div>
+                    <div class="row"><a class="nav-link px-2 px-md-3 px-lg-5 px-xl-5 py-1" 
+                    href="#idLocalEventsOnSaturday"></a></div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="col">
+                    <div class="row px-2 px-md-3 px-lg-5 px-xl-5" title="Domingo" aria-label="Domingo">
+                        D
+                    </div>
+                    <div class="row"><a class="nav-link px-2 px-md-3 px-lg-5 px-xl-5 py-1" 
+                    href="#idLocalEventsOnSunday"></a></div>
+                </div>
+            </li>
+        </ul>
     </div>
-    <div class="ml-4 pt-2">
+    <div class="ml-4">
         <i class="far fa-calendar fa-3x"></i>
     </div>
 </div>
-<div class="classEventsList">
+<div class="classLocalEventsList">
     <h4 class="pt-4">Hoy</h4>
     <div class="row">
         <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pt-4 classLocalEventContainer">
@@ -115,8 +163,7 @@ id="idLocalEventsWeekCalendar">
         </div>
     </div>
 </div>
-
-<div class="classEventsList">
+<div class="classLocalEventsList">
     <h4 class="pt-4">Mañana</h4>
     <div class="row">
         <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pt-4 classLocalEventContainer">
@@ -165,5 +212,6 @@ id="idLocalEventsWeekCalendar">
 </div>
 <script>
     fillNumericDaysOfTheMonthRowInLocalEventsNavigationBar();
-    setCurrentNumericDayAsSelectedInLocalEventsNavigationBar();
+    setIdsInLocalEventsLists();
+    setScrollspyInNavigationBarById("idLocalEventsNavigationBar",250);
 </script>
