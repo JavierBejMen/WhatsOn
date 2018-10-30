@@ -1,29 +1,7 @@
-<nav class="navbar navbar-expand fixed-top navbar-dark bg-dark text-white" 
-id="idSearchLocalNavigationBar">
-    <ul class="navbar-nav w-100 nav-justified">
-        <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" title="Mapa de locales" 
-            aria-label="Mapa de locales" 
-            onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR,this); 
-            loadSearchLocalMapSubview();">
-                MAPAS
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" title="Categorías de locales" 
-            aria-label="Categorías de locales" 
-            onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR,this); 
-            loadSearchLocalCategoriesSubview();">
-                CATEGORÍAS
-            </a>
-        </li>
-    </ul>
-</nav>
-<div class="container-fluid" id="idSearchLocalMain"></div>
 <!-- Button to activate modal window for categories filter -->
-<button type="button" class="btn btn-mdb-color waves-effect waves-light classRoundedBottomRightFloatingButton" 
-data-toggle="modal" data-target="#idFilterCategoriesModal" data-backdrop="false" title="Filtro de categorías" 
-aria-label="Filtro de categorías">
+<button type="button" class="btn btn-mdb-color waves-effect waves-light 
+classRoundedBottomRightFloatingButton" data-toggle="modal" data-target="#idFilterCategoriesModal" 
+data-backdrop="false" title="Filtro de categorías" aria-label="Filtro de categorías">
     <i class="fas fa-filter fa-2x"></i>
 </button>
 <!-- Modal window for categories filter -->
@@ -40,10 +18,10 @@ aria-labelledby="idFilterCategoriesModalLabel" aria-hidden="true">
             <div class="modal-body">
                 <div class="row justify-content-center" aria-label="Filtro de locales">
                     <div class="col-8 col-xs-8 col-sm-6 col-md-6 col-lg-6">
-                        <span class="btn btn-block btn-outline-success waves-effect mb-2 filterOfferButton" 
-                        onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.OFFERS,this)" disabled>Ofertas</span>
-                        <span class="btn btn-block btn-warning waves-effect mb-2 filterEventButton"
-                        onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.EVENTS,this)">Eventos</span>
+                        <span class="btn btn-block btn-outline-warning waves-effect mb-2 filterOffersEventsButton" 
+                        onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.OFFERS_EVENTS,this)" disabled>Ofertas</span>
+                        <span class="btn btn-block btn-warning waves-effect mb-2 filterOffersEventsButton"
+                        onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.OFFERS_EVENTS,this)">Eventos</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton" 
                         onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)">En directo</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton" 
@@ -68,9 +46,3 @@ aria-labelledby="idFilterCategoriesModalLabel" aria-hidden="true">
         </div>
     </div>
 </div>
-<script>
-    showMainMenuBar();
-    showMainNavigationBar();
-    setSelectedNavigationItemInNavigationBar(HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR,1);
-    loadSearchLocalCategoriesSubview();
-</script>

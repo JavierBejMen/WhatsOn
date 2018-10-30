@@ -18,13 +18,13 @@
 <body>
     <header>
         <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark text-white" id="idMainMenuBar">
-            <ul class="navbar-nav w-100">
-                <li class="nav-item mr-auto pl-5"><h2><small>Granada</small></h2></li>
+            <ul class="navbar-nav w-100 justify-content-between">
                 <li class="nav-item">
                     <a class="nav-link classRoundNavigationLink" title="Buscar" aria-label="Buscar">
                         <i class="fas fa-search fa-sm"></i>
                     </a>
                 </li>
+                <li class="nav-item pt-2"><h5>Granada</h5></li>
                 <li class="nav-item">
                     <a class="nav-link classRoundNavigationLink" title="Más acciones" 
                     aria-label="Más acciones">
@@ -39,21 +39,21 @@
     id="idMainNavigationBar">
         <ul class="navbar-nav w-100 nav-justified">
             <li class="nav-item">
-                <a class="nav-link d-flex flex-column" title="Perfil de usuario" 
-                aria-label="Perfil de usuario" 
-                onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this);
-                loadUserProfileView();">
-                    <i class="fas fa-user-circle fa-lg"></i>
-                    <span class="mt-2">Perfil</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link d-flex flex-column" title="Búsqueda de locales" 
                 aria-label="Búsqueda de locales" 
                 onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this); 
-                loadSearchLocalView();">
+                loadCategoriesOfLocalsView();">
                     <i class="fas fa-search fa-lg"></i>
                     <span class="mt-2">Búsqueda</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex flex-column" title="Mapa de locales" 
+                aria-label="Mapa de locales" 
+                onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this); 
+                loadMapOfLocalsView();">
+                    <i class="fas fa-map-marked-alt fa-lg"></i>
+                    <span class="mt-2">Mapa</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -62,6 +62,15 @@
                 onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this)">
                     <i class="far fa-calendar fa-lg"></i>
                     <span class="mt-2">Eventos</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex flex-column" title="Perfil de usuario" 
+                aria-label="Perfil de usuario" 
+                onclick="setNavigationItemAsSelectedInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,this);
+                loadUserProfileView();">
+                    <i class="fas fa-user-circle fa-lg"></i>
+                    <span class="mt-2">Perfil</span>
                 </a>
             </li>
         </ul>
@@ -82,8 +91,8 @@
     <script src="./scripts/categories-filter.js"></script>
     <script src="./scripts/photos.js"></script>
     <script>
-        setSelectedNavigationItemInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,1);
-        loadSearchLocalView();
+        setSelectedNavigationItemInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,0);
+        loadCategoriesOfLocalsView();
     </script>
 </body>
 </html>

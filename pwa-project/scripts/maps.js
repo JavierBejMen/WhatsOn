@@ -18,7 +18,8 @@ function loadLocalDataInGoogleMapsApi() {
 }
 
 function loadLocalDataInLeafletApi(localName,localLatitude,localLongitude,zoomLevel) {
-    var mapOfLocal = L.map("idLocalMapContainer").setView([localLatitude,localLongitude],zoomLevel);
+    var mapOfLocal = L.map("idLocalMapContainer", {dragging: !L.Browser.mobile})
+    .setView([localLatitude,localLongitude],zoomLevel);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
     {
         attribution: "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"

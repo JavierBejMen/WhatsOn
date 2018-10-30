@@ -2,11 +2,11 @@
     <ul class="navbar-nav w-100 justify-content-between">
         <li class="nav-item">
             <a class="nav-link waves-effect waves-light classRoundNavigationLink" title="Volver atrás" 
-            aria-label="Volver atrás" onclick="loadSearchLocalView()">
+            aria-label="Volver atrás" onclick="loadCategoriesOfLocalsView()">
                 <i class="fas fa-arrow-left fa-sm"></i>
             </a>
         </li>
-        <li class="nav-item mr-auto pl-2"><h2><small>Lemon Rock</small></h2></li>
+        <li class="nav-item pt-2"><h5>Lemon Rock</h5></li>
         <li class="nav-item">
             <a class="nav-link waves-effect waves-light classRoundNavigationLink" 
             title="Más sobre Lemon Rock" aria-label="Más sobre Lemon Rock">
@@ -39,6 +39,7 @@ alt="Imagen de Lemon Rock" aria-label="Imagen de Lemon Rock">
         </li>
     </ul>
 </nav>
+<div class="sticky-top" id="idEventsWeekCalendarContainerInLocalEvents"></div>
 <div class="container-fluid" id="idLocalMain"></div>
 <script>
     hideMainMenuBar();

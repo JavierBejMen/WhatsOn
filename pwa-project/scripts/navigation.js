@@ -2,14 +2,15 @@ const CSS_CHAR_ID_SELECTOR = "#";
 const HTML_TAG_BODY = "body";
 const HTML_TAG_MAIN = "main";
 const HTML_TAG_NAVIGATION_ITEM = "a";
+const FILE_PATH_CATEGORIES_OF_LOCALS_VIEW = "./views/categories-of-locals.html";
+const FILE_PATH_MAP_OF_LOCALS_VIEW = "./views/map-of-locals.html";
 const FILE_PATH_USER_PROFILE_VIEW = "./views/user-profile.html";
-const FILE_PATH_SEARCH_LOCAL_VIEW = "./views/search-local.html";
-const FILE_PATH_SEARCH_LOCAL_MAP_SUBVIEW = "./views/search-local-subviews/map.html";
-const FILE_PATH_SEARCH_LOCAL_CATEGORIES_SUBVIEW = "./views/search-local-subviews/categories.html";
 const FILE_PATH_LOCAL_VIEW = "./views/local.html";
 const FILE_PATH_LOCAL_INFO_SUBVIEW = "./views/local-subviews/info.html";
 const FILE_PATH_LOCAL_EVENTS_SUBVIEW = "./views/local-subviews/events.html";
 const FILE_PATH_LOCAL_PHOTOS_SUBVIEW = "./views/local-subviews/photos.html";
+const FILE_PATH_CATEGORIES_FILTER_COMPONENT = "./components/categories-filter.html";
+const FILE_PATH_EVENTS_WEEK_CALENDAR_COMPONENT = "./components/events-week-calendar.html";
 const HTML_ATTRIBUTE_ID = "id";
 const HTML_CLASS_INVISIBLE = "invisible";
 const HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR = "classSelectedNavigationItem";
@@ -17,11 +18,14 @@ const HTML_CLASS_SHOW_HIDE_DESCRIPTION_BUTTON = "classShowHideDescriptionButton"
 const HTML_CLASS_LOCAL_EVENTS_LIST = "classLocalEventsList";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
 const HTML_ID_MAIN_NAVIGATION_BAR = "idMainNavigationBar";
-const HTML_ID_SEARCH_LOCAL_NAVIGATION_BAR = "idSearchLocalNavigationBar";
-const HTML_ID_SEARCH_LOCAL_MAIN = "idSearchLocalMain";
 const HTML_ID_LOCAL_NAVIGATION_BAR = "idLocalNavigationBar";
 const HTML_ID_LOCAL_MAIN = "idLocalMain";
-const HTML_ID_LOCAL_EVENTS_NAVIGATION_BAR = "idLocalEventsNavigationBar";
+const HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_CATEGORIES_OF_LOCALS = 
+"idCategoriesFilterContainerInCategoriesOfLocals";
+const HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_MAP_OF_LOCALS = "idCategoriesFilterContainerInMapOfLocals";
+const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_LOCAL = 
+"idEventsWeekCalendarContainerInLocalEvents";
+const HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR = "idEventsWeekCalendarNavigationBar";
 const HTML_IDS_LIST_FOR_LOCAL_EVENTS_LISTS = ["idLocalEventsOnMonday","idLocalEventsOnTuesday",
 "idLocalEventsOnWednesday","idLocalEventsOnThursday","idLocalEventsOnFriday","idLocalEventsOnSaturday",
 "idLocalEventsOnSunday"];
@@ -37,21 +41,17 @@ function setNavigationItemAsSelectedInNavigationBar(htmlIdNavigationBar,htmlElem
     classList.remove(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
     htmlElement.classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
 }
+function loadCategoriesOfLocalsView()
+{
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_CATEGORIES_OF_LOCALS_VIEW);
+}
+function loadMapOfLocalsView()
+{
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_MAP_OF_LOCALS_VIEW);
+}
 function loadUserProfileView()
 {
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_VIEW);
-}
-function loadSearchLocalView()
-{
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_SEARCH_LOCAL_VIEW);
-}
-function loadSearchLocalMapSubview()
-{
-    loadHtmlFileInHtmlNodeById(HTML_ID_SEARCH_LOCAL_MAIN,FILE_PATH_SEARCH_LOCAL_MAP_SUBVIEW);
-}
-function loadSearchLocalCategoriesSubview()
-{
-    loadHtmlFileInHtmlNodeById(HTML_ID_SEARCH_LOCAL_MAIN,FILE_PATH_SEARCH_LOCAL_CATEGORIES_SUBVIEW);
 }
 function loadLocalView() {
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_LOCAL_VIEW);
@@ -66,11 +66,23 @@ function loadLocalEventsSubview()
 function loadLocalPhotosSubview() {
     loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,FILE_PATH_LOCAL_PHOTOS_SUBVIEW);
 }
-function loadHtmlFileInHtmlNodeById(htmlNodeId,htmlFilePath) {
-    $(CSS_CHAR_ID_SELECTOR + htmlNodeId).load(htmlFilePath);
+function loadCategoriesFilterComponentInHtmlNodeById(htmlNodeId)
+{
+    loadHtmlFileInHtmlNodeById(htmlNodeId,FILE_PATH_CATEGORIES_FILTER_COMPONENT);
+}
+function loadEventsWeekCalendarComponentInHtmlNodeById(htmlNodeId) 
+{
+    loadHtmlFileInHtmlNodeById(htmlNodeId,FILE_PATH_EVENTS_WEEK_CALENDAR_COMPONENT);
 }
 function loadHtmlFileInHtmlNodeByTag(htmlNodeTag,htmlFilePath) {
     $(htmlNodeTag).load(htmlFilePath);
+}
+function loadHtmlFileInHtmlNodeById(htmlNodeId,htmlFilePath) {
+    $(CSS_CHAR_ID_SELECTOR + htmlNodeId).load(htmlFilePath);
+}
+function removeHtmlNodeContentById(htmlNodeId)
+{
+    document.getElementById(htmlNodeId).innerText = HTML_EMPTY_ATTRIBUTE_VALUE;
 }
 function hideMainMenuBar() {
     document.getElementById(HTML_ID_MAIN_MENU_BAR).classList.add(HTML_CLASS_INVISIBLE);
@@ -99,9 +111,9 @@ function toggleShowAndHideDescriptionButtons(htmlIdDescriptionContainer)
         htmlListOfButtons[0].classList.remove(HTML_CLASS_INVISIBLE);
     }
 }
-function fillNumericDaysOfTheMonthRowInLocalEventsNavigationBar()
+function fillNumericDaysOfTheMonthRowInEventsWeekCalendarNavigationBar()
 {
-    var listOfNumericDaysOfTheMonth = document.getElementById(HTML_ID_LOCAL_EVENTS_NAVIGATION_BAR)
+    var listOfNumericDaysOfTheMonth = document.getElementById(HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR)
     .getElementsByTagName(HTML_TAG_NAVIGATION_ITEM);
     var todayAsNumericDayOfTheWeek = getTodayAsNumericDayOfTheWeek();
     var today = new Date();
