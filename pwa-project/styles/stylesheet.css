@@ -1,3 +1,8 @@
+:root {
+    --main-menu-bar-height: 56px;
+    --main-navigation-bar-height: 71px;
+}
+
 .btn {
     text-transform: none;
 }
@@ -117,6 +122,10 @@
     background-color: white !important;
 }
 
+#idEventsWeekCalendarContainerInAllEvents, #idEventsWeekCalendarContainerInLocal {
+    top: var(--main-menu-bar-height);
+}
+
 #idEventsWeekCalendarNavigationBar a {
     color: black;
     text-decoration: none;
@@ -134,53 +143,17 @@
 
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
 #idCategoriesOfLocalsMain {
-    margin-top: 56px;
-    margin-bottom: 72px;
+    margin-top: var(--main-menu-bar-height);
+    margin-bottom: var(--main-navigation-bar-height);
 }
 
 #idMapOfLocalsContainer {
-    margin-top: 56px;
+    margin-top: var(--main-menu-bar-height);
+    height: calc(100vh - var(--main-menu-bar-height) - var(--main-navigation-bar-height));
 }
 
-/* Extra small devices (portrait phones, less than 576px) */
-@media (min-height: 270px) and (max-height: 371.98px) {
-    #idMapOfLocalsContainer {
-        height: 200px;
-    }
-}
-@media (min-height: 372px) and (max-height: 473.98px) {
-    #idMapOfLocalsContainer {
-        height: 300px;
-    }
-}
-@media (min-height: 474px) and (max-height: 575.98px) {
-    #idMapOfLocalsContainer {
-        height: 500px;
-    }
-}
-/* Small devices (landscape phones, 576px and up) */
-@media (min-height: 576px) and (max-height: 767.98px) {
-    #idMapOfLocalsContainer {
-        height: 650px;
-    }
-}
-/* Medium devices (tablets, 768px and up) */
-@media (min-height: 768px) and (max-height: 991.98px) {
-    #idMapOfLocalsContainer {
-        height: 700px;
-    }
-}
-/* Large devices (desktops, 992px and up) */
-@media (min-height: 992px) and (max-height: 1199.98px) {
-    #idMapOfLocalsContainer {
-        height: 900px;
-    }
-}
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-height: 1200px) {
-    #idMapOfLocalsContainer {
-        height: 1000px;
-    }
+#idEventsMain {
+    margin-top: 40px;
 }
 
 #idEditUserProfileButton {
@@ -189,7 +162,7 @@
 
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
 #idUserProfilePictureContainer {
-    margin-top: 56px;
+    margin-top: var(--main-menu-bar-height);
 }
 
 #idUserProfilePictureContainer img {
@@ -198,9 +171,13 @@
     border-radius: 50%;
 }
 
+#idUserProfileNavigationContainer {
+    margin-bottom: var(--main-navigation-bar-height);
+}
+
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
 #idLocalHeaderImage {
-    margin-top: 54px;
+    margin-top: var(--main-menu-bar-height);
     max-height: 300px;
 }
 
@@ -234,8 +211,4 @@
 #idLocalRecommendationContainer > img {
     position: relative;
     max-height: 300px;
-}
-
-#idEventsWeekCalendarContainerInLocalEvents {
-    top: 56px;
 }

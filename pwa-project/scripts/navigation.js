@@ -4,6 +4,7 @@ const HTML_TAG_MAIN = "main";
 const HTML_TAG_NAVIGATION_ITEM = "a";
 const FILE_PATH_CATEGORIES_OF_LOCALS_VIEW = "./views/categories-of-locals.html";
 const FILE_PATH_MAP_OF_LOCALS_VIEW = "./views/map-of-locals.html";
+const FILE_PATH_EVENTS_VIEW = "./views/events.html";
 const FILE_PATH_USER_PROFILE_VIEW = "./views/user-profile.html";
 const FILE_PATH_LOCAL_VIEW = "./views/local.html";
 const FILE_PATH_LOCAL_INFO_SUBVIEW = "./views/local-subviews/info.html";
@@ -22,9 +23,11 @@ const HTML_ID_LOCAL_NAVIGATION_BAR = "idLocalNavigationBar";
 const HTML_ID_LOCAL_MAIN = "idLocalMain";
 const HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_CATEGORIES_OF_LOCALS = 
 "idCategoriesFilterContainerInCategoriesOfLocals";
-const HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_MAP_OF_LOCALS = "idCategoriesFilterContainerInMapOfLocals";
-const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_LOCAL = 
-"idEventsWeekCalendarContainerInLocalEvents";
+const HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_MAP_OF_LOCALS = 
+"idCategoriesFilterContainerInMapOfLocals";
+const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_LOCAL = "idEventsWeekCalendarContainerInLocal";
+const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS = 
+"idEventsWeekCalendarContainerInAllEvents";
 const HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR = "idEventsWeekCalendarNavigationBar";
 const HTML_IDS_LIST_FOR_LOCAL_EVENTS_LISTS = ["idLocalEventsOnMonday","idLocalEventsOnTuesday",
 "idLocalEventsOnWednesday","idLocalEventsOnThursday","idLocalEventsOnFriday","idLocalEventsOnSaturday",
@@ -53,6 +56,10 @@ function loadUserProfileView()
 {
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_VIEW);
 }
+function loadEventsView()
+{
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_EVENTS_VIEW);
+}
 function loadLocalView() {
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_LOCAL_VIEW);
 }
@@ -70,9 +77,10 @@ function loadCategoriesFilterComponentInHtmlNodeById(htmlNodeId)
 {
     loadHtmlFileInHtmlNodeById(htmlNodeId,FILE_PATH_CATEGORIES_FILTER_COMPONENT);
 }
-function loadEventsWeekCalendarComponentInHtmlNodeById(htmlNodeId) 
+function loadEventsWeekCalendarComponentInHtmlNodeById(htmlNodeId,offsetValue) 
 {
     loadHtmlFileInHtmlNodeById(htmlNodeId,FILE_PATH_EVENTS_WEEK_CALENDAR_COMPONENT);
+    setScrollspyInNavigationBarById(HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR,offsetValue);
 }
 function loadHtmlFileInHtmlNodeByTag(htmlNodeTag,htmlFilePath) {
     $(htmlNodeTag).load(htmlFilePath);
@@ -115,13 +123,13 @@ function fillNumericDaysOfTheMonthRowInEventsWeekCalendarNavigationBar()
 {
     var listOfNumericDaysOfTheMonth = document.getElementById(HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR)
     .getElementsByTagName(HTML_TAG_NAVIGATION_ITEM);
-    var todayAsNumericDayOfTheWeek = getTodayAsNumericDayOfTheWeek();
-    var today = new Date();
-    var firstNumericDayOfTheWeek = today.getDate() - todayAsNumericDayOfTheWeek;
-    for (var indexOfNumericDayOfTheWeek = 0; indexOfNumericDayOfTheWeek < 7; indexOfNumericDayOfTheWeek++)
-    { 
-        listOfNumericDaysOfTheMonth[indexOfNumericDayOfTheWeek].innerText = 
-        firstNumericDayOfTheWeek + indexOfNumericDayOfTheWeek;
+    var variableDate = new Date();
+    variableDate.setDate(variableDate.getDate() - getTodayAsNumericDayOfTheWeek());
+    for(var indexOfNumericDayOfTheWeek = 0; indexOfNumericDayOfTheWeek < 7; 
+    indexOfNumericDayOfTheWeek++)
+    {
+        listOfNumericDaysOfTheMonth[indexOfNumericDayOfTheWeek].innerText = variableDate.getDate();
+        variableDate.setDate(variableDate.getDate() + 1);
     }
 }
 function setIdsInLocalEventsLists()
