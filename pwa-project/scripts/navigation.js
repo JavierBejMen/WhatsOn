@@ -6,6 +6,8 @@ const FILE_PATH_CATEGORIES_OF_LOCALS_VIEW = "./views/categories-of-locals.html";
 const FILE_PATH_MAP_OF_LOCALS_VIEW = "./views/map-of-locals.html";
 const FILE_PATH_EVENTS_VIEW = "./views/events.html";
 const FILE_PATH_USER_PROFILE_VIEW = "./views/user-profile.html";
+const FILE_PATH_USER_PROFILE_OFFERS_SUBVIEW = "./views/user-profile-subviews/offers.html";
+const FILE_PATH_USER_PROFILE_SETTINGS_SUBVIEW = "./views/user-profile-subviews/settings.html";
 const FILE_PATH_LOCAL_VIEW = "./views/local.html";
 const FILE_PATH_LOCAL_INFO_SUBVIEW = "./views/local-subviews/info.html";
 const FILE_PATH_LOCAL_EVENTS_SUBVIEW = "./views/local-subviews/events.html";
@@ -34,14 +36,22 @@ const HTML_IDS_LIST_FOR_LOCAL_EVENTS_LISTS = ["idLocalEventsOnMonday","idLocalEv
 "idLocalEventsOnSunday"];
 
 function setSelectedNavigationItemInNavigationBar(htmlIdNavigationBar,indexOfElement){
-    document.getElementById(htmlIdNavigationBar)
-    .getElementsByTagName(HTML_TAG_NAVIGATION_ITEM)[indexOfElement].classList
+    var htmlNavigationBar = document.getElementById(htmlIdNavigationBar);
+    if(htmlNavigationBar.getElementsByClassName(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR).length)
+    {
+        htmlNavigationBar.getElementsByClassName(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR)[0].
+        classList.remove(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
+    }
+    htmlNavigationBar.getElementsByTagName(HTML_TAG_NAVIGATION_ITEM)[indexOfElement].classList
     .add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
 }
 function setNavigationItemAsSelectedInNavigationBar(htmlIdNavigationBar,htmlElement) {
-    document.getElementById(htmlIdNavigationBar)
-    .getElementsByClassName(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR)[0].
-    classList.remove(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
+    var htmlNavigationBar = document.getElementById(htmlIdNavigationBar);
+    if(htmlNavigationBar.getElementsByClassName(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR).length)
+    {
+        htmlNavigationBar.getElementsByClassName(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR)[0].
+        classList.remove(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
+    }
     htmlElement.classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
 }
 function loadCategoriesOfLocalsView()
@@ -55,6 +65,14 @@ function loadMapOfLocalsView()
 function loadUserProfileView()
 {
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_VIEW);
+}
+function loadUserProfileOffersSubview()
+{
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_OFFERS_SUBVIEW);
+}
+function loadUserProfileSettingsSubview()
+{
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_SETTINGS_SUBVIEW);
 }
 function loadEventsView()
 {

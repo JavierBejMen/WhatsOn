@@ -175,6 +175,19 @@
     margin-bottom: var(--main-navigation-bar-height);
 }
 
+#idUserProfileOffersMain {
+    margin-top: var(--main-menu-bar-height);
+}
+
+#idUserProfileOffersMain img {
+    max-width: 92px;
+    max-height: 92px;
+}
+
+#idUserProfileSettingsMain {
+    margin-top: var(--main-menu-bar-height);
+}
+
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
 #idLocalHeaderImage {
     margin-top: var(--main-menu-bar-height);

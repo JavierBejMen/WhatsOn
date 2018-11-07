@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand fixed-top navbar-dark bg-dark text-white"
+id="idUserProfileSettingsMenuBar">
+    <ul class="navbar-nav w-100 justify-content-between">
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light classRoundNavigationLink" title="Volver atrás" 
+            aria-label="Volver atrás" onclick="loadUserProfileView()">
+                <i class="fas fa-arrow-left fa-sm"></i>
+            </a>
+        </li>
+        <li class="nav-item pt-2"><h5>Ajustes</h5></li>
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light classRoundNavigationLink" 
+            title="Más acciones" aria-label="Más acciones">
+                <i class="fas fa-ellipsis-v fa-sm"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<div class="container-fluid" id="idUserProfileSettingsMain">
+    <div class="row">
+        <div class="col-12 col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+            <a class="btn btn-block text-left waves-effect shadow-none border-bottom pt-3 pb-1">
+                <p class="mb-1">E-mail</p>
+                <p class="text-muted">correo_de_usuario@servidor-de-correo.com</p>
+            </a>
+            <a class="btn btn-block text-left waves-effect shadow-none border-bottom pt-3 pb-1">
+                <p class="mb-1">Contraseña</p>
+                <p class="text-muted">Cambiar contraseña</p>
+            </a>
+            <a class="btn btn-block text-left waves-effect shadow-none border-bottom py-4">
+                Eliminar cuenta
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    hideMainMenuBar();
+</script>
