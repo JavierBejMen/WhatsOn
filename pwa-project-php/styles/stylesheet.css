@@ -175,7 +175,8 @@
     margin-bottom: var(--main-navigation-bar-height);
 }
 
-#idUserProfileOffersMain {
+#idUserProfileOffersMain, #idUserProfileSettingsMain, #idUserProfileHelpMain, 
+#idUserProfileHelFaqsMain {
     margin-top: var(--main-menu-bar-height);
 }
 
@@ -184,8 +185,12 @@
     max-height: 92px;
 }
 
-#idUserProfileSettingsMain {
-    margin-top: var(--main-menu-bar-height);
+#idUserProfileHelFaqsMain {
+    margin-bottom: var(--main-navigation-bar-height);
+}
+
+#idUserProfileHelFaqsMain button {
+    text-decoration: none;
 }
 
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
