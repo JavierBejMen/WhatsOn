@@ -8,6 +8,8 @@ const FILE_PATH_EVENTS_VIEW = "./views/events.html";
 const FILE_PATH_USER_PROFILE_VIEW = "./views/user-profile.html";
 const FILE_PATH_USER_PROFILE_OFFERS_SUBVIEW = "./views/user-profile-subviews/offers.html";
 const FILE_PATH_USER_PROFILE_SETTINGS_SUBVIEW = "./views/user-profile-subviews/settings.html";
+const FILE_PATH_USER_PROFILE_HELP_SUBVIEW = "./views/user-profile-subviews/help.html";
+const FILE_PATH_USER_PROFILE_HELP_FAQS_SUBVIEW = "./views/user-profile-subviews/help-faqs.html";
 const FILE_PATH_LOCAL_VIEW = "./views/local.html";
 const FILE_PATH_LOCAL_INFO_SUBVIEW = "./views/local-subviews/info.html";
 const FILE_PATH_LOCAL_EVENTS_SUBVIEW = "./views/local-subviews/events.html";
@@ -73,6 +75,14 @@ function loadUserProfileOffersSubview()
 function loadUserProfileSettingsSubview()
 {
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_SETTINGS_SUBVIEW);
+}
+function loadUserProfileHelpSubview()
+{
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_HELP_SUBVIEW);
+}
+function loadUserProfileHelpFaqs()
+{
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_HELP_FAQS_SUBVIEW);
 }
 function loadEventsView()
 {
