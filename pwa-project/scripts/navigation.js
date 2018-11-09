@@ -21,6 +21,7 @@ const HTML_CLASS_INVISIBLE = "invisible";
 const HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR = "classSelectedNavigationItem";
 const HTML_CLASS_SHOW_HIDE_DESCRIPTION_BUTTON = "classShowHideDescriptionButton";
 const HTML_CLASS_LOCAL_EVENTS_LIST = "classLocalEventsList";
+const HTML_CLASS_ALL_EVENTS_LIST = "classAllEventsList";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
 const HTML_ID_MAIN_NAVIGATION_BAR = "idMainNavigationBar";
 const HTML_ID_LOCAL_NAVIGATION_BAR = "idLocalNavigationBar";
@@ -33,9 +34,15 @@ const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_LOCAL = "idEventsWeekCalendarCon
 const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS = 
 "idEventsWeekCalendarContainerInAllEvents";
 const HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR = "idEventsWeekCalendarNavigationBar";
-const HTML_IDS_LIST_FOR_LOCAL_EVENTS_LISTS = ["idLocalEventsOnMonday","idLocalEventsOnTuesday",
+const HTML_IDS_LIST_FOR_EVENTS_LISTS = ["idLocalEventsOnMonday","idLocalEventsOnTuesday",
 "idLocalEventsOnWednesday","idLocalEventsOnThursday","idLocalEventsOnFriday","idLocalEventsOnSaturday",
 "idLocalEventsOnSunday"];
+const LOCAL_SUBVIEW = {
+    INFO: 0,
+    EVENTS: 1,
+    PHOTOS: 2
+};
+var globalVarSelectedLocalSubview = LOCAL_SUBVIEW.INFO;
 
 function setSelectedNavigationItemInNavigationBar(htmlIdNavigationBar,indexOfElement){
     var htmlNavigationBar = document.getElementById(htmlIdNavigationBar);
@@ -88,17 +95,37 @@ function loadEventsView()
 {
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_EVENTS_VIEW);
 }
-function loadLocalView() {
+function loadLocalView(localSubview = LOCAL_SUBVIEW.INFO) {
+    globalVarSelectedLocalSubview = localSubview;
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_LOCAL_VIEW);
 }
+function loadLocalSubviewFromGlobalVarSelectedLocalSubview()
+{
+    switch(globalVarSelectedLocalSubview)
+    {
+        default:
+        case LOCAL_SUBVIEW.INFO:
+            loadLocalInfoSubview();
+            break;
+        case LOCAL_SUBVIEW.EVENTS:
+            loadLocalEventsSubview();
+            break;
+        case LOCAL_SUBVIEW.PHOTOS:
+            loadLocalEventsSubview();
+            break;
+    }
+}
 function loadLocalInfoSubview() {
+    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_SUBVIEW.INFO);
     loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,FILE_PATH_LOCAL_INFO_SUBVIEW);
 }
 function loadLocalEventsSubview()
 {
+    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_SUBVIEW.EVENTS);
     loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,FILE_PATH_LOCAL_EVENTS_SUBVIEW);
 }
 function loadLocalPhotosSubview() {
+    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_SUBVIEW.PHOTOS);
     loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,FILE_PATH_LOCAL_PHOTOS_SUBVIEW);
 }
 function loadCategoriesFilterComponentInHtmlNodeById(htmlNodeId)
@@ -160,16 +187,16 @@ function fillNumericDaysOfTheMonthRowInEventsWeekCalendarNavigationBar()
         variableDate.setDate(variableDate.getDate() + 1);
     }
 }
-function setIdsInLocalEventsLists()
+function setIdsInEventsLists(htmlClassEventsList)
 {
     var todayAsNumericDayOfTheWeek = getTodayAsNumericDayOfTheWeek();
-    var eventsLists = document.getElementsByClassName(HTML_CLASS_LOCAL_EVENTS_LIST);
+    var eventsLists = document.getElementsByClassName(htmlClassEventsList);
     for(var indexOfEventsLists = 0; indexOfEventsLists < eventsLists.length; indexOfEventsLists++)
     {
         if((idForLocalEventsList = todayAsNumericDayOfTheWeek + indexOfEventsLists) < 7)
         {
             eventsLists[indexOfEventsLists].setAttribute(HTML_ATTRIBUTE_ID,
-            HTML_IDS_LIST_FOR_LOCAL_EVENTS_LISTS[idForLocalEventsList]);
+            HTML_IDS_LIST_FOR_EVENTS_LISTS[idForLocalEventsList]);
         }
     }
 }
