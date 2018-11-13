@@ -12,151 +12,76 @@ id="idEventsMenuBar">
 </nav>
 <div class="sticky-top" id="idEventsWeekCalendarContainerInAllEvents"></div>
 <div class="container-fluid" id="idEventsMain">
-    <div class="classLocalEventsList">
-        <h4 class="pt-4">Hoy</h4>
+    <div class="classAllEventsList">
+        <h4 class="pt-4 mb-0">Hoy</h4>
         <div class="row">
             <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pt-4 
-            classLocalEventContainer">
-                <div aria-label="Fecha y hora del evento Salir con Arte">
-                    <p><i class="far fa-calendar fa-lg pr-2"></i>Hoy: Taller de pintura - Salir con Arte</p>
-                    <p><i class="far fa-clock fa-lg pr-2"></i>17:00 - 18:00</p>
-                </div>
-                <div class="row justify-content-start my-4 classCategoriesList" 
-                aria-label="Categorías del evento Salir con Arte">
-                    <span class="btn btn-elegant" disabled>Pintura</span>
-                    <span class="btn btn-elegant" disabled>Arte</span>
-                </div>
-                <div class="classDescriptionContainer" id="idEvent1DescriptionContainer" 
-                aria-label="Descripción del evento Salir con Arte">
-                    <p class="collapse classDescriptionParagraph" id="idEvent1DescriptionParagraph" 
-                    aria-expanded="false">
-                        En Salir con Arte aprenderás a pintar tu propio cuadro en tan solo dos horas incluso si no has cogido un pincel en
-                        tu vida. Un artista profesional te guía para que paso a paso crees una obra de arte que al final del evento te
-                        llevarás a casa. Apúntate en https://salirconarte.com
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
-                        classShowHideDescriptionButton" type="button" data-toggle="collapse" 
-                        href="#idEvent1DescriptionParagraph" aria-expanded="false" 
-                        aria-controls="idEvent1DescriptionParagraph" title="Ver descripción" 
-                        aria-label="Ver descripción" 
-                        onclick="toggleShowAndHideDescriptionButtons('idEvent1DescriptionContainer')">
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
-                        classShowHideDescriptionButton invisible" type="button" data-toggle="collapse" 
-                        href="#idEvent1DescriptionParagraph" aria-expanded="false" 
-                        aria-controls="idEvent1DescriptionParagraph" title="Ocultar descripción" 
-                        aria-label="Ocultar descripción" 
-                        onclick="toggleShowAndHideDescriptionButtons('idEvent1DescriptionContainer')">
-                            <i class="fas fa-chevron-up"></i>
-                        </button>
+            classAllEventsEventContainer">
+                <div class="card" onclick="loadLocalView(LOCAL_SUBVIEW.EVENTS)">
+                    <img class="card-img-top" 
+                    src="./assets/images/events-lemon-rock/salir-con-arte.png" 
+                    alt="Imagen del evento Salir con Arte" 
+                    aria-label="Imagen del evento Salir con Arte">
+                    <div class="card-body">
+                        <h5 class="card-title">Taller de pintura - Salir con Arte</h5>
+                        <p class="card-text">Lemon Rock - 17:00</p>
+                        <div class="card-subtitle row justify-content-start classCategoriesList"
+                        aria-label="Categorías de Lemon Rock">
+                            <span class="btn btn-sm btn-elegant" disabled>Pintura</span>
+                            <span class="btn btn-sm btn-elegant" disabled>Arte</span>
+                        </div>
                     </div>
                 </div>
-                <img class="img-fluid mx-auto d-block py-3" src="./assets/images/events-lemon-rock/salir-con-arte.png" 
-                alt="Imagen del evento Salir con Arte" aria-label="Imagen del evento Salir con Arte">
-                <a class="btn btn-lg btn-default waves-effect w-100" title="Ver ofertas" 
-                aria-label="Ver ofertas">VER OFERTAS</a>
             </div>
             <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pt-4 
-            classLocalEventContainer">
-                <div aria-label="Fecha y hora del evento Lemon Jazz">
-                    <p><i class="far fa-calendar fa-lg pr-2"></i>Hoy: Lemon Jazz</p>
-                    <p><i class="far fa-clock fa-lg pr-2"></i>18:30 - 22:00</p>
-                </div>
-                <div class="row justify-content-start my-4 classCategoriesList" 
-                aria-label="Categorías del evento Lemon Jazz">
-                    <span class="btn btn-elegant" disabled>En directo</span>
-                    <span class="btn btn-elegant" disabled>Jazz</span>
-                    <span class="btn btn-elegant" disabled>Rock</span>
-                </div>
-                <div class="classDescriptionContainer" id="idEvent2DescriptionContainer" 
-                aria-label="Descripción del evento Lemon Jazz">
-                    <p class="collapse classDescriptionParagraph" id="idEvent2DescriptionParagraph"
-                    aria-expanded="false">
-                        Lemon JAZZ con Carlos Ligero Trío un joven saxofonista andaluz muy ligado a la tradición pero a raiz de su ultimo
-                        viaje en Paris, meses de estudio y una profunda busqueda con su istrumento, cambia completamente su forma de tocar
-                        y nos trae nuevas sonoridades acompañado de Alejandro Tamayo al contrabajo y Alfredo Sarno a la batería. ENTRADA
-                        GRATUITA. Consumiciones +1€ para colaborar con los músicos.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
-                        classShowHideDescriptionButton" type="button" data-toggle="collapse" 
-                        href="#idEvent2DescriptionParagraph" aria-expanded="false" 
-                        aria-controls="idEvent2DescriptionParagraph" title="Ver descripción" 
-                        aria-label="Ver descripción" 
-                        onclick="toggleShowAndHideDescriptionButtons('idEvent2DescriptionContainer')">
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
-                        classShowHideDescriptionButton invisible" type="button" data-toggle="collapse" 
-                        href="#idEvent2DescriptionParagraph" aria-expanded="false" 
-                        aria-controls="idEvent2DescriptionParagraph" title="Ocultar descripción" 
-                        aria-label="Ocultar descripción" 
-                        onclick="toggleShowAndHideDescriptionButtons('idEvent2DescriptionContainer')">
-                            <i class="fas fa-chevron-up"></i>
-                        </button>
+            classAllEventsEventContainer">
+                <div class="card" onclick="loadLocalView(LOCAL_SUBVIEW.EVENTS)">
+                    <img class="card-img-top" 
+                    src="./assets/images/events-lemon-rock/lemon-jazz.jpg" 
+                    alt="Imagen del evento Lemon Jazz" 
+                    aria-label="Imagen del evento Lemon Jazz">
+                    <div class="card-body">
+                        <h5 class="card-title">Lemon Jazz</h5>
+                        <p class="card-text">Lemon Rock - 18:30</p>
+                        <div class="card-subtitle row justify-content-start classCategoriesList"
+                        aria-label="Categorías de Lemon Rock">
+                            <span class="btn btn-sm btn-elegant" disabled>En directo</span>
+                            <span class="btn btn-sm btn-elegant" disabled>Jazz</span>
+                            <span class="btn btn-sm btn-elegant" disabled>Rock</span>
+                        </div>
                     </div>
                 </div>
-                <img class="img-fluid mx-auto d-block py-3" src="./assets/images/events-lemon-rock/lemon-jazz.jpg" 
-                alt="Imagen del evento Lemon Jazz" aria-label="Imagen del evento Lemon Jazz">
-                <a class="btn btn-lg btn-default waves-effect w-100" title="Ver ofertas" 
-                aria-label="Ver ofertas">VER OFERTAS</a>
             </div>
         </div>
     </div>
-    <div class="classLocalEventsList">
-        <h4 class="pt-4">Mañana</h4>
+    <div class="classAllEventsList">
+        <h4 class="pt-4 mb-0">Mañana</h4>
         <div class="row">
             <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pt-4 
-            classLocalEventContainer">
-                <div aria-label="Fecha y hora del evento Guillermo Crovetto">
-                    <p><i class="far fa-calendar fa-lg pr-2"></i>Mañana: Guillermo Crovetto</p>
-                    <p><i class="far fa-clock fa-lg pr-2"></i>20:30 - 23:00</p>
-                </div>
-                <div class="row justify-content-start my-4 classCategoriesList" 
-                aria-label="Categorías del evento Guillermo Crovetto">
-                    <span class="btn btn-elegant" disabled>En directo</span>
-                    <span class="btn btn-elegant" disabled>Indie</span>
-                    <span class="btn btn-elegant" disabled>Rock</span>
-                </div>
-                <div class="classDescriptionContainer" id="idEvent3DescriptionContainer" 
-                aria-label="Descripción del evento Guillermo Crovetto">
-                    <p class="collapse classDescriptionParagraph" id="idEvent3DescriptionParagraph" 
-                    aria-expanded="false">
-                        Vuelve Guillermo Crovetto a dar guerra. Artista carismático donde los haya, reune todas las cualidades para hacer
-                        pasar un buen rato a cualquiera con sus versiones de pop rock en acústico. ENTRADA GRATUITA
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
-                        classShowHideDescriptionButton" type="button" data-toggle="collapse" 
-                        href="#idEvent3DescriptionParagraph" aria-expanded="false" 
-                        aria-controls="idEvent3DescriptionParagraph" title="Ver descripción" 
-                        aria-label="Ver descripción" 
-                        onclick="toggleShowAndHideDescriptionButtons('idEvent3DescriptionContainer')">
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
-                        classShowHideDescriptionButton invisible" type="button" data-toggle="collapse" 
-                        href="#idEvent3DescriptionParagraph" aria-expanded="false" 
-                        aria-controls="idEvent3DescriptionParagraph" title="Ocultar descripción" 
-                        aria-label="Ocultar descripción" 
-                        onclick="toggleShowAndHideDescriptionButtons('idEvent3DescriptionContainer')">
-                            <i class="fas fa-chevron-up"></i>
-                        </button>
+            classAllEventsEventContainer">
+                <div class="card" onclick="loadLocalView(LOCAL_SUBVIEW.EVENTS)">
+                    <img class="card-img-top" 
+                    src="./assets/images/events-lemon-rock/guillermo-crovetto.jpg" 
+                    alt="Imagen del evento Guillermo Crovetto" 
+                    aria-label="Imagen del evento Guillermo Crovetto">
+                    <div class="card-body">
+                        <h5 class="card-title">Taller de pintura - Guillermo Crovetto</h5>
+                        <p class="card-text">Lemon Rock - 17:00</p>
+                        <div class="card-subtitle row justify-content-start classCategoriesList"
+                        aria-label="Categorías de Lemon Rock">
+                            <span class="btn btn-sm btn-elegant" disabled>En directo</span>
+                            <span class="btn btn-sm btn-elegant" disabled>Indie</span>
+                            <span class="btn btn-sm btn-elegant" disabled>Rock</span>
+                        </div>
                     </div>
                 </div>
-                <img class="img-fluid mx-auto d-block py-3" src="./assets/images/events-lemon-rock/guillermo-crovetto.jpg" 
-                alt="Imagen del evento Guillermo Crovetto" aria-label="Imagen del evento Guillermo Crovetto">
-                <a class="btn btn-lg btn-default waves-effect w-100" title="Ver ofertas" 
-                aria-label="Ver ofertas">VER OFERTAS</a>
             </div>
         </div>
     </div>
 </div>
 <script>
     hideMainMenuBar();
-    setIdsInLocalEventsLists();
+    setIdsInEventsLists(HTML_CLASS_ALL_EVENTS_LIST);
     loadEventsWeekCalendarComponentInHtmlNodeById(HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS,
     250);
 </script>

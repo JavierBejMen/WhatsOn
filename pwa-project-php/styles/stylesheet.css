@@ -20,13 +20,12 @@
     border-radius: 2rem;
 }
 
-.classCategoriesList span {
-    border-radius: 2rem;
-    cursor: auto;
-}
-
-.classCategoriesListInCardBody span {
+.classCategoriesList span, .classCategoriesList span:hover, 
+.classCategoriesList span:active, .classCategoriesList span:visited {
     padding: 5px 10px !important;
+    border-radius: 2rem;
+    box-shadow: none;
+    cursor: inherit !important;
 }
 
 .classDescriptionContainer .classDescriptionParagraph.collapse {
@@ -71,7 +70,7 @@
 
 .classFloatingBottomButton {
     position: fixed;
-    bottom: 10px;
+    bottom: 0;
     right: 0.5%;
     width: 97% !important;
     z-index: 2000;
@@ -154,6 +153,11 @@
 
 #idEventsMain {
     margin-top: 40px;
+    margin-bottom: var(--main-navigation-bar-height);
+}
+
+#idEventsMain .card img {
+    max-height: 35vh;
 }
 
 #idEditUserProfileButton {
@@ -196,7 +200,7 @@
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
 #idLocalHeaderImage {
     margin-top: var(--main-menu-bar-height);
-    max-height: 300px;
+    max-height: 27vh;
 }
 
 #idLocalNameInDescription {
