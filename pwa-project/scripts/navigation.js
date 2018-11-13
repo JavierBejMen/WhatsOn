@@ -37,12 +37,18 @@ const HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR = "idEventsWeekCalendarNavigat
 const HTML_IDS_LIST_FOR_EVENTS_LISTS = ["idLocalEventsOnMonday","idLocalEventsOnTuesday",
 "idLocalEventsOnWednesday","idLocalEventsOnThursday","idLocalEventsOnFriday","idLocalEventsOnSaturday",
 "idLocalEventsOnSunday"];
-const LOCAL_SUBVIEW = {
+const MAIN_NAVIGATION_BAR_INDEX = {
+    CATEGORIES_OF_LOCALS: 0,
+    MAP_OF_LOCALS: 1,
+    EVENTS: 2,
+    USER_PROFILE: 3
+}
+const LOCAL_NAVIGATION_BAR_INDEX = {
     INFO: 0,
     EVENTS: 1,
     PHOTOS: 2
 };
-var globalVarSelectedLocalSubview = LOCAL_SUBVIEW.INFO;
+var globalVarSelectedLocalSubview = LOCAL_NAVIGATION_BAR_INDEX.INFO;
 
 function setSelectedNavigationItemInNavigationBar(htmlIdNavigationBar,indexOfElement){
     var htmlNavigationBar = document.getElementById(htmlIdNavigationBar);
@@ -54,25 +60,28 @@ function setSelectedNavigationItemInNavigationBar(htmlIdNavigationBar,indexOfEle
     htmlNavigationBar.getElementsByTagName(HTML_TAG_NAVIGATION_ITEM)[indexOfElement].classList
     .add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
 }
-function setNavigationItemAsSelectedInNavigationBar(htmlIdNavigationBar,htmlElement) {
-    var htmlNavigationBar = document.getElementById(htmlIdNavigationBar);
-    if(htmlNavigationBar.getElementsByClassName(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR).length)
-    {
-        htmlNavigationBar.getElementsByClassName(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR)[0].
-        classList.remove(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
-    }
-    htmlElement.classList.add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
-}
 function loadCategoriesOfLocalsView()
 {
+    setSelectedNavigationItemInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,
+    MAIN_NAVIGATION_BAR_INDEX.CATEGORIES_OF_LOCALS);
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_CATEGORIES_OF_LOCALS_VIEW);
 }
 function loadMapOfLocalsView()
 {
+    setSelectedNavigationItemInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,
+    MAIN_NAVIGATION_BAR_INDEX.MAP_OF_LOCALS);
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_MAP_OF_LOCALS_VIEW);
+}
+function loadEventsView()
+{
+    setSelectedNavigationItemInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,
+    MAIN_NAVIGATION_BAR_INDEX.EVENTS);
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_EVENTS_VIEW);
 }
 function loadUserProfileView()
 {
+    setSelectedNavigationItemInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,
+    MAIN_NAVIGATION_BAR_INDEX.USER_PROFILE);
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_VIEW);
 }
 function loadUserProfileOffersSubview()
@@ -91,11 +100,7 @@ function loadUserProfileHelpFaqs()
 {
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_HELP_FAQS_SUBVIEW);
 }
-function loadEventsView()
-{
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_EVENTS_VIEW);
-}
-function loadLocalView(localSubview = LOCAL_SUBVIEW.INFO) {
+function loadLocalView(localSubview = LOCAL_NAVIGATION_BAR_INDEX.INFO) {
     globalVarSelectedLocalSubview = localSubview;
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_LOCAL_VIEW);
 }
@@ -104,28 +109,28 @@ function loadLocalSubviewFromGlobalVarSelectedLocalSubview()
     switch(globalVarSelectedLocalSubview)
     {
         default:
-        case LOCAL_SUBVIEW.INFO:
+        case LOCAL_NAVIGATION_BAR_INDEX.INFO:
             loadLocalInfoSubview();
             break;
-        case LOCAL_SUBVIEW.EVENTS:
+        case LOCAL_NAVIGATION_BAR_INDEX.EVENTS:
             loadLocalEventsSubview();
             break;
-        case LOCAL_SUBVIEW.PHOTOS:
-            loadLocalEventsSubview();
+        case LOCAL_NAVIGATION_BAR_INDEX.PHOTOS:
+            loadLocalPhotosSubview();
             break;
     }
 }
 function loadLocalInfoSubview() {
-    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_SUBVIEW.INFO);
+    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_NAVIGATION_BAR_INDEX.INFO);
     loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,FILE_PATH_LOCAL_INFO_SUBVIEW);
 }
 function loadLocalEventsSubview()
 {
-    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_SUBVIEW.EVENTS);
+    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_NAVIGATION_BAR_INDEX.EVENTS);
     loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,FILE_PATH_LOCAL_EVENTS_SUBVIEW);
 }
 function loadLocalPhotosSubview() {
-    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_SUBVIEW.PHOTOS);
+    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_NAVIGATION_BAR_INDEX.PHOTOS);
     loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,FILE_PATH_LOCAL_PHOTOS_SUBVIEW);
 }
 function loadCategoriesFilterComponentInHtmlNodeById(htmlNodeId)

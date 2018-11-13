@@ -156,6 +156,10 @@
     margin-bottom: var(--main-navigation-bar-height);
 }
 
+#idEventsMain .card:hover {
+    cursor: pointer;
+}
+
 #idEventsMain .card img {
     max-height: 35vh;
 }
