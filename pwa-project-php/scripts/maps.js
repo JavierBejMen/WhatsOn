@@ -33,5 +33,8 @@ function loadMapInHtmlNodeWithLeafletApi(htmlNodeId) {
     {
         attribution: "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
     }).addTo(mapOfLocal);
-    L.marker([LOCAL_LATITUDE,LOCAL_LONGITUDE]).addTo(mapOfLocal).bindPopup(LOCAL_NAME).openPopup();
+    L.marker([LOCAL_LATITUDE,LOCAL_LONGITUDE]).addTo(mapOfLocal).bindPopup(LOCAL_NAME)
+    .openPopup().on('click',function(){
+        loadLocalView();
+    });
 }

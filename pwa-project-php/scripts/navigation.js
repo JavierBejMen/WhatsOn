@@ -10,6 +10,8 @@ const FILE_PATH_USER_PROFILE_OFFERS_SUBVIEW = "./views/user-profile-subviews/off
 const FILE_PATH_USER_PROFILE_SETTINGS_SUBVIEW = "./views/user-profile-subviews/settings.html";
 const FILE_PATH_USER_PROFILE_HELP_SUBVIEW = "./views/user-profile-subviews/help.html";
 const FILE_PATH_USER_PROFILE_HELP_FAQS_SUBVIEW = "./views/user-profile-subviews/help-faqs.html";
+const FILE_PATH_USER_PROFILE_HELP_FAQS_ANSWER_SUBVIEW = 
+"./views/user-profile-subviews/help-faq-answer.html";
 const FILE_PATH_LOCAL_VIEW = "./views/local.html";
 const FILE_PATH_LOCAL_INFO_SUBVIEW = "./views/local-subviews/info.html";
 const FILE_PATH_LOCAL_EVENTS_SUBVIEW = "./views/local-subviews/events.html";
@@ -96,9 +98,13 @@ function loadUserProfileHelpSubview()
 {
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_HELP_SUBVIEW);
 }
-function loadUserProfileHelpFaqs()
+function loadUserProfileHelpFaqsSubview()
 {
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_HELP_FAQS_SUBVIEW);
+}
+function loadUserProfileFaqAnswerSubview()
+{
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_HELP_FAQS_ANSWER_SUBVIEW);
 }
 function loadLocalView(localSubview = LOCAL_NAVIGATION_BAR_INDEX.INFO) {
     globalVarSelectedLocalSubview = localSubview;
