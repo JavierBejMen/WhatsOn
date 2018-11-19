@@ -184,7 +184,7 @@
 }
 
 #idUserProfileOffersMain, #idUserProfileSettingsMain, #idUserProfileHelpMain, 
-#idUserProfileHelFaqsMain {
+#idUserProfileHelpFaqsMain {
     margin-top: var(--main-menu-bar-height);
 }
 
@@ -193,12 +193,17 @@
     max-height: 92px;
 }
 
-#idUserProfileHelFaqsMain {
+#idUserProfileHelpFaqsMain {
     margin-bottom: var(--main-navigation-bar-height);
 }
 
-#idUserProfileHelFaqsMain button {
+#idUserProfileHelpFaqsMain button {
     text-decoration: none;
+}
+
+#idUserProfileHelpFaqAnswerMain {
+    margin-bottom: var(--main-navigation-bar-height);
+    margin-top: var(--main-menu-bar-height);
 }
 
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
