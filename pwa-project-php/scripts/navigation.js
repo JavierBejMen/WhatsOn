@@ -6,7 +6,10 @@ const FILE_PATH_CATEGORIES_OF_LOCALS_VIEW = "./views/categories-of-locals.html";
 const FILE_PATH_MAP_OF_LOCALS_VIEW = "./views/map-of-locals.html";
 const FILE_PATH_EVENTS_VIEW = "./views/events.html";
 const FILE_PATH_USER_PROFILE_VIEW = "./views/user-profile.html";
-const FILE_PATH_USER_PROFILE_OFFERS_SUBVIEW = "./views/user-profile-subviews/offers.html";
+const FILE_PATH_USER_PROFILE_MY_OFFER_FLYERS_SUBVIEW = 
+"./views/user-profile-subviews/my-offer-flyers.html";
+const FILE_PATH_USER_PROFILE_OFFER_FLYER_VALIDATION_SUBVIEW = 
+"./views/user-profile-subviews/offer-flyer-validation.html";
 const FILE_PATH_USER_PROFILE_SETTINGS_SUBVIEW = "./views/user-profile-subviews/settings.html";
 const FILE_PATH_USER_PROFILE_HELP_SUBVIEW = "./views/user-profile-subviews/help.html";
 const FILE_PATH_USER_PROFILE_HELP_FAQS_SUBVIEW = "./views/user-profile-subviews/help-faqs.html";
@@ -39,6 +42,7 @@ const HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR = "idEventsWeekCalendarNavigat
 const HTML_IDS_LIST_FOR_EVENTS_LISTS = ["idLocalEventsOnMonday","idLocalEventsOnTuesday",
 "idLocalEventsOnWednesday","idLocalEventsOnThursday","idLocalEventsOnFriday","idLocalEventsOnSaturday",
 "idLocalEventsOnSunday"];
+const HTML_ID_CONSUME_OFFER_BUTTON = "idConsumeOfferButton";
 const MAIN_NAVIGATION_BAR_INDEX = {
     CATEGORIES_OF_LOCALS: 0,
     MAP_OF_LOCALS: 1,
@@ -86,9 +90,13 @@ function loadUserProfileView()
     MAIN_NAVIGATION_BAR_INDEX.USER_PROFILE);
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_VIEW);
 }
-function loadUserProfileOffersSubview()
+function loadUserProfileMyOfferFlyersSubview()
 {
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_OFFERS_SUBVIEW);
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_MY_OFFER_FLYERS_SUBVIEW);
+}
+function loadOfferFlyerValidationSubview()
+{
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_OFFER_FLYER_VALIDATION_SUBVIEW);
 }
 function loadUserProfileSettingsSubview()
 {
@@ -219,4 +227,10 @@ function getTodayAsNumericDayOfTheWeek()
 function setScrollspyInNavigationBarById(htmlIdNavigationBar,offsetValue)
 {
     $(HTML_TAG_BODY).scrollspy({target: CSS_CHAR_ID_SELECTOR + htmlIdNavigationBar,offset: offsetValue});
+}
+function ConsumeOffer()
+{
+    var htmlConsumeOfferButton = document.getElementById(HTML_ID_CONSUME_OFFER_BUTTON);
+    htmlConsumeOfferButton.innerText = "OFERTA CONSUMIDA";
+    htmlConsumeOfferButton.setAttribute(HTML_DISABLED_ATTRIBUTE,HTML_EMPTY_ATTRIBUTE_VALUE);
 }
