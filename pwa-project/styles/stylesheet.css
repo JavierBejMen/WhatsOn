@@ -183,18 +183,43 @@
     margin-bottom: var(--main-navigation-bar-height);
 }
 
-#idUserProfileOffersMain, #idUserProfileSettingsMain, #idUserProfileHelpMain, 
+#idUserProfileMyOfferFlyersMain, #idUserProfileOfferFlyerValidationMain, 
+#idHowToValidateFlyerContainer, #idUserProfileSettingsMain, #idUserProfileHelpMain, 
 #idUserProfileHelpFaqsMain {
     margin-top: var(--main-menu-bar-height);
 }
 
-#idUserProfileOffersMain img {
+#idUserProfileMyOfferFlyersMain, #idUserProfileOfferFlyerValidationMain, 
+#idHowToValidateFlyerContainer, #idUserProfileSettingsMain, #idUserProfileHelpMain, 
+#idUserProfileHelpFaqsMain {
+    margin-bottom: var(--main-navigation-bar-height);
+}
+
+#idUserProfileMyOfferFlyersMain img {
     max-width: 92px;
     max-height: 92px;
 }
 
+#idUserProfileMyOfferFlyersMain .classUserProfileMyOfferFlyersItem {
+    cursor: pointer;
+}
+
+#idUserProfileOfferFlyerValidationBackgroundImage {
+    height: calc(100vh - var(--main-menu-bar-height));
+    position: fixed;
+    top: var(--main-menu-bar-height);
+}
+
+#idUserProfileOfferFlyerValidationMain {
+    height: calc(100vh - var(--main-menu-bar-height) - var(--main-navigation-bar-height));
+    position: absolute;
+    background-color: rgba(0,0,0,0.8) !important;
+    z-index: 1;
+}
+
 #idUserProfileHelpFaqsMain {
     margin-bottom: var(--main-navigation-bar-height);
+    padding: 0;
 }
 
 #idUserProfileHelpFaqsMain button {
