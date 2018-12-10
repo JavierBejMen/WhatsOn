@@ -41,7 +41,7 @@
             <li class="nav-item">
                 <a class="nav-link d-flex flex-column" title="Categorías de locales" 
                 aria-label="Categorías de locales" 
-                onclick="loadCategoriesOfLocalsView()">
+                onclick="loadMainNavigationView(FILE_PATH_CATEGORIES_OF_LOCALS_VIEW)">
                     <i class="fas fa-list fa-lg"></i>
                     <span class="mt-2">Categorías</span>
                 </a>
@@ -49,7 +49,7 @@
             <li class="nav-item">
                 <a class="nav-link d-flex flex-column" title="Mapa de locales" 
                 aria-label="Mapa de locales" 
-                onclick=" loadMapOfLocalsView()">
+                onclick=" loadMainNavigationView(FILE_PATH_MAP_OF_LOCALS_VIEW)">
                     <i class="fas fa-map-marked-alt fa-lg"></i>
                     <span class="mt-2">Mapa</span>
                 </a>
@@ -57,7 +57,7 @@
             <li class="nav-item">
                 <a class="nav-link d-flex flex-column" title="Eventos de locales" 
                 aria-label="Eventos de locales" 
-                onclick="loadEventsView();">
+                onclick="loadMainNavigationView(FILE_PATH_EVENTS_VIEW);">
                     <i class="far fa-calendar fa-lg"></i>
                     <span class="mt-2">Eventos</span>
                 </a>
@@ -65,7 +65,7 @@
             <li class="nav-item">
                 <a class="nav-link d-flex flex-column" title="Perfil de usuario" 
                 aria-label="Perfil de usuario" 
-                onclick="loadUserProfileView();">
+                onclick="loadMainNavigationView(FILE_PATH_USER_PROFILE_VIEW);">
                     <i class="fas fa-user-circle fa-lg"></i>
                     <span class="mt-2">Perfil</span>
                 </a>
@@ -88,7 +88,7 @@
     <script src="./scripts/categories-filter.js"></script>
     <script src="./scripts/photos.js"></script>
     <script>
-        loadCategoriesOfLocalsView();
+        loadMainNavigationView(FILE_PATH_CATEGORIES_OF_LOCALS_VIEW);
     </script>
 </body>
 </html>

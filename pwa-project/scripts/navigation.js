@@ -2,6 +2,7 @@ const CSS_CHAR_ID_SELECTOR = "#";
 const HTML_TAG_BODY = "body";
 const HTML_TAG_MAIN = "main";
 const HTML_TAG_NAVIGATION_ITEM = "a";
+const HTML_TAG_MENU_BAR_TITLE = "h5";
 const JS_EMPTY_STRING_VALUE = "";
 const FILE_PATH_CATEGORIES_OF_LOCALS_VIEW = "./views/categories-of-locals.html";
 const FILE_PATH_MAP_OF_LOCALS_VIEW = "./views/map-of-locals.html";
@@ -21,11 +22,15 @@ const FILE_PATH_OFFERS_OFFER_FLYER_SUBVIEW = "./views/offers-subviews/offer-flye
 const FILE_PATH_CATEGORIES_FILTER_COMPONENT = "./components/categories-filter.html";
 const FILE_PATH_EVENTS_WEEK_CALENDAR_COMPONENT = "./components/events-week-calendar.html";
 const HTML_ATTRIBUTE_ID = "id";
+const HTML_ATTRIBUTE_DATA_TOGGLE = "data-toggle";
+const HTML_ATTRIBUTE_DATA_TARGET = "data-target";
 const HTML_CLASS_INVISIBLE = "invisible";
 const HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR = "classSelectedNavigationItem";
 const HTML_CLASS_SHOW_HIDE_DESCRIPTION_BUTTON = "classShowHideDescriptionButton";
 const HTML_CLASS_LOCAL_EVENTS_LIST = "classLocalEventsList";
 const HTML_CLASS_ALL_EVENTS_LIST = "classAllEventsList";
+const HTML_CLASS_OFFERS_ITEM = "classOffersItem";
+const HTML_CLASS_ROUNDED_BOTTOM_RIGHT_FLOATING_BUTTON = "classRoundedBottomRightFloatingButton";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
 const HTML_ID_MAIN_NAVIGATION_BAR = "idMainNavigationBar";
 const HTML_ID_LOCAL_NAVIGATION_BAR = "idLocalNavigationBar";
@@ -42,7 +47,11 @@ const HTML_IDS_LIST_FOR_EVENTS_LISTS = ["idLocalEventsOnMonday","idLocalEventsOn
 "idLocalEventsOnWednesday","idLocalEventsOnThursday","idLocalEventsOnFriday","idLocalEventsOnSaturday",
 "idLocalEventsOnSunday"];
 const HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_EVENTS = "idCategoriesFilterContainerInEvents";
-const HTML_ID_OFFER_FLYER_ACTION_BUTTON = "idOfferFlyerActionButton";
+const HTML_ID_OFFERS_MENU_BAR = "idOffersMenuBar";
+const HTML_ID_OFFERS_MAIN = "idOffersMain";
+const HTML_ID_OFFERS_OFFER_FLYER_MENU_BAR = "idOffersOfferFlyerMenuBar";
+const HTML_ID_OFFER_FLYER_ACTION_BUTTON = "idOffersOfferFlyerActionButton";
+const HTML_ID_RESERVE_OFFER_MODAL = "idReserveOfferModal";
 const TEXT_LOCAL_OFFERS_MENU_BAR = "Ofertas del local";
 const TEXT_MY_OFFER_FLYERS_MENU_BAR = "Mis flyers de ofertas";
 const TEXT_OFFER_INFO_MENU_BAR = "Información de oferta";
@@ -70,8 +79,8 @@ const OFFER_FLYER_SUBVIEW_VARIATION = {
     RESERVE_OFFER: 0,
     CONSUME_OFFER: 1
 };
-var globalVarSelectedLocalSubview = LOCAL_NAVIGATION_BAR_INDEX.INFO;
-var globalVarSelectedOffersViewVariation, globalVarPreviousLocalSubview, 
+var globalVarSelectedFilePathLocalSubview = LOCAL_NAVIGATION_BAR_INDEX.INFO;
+var globalVarSelectedOffersViewVariation, globalVarPreviousFilePathLocalSubview, 
 globalVarSelectedOfferFlyerSubviewVariation;
 
 function setSelectedNavigationItemInNavigationBar(htmlIdNavigationBar,indexOfElement){
@@ -84,89 +93,124 @@ function setSelectedNavigationItemInNavigationBar(htmlIdNavigationBar,indexOfEle
     htmlNavigationBar.getElementsByTagName(HTML_TAG_NAVIGATION_ITEM)[indexOfElement].classList
     .add(HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR);
 }
-function loadCategoriesOfLocalsView()
+function loadMainNavigationView(filePathMainNavigationView)
 {
+    var selectedNavigationItemInNavigationBar;
+    switch(filePathMainNavigationView)
+    {
+        case FILE_PATH_CATEGORIES_OF_LOCALS_VIEW:
+            selectedNavigationItemInNavigationBar = MAIN_NAVIGATION_BAR_INDEX.CATEGORIES_OF_LOCALS;
+            break;
+        case FILE_PATH_MAP_OF_LOCALS_VIEW:
+            selectedNavigationItemInNavigationBar = MAIN_NAVIGATION_BAR_INDEX.MAP_OF_LOCALS;
+            break;
+        case FILE_PATH_EVENTS_VIEW:
+            selectedNavigationItemInNavigationBar = MAIN_NAVIGATION_BAR_INDEX.EVENTS;
+            break;
+        case FILE_PATH_USER_PROFILE_VIEW:
+            selectedNavigationItemInNavigationBar = MAIN_NAVIGATION_BAR_INDEX.USER_PROFILE;
+            break;
+    }
     setSelectedNavigationItemInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,
-    MAIN_NAVIGATION_BAR_INDEX.CATEGORIES_OF_LOCALS);
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_CATEGORIES_OF_LOCALS_VIEW);
+    selectedNavigationItemInNavigationBar);
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,filePathMainNavigationView);
 }
-function loadMapOfLocalsView()
+function loadUserProfileSubview(fileUserProfileSubview)
 {
-    setSelectedNavigationItemInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,
-    MAIN_NAVIGATION_BAR_INDEX.MAP_OF_LOCALS);
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_MAP_OF_LOCALS_VIEW);
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,fileUserProfileSubview);
 }
-function loadEventsView()
+function loadLocalView(filePathLocalSubview = FILE_PATH_LOCAL_INFO_SUBVIEW) {
+    globalVarSelectedFilePathLocalSubview = filePathLocalSubview;
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_LOCAL_VIEW);
+}
+function loadLocalSubviewFromGlobalVarSelectedFilePathLocalSubview()
 {
-    setSelectedNavigationItemInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,
-    MAIN_NAVIGATION_BAR_INDEX.EVENTS);
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_EVENTS_VIEW);
+    loadLocalSubview(globalVarSelectedFilePathLocalSubview);
 }
-function loadUserProfileView()
+function loadLocalSubview(filePathLocalSubview)
 {
-    setSelectedNavigationItemInNavigationBar(HTML_ID_MAIN_NAVIGATION_BAR,
-    MAIN_NAVIGATION_BAR_INDEX.USER_PROFILE);
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_VIEW);
+    var selectedNavigationItemInNavigationBar;
+    switch(filePathLocalSubview)
+    {
+        case FILE_PATH_LOCAL_INFO_SUBVIEW:
+            selectedNavigationItemInNavigationBar = LOCAL_NAVIGATION_BAR_INDEX.INFO;
+            break;
+        case FILE_PATH_LOCAL_EVENTS_SUBVIEW:
+            selectedNavigationItemInNavigationBar = LOCAL_NAVIGATION_BAR_INDEX.EVENTS;
+            break;
+        case FILE_PATH_LOCAL_PHOTOS_SUBVIEW:
+            selectedNavigationItemInNavigationBar = LOCAL_NAVIGATION_BAR_INDEX.PHOTOS;
+            break;
+    }
+    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,
+    selectedNavigationItemInNavigationBar);
+    loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,filePathLocalSubview);
 }
-function loadOffersView(offersViewVariation, previousLocalSubview = JS_EMPTY_STRING_VALUE)
+function loadOffersView(offersViewVariation, previousFilePathLocalSubview = JS_EMPTY_STRING_VALUE)
 {
     globalVarSelectedOffersViewVariation = offersViewVariation;
-    globalVarPreviousLocalSubview = previousLocalSubview;
+    globalVarPreviousFilePathLocalSubview = previousFilePathLocalSubview;
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_OFFERS_VIEW);
+}
+function loadOffersViewVariationFromGlobalVarSelectedOffersViewVariation()
+{
+    var navigateToPreviousViewFunction, menuBarTitle, offerFlyerSubviewVariation;
+    switch(globalVarSelectedOffersViewVariation)
+    {
+        case OFFERS_VIEW_VARIATION.LOCAL_OFFERS:
+            navigateToPreviousViewFunction = function()
+            {loadLocalView(globalVarPreviousFilePathLocalSubview)};
+            menuBarTitle = TEXT_LOCAL_OFFERS_MENU_BAR;
+            offerFlyerSubviewVariation = OFFER_FLYER_SUBVIEW_VARIATION.RESERVE_OFFER;
+            break;
+        case OFFERS_VIEW_VARIATION.MY_OFFER_FLYERS:
+            navigateToPreviousViewFunction = function()
+            {loadMainNavigationView(FILE_PATH_USER_PROFILE_VIEW)};
+            menuBarTitle = TEXT_MY_OFFER_FLYERS_MENU_BAR;
+            offerFlyerSubviewVariation = OFFER_FLYER_SUBVIEW_VARIATION.CONSUME_OFFER;
+            break;
+    }
+    var htmlMenuBar = document.getElementById(HTML_ID_OFFERS_MENU_BAR);
+    htmlMenuBar.getElementsByTagName(HTML_TAG_NAVIGATION_ITEM)[0].onclick = navigateToPreviousViewFunction;
+    htmlMenuBar.getElementsByTagName(HTML_TAG_MENU_BAR_TITLE)[0].innerText = menuBarTitle;
+    var htmlOffersItems = document.getElementById(HTML_ID_OFFERS_MAIN)
+    .getElementsByClassName(HTML_CLASS_OFFERS_ITEM);
+    for(offersItemsIndex = 0; offersItemsIndex < htmlOffersItems.length; offersItemsIndex++)
+    {
+        htmlOffersItems[offersItemsIndex].onclick = function()
+        {loadOffersOfferFlyerSubview(offerFlyerSubviewVariation)};
+    }
 }
 function loadOffersOfferFlyerSubview(offerFlyerSubviewVariation)
 {
     globalVarSelectedOfferFlyerSubviewVariation = offerFlyerSubviewVariation;
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_OFFERS_OFFER_FLYER_SUBVIEW);
 }
-function loadUserProfileSettingsSubview()
+function loadOffersOfferFlyerSubviewVariationFromGlobalVarSelectedOffersViewVariation()
 {
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_SETTINGS_SUBVIEW);
-}
-function loadUserProfileHelpSubview()
-{
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_HELP_SUBVIEW);
-}
-function loadUserProfileHelpFaqsSubview()
-{
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_HELP_FAQS_SUBVIEW);
-}
-function loadUserProfileFaqAnswerSubview()
-{
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_HELP_FAQS_ANSWER_SUBVIEW);
-}
-function loadLocalView(localSubview = LOCAL_NAVIGATION_BAR_INDEX.INFO) {
-    globalVarSelectedLocalSubview = localSubview;
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_LOCAL_VIEW);
-}
-function loadLocalSubviewFromGlobalVarSelectedLocalSubview()
-{
-    switch(globalVarSelectedLocalSubview)
+    var menuBarTitle;
+    var htmlActionButton = document.getElementById(HTML_ID_OFFER_FLYER_ACTION_BUTTON);
+    switch(globalVarSelectedOfferFlyerSubviewVariation)
     {
-        default:
-        case LOCAL_NAVIGATION_BAR_INDEX.INFO:
-            loadLocalInfoSubview();
+        case OFFER_FLYER_SUBVIEW_VARIATION.RESERVE_OFFER:
+            menuBarTitle = TEXT_OFFER_INFO_MENU_BAR;
+            actionButtonText = TEXT_RESERVE_OFFER_BUTTON;
+            htmlActionButton.setAttribute(HTML_ATTRIBUTE_DATA_TOGGLE,"modal");
+            htmlActionButton.setAttribute(HTML_ATTRIBUTE_DATA_TARGET,
+            CSS_CHAR_ID_SELECTOR + HTML_ID_RESERVE_OFFER_MODAL);
+            $(CSS_CHAR_ID_SELECTOR + HTML_ID_RESERVE_OFFER_MODAL).on('hidden.bs.modal',ReserveOffer);
+            document.getElementsByClassName(HTML_CLASS_ROUNDED_BOTTOM_RIGHT_FLOATING_BUTTON)[0].classList
+            .add(HTML_CLASS_INVISIBLE);
             break;
-        case LOCAL_NAVIGATION_BAR_INDEX.EVENTS:
-            loadLocalEventsSubview();
-            break;
-        case LOCAL_NAVIGATION_BAR_INDEX.PHOTOS:
-            loadLocalPhotosSubview();
+        case OFFER_FLYER_SUBVIEW_VARIATION.CONSUME_OFFER:
+            menuBarTitle = TEXT_OFFER_FLYER_MENU_BAR;
+            actionButtonText = TEXT_CONSUME_OFFER_BUTTON;
+            htmlActionButton.onclick = ConsumeOffer;
             break;
     }
-}
-function loadLocalInfoSubview() {
-    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_NAVIGATION_BAR_INDEX.INFO);
-    loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,FILE_PATH_LOCAL_INFO_SUBVIEW);
-}
-function loadLocalEventsSubview()
-{
-    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_NAVIGATION_BAR_INDEX.EVENTS);
-    loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,FILE_PATH_LOCAL_EVENTS_SUBVIEW);
-}
-function loadLocalPhotosSubview() {
-    setSelectedNavigationItemInNavigationBar(HTML_ID_LOCAL_NAVIGATION_BAR,LOCAL_NAVIGATION_BAR_INDEX.PHOTOS);
-    loadHtmlFileInHtmlNodeById(HTML_ID_LOCAL_MAIN,FILE_PATH_LOCAL_PHOTOS_SUBVIEW);
+    document.getElementById(HTML_ID_OFFERS_OFFER_FLYER_MENU_BAR)
+    .getElementsByTagName(HTML_TAG_MENU_BAR_TITLE)[0].innerText = menuBarTitle;
+    htmlActionButton.innerText = actionButtonText;
 }
 function loadCategoriesFilterComponentInHtmlNodeById(htmlNodeId)
 {

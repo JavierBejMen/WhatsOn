@@ -47,39 +47,5 @@
 <script>
     hideMainMenuBar();
     hideMainNavigationBar();
-
-    var htmlMenuBar = document.getElementById("idOffersMenuBar");
-    switch(globalVarSelectedOffersViewVariation)
-    {
-        case OFFERS_VIEW_VARIATION.LOCAL_OFFERS:
-            htmlMenuBar.getElementsByTagName("a")[0].onclick = 
-            function(){
-                loadLocalView(globalVarPreviousLocalSubview)
-            };
-            htmlMenuBar.getElementsByTagName("h5")[0].innerText = TEXT_LOCAL_OFFERS_MENU_BAR;
-            var htmlOffersItems = document.getElementById("idOffersMain")
-            .getElementsByClassName("classOffersItem");
-            for(offersItemsIndex = 0; offersItemsIndex < htmlOffersItems.length; offersItemsIndex++)
-            {
-                htmlOffersItems[offersItemsIndex].onclick = function(){
-                    loadOffersOfferFlyerSubview(OFFER_FLYER_SUBVIEW_VARIATION.RESERVE_OFFER)
-                };
-            }
-            break;
-        case OFFERS_VIEW_VARIATION.MY_OFFER_FLYERS:
-            htmlMenuBar.getElementsByTagName("a")[0].onclick = 
-            function(){
-                loadUserProfileView()
-            };
-            htmlMenuBar.getElementsByTagName("h5")[0].innerText = TEXT_MY_OFFER_FLYERS_MENU_BAR;
-            var htmlOffersItems = document.getElementById("idOffersMain")
-            .getElementsByClassName("classOffersItem");
-            for(offersItemsIndex = 0; offersItemsIndex < htmlOffersItems.length; offersItemsIndex++)
-            {
-                htmlOffersItems[offersItemsIndex].onclick = function(){
-                    loadOffersOfferFlyerSubview(OFFER_FLYER_SUBVIEW_VARIATION.CONSUME_OFFER)
-                };
-            }
-            break;
-    }
+    loadOffersViewVariationFromGlobalVarSelectedOffersViewVariation();
 </script>

@@ -4,7 +4,7 @@ id="idOffersOfferFlyerMenuBar">
         <li class="nav-item">
             <a class="nav-link waves-effect waves-light classRoundNavigationLink" title="Volver atrás" 
             aria-label="Volver atrás" onclick="loadOffersView(globalVarSelectedOffersViewVariation,
-            globalVarPreviousLocalSubview)">
+            globalVarPreviousFilePathLocalSubview)">
                 <i class="fas fa-arrow-left fa-sm"></i>
             </a>
         </li>
@@ -27,7 +27,7 @@ aria-label="Imagen de Lemon Rock">
     <p>Fecha: 15 / 12 / 2018</p>
 </div>
 <button type="button" class="btn btn-lg btn-danger font-weight-bold waves-effect w-100 classFloatingBottomButton" 
-id="idOfferFlyerActionButton" title="Reservar o consumir oferta" aria-label="Reservar o Consumir oferta"></button>
+id="idOffersOfferFlyerActionButton" title="Reservar o consumir oferta" aria-label="Reservar o Consumir oferta"></button>
 <!-- Button to activate modal window for how to validate flyer -->
 <button type="button" class="btn btn-mdb-color waves-effect waves-light 
 classRoundedBottomRightFloatingButton" data-toggle="modal" data-target="#idHowToValidateFlyerModal" 
@@ -75,7 +75,7 @@ aria-labelledby="idReserveOfferModal" aria-hidden="true">
             </div>
             <div class="modal-body">
                 <p>
-                    Puede consultar y consumir el flyer de la misma desde su perfil de usuario.
+                    Puedes consultar y consumir el flyer de la oferta desde tu perfil de usuario.
                 </p>
             </div>
             <div class="modal-footer bg-dark text-light">
@@ -90,23 +90,5 @@ aria-labelledby="idReserveOfferModal" aria-hidden="true">
 <script>
     hideMainMenuBar();
     hideMainNavigationBar();
-
-    var htmlMenuBar = document.getElementById("idOffersOfferFlyerMenuBar");
-    switch(globalVarSelectedOfferFlyerSubviewVariation)
-    {
-        case OFFER_FLYER_SUBVIEW_VARIATION.RESERVE_OFFER:
-            htmlMenuBar.getElementsByTagName("h5")[0].innerText = TEXT_OFFER_INFO_MENU_BAR;
-            document.getElementById("idOfferFlyerActionButton").innerText = TEXT_RESERVE_OFFER_BUTTON;
-            document.getElementById("idOfferFlyerActionButton").setAttribute("data-toggle","modal");
-            document.getElementById("idOfferFlyerActionButton").setAttribute("data-target","#idReserveOfferModal");
-            document.getElementsByClassName("classRoundedBottomRightFloatingButton")[0].classList
-            .add("invisible");
-            $('#idReserveOfferModal').on('hidden.bs.modal',ReserveOffer)
-            break;
-        case OFFER_FLYER_SUBVIEW_VARIATION.CONSUME_OFFER:
-            htmlMenuBar.getElementsByTagName("h5")[0].innerText = TEXT_OFFER_FLYER_MENU_BAR;
-            document.getElementById("idOfferFlyerActionButton").innerText = TEXT_CONSUME_OFFER_BUTTON;
-            document.getElementById("idOfferFlyerActionButton").onclick = ConsumeOffer;
-            break;
-    }
+    loadOffersOfferFlyerSubviewVariationFromGlobalVarSelectedOffersViewVariation();
 </script>

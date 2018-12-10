@@ -2,7 +2,7 @@
     <ul class="navbar-nav w-100 justify-content-between">
         <li class="nav-item">
             <a class="nav-link waves-effect waves-light classRoundNavigationLink" title="Volver atrás" 
-            aria-label="Volver atrás" onclick="loadCategoriesOfLocalsView()">
+            aria-label="Volver atrás" onclick="loadMainNavigationView(FILE_PATH_CATEGORIES_OF_LOCALS_VIEW)">
                 <i class="fas fa-arrow-left fa-sm"></i>
             </a>
         </li>
@@ -22,17 +22,17 @@ alt="Imagen de Lemon Rock" aria-label="Imagen de Lemon Rock">
         <li class="nav-item">
             <a class="nav-link waves-effect" title="Información de Lemon Rock" 
             aria-label="Información de Lemon Rock" 
-            onclick="loadLocalInfoSubview()">INFO</a>
+            onclick="loadLocalSubview(FILE_PATH_LOCAL_INFO_SUBVIEW)">INFO</a>
         </li>
         <li class="nav-item">
             <a class="nav-link waves-effect" title="Eventos de Lemon Rock" 
             aria-label="Eventos de Lemon Rock" 
-            onclick="loadLocalEventsSubview()">EVENTOS</a>
+            onclick="loadLocalSubview(FILE_PATH_LOCAL_EVENTS_SUBVIEW)">EVENTOS</a>
         </li>
         <li class="nav-item waves-effect">
             <a class="nav-link" title="Fotografías de Lemon Rock" 
             aria-label="Fotografías de Lemon Rock" 
-            onclick="loadLocalPhotosSubview()">FOTOS</a>
+            onclick="loadLocalSubview(FILE_PATH_LOCAL_PHOTOS_SUBVIEW)">FOTOS</a>
         </li>
     </ul>
 </nav>
@@ -41,5 +41,5 @@ alt="Imagen de Lemon Rock" aria-label="Imagen de Lemon Rock">
 <script>
     hideMainMenuBar();
     hideMainNavigationBar();
-    loadLocalSubviewFromGlobalVarSelectedLocalSubview();
+    loadLocalSubviewFromGlobalVarSelectedFilePathLocalSubview();
 </script>
