@@ -1,0 +1,112 @@
+<nav class="navbar navbar-expand fixed-top navbar-dark bg-dark text-white"
+id="idOffersOfferFlyerMenuBar">
+    <ul class="navbar-nav w-100 justify-content-between">
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light classRoundNavigationLink" title="Volver atrás" 
+            aria-label="Volver atrás" onclick="loadOffersView(globalVarSelectedOffersViewVariation,
+            globalVarPreviousLocalSubview)">
+                <i class="fas fa-arrow-left fa-sm"></i>
+            </a>
+        </li>
+        <li class="nav-item pt-2"><h5></h5></li>
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light classRoundNavigationLink" 
+            title="Más acciones" aria-label="Más acciones">
+                <i class="fas fa-ellipsis-v fa-sm"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<img class="img-fluid w-100" id="idOffersOfferFlyerBackgroundImage" 
+src="../../assets/images/offers-lemon-rock/offer-1.jpg" alt="Imagen de Lemon Rock" 
+aria-label="Imagen de Lemon Rock">
+<div class="container-fluid text-white" id="idOffersOfferFlyerMain">
+    <h5 class="pt-4 pb-2">3 copas de ron "Brugal" por 9€</h5>
+    <p>Lemon Rock</p>
+    <p>Válido hasta las 02:00 A.M.</p>
+    <p>Fecha: 15 / 12 / 2018</p>
+</div>
+<button type="button" class="btn btn-lg btn-danger font-weight-bold waves-effect w-100 classFloatingBottomButton" 
+id="idOfferFlyerActionButton" title="Reservar o consumir oferta" aria-label="Reservar o Consumir oferta"></button>
+<!-- Button to activate modal window for how to validate flyer -->
+<button type="button" class="btn btn-mdb-color waves-effect waves-light 
+classRoundedBottomRightFloatingButton" data-toggle="modal" data-target="#idHowToValidateFlyerModal" 
+title="Mostrar cómo validar el flyer" aria-label="Mostrar cómo validar el flyer">
+    <i class="fas fa-question fa-2x"></i>
+</button>
+<!-- Modal window for how to validate flyer -->
+<div class="modal fade" id="idHowToValidateFlyerModal" tabindex="-1" role="dialog" 
+aria-labelledby="idHowToValidateFlyerModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-light">
+                <h5 class="modal-title" id="idHowToValidateFlyerModal">¿Qué hago con esto?</h5>
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Cuando llegues a Lemon Rock, enséñale el flyer de la oferta a alguien de la barra.
+                </p>
+                <p>
+                    Te pedirá que pulses el botón "CONSUMIR OFERTA" para que el mismo flyer de la oferta 
+                    sea consumido y no pueda volver a ser usado.
+                </p>
+            </div>
+            <div class="modal-footer bg-dark text-light">
+                <button type="button" class="btn btn-success waves-effect" data-dismiss="modal">
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal window for reserve offer -->
+<div class="modal fade" id="idReserveOfferModal" tabindex="-1" role="dialog" 
+aria-labelledby="idReserveOfferModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-light">
+                <h5 class="modal-title" id="idReserveOfferModal">Oferta reservada</h5>
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Puede consultar y consumir el flyer de la misma desde su perfil de usuario.
+                </p>
+            </div>
+            <div class="modal-footer bg-dark text-light">
+                <button type="button" class="btn btn-success waves-effect" data-dismiss="modal" 
+                onclick="ReserveOffer()">
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    hideMainMenuBar();
+    hideMainNavigationBar();
+
+    var htmlMenuBar = document.getElementById("idOffersOfferFlyerMenuBar");
+    switch(globalVarSelectedOfferFlyerSubviewVariation)
+    {
+        case OFFER_FLYER_SUBVIEW_VARIATION.RESERVE_OFFER:
+            htmlMenuBar.getElementsByTagName("h5")[0].innerText = TEXT_OFFER_INFO_MENU_BAR;
+            document.getElementById("idOfferFlyerActionButton").innerText = TEXT_RESERVE_OFFER_BUTTON;
+            document.getElementById("idOfferFlyerActionButton").setAttribute("data-toggle","modal");
+            document.getElementById("idOfferFlyerActionButton").setAttribute("data-target","#idReserveOfferModal");
+            document.getElementsByClassName("classRoundedBottomRightFloatingButton")[0].classList
+            .add("invisible");
+            $('#idReserveOfferModal').on('hidden.bs.modal',ReserveOffer)
+            break;
+        case OFFER_FLYER_SUBVIEW_VARIATION.CONSUME_OFFER:
+            htmlMenuBar.getElementsByTagName("h5")[0].innerText = TEXT_OFFER_FLYER_MENU_BAR;
+            document.getElementById("idOfferFlyerActionButton").innerText = TEXT_CONSUME_OFFER_BUTTON;
+            document.getElementById("idOfferFlyerActionButton").onclick = ConsumeOffer;
+            break;
+    }
+</script>

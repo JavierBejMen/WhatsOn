@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand fixed-top navbar-dark bg-dark text-white" id="idOffersMenuBar">
+    <ul class="navbar-nav w-100 justify-content-between">
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light classRoundNavigationLink" title="Volver atrás" 
+            aria-label="Volver atrás">
+                <i class="fas fa-arrow-left fa-sm"></i>
+            </a>
+        </li>
+        <li class="nav-item pt-2"><h5></h5></li>
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light classRoundNavigationLink" 
+            title="Más acciones" aria-label="Más acciones">
+                <i class="fas fa-ellipsis-v fa-sm"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<div class="container-fluid" id="idOffersMain">
+    <div onclick="loadOffersOfferFlyerSubview()" class="d-flex shadow classOffersItem py-4 mb-3">
+        <img class="ml-4 mr-3" src="./assets/images/offers-lemon-rock/offer-1-thumbnail.jpeg" 
+        alt="Oferta de Lemon Rock" aria-label="Oferta de Lemon Rock"/>
+        <div>
+            <p class="font-weight-bold">Un chupito gratis</p>
+            <p class="mb-1">Lemon Rock</p>
+            <p>Viernes, 6 de abril</p>
+        </div>
+    </div>
+    <div onclick="loadOffersOfferFlyerSubview()" class="d-flex shadow classOffersItem py-4 mb-3">
+        <img class="ml-4 mr-3" src="./assets/images/offers-lemon-rock/offer-1-thumbnail.jpeg" 
+        alt="Oferta de Lemon Rock" aria-label="Oferta de Lemon Rock"/>
+        <div>
+            <p class="font-weight-bold">Copa a 3€</p>
+            <p class="mb-1">Lemon Rock</p>
+            <p>Sábado, 7 de abril</p>
+        </div>
+    </div>
+    <div onclick="loadOffersOfferFlyerSubview()" class="d-flex shadow classOffersItem py-4 mb-3">
+        <img class="ml-4 mr-3" src="./assets/images/offers-lemon-rock/offer-1-thumbnail.jpeg" 
+        alt="Oferta de Lemon Rock" aria-label="Oferta de Lemon Rock"/>
+        <div>
+            <p class="font-weight-bold">3 copas de ron "Brugal" por 9€</p>
+            <p class="mb-1">Lemon Rock</p>
+            <p>Sábado, 15 de diciembre</p>
+        </div>
+    </div>
+</div>
+<script>
+    hideMainMenuBar();
+    hideMainNavigationBar();
+
+    var htmlMenuBar = document.getElementById("idOffersMenuBar");
+    switch(globalVarSelectedOffersViewVariation)
+    {
+        case OFFERS_VIEW_VARIATION.LOCAL_OFFERS:
+            htmlMenuBar.getElementsByTagName("a")[0].onclick = 
+            function(){
+                loadLocalView(globalVarPreviousLocalSubview)
+            };
+            htmlMenuBar.getElementsByTagName("h5")[0].innerText = TEXT_LOCAL_OFFERS_MENU_BAR;
+            var htmlOffersItems = document.getElementById("idOffersMain")
+            .getElementsByClassName("classOffersItem");
+            for(offersItemsIndex = 0; offersItemsIndex < htmlOffersItems.length; offersItemsIndex++)
+            {
+                htmlOffersItems[offersItemsIndex].onclick = function(){
+                    loadOffersOfferFlyerSubview(OFFER_FLYER_SUBVIEW_VARIATION.RESERVE_OFFER)
+                };
+            }
+            break;
+        case OFFERS_VIEW_VARIATION.MY_OFFER_FLYERS:
+            htmlMenuBar.getElementsByTagName("a")[0].onclick = 
+            function(){
+                loadUserProfileView()
+            };
+            htmlMenuBar.getElementsByTagName("h5")[0].innerText = TEXT_MY_OFFER_FLYERS_MENU_BAR;
+            var htmlOffersItems = document.getElementById("idOffersMain")
+            .getElementsByClassName("classOffersItem");
+            for(offersItemsIndex = 0; offersItemsIndex < htmlOffersItems.length; offersItemsIndex++)
+            {
+                htmlOffersItems[offersItemsIndex].onclick = function(){
+                    loadOffersOfferFlyerSubview(OFFER_FLYER_SUBVIEW_VARIATION.CONSUME_OFFER)
+                };
+            }
+            break;
+    }
+</script>

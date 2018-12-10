@@ -2,14 +2,11 @@ const CSS_CHAR_ID_SELECTOR = "#";
 const HTML_TAG_BODY = "body";
 const HTML_TAG_MAIN = "main";
 const HTML_TAG_NAVIGATION_ITEM = "a";
+const JS_EMPTY_STRING_VALUE = "";
 const FILE_PATH_CATEGORIES_OF_LOCALS_VIEW = "./views/categories-of-locals.html";
 const FILE_PATH_MAP_OF_LOCALS_VIEW = "./views/map-of-locals.html";
 const FILE_PATH_EVENTS_VIEW = "./views/events.html";
 const FILE_PATH_USER_PROFILE_VIEW = "./views/user-profile.html";
-const FILE_PATH_USER_PROFILE_MY_OFFER_FLYERS_SUBVIEW = 
-"./views/user-profile-subviews/my-offer-flyers.html";
-const FILE_PATH_USER_PROFILE_OFFER_FLYER_VALIDATION_SUBVIEW = 
-"./views/user-profile-subviews/offer-flyer-validation.html";
 const FILE_PATH_USER_PROFILE_SETTINGS_SUBVIEW = "./views/user-profile-subviews/settings.html";
 const FILE_PATH_USER_PROFILE_HELP_SUBVIEW = "./views/user-profile-subviews/help.html";
 const FILE_PATH_USER_PROFILE_HELP_FAQS_SUBVIEW = "./views/user-profile-subviews/help-faqs.html";
@@ -19,6 +16,8 @@ const FILE_PATH_LOCAL_VIEW = "./views/local.html";
 const FILE_PATH_LOCAL_INFO_SUBVIEW = "./views/local-subviews/info.html";
 const FILE_PATH_LOCAL_EVENTS_SUBVIEW = "./views/local-subviews/events.html";
 const FILE_PATH_LOCAL_PHOTOS_SUBVIEW = "./views/local-subviews/photos.html";
+const FILE_PATH_OFFERS_VIEW = "./views/offers.html";
+const FILE_PATH_OFFERS_OFFER_FLYER_SUBVIEW = "./views/offers-subviews/offer-flyer.html";
 const FILE_PATH_CATEGORIES_FILTER_COMPONENT = "./components/categories-filter.html";
 const FILE_PATH_EVENTS_WEEK_CALENDAR_COMPONENT = "./components/events-week-calendar.html";
 const HTML_ATTRIBUTE_ID = "id";
@@ -42,7 +41,16 @@ const HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR = "idEventsWeekCalendarNavigat
 const HTML_IDS_LIST_FOR_EVENTS_LISTS = ["idLocalEventsOnMonday","idLocalEventsOnTuesday",
 "idLocalEventsOnWednesday","idLocalEventsOnThursday","idLocalEventsOnFriday","idLocalEventsOnSaturday",
 "idLocalEventsOnSunday"];
-const HTML_ID_CONSUME_OFFER_BUTTON = "idConsumeOfferButton";
+const HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_EVENTS = "idCategoriesFilterContainerInEvents";
+const HTML_ID_OFFER_FLYER_ACTION_BUTTON = "idOfferFlyerActionButton";
+const TEXT_LOCAL_OFFERS_MENU_BAR = "Ofertas del local";
+const TEXT_MY_OFFER_FLYERS_MENU_BAR = "Mis flyers de ofertas";
+const TEXT_OFFER_INFO_MENU_BAR = "Información de oferta";
+const TEXT_OFFER_FLYER_MENU_BAR = "Flyer de oferta";
+const TEXT_RESERVE_OFFER_BUTTON = "RESERVAR OFERTA";
+const TEXT_YET_RESERVED_OFFER_BUTTON = "OFERTA RESERVADA";
+const TEXT_YET_CONSUMED_OFFER_BUTTON = "OFERTA CONSUMIDA";
+const TEXT_CONSUME_OFFER_BUTTON = "CONSUMIR OFERTA";
 const MAIN_NAVIGATION_BAR_INDEX = {
     CATEGORIES_OF_LOCALS: 0,
     MAP_OF_LOCALS: 1,
@@ -54,7 +62,17 @@ const LOCAL_NAVIGATION_BAR_INDEX = {
     EVENTS: 1,
     PHOTOS: 2
 };
+const OFFERS_VIEW_VARIATION = {
+    LOCAL_OFFERS: 0,
+    MY_OFFER_FLYERS: 1
+};
+const OFFER_FLYER_SUBVIEW_VARIATION = {
+    RESERVE_OFFER: 0,
+    CONSUME_OFFER: 1
+};
 var globalVarSelectedLocalSubview = LOCAL_NAVIGATION_BAR_INDEX.INFO;
+var globalVarSelectedOffersViewVariation, globalVarPreviousLocalSubview, 
+globalVarSelectedOfferFlyerSubviewVariation;
 
 function setSelectedNavigationItemInNavigationBar(htmlIdNavigationBar,indexOfElement){
     var htmlNavigationBar = document.getElementById(htmlIdNavigationBar);
@@ -90,13 +108,16 @@ function loadUserProfileView()
     MAIN_NAVIGATION_BAR_INDEX.USER_PROFILE);
     loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_VIEW);
 }
-function loadUserProfileMyOfferFlyersSubview()
+function loadOffersView(offersViewVariation, previousLocalSubview = JS_EMPTY_STRING_VALUE)
 {
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_MY_OFFER_FLYERS_SUBVIEW);
+    globalVarSelectedOffersViewVariation = offersViewVariation;
+    globalVarPreviousLocalSubview = previousLocalSubview;
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_OFFERS_VIEW);
 }
-function loadOfferFlyerValidationSubview()
+function loadOffersOfferFlyerSubview(offerFlyerSubviewVariation)
 {
-    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_USER_PROFILE_OFFER_FLYER_VALIDATION_SUBVIEW);
+    globalVarSelectedOfferFlyerSubviewVariation = offerFlyerSubviewVariation;
+    loadHtmlFileInHtmlNodeByTag(HTML_TAG_MAIN,FILE_PATH_OFFERS_OFFER_FLYER_SUBVIEW);
 }
 function loadUserProfileSettingsSubview()
 {
@@ -228,9 +249,15 @@ function setScrollspyInNavigationBarById(htmlIdNavigationBar,offsetValue)
 {
     $(HTML_TAG_BODY).scrollspy({target: CSS_CHAR_ID_SELECTOR + htmlIdNavigationBar,offset: offsetValue});
 }
+function ReserveOffer()
+{
+    var htmlOfferFlyerActionButton = document.getElementById(HTML_ID_OFFER_FLYER_ACTION_BUTTON);
+    htmlOfferFlyerActionButton.innerText = TEXT_YET_RESERVED_OFFER_BUTTON;
+    htmlOfferFlyerActionButton.setAttribute(HTML_DISABLED_ATTRIBUTE,HTML_EMPTY_ATTRIBUTE_VALUE);
+}
 function ConsumeOffer()
 {
-    var htmlConsumeOfferButton = document.getElementById(HTML_ID_CONSUME_OFFER_BUTTON);
-    htmlConsumeOfferButton.innerText = "OFERTA CONSUMIDA";
-    htmlConsumeOfferButton.setAttribute(HTML_DISABLED_ATTRIBUTE,HTML_EMPTY_ATTRIBUTE_VALUE);
+    var htmlOfferFlyerActionButton = document.getElementById(HTML_ID_OFFER_FLYER_ACTION_BUTTON);
+    htmlOfferFlyerActionButton.innerText = TEXT_YET_CONSUMED_OFFER_BUTTON;
+    htmlOfferFlyerActionButton.setAttribute(HTML_DISABLED_ATTRIBUTE,HTML_EMPTY_ATTRIBUTE_VALUE);
 }

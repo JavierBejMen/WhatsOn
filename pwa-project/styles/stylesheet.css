@@ -1,6 +1,7 @@
 :root {
     --main-menu-bar-height: 56px;
     --main-navigation-bar-height: 71px;
+    --local-navigation-bar-height: 61px;
 }
 
 .btn {
@@ -121,8 +122,8 @@
     background-color: white !important;
 }
 
-#idEventsWeekCalendarContainerInAllEvents, #idEventsWeekCalendarContainerInLocal {
-    top: var(--main-menu-bar-height);
+#idEventsWeekCalendarContainerInLocal {
+    top: calc(var(--main-menu-bar-height) + var(--local-navigation-bar-height));
 }
 
 #idEventsWeekCalendarNavigationBar a {
@@ -149,6 +150,10 @@
 #idMapOfLocalsContainer {
     margin-top: var(--main-menu-bar-height);
     height: calc(100vh - var(--main-menu-bar-height) - var(--main-navigation-bar-height));
+}
+
+#idEventsWeekCalendarContainerInAllEvents {
+    top: var(--main-menu-bar-height);
 }
 
 #idEventsMain {
@@ -183,34 +188,34 @@
     margin-bottom: var(--main-navigation-bar-height);
 }
 
-#idUserProfileMyOfferFlyersMain, #idUserProfileOfferFlyerValidationMain, 
+#idOffersMain, #idOffersOfferFlyerMain, 
 #idHowToValidateFlyerContainer, #idUserProfileSettingsMain, #idUserProfileHelpMain, 
 #idUserProfileHelpFaqsMain {
     margin-top: var(--main-menu-bar-height);
 }
 
-#idUserProfileMyOfferFlyersMain, #idUserProfileOfferFlyerValidationMain, 
+#idOffersMain, #idOffersOfferFlyerMain, 
 #idHowToValidateFlyerContainer, #idUserProfileSettingsMain, #idUserProfileHelpMain, 
 #idUserProfileHelpFaqsMain {
     margin-bottom: var(--main-navigation-bar-height);
 }
 
-#idUserProfileMyOfferFlyersMain img {
+#idOffersMain img {
     max-width: 92px;
     max-height: 92px;
 }
 
-#idUserProfileMyOfferFlyersMain .classUserProfileMyOfferFlyersItem {
+#idOffersMain .classOffersItem {
     cursor: pointer;
 }
 
-#idUserProfileOfferFlyerValidationBackgroundImage {
+#idOffersOfferFlyerBackgroundImage {
     height: calc(100vh - var(--main-menu-bar-height));
     position: fixed;
     top: var(--main-menu-bar-height);
 }
 
-#idUserProfileOfferFlyerValidationMain {
+#idOffersOfferFlyerMain {
     height: calc(100vh - var(--main-menu-bar-height) - var(--main-navigation-bar-height));
     position: absolute;
     background-color: rgba(0,0,0,0.8) !important;
@@ -239,6 +244,10 @@
 
 #idLocalNameInDescription {
     font-size: 120%;
+}
+
+#idLocalNavigationBar {
+    top: var(--main-menu-bar-height);
 }
 
 #idLocalNavigationBar a {
