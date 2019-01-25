@@ -165,9 +165,9 @@
     cursor: pointer;
 }
 
-#idEventsMain .card img {
+/*#idEventsMain .card img {
     max-height: 35vh;
-}
+}*/
 
 #idEditUserProfileButton {
     background-color: white;
@@ -213,6 +213,7 @@
     height: calc(100vh - var(--main-menu-bar-height));
     position: fixed;
     top: var(--main-menu-bar-height);
+    object-fit: cover;
 }
 
 #idOffersOfferFlyerMain {
@@ -240,6 +241,7 @@
 #idLocalHeaderImage {
     margin-top: var(--main-menu-bar-height);
     max-height: 45vh;
+    object-fit: cover;
 }
 
 #idLocalNameInDescription {
@@ -276,4 +278,5 @@
 #idLocalRecommendationContainer > img {
     position: relative;
     max-height: 300px;
+    object-fit: cover;
 }

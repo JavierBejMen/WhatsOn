@@ -213,6 +213,7 @@
     height: calc(100vh - var(--main-menu-bar-height));
     position: fixed;
     top: var(--main-menu-bar-height);
+    object-fit: cover;
 }
 
 #idOffersOfferFlyerMain {
