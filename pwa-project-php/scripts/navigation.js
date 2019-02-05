@@ -4,6 +4,7 @@ const HTML_TAG_MAIN = "main";
 const HTML_TAG_NAVIGATION_ITEM = "a";
 const HTML_TAG_MENU_BAR_TITLE = "h5";
 const JS_EMPTY_STRING_VALUE = "";
+const FILE_PATH_SERVICE_WORKER = "./service-worker.js";
 const FILE_PATH_CATEGORIES_OF_LOCALS_VIEW = "./views/categories-of-locals.html";
 const FILE_PATH_MAP_OF_LOCALS_VIEW = "./views/map-of-locals.html";
 const FILE_PATH_EVENTS_VIEW = "./views/events.html";
