@@ -27,8 +27,8 @@ function loadLocalDataInLeafletApi(localName,localLatitude,localLongitude,zoomLe
     L.marker([localLatitude,localLongitude]).addTo(mapOfLocal).bindPopup(localName).openPopup();
 }
 
-function loadMapInHtmlNodeWithLeafletApi(htmlNodeId) {
-    var mapOfLocal = L.map(htmlNodeId).setView([LOCAL_LATITUDE,LOCAL_LONGITUDE],17);
+function loadMapInHtmlElementWithLeafletApi(htmlElementId) {
+    var mapOfLocal = L.map(htmlElementId).setView([LOCAL_LATITUDE,LOCAL_LONGITUDE],17);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
     {
         attribution: "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"

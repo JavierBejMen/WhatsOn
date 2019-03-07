@@ -240,8 +240,11 @@
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
 #idLocalHeaderImage {
     margin-top: var(--main-menu-bar-height);
+    height: 45vh;
     max-height: 45vh;
-    object-fit: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #idLocalNameInDescription {
@@ -275,8 +278,11 @@
     border-radius: 10rem;
 }
 
-#idLocalRecommendationContainer > img {
+#idLocalRecommendationContainer #idLocalFooterImage {
     position: relative;
+    height: 300px;
     max-height: 300px;
-    object-fit: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

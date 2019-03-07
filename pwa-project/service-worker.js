@@ -3,26 +3,7 @@ var filesToCache = [
     "./",
     "./manifest.json",
     "./index.html",
-    "./assets/images/disco.jpg",
-    "./assets/images/local-babel-world-fusion.jpg",
-    "./assets/images/local-boogaclub.jpg",
-    "./assets/images/local-boom-boom-room.jpg",
-    "./assets/images/local-el-pesaor.jpg",
-    "./assets/images/local-garden.jpg",
-    "./assets/images/local-industrial-copera.jpg",
-    "./assets/images/local-la-rocka.jpg",
-    "./assets/images/local-la-tertulia.jpg",
-    "./assets/images/local-lemon-rock.jpg",
-    "./assets/images/local-los-diamantes.jpg",
-    "./assets/images/local-mae-west.jpg",
-    "./assets/images/local-perro-andaluz.jpg",
-    "./assets/images/local-planta-baja.jpg",
-    "./assets/images/local-poe.jpg",
-    "./assets/images/local-rocknrolla-club.jpg",
-    "./assets/images/local-sala-el-tren.jpg",
-    "./assets/images/local-sala-vogue.jpg",
-    "./assets/images/offers-lemon-rock",
-    "./assets/images/photos-lemon-rock",
+    "./assets/images/headers-and-footers-local/lemon-rock.jpg",
     "./assets/images/user-profile-picture.png",
     "./assets/images/events-lemon-rock/guillermo-crovetto.jpg",
     "./assets/images/events-lemon-rock/lemon-jazz.jpg",
@@ -44,6 +25,24 @@ var filesToCache = [
     "./assets/images/photos-lemon-rock/lemon-rock-6.jpg",
     "./assets/images/photos-lemon-rock/lemon-rock-7.jpg",
     "./assets/images/photos-lemon-rock/lemon-rock-8.jpg",
+    "./assets/images/thumbnails-local/disco.jpg",
+    "./assets/images/thumbnails-local/babel-world-fusion.jpg",
+    "./assets/images/thumbnails-local/boogaclub.jpg",
+    "./assets/images/thumbnails-local/boom-boom-room.jpg",
+    "./assets/images/thumbnails-local/el-pesaor.jpg",
+    "./assets/images/thumbnails-local/garden.jpg",
+    "./assets/images/thumbnails-local/industrial-copera.jpg",
+    "./assets/images/thumbnails-local/la-rocka.jpg",
+    "./assets/images/thumbnails-local/la-tertulia.jpg",
+    "./assets/images/thumbnails-local/lemon-rock.jpg",
+    "./assets/images/thumbnails-local/los-diamantes.jpg",
+    "./assets/images/thumbnails-local/mae-west.jpg",
+    "./assets/images/thumbnails-local/perro-andaluz.jpg",
+    "./assets/images/thumbnails-local/planta-baja.jpg",
+    "./assets/images/thumbnails-local/poe.jpg",
+    "./assets/images/thumbnails-local/rocknrolla-club.jpg",
+    "./assets/images/thumbnails-local/sala-el-tren.jpg",
+    "./assets/images/thumbnails-local/sala-vogue.jpg",
     "./components/categories-filter.html",
     "./components/events-week-calendar.html",
     "./scripts/categories-filter.js",
@@ -80,29 +79,23 @@ var filesToCache = [
     "./views/user-profile-subviews/settings.html"
 ];
 
-self.addEventListener("install", (event) =>
-{
+self.addEventListener("install", (event) => {
     console.log("[ServiceWorker] Install");
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) =>
-        {
+        caches.open(CACHE_NAME).then((cache) => {
             console.log("[ServiceWorker] Caching app shell");
             return cache.addAll(filesToCache);
         })
     );
 });
 
-self.addEventListener("activate", (event) =>
-{
+self.addEventListener("activate", (event) => {
     console.log("[ServiceWorker] Activate");
     event.waitUntil(
-        caches.keys().then((keyList) =>
-        {
-            return Promise.all(keyList.map((key) =>
-            {
-                if(key !== CACHE_NAME)
-                {
-                    console.log("[ServiceWorker] Removing old cache",key);
+        caches.keys().then((keyList) => {
+            return Promise.all(keyList.map((key) => {
+                if (key !== CACHE_NAME) {
+                    console.log("[ServiceWorker] Removing old cache", key);
                     return caches.delete(key);
                 }
             }));
@@ -111,9 +104,8 @@ self.addEventListener("activate", (event) =>
     return self.clients.claim();
 });
 
-self.addEventListener("fetch", (event) =>
-{
-    console.log("[ServiceWorker] Fetch",event.request.url);
+self.addEventListener("fetch", (event) => {
+    console.log("[ServiceWorker] Fetch", event.request.url);
     event.respondWith(
         // First server strategy
         /*fetch(event.request).then((response) => 
@@ -134,28 +126,23 @@ self.addEventListener("fetch", (event) =>
             })
         })*/
         // First cache strategy
-        caches.match(event.request).then((response) =>
-        {
-            if(response)
-            {
-                console.log("[ServiceWorker] Fetched",event.request.url,"from cache");
+        caches.match(event.request).then((response) => {
+            if (response) {
+                console.log("[ServiceWorker] Fetched", event.request.url, "from cache");
                 return response;
             }
-            return fetch(event.request).then((response) => 
-            {
-                console.log("[ServiceWorker] Fetched",event.request.url,"from server");
+            return fetch(event.request).then((response) => {
+                console.log("[ServiceWorker] Fetched", event.request.url, "from server");
                 return response;
             },
-            (response) => 
-            {
-                return onFetchError(response);
-            });
+                (response) => {
+                    return onFetchError(response);
+                });
         })
     );
 });
 
-function onFetchError(response)
-{
-    console.log("[ServiceWorker] Fetch error",response);
+function onFetchError(response) {
+    console.log("[ServiceWorker] Fetch error", response);
     return response;
 }
