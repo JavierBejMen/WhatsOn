@@ -267,22 +267,21 @@
     height: 300px;
 }
 
-#idLocalRecommendationContainer #idLocalViewSocialButtonsList {
-    position: absolute;
-    margin-top: 75px;
-    background: white;
-    z-index: 1;
-}
-
-#idLocalRecommendationContainer #idLocalViewSocialButtonsList a {
-    border-radius: 10rem;
-}
-
 #idLocalRecommendationContainer #idLocalFooterImage {
-    position: relative;
     height: 300px;
     max-height: 300px;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+#idLocalRecommendationContainer #idLocalFooterImage #idLocalViewSocialButtonsList {
+    position: relative;
+    top: 75px;
+    background: white;
+    z-index: 1;
+}
+
+#idLocalRecommendationContainer #idLocalFooterImage #idLocalViewSocialButtonsList a {
+    border-radius: 10rem;
 }

@@ -21,27 +21,23 @@ classRoundedTopRightFloatingButton" id="idEditUserProfileButton" title="Editar p
         aria-label="Imágen de perfil de usuario" />
     <p class="text-center pt-3">Nombre de usuario</p>
 </div>
-<div class="container pt-3" id="idUserProfileMain">
-    <div class="row">
-        <div class="col">
-            <a class="btn btn-block text-left waves-effect shadow-none border-bottom py-3"
-                onclick="loadOffersView(OFFERS_VIEW_VARIATION.MY_OFFER_FLYERS)">
-                <i class="fas fa-shopping-cart fa-lg pr-4"></i>Mis flyers de ofertas (3)
-            </a>
-            <a class="btn btn-block text-left waves-effect shadow-none border-bottom py-3"
-                onclick="loadUserProfileSubview(FILE_PATH_USER_PROFILE_SETTINGS_SUBVIEW)">
-                <i class="fas fa-cog fa-lg pr-4"></i>Ajustes
-            </a>
-            <a class="btn btn-block text-left waves-effect shadow-none border-bottom py-3"
-                onclick="loadUserProfileSubview(FILE_PATH_USER_PROFILE_HELP_SUBVIEW)">
-                <i class="fas fa-info-circle fa-lg pr-4"></i>Ayuda
-            </a>
-            <a class="btn btn-block text-left waves-effect shadow-none border-bottom py-3"
-                onclick="loadMainNavigationView(FILE_PATH_CATEGORIES_OF_LOCALS_VIEW)">
-                <i class="fas fa-power-off fa-lg pr-4"></i>Cerrar sesión
-            </a>
-        </div>
-    </div>
+<div class="container px-0" id="idUserProfileMain">
+    <a class="btn btn-block text-left waves-effect shadow-none border-bottom"
+        onclick="loadOffersView(OFFERS_VIEW_VARIATION.MY_OFFER_FLYERS)">
+        <i class="fas fa-shopping-cart fa-lg pr-4"></i>Mis flyers de ofertas (3)
+    </a>
+    <a class="btn btn-block text-left waves-effect shadow-none border-bottom"
+        onclick="loadUserProfileSubview(FILE_PATH_USER_PROFILE_SETTINGS_SUBVIEW)">
+        <i class="fas fa-cog fa-lg pr-4"></i>Ajustes
+    </a>
+    <a class="btn btn-block text-left waves-effect shadow-none border-bottom"
+        onclick="loadUserProfileSubview(FILE_PATH_USER_PROFILE_HELP_SUBVIEW)">
+        <i class="fas fa-info-circle fa-lg pr-4"></i>Ayuda
+    </a>
+    <a class="btn btn-block text-left waves-effect shadow-none border-bottom"
+        onclick="loadMainNavigationView(FILE_PATH_CATEGORIES_OF_LOCALS_VIEW)">
+        <i class="fas fa-power-off fa-lg pr-4"></i>Cerrar sesión
+    </a>
 </div>
 <script>
     hideMainMenuBar();
