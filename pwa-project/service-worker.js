@@ -48,6 +48,7 @@ var filesToCache = [
     "./scripts/maps.js",
     "./scripts/navigation.js",
     "./scripts/photos.js",
+    "./scripts/worker.js",
     "./styles/fontawesome-free-5.3.1-web/css/all.min.css",
     "./styles/fontawesome-free-5.3.1-web/webfonts/fa-brands-400.woff2",
     "./styles/fontawesome-free-5.3.1-web/webfonts/fa-solid-900.woff2",
