@@ -1,0 +1,352 @@
+:root {
+    --primary-color: #413F50;
+    --secondary-color: #545261;
+    --tertiary-color: #EEEEEE;
+    --quaternary-color: #009688;
+    --main-menu-bar-height: 56px;
+    --event-card-height: 360px;
+    --categories-filter-button-width: 150px;
+
+    --main-navigation-bar-height: 71px;
+    --local-navigation-bar-height: 61px;
+}
+
+.classBackgroundPrimaryColor {
+    background-color: var(--primary-color);
+}
+
+.classBackgroundSecondaryColor {
+    background-color: var(--secondary-color);
+}
+
+.classBackgroundTertiaryColor {
+    background-color: var(--tertiary-color);
+}
+
+.btn {
+    text-transform: none;
+}
+
+.invisible {
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.classRoundNavigationLink {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    border-radius: 2rem;
+}
+
+.classCategoriesList span, .classCategoriesList span:hover, 
+.classCategoriesList span:active, .classCategoriesList span:visited {
+    padding: 5px 10px !important;
+    border-radius: 2rem;
+    box-shadow: none;
+    cursor: inherit !important;
+}
+
+.classDescriptionContainer .classDescriptionParagraph.collapse {
+    display: block;
+    height: 100px;
+    overflow: hidden;
+}
+
+.classDescriptionContainer .classDescriptionParagraph.collapsing {
+    height: 100px;
+}
+
+.classDescriptionContainer .classDescriptionParagraph.collapse.show {
+    height: auto;
+}
+
+.classShowHideDescriptionButton {
+    border-radius: 2rem;
+}
+
+.classAllEventsEventContainer .card {
+    height: var(--event-card-height);
+    max-height: var(--event-card-height);
+    background-position: 50% 0%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.card .classEventPrice span{
+    background-color: rgba(0,0,0,0.65) !important;
+}
+
+.card .classAllEventsCardBody {
+    position: absolute;
+    top: calc(var(--event-card-height) - 148px);
+    background-color: rgba(0,0,0,0.65) !important;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.classRoundedTopRightFloatingButton {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    padding: 5px 0 0 0;
+	width: 55px;
+	height: 55px;
+    border-radius: 2rem;
+    z-index: 1000;
+}
+
+.classRoundedBottomRightFloatingButton {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    padding: 5px 0 0 0;
+	width: 55px;
+	height: 55px;
+    border-radius: 2rem;
+    z-index: 1000;
+}
+
+.classFloatingBottomButton {
+    position: fixed;
+    bottom: 0;
+    right: 0.5%;
+    width: 97% !important;
+    z-index: 2000;
+}
+
+.classFloatingFilterButtonWrap {
+    position: fixed;
+    bottom: 10px;
+    right: calc((100vw - var(--categories-filter-button-width))/2);
+    /*width: var(--categories-filter-button-width) !important;
+    height: 100px;*/
+    border-radius: 5rem;
+
+    background: linear-gradient(-45deg, #6EFA86, #EEF0F0, #3BEFF4);
+    background-size: 400% 400%;
+	animation: Gradient 1.5s ease infinite;
+}
+
+@keyframes Gradient {
+	0%      {background-position: 0% 50%}
+	50%     {background-position: 100% 50%}
+	100%    {background-position: 0% 50%}
+}
+
+.classFloatingFilterButton {
+    font-size: 125%;
+    width: var(--categories-filter-button-width) !important;
+    border-radius: 5rem;
+}
+
+.classHorizontalListRow {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+  
+.classHorizontalListCol {
+    flex: 0 0 auto;
+    cursor: pointer;
+}
+  
+/*@media screen and (max-width: 720px) {
+    .classHorizontalListCol .card-body {
+        min-height: 150px;
+    }
+}
+@media screen and (min-width: 720px) {
+    .classHorizontalListCol .card-body {
+        min-height: 195px;
+    }
+}*/
+
+#idFilterCategoriesModal .modal-content {
+    background-color: rgba(0,0,0,0.8) !important;
+}
+
+#idFilterCategoriesModal .filterOffersEventsButton, #idFilterCategoriesModal .filterCategorieButton {
+    border: 2px solid !important;
+    border-radius: 0.5rem;
+}
+
+#idFilterCategoriesModal .filterOffersEventsButton:not([disabled]) {
+    color: #2e2e2e !important;
+    border: 0 !important;
+}
+
+#idFilterCategoriesModal .filterCategorieButton[disabled] {
+    background-color: rgba(0,0,0,0) !important;
+}
+
+#idFilterCategoriesModal .filterCategorieButton:not([disabled]) {
+    color: #2e2e2e !important;
+    background-color: white !important;
+}
+
+#idEventsWeekCalendarContainerInLocal {
+    top: calc(var(--main-menu-bar-height) + var(--local-navigation-bar-height));
+}
+
+#idEventsWeekCalendarNavigationBar a {
+    color: black;
+    text-decoration: none;
+}
+
+#idEventsWeekCalendarNavigationBar a.active {
+    color: white;
+    background: #1d2124;
+    border-radius: 2rem;
+}
+
+#idMainNavigationBar a:not(.classSelectedNavigationItem) span {
+    visibility: hidden;
+}
+
+/* Please keep this margin and do not try to perform with my-* Bootstrap classes */
+#idCategoriesOfLocalsMain {
+    margin-top: var(--main-menu-bar-height);
+    margin-bottom: var(--main-navigation-bar-height);
+}
+
+#idMapOfLocalsContainer {
+    margin-top: var(--main-menu-bar-height);
+    height: calc(100vh - var(--main-menu-bar-height) - var(--main-navigation-bar-height));
+}
+
+#idEventsWeekCalendarContainerInAllEvents {
+    top: calc(var(--main-menu-bar-height) - 2px);
+}
+
+#idEventsMain {
+    margin-top: 40px;
+    padding-bottom: 40px;
+}
+
+#idEventsMain .card:hover {
+    cursor: pointer;
+}
+
+/*#idEventsMain .card img {
+    max-height: 35vh;
+}*/
+
+#idEditUserProfileButton {
+    background-color: white;
+}
+
+/* Please keep this margin and do not try to perform with my-* Bootstrap classes */
+#idUserProfilePictureContainer {
+    margin-top: var(--main-menu-bar-height);
+}
+
+#idUserProfilePictureContainer img {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+}
+
+#idUserProfileNavigationContainer {
+    margin-bottom: var(--main-navigation-bar-height);
+}
+
+#idOffersMain, #idOffersOfferFlyerMain, 
+#idHowToValidateFlyerContainer, #idUserProfileSettingsMain, #idUserProfileHelpMain, 
+#idUserProfileHelpFaqsMain {
+    margin-top: var(--main-menu-bar-height);
+}
+
+#idOffersMain, #idOffersOfferFlyerMain, 
+#idHowToValidateFlyerContainer, #idUserProfileSettingsMain, #idUserProfileHelpMain, 
+#idUserProfileHelpFaqsMain {
+    margin-bottom: var(--main-navigation-bar-height);
+}
+
+#idOffersMain img {
+    max-width: 92px;
+    max-height: 92px;
+}
+
+#idOffersMain .classOffersItem {
+    cursor: pointer;
+}
+
+#idOffersOfferFlyerBackgroundImage {
+    height: calc(100vh - var(--main-menu-bar-height));
+    position: fixed;
+    top: var(--main-menu-bar-height);
+    object-fit: cover;
+}
+
+#idOffersOfferFlyerMain {
+    height: calc(100vh - var(--main-menu-bar-height) - var(--main-navigation-bar-height));
+    position: absolute;
+    background-color: rgba(0,0,0,0.8) !important;
+    z-index: 1;
+}
+
+#idUserProfileHelpFaqsMain {
+    margin-bottom: var(--main-navigation-bar-height);
+    padding: 0;
+}
+
+#idUserProfileHelpFaqsMain button {
+    text-decoration: none;
+}
+
+#idUserProfileHelpFaqAnswerMain {
+    margin-bottom: var(--main-navigation-bar-height);
+    margin-top: var(--main-menu-bar-height);
+}
+
+/* Please keep this margin and do not try to perform with my-* Bootstrap classes */
+#idLocalHeaderImage {
+    margin-top: var(--main-menu-bar-height);
+    height: 45vh;
+    max-height: 45vh;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#idLocalNameInDescription {
+    font-size: 120%;
+}
+
+#idLocalNavigationBar {
+    top: var(--main-menu-bar-height);
+}
+
+#idLocalNavigationBar a {
+    border-bottom: 5px solid #e0e0e0;
+}
+
+#idLocalNavigationBar a.classSelectedNavigationItem {
+    border-bottom: 5px solid !important;
+}
+
+#idLocalMapContainer {
+    height: 300px;
+}
+
+#idLocalRecommendationContainer #idLocalFooterImage {
+    height: 300px;
+    max-height: 300px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#idLocalRecommendationContainer #idLocalFooterImage #idLocalViewSocialButtonsList {
+    position: relative;
+    top: 75px;
+    background: white;
+    z-index: 1;
+}
+
+#idLocalRecommendationContainer #idLocalFooterImage #idLocalViewSocialButtonsList a {
+    border-radius: 10rem;
+}
