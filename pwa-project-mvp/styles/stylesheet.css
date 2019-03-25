@@ -11,6 +11,10 @@
     --local-navigation-bar-height: 61px;
 }
 
+* {
+    font-family: 'Muli', sans-serif;
+}
+
 .classBackgroundPrimaryColor {
     background-color: var(--primary-color);
 }
@@ -265,88 +269,32 @@
     margin-bottom: var(--main-navigation-bar-height);
 }
 
-#idOffersMain img {
-    max-width: 92px;
-    max-height: 92px;
-}
-
-#idOffersMain .classOffersItem {
-    cursor: pointer;
-}
-
-#idOffersOfferFlyerBackgroundImage {
-    height: calc(100vh - var(--main-menu-bar-height));
-    position: fixed;
-    top: var(--main-menu-bar-height);
-    object-fit: cover;
-}
-
-#idOffersOfferFlyerMain {
-    height: calc(100vh - var(--main-menu-bar-height) - var(--main-navigation-bar-height));
-    position: absolute;
-    background-color: rgba(0,0,0,0.8) !important;
-    z-index: 1;
-}
-
-#idUserProfileHelpFaqsMain {
-    margin-bottom: var(--main-navigation-bar-height);
-    padding: 0;
-}
-
-#idUserProfileHelpFaqsMain button {
-    text-decoration: none;
-}
-
-#idUserProfileHelpFaqAnswerMain {
-    margin-bottom: var(--main-navigation-bar-height);
-    margin-top: var(--main-menu-bar-height);
-}
-
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
-#idLocalHeaderImage {
+#idEventInfoHeaderImage {
     margin-top: var(--main-menu-bar-height);
-    height: 45vh;
-    max-height: 45vh;
-    background-position: 50% 50%;
+    height: 365px;
+    max-height: 365px;
+    background-position: 50% 0%;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-#idLocalNameInDescription {
-    font-size: 120%;
+#idEventInfoMapContainer {
+    height: 150px;
 }
 
-#idLocalNavigationBar {
-    top: var(--main-menu-bar-height);
-}
-
-#idLocalNavigationBar a {
-    border-bottom: 5px solid #e0e0e0;
-}
-
-#idLocalNavigationBar a.classSelectedNavigationItem {
-    border-bottom: 5px solid !important;
-}
-
-#idLocalMapContainer {
-    height: 300px;
-}
-
-#idLocalRecommendationContainer #idLocalFooterImage {
-    height: 300px;
-    max-height: 300px;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-#idLocalRecommendationContainer #idLocalFooterImage #idLocalViewSocialButtonsList {
-    position: relative;
-    top: 75px;
+#idEventInfoRecommendationContainer #idEventInfoViewSocialButtonsList {
     background: white;
-    z-index: 1;
 }
 
-#idLocalRecommendationContainer #idLocalFooterImage #idLocalViewSocialButtonsList a {
+#idEventInfoRecommendationContainer #idEventInfoViewSocialButtonsList a {
     border-radius: 10rem;
+}
+
+#idEventInfoFooterImage {
+    height: 240px;
+    max-height: 240px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

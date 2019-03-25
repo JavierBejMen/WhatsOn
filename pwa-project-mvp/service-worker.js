@@ -15,6 +15,7 @@ var filesToCache = [
     "./components/categories-filter.html",
     "./components/events-week-calendar.html",
     "./scripts/categories-filter.js",
+    "./scripts/maps.js",
     "./scripts/navigation.js",
     "./scripts/worker.js",
     "./styles/fontawesome-free-5.3.1-web/css/all.min.css",
@@ -32,8 +33,7 @@ var filesToCache = [
     "./styles/material-design-for-bootstrap-free-4.5.10/js/popper.min.js",
     "./styles/stylesheet.css",
     "./views/events.html",
-    "./views/local.html",
-    "./views/local-subviews/info.html"
+    "./views/event-info.html"
 ];
 
 self.addEventListener("install", (event) => {
