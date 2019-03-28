@@ -2,11 +2,9 @@
     --primary-color: #413F50;
     --secondary-color: #545261;
     --tertiary-color: #EEEEEE;
-    --quaternary-color: #009688;
     --main-menu-bar-height: 56px;
     --event-card-height: 360px;
     --categories-filter-button-width: 150px;
-
     --main-navigation-bar-height: 71px;
     --local-navigation-bar-height: 61px;
 }
@@ -15,16 +13,20 @@
     font-family: 'Muli', sans-serif;
 }
 
-.classBackgroundPrimaryColor {
+.classPrimaryBackgroundColor {
     background-color: var(--primary-color);
 }
 
-.classBackgroundSecondaryColor {
+.classSecondaryBackgroundColor {
     background-color: var(--secondary-color);
 }
 
-.classBackgroundTertiaryColor {
+.classTertiaryBackgroundColor {
     background-color: var(--tertiary-color);
+}
+
+.classSecondaryColor {
+    color: var(--secondary-color);
 }
 
 .btn {
@@ -44,8 +46,13 @@
     border-radius: 2rem;
 }
 
-.classCategoriesList span, .classCategoriesList span:hover, 
-.classCategoriesList span:active, .classCategoriesList span:visited {
+.classOnlyBottomBorderInput {
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+.classCategoriesList span, .classCategoriesList span:hover, .classCategoriesList span:active, .classCategoriesList span:visited {
     padding: 5px 10px !important;
     border-radius: 2rem;
     box-shadow: none;
@@ -79,14 +86,14 @@
     border-radius: 10px;
 }
 
-.card .classEventPrice span{
-    background-color: rgba(0,0,0,0.65) !important;
+.card .classEventPrice span {
+    background-color: rgba(0, 0, 0, 0.65) !important;
 }
 
 .card .classAllEventsCardBody {
     position: absolute;
     top: calc(var(--event-card-height) - 148px);
-    background-color: rgba(0,0,0,0.65) !important;
+    background-color: rgba(0, 0, 0, 0.65) !important;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -96,8 +103,8 @@
     top: 70px;
     right: 20px;
     padding: 5px 0 0 0;
-	width: 55px;
-	height: 55px;
+    width: 55px;
+    height: 55px;
     border-radius: 2rem;
     z-index: 1000;
 }
@@ -107,8 +114,8 @@
     bottom: 70px;
     right: 20px;
     padding: 5px 0 0 0;
-	width: 55px;
-	height: 55px;
+    width: 55px;
+    height: 55px;
     border-radius: 2rem;
     z-index: 1000;
 }
@@ -128,62 +135,40 @@
     /*width: var(--categories-filter-button-width) !important;
     height: 100px;*/
     border-radius: 5rem;
-
     background: linear-gradient(-45deg, #6EFA86, #EEF0F0, #3BEFF4);
     background-size: 400% 400%;
-	animation: Gradient 1.5s ease infinite;
+    animation: Gradient 1.5s ease infinite;
 }
 
 @keyframes Gradient {
-	0%      {background-position: 0% 50%}
-	50%     {background-position: 100% 50%}
-	100%    {background-position: 0% 50%}
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
 }
 
-.classFloatingFilterButton {
+.classFloatingFilterButtonWrap .classFloatingFilterButton {
     font-size: 125%;
     width: var(--categories-filter-button-width) !important;
     border-radius: 5rem;
 }
 
-.classHorizontalListRow {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-}
-  
-.classHorizontalListCol {
-    flex: 0 0 auto;
-    cursor: pointer;
-}
-  
-/*@media screen and (max-width: 720px) {
-    .classHorizontalListCol .card-body {
-        min-height: 150px;
-    }
-}
-@media screen and (min-width: 720px) {
-    .classHorizontalListCol .card-body {
-        min-height: 195px;
-    }
-}*/
-
 #idFilterCategoriesModal .modal-content {
-    background-color: rgba(0,0,0,0.8) !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
-#idFilterCategoriesModal .filterOffersEventsButton, #idFilterCategoriesModal .filterCategorieButton {
+#idFilterCategoriesModal .filterCategorieButton {
     border: 2px solid !important;
     border-radius: 0.5rem;
 }
 
-#idFilterCategoriesModal .filterOffersEventsButton:not([disabled]) {
-    color: #2e2e2e !important;
-    border: 0 !important;
-}
-
 #idFilterCategoriesModal .filterCategorieButton[disabled] {
-    background-color: rgba(0,0,0,0) !important;
+    background-color: rgba(0, 0, 0, 0) !important;
 }
 
 #idFilterCategoriesModal .filterCategorieButton:not([disabled]) {
@@ -206,21 +191,6 @@
     border-radius: 2rem;
 }
 
-#idMainNavigationBar a:not(.classSelectedNavigationItem) span {
-    visibility: hidden;
-}
-
-/* Please keep this margin and do not try to perform with my-* Bootstrap classes */
-#idCategoriesOfLocalsMain {
-    margin-top: var(--main-menu-bar-height);
-    margin-bottom: var(--main-navigation-bar-height);
-}
-
-#idMapOfLocalsContainer {
-    margin-top: var(--main-menu-bar-height);
-    height: calc(100vh - var(--main-menu-bar-height) - var(--main-navigation-bar-height));
-}
-
 #idEventsWeekCalendarContainerInAllEvents {
     top: calc(var(--main-menu-bar-height) - 2px);
 }
@@ -234,42 +204,8 @@
     cursor: pointer;
 }
 
-/*#idEventsMain .card img {
-    max-height: 35vh;
-}*/
-
-#idEditUserProfileButton {
-    background-color: white;
-}
-
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
-#idUserProfilePictureContainer {
-    margin-top: var(--main-menu-bar-height);
-}
 
-#idUserProfilePictureContainer img {
-    max-width: 100px;
-    max-height: 100px;
-    border-radius: 50%;
-}
-
-#idUserProfileNavigationContainer {
-    margin-bottom: var(--main-navigation-bar-height);
-}
-
-#idOffersMain, #idOffersOfferFlyerMain, 
-#idHowToValidateFlyerContainer, #idUserProfileSettingsMain, #idUserProfileHelpMain, 
-#idUserProfileHelpFaqsMain {
-    margin-top: var(--main-menu-bar-height);
-}
-
-#idOffersMain, #idOffersOfferFlyerMain, 
-#idHowToValidateFlyerContainer, #idUserProfileSettingsMain, #idUserProfileHelpMain, 
-#idUserProfileHelpFaqsMain {
-    margin-bottom: var(--main-navigation-bar-height);
-}
-
-/* Please keep this margin and do not try to perform with my-* Bootstrap classes */
 #idEventInfoHeaderImage {
     margin-top: var(--main-menu-bar-height);
     height: 365px;
@@ -283,10 +219,6 @@
     height: 150px;
 }
 
-#idEventInfoRecommendationContainer #idEventInfoViewSocialButtonsList {
-    background: white;
-}
-
 #idEventInfoRecommendationContainer #idEventInfoViewSocialButtonsList a {
     border-radius: 10rem;
 }
@@ -297,4 +229,18 @@
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+#idLoginMain, #idAdminProfileContainer {
+    margin-top: var(--main-menu-bar-height);
+}
+
+#idLoginForm {
+    width: 300px;
+    max-width: 300px;
+}
+
+#idLoginForm button {
+    width: 230px;
+    max-width: 230px;
 }

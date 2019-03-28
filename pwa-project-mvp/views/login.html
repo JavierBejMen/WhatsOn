@@ -1,0 +1,80 @@
+<nav class="navbar navbar-expand fixed-top classPrimaryBackgroundColor text-white" id="idEventInfoMenuBar">
+    <ul class="navbar-nav w-100 justify-content-between">
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light classRoundNavigationLink" title="Volver atrás"
+                aria-label="Volver atrás" onclick="loadEvents()">
+                <i class="fas fa-arrow-left fa-sm"></i>
+            </a>
+        </li>
+        <li class="nav-item pt-2">
+            <h5>Inicio de sesión</h5>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light classRoundNavigationLink" title="Más acciones"
+                aria-label="Más acciones">
+                <i class="fas fa-ellipsis-v fa-sm"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<div class="container classTertiaryBackgroundColor" id="idLoginMain">
+    <form class="needs-validation mx-auto py-5" id="idLoginForm" novalidate>
+        <div class="form-group">
+            <label for="idLoginEmail">Usuario</label>
+            <input type="email" class="form-control classTertiaryBackgroundColor classOnlyBottomBorderInput"
+                id="idLoginEmail" aria-describedby="emailHelp" placeholder="Email" required>
+            <div class="valid-feedback">
+                Campo correcto
+            </div>
+            <div class="invalid-feedback">
+                Por favor, introduce una dirección de correo electrónico.
+            </div>
+        </div>
+        <div class="form-group pb-4">
+            <label for="idLoginPassword">Contraseña</label>
+            <input type="password" class="form-control classTertiaryBackgroundColor classOnlyBottomBorderInput"
+                id="idLoginPassword" placeholder="Contraseña" required>
+            <div class="valid-feedback">
+                Campo correcto
+            </div>
+            <div class="invalid-feedback">
+                Por favor, introduce la contraseña.
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <button id="idLoginButton" type="submit"
+                class="btn btn-lg btn-default waves-effect mx-auto">ACCEDER</button>
+        </div>
+    </form>
+    <div class="container-flex text-black-50">
+        Sólo los administradores autorizados pueden crear eventos de momento. Si estás interesado/a en publicar eventos
+        en WhatsOn, ponte en <a class="text-dark" href="#"><u>contacto con nosotros</u></a>.
+    </div>
+</div>
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+    document.getElementById("idLoginButton").addEventListener("click", function (event) {
+        event.preventDefault();
+        loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_ADMIN_PANEL);
+    });
+
+    hideMainMenuBar();
+    setBodyHtmlElementBackgroundColor(HTML_CLASS_TERTIARY_BACKGROUND_COLOR);
+</script>

@@ -33,7 +33,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand fixed-top classBackgroundPrimaryColor text-white" id="idMainMenuBar">
+        <nav class="navbar navbar-expand fixed-top classPrimaryBackgroundColor text-white" id="idMainMenuBar">
             <ul class="navbar-nav w-100 justify-content-between">
                 <li class="nav-item pt-2">
                     <img src="./assets/icons/icon-32x32.png" alt="WhatsOn Logo" aria-label="WhatsOn Logo">
@@ -59,7 +59,8 @@
                                 <a class="dropdown-item waves-effect waves-light" data-toggle="modal"
                                     data-target="#idFilterCategoriesModal">Aplicar filtros</a>
                                 <a class="dropdown-item waves-effect waves-light">Recomendar WhatsOn</a>
-                                <a class="dropdown-item waves-effect waves-light">Crear evento</a>
+                                <a class="dropdown-item waves-effect waves-light" onclick="loadLoginView()">Crear
+                                    evento</a>
                             </div>
                         </li>
                     </ul>
@@ -83,7 +84,7 @@
     <script src="./scripts/categories-filter.js"></script>
     <script src="./scripts/worker.js"></script>
     <script>
-        loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_EVENTS_VIEW);
+        loadEvents();
         // PWA feature: Service Worker
         registerServiceWorker(FILE_PATH_SERVICE_WORKER);
     </script>

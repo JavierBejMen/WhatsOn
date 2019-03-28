@@ -1,6 +1,6 @@
 <!-- Button to activate modal window for categories filter -->
 <div class="classFloatingFilterButtonWrap">
-    <button type="button" class="btn classBackgroundSecondaryColor waves-effect waves-light classFloatingFilterButton"
+    <button type="button" class="btn classSecondaryBackgroundColor waves-effect waves-light classFloatingFilterButton"
         data-toggle="modal" data-target="#idFilterCategoriesModal" data-backdrop="false" title="Filtro de categorías"
         aria-label="Filtro de categorías">
         FILTROS
@@ -17,36 +17,35 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row justify-content-center" aria-label="Filtro de locales">
-                    <div class="col-8 col-sm-6 col-md-6 col-lg-6">
+                <div class="row justify-content-center" aria-label="Filtro de categorías">
+                    <div class="col-8 col-sm-6">
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton"
-                            onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)">Música en directo</span>
+                            onclick="toggleFilterButton(this)">Música en directo</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton"
-                            onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)" disabled>Pubs</span>
+                            onclick="toggleFilterButton(this)" disabled>Pubs</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton"
-                            onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)">Discotecas</span>
+                            onclick="toggleFilterButton(this)">Discotecas</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton"
-                            onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)">Bares de tapas</span>
+                            onclick="toggleFilterButton(this)">Bares de tapas</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton"
-                            onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)">Flamenco</span>
+                            onclick="toggleFilterButton(this)">Flamenco</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton"
-                            onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)" disabled>Pop</span>
+                            onclick="toggleFilterButton(this)" disabled>Pop</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton"
-                            onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)">Rock</span>
+                            onclick="toggleFilterButton(this)">Rock</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton"
-                            onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)" disabled>Indie</span>
+                            onclick="toggleFilterButton(this)" disabled>Indie</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton"
-                            onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)"
-                            disabled>Electrónica</span>
+                            onclick="toggleFilterButton(this)" disabled>Electrónica</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton"
-                            onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)" disabled>Techno</span>
+                            onclick="toggleFilterButton(this)" disabled>Techno</span>
                         <span class="btn btn-block btn-elegant waves-effect mb-2 filterCategorieButton"
-                            onclick="toggleFilterButton(TYPE_OF_FILTER_BUTTON.CATEGORIE,this)" disabled>Hip Hop</span>
+                            onclick="toggleFilterButton(this)" disabled>Hip Hop</span>
                     </div>
                 </div>
             </div>
             <div class="modal-footer border-top-0">
-                <button type="button" class="btn btn-lg classBackgroundSecondaryColor waves-effect w-100">GUARDAR
+                <button type="button" class="btn btn-lg classSecondaryBackgroundColor waves-effect w-100">GUARDAR
                     CAMBIOS</button>
             </div>
         </div>
