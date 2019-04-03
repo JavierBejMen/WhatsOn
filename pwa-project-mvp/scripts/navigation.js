@@ -8,12 +8,14 @@ const FILE_PATH_SERVICE_WORKER = "./service-worker.js";
 const FILE_PATH_EVENTS_VIEW = "./views/events.html";
 const FILE_PATH_EVENT_INFO_VIEW = "./views/event-info.html";
 const FILE_PATH_LOGIN_VIEW = "./views/login.html";
-const FILE_PATH_ADMIN_PANEL = "./views/admin-panel.html";
+const FILE_PATH_ADMIN_PANEL_VIEW = "./views/admin-panel.html";
+const FILE_PATH_CREATE_EVENT_VIEW = "./views/admin-panel-subviews/create-event.html";
 const FILE_PATH_CATEGORIES_FILTER_COMPONENT = "./components/categories-filter.html";
 const FILE_PATH_EVENTS_WEEK_CALENDAR_COMPONENT = "./components/events-week-calendar.html";
 const HTML_ATTRIBUTE_ID = "id";
 const HTML_ATTRIBUTE_DATA_TOGGLE = "data-toggle";
 const HTML_ATTRIBUTE_DATA_TARGET = "data-target";
+const HTML_CLASS_WHITE_BACKGROUND_COLOR = "#FFFFFF";
 const HTML_CLASS_TERTIARY_BACKGROUND_COLOR = "#EEEEEE";
 const HTML_CLASS_INVISIBLE = "invisible";
 const HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR = "classSelectedNavigationItem";
@@ -37,6 +39,12 @@ function loadEventInfoView() {
 }
 function loadLoginView() {
     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_LOGIN_VIEW);
+}
+function loadAdminPanelView() {
+    loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_ADMIN_PANEL_VIEW);
+}
+function loadCreateEventView() {
+    loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_CREATE_EVENT_VIEW);
 }
 function loadCategoriesFilterComponentInHtmlElementById(htmlElementId) {
     loadHtmlFileInHtmlElementById(htmlElementId, FILE_PATH_CATEGORIES_FILTER_COMPONENT);

@@ -69,12 +69,11 @@
             });
         }, false);
     })();
-
     document.getElementById("idLoginButton").addEventListener("click", function (event) {
         event.preventDefault();
-        loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_ADMIN_PANEL);
+        loadAdminPanelView();
     });
 
-    hideMainMenuBar();
     setBodyHtmlElementBackgroundColor(HTML_CLASS_TERTIARY_BACKGROUND_COLOR);
+    hideMainMenuBar();
 </script>

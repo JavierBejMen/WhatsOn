@@ -1,4 +1,4 @@
-const CACHE_NAME = "WhatsOnPWA-v1.0";
+const CACHE_NAME = "WhatsOnPWA-v1.1";
 var filesToCache = [
     "./",
     "./manifest.json",
@@ -33,7 +33,10 @@ var filesToCache = [
     "./styles/material-design-for-bootstrap-free-4.5.10/js/popper.min.js",
     "./styles/stylesheet.css",
     "./views/events.html",
-    "./views/event-info.html"
+    "./views/event-info.html",
+    "./views/login.html",
+    "./views/admin-panel.html",
+    "./views/admin-panel-subviews/create-event.html"
 ];
 
 self.addEventListener("install", (event) => {

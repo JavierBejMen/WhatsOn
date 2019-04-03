@@ -13,6 +13,10 @@
     font-family: 'Muli', sans-serif;
 }
 
+.classWhiteBackgroundColor {
+    background-color: #FFFFFF;
+}
+
 .classPrimaryBackgroundColor {
     background-color: var(--primary-color);
 }
@@ -231,7 +235,7 @@
     background-size: cover;
 }
 
-#idLoginMain, #idAdminProfileContainer {
+#idLoginMain, #idAdminProfileContainer, #idEditEventPictureContainer {
     margin-top: var(--main-menu-bar-height);
 }
 
@@ -243,4 +247,14 @@
 #idLoginForm button {
     width: 230px;
     max-width: 230px;
+}
+
+#idEditEventPictureContainer #idEditEventPictureButton {
+    padding: 10px;
+    border-radius: 2rem;
+}
+
+#idCreateEventMain #idCreateEventForm #idAddTagsButton {
+    padding: 5px 10px;
+    border-radius: 2rem;
 }
