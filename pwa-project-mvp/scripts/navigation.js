@@ -1,9 +1,3 @@
-const CSS_CHAR_ID_SELECTOR = "#";
-const HTML_TAG_BODY = "body";
-const HTML_TAG_MAIN = "main";
-const HTML_TAG_NAVIGATION_ITEM = "a";
-const HTML_TAG_MENU_BAR_TITLE = "h5";
-const JS_EMPTY_STRING_VALUE = "";
 const FILE_PATH_SERVICE_WORKER = "./service-worker.js";
 const FILE_PATH_EVENTS_VIEW = "./views/events.html";
 const FILE_PATH_EVENT_INFO_VIEW = "./views/event-info.html";
@@ -12,6 +6,18 @@ const FILE_PATH_ADMIN_PANEL_VIEW = "./views/admin-panel.html";
 const FILE_PATH_CREATE_EVENT_VIEW = "./views/admin-panel-subviews/create-event.html";
 const FILE_PATH_CATEGORIES_FILTER_COMPONENT = "./components/categories-filter.html";
 const FILE_PATH_EVENTS_WEEK_CALENDAR_COMPONENT = "./components/events-week-calendar.html";
+const CSS_CHAR_ID_SELECTOR = "#";
+const JS_EMPTY_STRING_VALUE = "";
+const JS_DATE_TIME_PICKER_LOCALE = "es";
+const JS_DATE_TIME_PICKER_DATE_TYPE = "date";
+const JS_DATE_TIME_PICKER_TIME_TYPE = "time";
+const JS_DATE_TIME_PICKER_ORIENTATION = "PORTRAIT";
+const JS_DATE_TIME_PICKER_OK_BUTTON_TEXT = "guardar";
+const JS_DATE_TIME_PICKER_CANCEL_BUTTON_TEXT = "cancelar";
+const HTML_TAG_BODY = "body";
+const HTML_TAG_MAIN = "main";
+const HTML_TAG_NAVIGATION_ITEM = "a";
+const HTML_TAG_MENU_BAR_TITLE = "h5";
 const HTML_ATTRIBUTE_ID = "id";
 const HTML_ATTRIBUTE_DATA_TOGGLE = "data-toggle";
 const HTML_ATTRIBUTE_DATA_TARGET = "data-target";
@@ -111,7 +117,21 @@ function getTodayAsNumericDayOfTheWeek() {
 function setScrollspyInNavigationBarById(htmlIdNavigationBar, offsetValue) {
     $(HTML_TAG_BODY).scrollspy({ target: CSS_CHAR_ID_SELECTOR + htmlIdNavigationBar, offset: offsetValue });
 }
-
 function setBodyHtmlElementBackgroundColor(backgroundColor) {
     document.getElementsByTagName(HTML_TAG_BODY)[0].style.backgroundColor = backgroundColor;
+}
+function getDatePicker() {
+    moment.locale(JS_DATE_TIME_PICKER_LOCALE);
+    return new mdDateTimePicker.default({
+        type: JS_DATE_TIME_PICKER_DATE_TYPE, orientation: JS_DATE_TIME_PICKER_ORIENTATION,
+        past: moment(), future: moment().add(21, "years"),
+        ok: JS_DATE_TIME_PICKER_OK_BUTTON_TEXT, cancel: JS_DATE_TIME_PICKER_CANCEL_BUTTON_TEXT
+    });
+}
+function getTimePicker() {
+    moment.locale(JS_DATE_TIME_PICKER_LOCALE);
+    return new mdDateTimePicker.default({
+        type: JS_DATE_TIME_PICKER_TIME_TYPE, orientation: JS_DATE_TIME_PICKER_ORIENTATION,
+        ok: JS_DATE_TIME_PICKER_OK_BUTTON_TEXT, cancel: JS_DATE_TIME_PICKER_CANCEL_BUTTON_TEXT
+    });
 }

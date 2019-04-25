@@ -66,10 +66,17 @@
             </li>
         </ul>
     </div>
-    <div class="mt-2 ml-4 text-white">
-        <i class="far fa-calendar fa-2x"></i>
+    <div class="ml-2 text-white">
+        <a class="nav-link" id="idEventsWeekCalendarButton">
+            <i class="far fa-calendar fa-2x"></i>
+        </a>
     </div>
 </div>
 <script>
     fillNumericDaysOfTheMonthRowInEventsWeekCalendarNavigationBar();
+
+    document.getElementById("idEventsWeekCalendarButton").addEventListener("click", function () {
+        var datePicker = getDatePicker();
+        datePicker.toggle();
+    });
 </script>

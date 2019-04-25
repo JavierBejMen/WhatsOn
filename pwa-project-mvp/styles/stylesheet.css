@@ -258,3 +258,9 @@
     padding: 5px 10px;
     border-radius: 2rem;
 }
+
+/* Material Design - Date & Time Picker */
+
+#mddtp-time__header {
+    width: inherit;
+}

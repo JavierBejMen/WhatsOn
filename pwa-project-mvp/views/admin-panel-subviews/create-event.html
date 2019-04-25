@@ -42,16 +42,25 @@
         </div>
         <div class="form-group">
             <label for="idEventDescription">En qué consiste</label>
-            <input class="form-control classOnlyBottomBorderInput" id="idEventDescription" type="text"
-                placeholder="Descripción del evento" required>
+            <textarea class="form-control classOnlyBottomBorderInput" id="idEventDescription" rows="5"
+                placeholder="Descripción del evento" required></textarea>
         </div>
-        <div class="form-group">
-            <label for="idEventDate">Cuándo <span class="text-danger">*</span></label>
-            <a role="button"
-                class="form-control btn classSecondaryBackgroundColor text-white waves-effect waves-light mx-auto py-2"
-                id="idEventDate" title="Fecha y hora del evento" aria-label="Fecha y hora del evento">
-                Elegir fecha y hora <i class="far fa-calendar fa-lg ml-1"></i>
-            </a>
+        <div class="d-flex mb-4">
+            <i class="text-primary fas fa-calendar-day fa-lg mr-3"></i>
+            <div class="w-100">
+                <div class="form-group">
+                    <label for="idEventDateButton">Cuándo <span class="text-danger">*</span></label>
+                    <input class="form-control mb-2" id="idEventDateText" type="text" placeholder="Fecha" readonly
+                        required>
+                    <input class="form-control" id="idEventTimeText" type="text" placeholder="Hora" readonly required>
+                    <button
+                        class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2"
+                        type="button" id="idEventDateButton" title="Elegir fecha y hora del evento"
+                        aria-label="Elegir fecha y hora del evento">
+                        <i class="far fa-calendar-plus fa-lg mr-1"></i>
+                    </button>
+                </div>
+            </div>
         </div>
         <label for="idEventPricesContainer">Precios</label>
         <div class="mx-4 mb-3" id="idEventPricesContainer">
@@ -116,6 +125,24 @@
     </form>
 </div>
 <script>
+    var datePicker;
+    var timePicker;
+    document.getElementById("idEventDateButton").addEventListener("click", function () {
+        datePicker = getDatePicker();
+        datePicker.trigger = document.getElementById("idEventDateText");
+        datePicker.toggle();
+    });
+    document.getElementById("idEventDateText").addEventListener('onOk', function () {
+        timePicker = getTimePicker();
+        timePicker.trigger = document.getElementById("idEventTimeText");
+        timePicker.toggle();
+    });
+    document.getElementById("idEventTimeText").addEventListener('onOk', function () {
+        var dateText = datePicker.time.format('LLLL').toString();
+        dateText = dateText.substring(0, dateText.lastIndexOf(" "));
+        document.getElementById("idEventDateText").value = dateText;
+        this.value = timePicker.time.format('LT').toString();
+    });
     document.getElementById("idCreateEventButton").addEventListener("click", function (event) {
         event.preventDefault();
     });
