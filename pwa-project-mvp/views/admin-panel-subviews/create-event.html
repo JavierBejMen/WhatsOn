@@ -46,18 +46,32 @@
                 placeholder="Descripción del evento" required></textarea>
         </div>
         <div class="d-flex mb-4">
-            <i class="text-primary fas fa-calendar-day fa-lg mr-3"></i>
+            <i class="text-primary fas fa-calendar fa-lg mr-3"></i>
             <div class="w-100">
                 <div class="form-group">
-                    <label for="idEventDateButton">Cuándo <span class="text-danger">*</span></label>
-                    <input class="form-control mb-2" id="idEventDateText" type="text" placeholder="Fecha" readonly
+                    <label for="idEventStartDateTimeButton">Cuándo empieza <span class="text-danger">*</span></label>
+                    <input class="form-control mb-2" id="idEventStartDateText" type="text" placeholder="Fecha" readonly
                         required>
-                    <input class="form-control" id="idEventTimeText" type="text" placeholder="Hora" readonly required>
+                    <input class="form-control" id="idEventStartTimeText" type="text" placeholder="Hora" readonly
+                        required>
                     <button
                         class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2"
-                        type="button" id="idEventDateButton" title="Elegir fecha y hora del evento"
+                        type="button" id="idEventStartDateTimeButton" title="Elegir fecha y hora de comienzo"
+                        aria-label="Elegir fecha y hora del evento de comienzo">
+                        <i class="fas fa-calendar-day fa-lg mr-1"></i>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="idEventEndDateTimeButton">Cuándo termina</span></label>
+                    <input class="form-control mb-2" id="idEventEndDateText" type="text" placeholder="Fecha" readonly
+                        required>
+                    <input class="form-control" id="idEventEndTimeText" type="text" placeholder="Hora" readonly
+                        required>
+                    <button
+                        class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2"
+                        type="button" id="idEventEndDateTimeButton" title="Elegir fecha y hora de fin"
                         aria-label="Elegir fecha y hora del evento">
-                        <i class="far fa-calendar-plus fa-lg mr-1"></i>
+                        <i class="fas fa-calendar-day fa-lg mr-1"></i>
                     </button>
                 </div>
             </div>
@@ -125,23 +139,46 @@
     </form>
 </div>
 <script>
-    var datePicker;
-    var timePicker;
-    document.getElementById("idEventDateButton").addEventListener("click", function () {
-        datePicker = getDatePicker();
-        datePicker.trigger = document.getElementById("idEventDateText");
-        datePicker.toggle();
+    var startDatePicker, startTimePicker;
+    var endDatePicker, endTimePicker;
+
+    document.getElementById("idEventStartDateTimeButton").addEventListener("click", function () {
+        startDatePicker = getDatePicker();
+        startDatePicker.trigger = document.getElementById("idEventStartDateText");
+        startDatePicker.toggle();
     });
-    document.getElementById("idEventDateText").addEventListener('onOk', function () {
-        timePicker = getTimePicker();
-        timePicker.trigger = document.getElementById("idEventTimeText");
-        timePicker.toggle();
+    document.getElementById("idEventStartDateText").addEventListener('onOk', function () {
+        startTimePicker = getTimePicker();
+        startTimePicker.trigger = document.getElementById("idEventStartTimeText");
+        startTimePicker.toggle();
     });
-    document.getElementById("idEventTimeText").addEventListener('onOk', function () {
-        var dateText = datePicker.time.format('LLLL').toString();
+    document.getElementById("idEventStartTimeText").addEventListener('onOk', function () {
+        var dateText = startDatePicker.time.format('LLLL').toString();
         dateText = dateText.substring(0, dateText.lastIndexOf(" "));
-        document.getElementById("idEventDateText").value = dateText;
-        this.value = timePicker.time.format('LT').toString();
+        document.getElementById("idEventStartDateText").value = dateText;
+        this.value = startTimePicker.time.format('LT').toString();
+
+        document.getElementById("idEventEndDateText").value = JS_EMPTY_STRING_VALUE;
+        document.getElementById("idEventEndTimeText").value = JS_EMPTY_STRING_VALUE;
+    });
+
+    document.getElementById("idEventEndDateTimeButton").addEventListener("click", function () {
+        if (document.getElementById("idEventStartDateText").value && document.getElementById("idEventStartTimeText").value) {
+            endDatePicker = getDatePicker(startDatePicker.time);
+            endDatePicker.trigger = document.getElementById("idEventEndDateText");
+            endDatePicker.toggle();
+        }
+    });
+    document.getElementById("idEventEndDateText").addEventListener('onOk', function () {
+        endTimePicker = getTimePicker(startTimePicker.time);
+        endTimePicker.trigger = document.getElementById("idEventEndTimeText");
+        endTimePicker.toggle();
+    });
+    document.getElementById("idEventEndTimeText").addEventListener('onOk', function () {
+        var dateText = endDatePicker.time.format('LLLL').toString();
+        dateText = dateText.substring(0, dateText.lastIndexOf(" "));
+        document.getElementById("idEventEndDateText").value = dateText;
+        this.value = endTimePicker.time.format('LT').toString();
     });
     document.getElementById("idCreateEventButton").addEventListener("click", function (event) {
         event.preventDefault();

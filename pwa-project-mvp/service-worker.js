@@ -1,4 +1,4 @@
-const CACHE_NAME = "WhatsOnPWA-v1.0.1";
+const CACHE_NAME = "WhatsOnPWA-v1.0.2";
 var filesToCache = [
     "./",
     "./manifest.json",

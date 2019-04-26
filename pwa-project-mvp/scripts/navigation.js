@@ -120,18 +120,20 @@ function setScrollspyInNavigationBarById(htmlIdNavigationBar, offsetValue) {
 function setBodyHtmlElementBackgroundColor(backgroundColor) {
     document.getElementsByTagName(HTML_TAG_BODY)[0].style.backgroundColor = backgroundColor;
 }
-function getDatePicker() {
+function getDatePicker(startDate = moment()) {
     moment.locale(JS_DATE_TIME_PICKER_LOCALE);
     return new mdDateTimePicker.default({
-        type: JS_DATE_TIME_PICKER_DATE_TYPE, orientation: JS_DATE_TIME_PICKER_ORIENTATION,
-        past: moment(), future: moment().add(21, "years"),
+        type: JS_DATE_TIME_PICKER_DATE_TYPE, init: startDate,
+        past: moment(startDate), future: moment(startDate).add(21, "years"),
+        orientation: JS_DATE_TIME_PICKER_ORIENTATION,
         ok: JS_DATE_TIME_PICKER_OK_BUTTON_TEXT, cancel: JS_DATE_TIME_PICKER_CANCEL_BUTTON_TEXT
     });
 }
-function getTimePicker() {
+function getTimePicker(startTime = moment()) {
     moment.locale(JS_DATE_TIME_PICKER_LOCALE);
     return new mdDateTimePicker.default({
-        type: JS_DATE_TIME_PICKER_TIME_TYPE, orientation: JS_DATE_TIME_PICKER_ORIENTATION,
+        type: JS_DATE_TIME_PICKER_TIME_TYPE, init: startTime,
+        orientation: JS_DATE_TIME_PICKER_ORIENTATION,
         ok: JS_DATE_TIME_PICKER_OK_BUTTON_TEXT, cancel: JS_DATE_TIME_PICKER_CANCEL_BUTTON_TEXT
     });
 }
