@@ -74,9 +74,5 @@
 </div>
 <script>
     fillNumericDaysOfTheMonthRowInEventsWeekCalendarNavigationBar();
-
-    document.getElementById("idEventsWeekCalendarButton").addEventListener("click", function () {
-        var datePicker = getDatePicker();
-        datePicker.toggle();
-    });
+    showDatePickerOnHtmlElementClick(HTML_ID_EVENTS_WEEK_CALENDAR_BUTTON);
 </script>

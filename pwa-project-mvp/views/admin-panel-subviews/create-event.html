@@ -50,9 +50,9 @@
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventStartDateTimeButton">Cuándo empieza <span class="text-danger">*</span></label>
-                    <input class="form-control mb-2" id="idEventStartDateText" type="text" placeholder="Fecha" readonly
-                        required>
-                    <input class="form-control" id="idEventStartTimeText" type="text" placeholder="Hora" readonly
+                    <input class="form-control mb-2" id="idEventStartDateTextInput" type="text" placeholder="Fecha"
+                        readonly required>
+                    <input class="form-control" id="idEventStartTimeTextInput" type="text" placeholder="Hora" readonly
                         required>
                     <button
                         class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2"
@@ -63,9 +63,9 @@
                 </div>
                 <div class="form-group">
                     <label for="idEventEndDateTimeButton">Cuándo termina</span></label>
-                    <input class="form-control mb-2" id="idEventEndDateText" type="text" placeholder="Fecha" readonly
-                        required>
-                    <input class="form-control" id="idEventEndTimeText" type="text" placeholder="Hora" readonly
+                    <input class="form-control mb-2" id="idEventEndDateTextInput" type="text" placeholder="Fecha"
+                        readonly required>
+                    <input class="form-control" id="idEventEndTimeTextInput" type="text" placeholder="Hora" readonly
                         required>
                     <button
                         class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2"
@@ -139,51 +139,64 @@
     </form>
 </div>
 <script>
+    setHtmlBodyBackgroundColor(HTML_CLASS_WHITE_BACKGROUND_COLOR);
+    hideMainMenuBar();
+
+    /* TODO -- Refactoring */
     var startDatePicker, startTimePicker;
     var endDatePicker, endTimePicker;
-
-    document.getElementById("idEventStartDateTimeButton").addEventListener("click", function () {
+    document.getElementById(HTML_ID_EVENT_START_DATE_TIME_BUTTON).addEventListener("click", function () {
         startDatePicker = getDatePicker();
-        startDatePicker.trigger = document.getElementById("idEventStartDateText");
+        startDatePicker.trigger = document.getElementById(HTML_ID_EVENT_START_DATE_TEXT_INPUT);
         startDatePicker.toggle();
+        createHtmlDateTimePickerWrapperInHtmlBody();
+        showHtmlDateTimePickerWrapper();
+        insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER);
+        hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(HTML_ID_DATE_PICKER_CANCEL_BUTTON);
     });
-    document.getElementById("idEventStartDateText").addEventListener('onOk', function () {
+    document.getElementById(HTML_ID_EVENT_START_DATE_TEXT_INPUT).addEventListener("onOk", function () {
         startTimePicker = getTimePicker();
-        startTimePicker.trigger = document.getElementById("idEventStartTimeText");
+        startTimePicker.trigger = document.getElementById(HTML_ID_EVENT_START_TIME_TEXT_INPUT);
         startTimePicker.toggle();
+        createHtmlDateTimePickerWrapperInHtmlBody();
+        showHtmlDateTimePickerWrapper();
+        insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_TIME_PICKER);
+        hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(HTML_ID_TIME_PICKER_CANCEL_BUTTON);
+        hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(HTML_ID_TIME_PICKER_OK_BUTTON);
     });
-    document.getElementById("idEventStartTimeText").addEventListener('onOk', function () {
-        var dateText = startDatePicker.time.format('LLLL').toString();
-        dateText = dateText.substring(0, dateText.lastIndexOf(" "));
-        document.getElementById("idEventStartDateText").value = dateText;
-        this.value = startTimePicker.time.format('LT').toString();
-
-        document.getElementById("idEventEndDateText").value = JS_EMPTY_STRING_VALUE;
-        document.getElementById("idEventEndTimeText").value = JS_EMPTY_STRING_VALUE;
+    document.getElementById(HTML_ID_EVENT_START_TIME_TEXT_INPUT).addEventListener("onOk", function () {
+        writeDateFromDatePickerToDateTextInput(startDatePicker, HTML_ID_EVENT_START_DATE_TEXT_INPUT);
+        writeTimeFromTimePickerToTimeTextInput(startTimePicker, this.id);
+        clearHtmlElementValue(HTML_ID_EVENT_END_DATE_TEXT_INPUT);
+        clearHtmlElementValue(HTML_ID_EVENT_END_TIME_TEXT_INPUT);
     });
-
-    document.getElementById("idEventEndDateTimeButton").addEventListener("click", function () {
-        if (document.getElementById("idEventStartDateText").value && document.getElementById("idEventStartTimeText").value) {
+    document.getElementById(HTML_ID_EVENT_END_DATE_TIME_BUTTON).addEventListener("click", function () {
+        if (document.getElementById(HTML_ID_EVENT_START_DATE_TEXT_INPUT).value &&
+            document.getElementById(HTML_ID_EVENT_START_TIME_TEXT_INPUT).value) {
             endDatePicker = getDatePicker(startDatePicker.time);
-            endDatePicker.trigger = document.getElementById("idEventEndDateText");
+            endDatePicker.trigger = document.getElementById(HTML_ID_EVENT_END_DATE_TEXT_INPUT);
             endDatePicker.toggle();
+            createHtmlDateTimePickerWrapperInHtmlBody();
+            showHtmlDateTimePickerWrapper();
+            insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER);
+            hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(HTML_ID_DATE_PICKER_CANCEL_BUTTON);
         }
     });
-    document.getElementById("idEventEndDateText").addEventListener('onOk', function () {
-        endTimePicker = getTimePicker(startTimePicker.time);
-        endTimePicker.trigger = document.getElementById("idEventEndTimeText");
+    document.getElementById(HTML_ID_EVENT_END_DATE_TEXT_INPUT).addEventListener("onOk", function () {
+        endTimePicker = getTimePicker();
+        endTimePicker.trigger = document.getElementById(HTML_ID_EVENT_END_TIME_TEXT_INPUT);
         endTimePicker.toggle();
+        createHtmlDateTimePickerWrapperInHtmlBody();
+        showHtmlDateTimePickerWrapper();
+        insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_TIME_PICKER);
+        hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(HTML_ID_TIME_PICKER_CANCEL_BUTTON);
+        hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(HTML_ID_TIME_PICKER_OK_BUTTON);
     });
-    document.getElementById("idEventEndTimeText").addEventListener('onOk', function () {
-        var dateText = endDatePicker.time.format('LLLL').toString();
-        dateText = dateText.substring(0, dateText.lastIndexOf(" "));
-        document.getElementById("idEventEndDateText").value = dateText;
-        this.value = endTimePicker.time.format('LT').toString();
+    document.getElementById(HTML_ID_EVENT_END_TIME_TEXT_INPUT).addEventListener("onOk", function () {
+        writeDateFromDatePickerToDateTextInput(endDatePicker, HTML_ID_EVENT_END_DATE_TEXT_INPUT);
+        writeTimeFromTimePickerToTimeTextInput(endTimePicker, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
     });
-    document.getElementById("idCreateEventButton").addEventListener("click", function (event) {
+    document.getElementById(HTML_ID_CREATE_EVENT_BUTTON).addEventListener("click", function (event) {
         event.preventDefault();
     });
-
-    setBodyHtmlElementBackgroundColor(HTML_CLASS_WHITE_BACKGROUND_COLOR);
-    hideMainMenuBar();
 </script>

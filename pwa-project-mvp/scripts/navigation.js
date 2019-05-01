@@ -16,6 +16,7 @@ const JS_DATE_TIME_PICKER_OK_BUTTON_TEXT = "guardar";
 const JS_DATE_TIME_PICKER_CANCEL_BUTTON_TEXT = "cancelar";
 const HTML_TAG_BODY = "body";
 const HTML_TAG_MAIN = "main";
+const HTML_TAG_DIV = "div";
 const HTML_TAG_NAVIGATION_ITEM = "a";
 const HTML_TAG_MENU_BAR_TITLE = "h5";
 const HTML_ATTRIBUTE_ID = "id";
@@ -29,13 +30,28 @@ const HTML_CLASS_SHOW_HIDE_DESCRIPTION_BUTTON = "classShowHideDescriptionButton"
 const HTML_CLASS_ALL_EVENTS_LIST = "classAllEventsList";
 const HTML_CLASS_ROUNDED_BOTTOM_RIGHT_FLOATING_BUTTON = "classRoundedBottomRightFloatingButton";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
+const HTML_ID_EVENT_START_DATE_TIME_BUTTON = "idEventStartDateTimeButton";
+const HTML_ID_EVENT_START_DATE_TEXT_INPUT = "idEventStartDateTextInput";
+const HTML_ID_EVENT_START_TIME_TEXT_INPUT = "idEventStartTimeTextInput";
+const HTML_ID_EVENT_END_DATE_TIME_BUTTON = "idEventEndDateTimeButton";
+const HTML_ID_EVENT_END_DATE_TEXT_INPUT = "idEventEndDateTextInput";
+const HTML_ID_EVENT_END_TIME_TEXT_INPUT = "idEventEndTimeTextInput";
+const HTML_ID_CREATE_EVENT_BUTTON = "idCreateEventButton";
 const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS =
     "idEventsWeekCalendarContainerInAllEvents";
 const HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR = "idEventsWeekCalendarNavigationBar";
+const HTML_ID_EVENTS_WEEK_CALENDAR_BUTTON = "idEventsWeekCalendarButton";
 const HTML_IDS_LIST_FOR_EVENTS_LISTS = ["idEventsOnMonday", "idEventsOnTuesday",
     "idEventsOnWednesday", "idEventsOnThursday", "idEventsOnFriday", "idEventsOnSaturday",
     "idEventsOnSunday"];
 const HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_EVENTS = "idCategoriesFilterContainerInEvents";
+const HTML_ID_DATE_TIME_PICKER_WRAPPER = "idMddtpPickerWrapper";
+const HTML_ID_DATE_PICKER = "mddtp-picker__date";
+const HTML_ID_DATE_PICKER_CANCEL_BUTTON = "mddtp-date__cancel";
+const HTML_ID_DATE_PICKER_OK_BUTTON = "mddtp-date__ok";
+const HTML_ID_TIME_PICKER = "mddtp-picker__time";
+const HTML_ID_TIME_PICKER_CANCEL_BUTTON = "mddtp-time__cancel";
+const HTML_ID_TIME_PICKER_OK_BUTTON = "mddtp-time__ok";
 
 function loadEvents() {
     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_EVENTS_VIEW);
@@ -117,23 +133,68 @@ function getTodayAsNumericDayOfTheWeek() {
 function setScrollspyInNavigationBarById(htmlIdNavigationBar, offsetValue) {
     $(HTML_TAG_BODY).scrollspy({ target: CSS_CHAR_ID_SELECTOR + htmlIdNavigationBar, offset: offsetValue });
 }
-function setBodyHtmlElementBackgroundColor(backgroundColor) {
+function setHtmlBodyBackgroundColor(backgroundColor) {
     document.getElementsByTagName(HTML_TAG_BODY)[0].style.backgroundColor = backgroundColor;
 }
+function showDatePickerOnHtmlElementClick(htmlElementId) {
+    document.getElementById(htmlElementId).addEventListener("click", function () {
+        var datePicker = getDatePicker();
+        datePicker.toggle();
+        createHtmlDateTimePickerWrapperInHtmlBody();
+        showHtmlDateTimePickerWrapper();
+        insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER);
+        hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(HTML_ID_DATE_PICKER_CANCEL_BUTTON);
+        hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(HTML_ID_DATE_PICKER_OK_BUTTON);
+    });
+}
+function createHtmlDateTimePickerWrapperInHtmlBody() {
+    if (!document.getElementById(HTML_ID_DATE_TIME_PICKER_WRAPPER)) {
+        var datePickerWrapper = document.createElement(HTML_TAG_DIV);
+        datePickerWrapper.id = HTML_ID_DATE_TIME_PICKER_WRAPPER;
+        document.body.appendChild(datePickerWrapper);
+    }
+}
+function showHtmlDateTimePickerWrapper() {
+    document.getElementById(HTML_ID_DATE_TIME_PICKER_WRAPPER).style.display = "initial";
+}
+function insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(htmlDateTimePickerId) {
+    if (!document.querySelector(CSS_CHAR_ID_SELECTOR + HTML_ID_DATE_TIME_PICKER_WRAPPER + " "
+        + CSS_CHAR_ID_SELECTOR + htmlDateTimePickerId)) {
+        document.getElementById(HTML_ID_DATE_TIME_PICKER_WRAPPER).appendChild(document.getElementById(htmlDateTimePickerId));
+    }
+}
+function hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(htmlDateTimePickerButtonId) {
+    document.getElementById(htmlDateTimePickerButtonId).addEventListener("click", function () {
+        document.getElementById(HTML_ID_DATE_TIME_PICKER_WRAPPER).style.display = "none";
+    });
+}
 function getDatePicker(startDate = moment()) {
-    moment.locale(JS_DATE_TIME_PICKER_LOCALE);
-    return new mdDateTimePicker.default({
+    var datePicker = new mdDateTimePicker.default({
         type: JS_DATE_TIME_PICKER_DATE_TYPE, init: startDate,
         past: moment(startDate), future: moment(startDate).add(21, "years"),
         orientation: JS_DATE_TIME_PICKER_ORIENTATION,
         ok: JS_DATE_TIME_PICKER_OK_BUTTON_TEXT, cancel: JS_DATE_TIME_PICKER_CANCEL_BUTTON_TEXT
     });
+    datePicker.time.locale(JS_DATE_TIME_PICKER_LOCALE);
+    return datePicker;
 }
 function getTimePicker(startTime = moment()) {
-    moment.locale(JS_DATE_TIME_PICKER_LOCALE);
-    return new mdDateTimePicker.default({
+    var timePicker = new mdDateTimePicker.default({
         type: JS_DATE_TIME_PICKER_TIME_TYPE, init: startTime,
         orientation: JS_DATE_TIME_PICKER_ORIENTATION,
         ok: JS_DATE_TIME_PICKER_OK_BUTTON_TEXT, cancel: JS_DATE_TIME_PICKER_CANCEL_BUTTON_TEXT
     });
+    timePicker.time.locale(JS_DATE_TIME_PICKER_LOCALE);
+    return timePicker;
+}
+function clearHtmlElementValue(htmlElementId) {
+    document.getElementById(htmlElementId).value = JS_EMPTY_STRING_VALUE;
+}
+function writeDateFromDatePickerToDateTextInput(jsDatePicker, htmlElementId) {
+    var dateText = jsDatePicker.time.format('LLLL').toString();
+    dateText = dateText.substring(0, dateText.lastIndexOf(" "));
+    document.getElementById(htmlElementId).value = dateText;
+}
+function writeTimeFromTimePickerToTimeTextInput(jsDatePicker, htmlElementId) {
+    document.getElementById(htmlElementId).value = jsDatePicker.time.format('LT').toString();
 }
