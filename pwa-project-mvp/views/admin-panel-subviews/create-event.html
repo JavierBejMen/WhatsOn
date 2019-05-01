@@ -58,7 +58,7 @@
                         class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2"
                         type="button" id="idEventStartDateTimeButton" title="Elegir fecha y hora de comienzo"
                         aria-label="Elegir fecha y hora del evento de comienzo">
-                        <i class="fas fa-calendar-day fa-lg mr-1"></i>
+                        <i class="fas fa-calendar-day fa-lg"></i>
                     </button>
                 </div>
                 <div class="form-group">
@@ -71,7 +71,7 @@
                         class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2"
                         type="button" id="idEventEndDateTimeButton" title="Elegir fecha y hora de fin"
                         aria-label="Elegir fecha y hora del evento">
-                        <i class="fas fa-calendar-day fa-lg mr-1"></i>
+                        <i class="fas fa-calendar-day fa-lg"></i>
                     </button>
                 </div>
             </div>
@@ -143,21 +143,21 @@
     hideMainMenuBar();
 
     /* TODO -- Refactoring */
+    var datePicker, timePicker;
     var startDatePicker, startTimePicker;
-    var endDatePicker, endTimePicker;
     document.getElementById(HTML_ID_EVENT_START_DATE_TIME_BUTTON).addEventListener("click", function () {
-        startDatePicker = getDatePicker();
-        startDatePicker.trigger = document.getElementById(HTML_ID_EVENT_START_DATE_TEXT_INPUT);
-        startDatePicker.toggle();
+        datePicker = getDatePicker();
+        datePicker.trigger = document.getElementById(HTML_ID_EVENT_START_DATE_TEXT_INPUT);
+        datePicker.toggle();
         createHtmlDateTimePickerWrapperInHtmlBody();
         showHtmlDateTimePickerWrapper();
         insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER);
         hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(HTML_ID_DATE_PICKER_CANCEL_BUTTON);
     });
     document.getElementById(HTML_ID_EVENT_START_DATE_TEXT_INPUT).addEventListener("onOk", function () {
-        startTimePicker = getTimePicker();
-        startTimePicker.trigger = document.getElementById(HTML_ID_EVENT_START_TIME_TEXT_INPUT);
-        startTimePicker.toggle();
+        timePicker = getTimePicker();
+        timePicker.trigger = document.getElementById(HTML_ID_EVENT_START_TIME_TEXT_INPUT);
+        timePicker.toggle();
         createHtmlDateTimePickerWrapperInHtmlBody();
         showHtmlDateTimePickerWrapper();
         insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_TIME_PICKER);
@@ -165,6 +165,8 @@
         hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(HTML_ID_TIME_PICKER_OK_BUTTON);
     });
     document.getElementById(HTML_ID_EVENT_START_TIME_TEXT_INPUT).addEventListener("onOk", function () {
+        startDatePicker = datePicker;
+        startTimePicker = timePicker;
         writeDateFromDatePickerToDateTextInput(startDatePicker, HTML_ID_EVENT_START_DATE_TEXT_INPUT);
         writeTimeFromTimePickerToTimeTextInput(startTimePicker, this.id);
         clearHtmlElementValue(HTML_ID_EVENT_END_DATE_TEXT_INPUT);
@@ -173,9 +175,9 @@
     document.getElementById(HTML_ID_EVENT_END_DATE_TIME_BUTTON).addEventListener("click", function () {
         if (document.getElementById(HTML_ID_EVENT_START_DATE_TEXT_INPUT).value &&
             document.getElementById(HTML_ID_EVENT_START_TIME_TEXT_INPUT).value) {
-            endDatePicker = getDatePicker(startDatePicker.time);
-            endDatePicker.trigger = document.getElementById(HTML_ID_EVENT_END_DATE_TEXT_INPUT);
-            endDatePicker.toggle();
+            datePicker = getDatePicker(startDatePicker.time);
+            datePicker.trigger = document.getElementById(HTML_ID_EVENT_END_DATE_TEXT_INPUT);
+            datePicker.toggle();
             createHtmlDateTimePickerWrapperInHtmlBody();
             showHtmlDateTimePickerWrapper();
             insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER);
@@ -183,9 +185,9 @@
         }
     });
     document.getElementById(HTML_ID_EVENT_END_DATE_TEXT_INPUT).addEventListener("onOk", function () {
-        endTimePicker = getTimePicker();
-        endTimePicker.trigger = document.getElementById(HTML_ID_EVENT_END_TIME_TEXT_INPUT);
-        endTimePicker.toggle();
+        timePicker = getTimePicker();
+        timePicker.trigger = document.getElementById(HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+        timePicker.toggle();
         createHtmlDateTimePickerWrapperInHtmlBody();
         showHtmlDateTimePickerWrapper();
         insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_TIME_PICKER);
@@ -193,8 +195,8 @@
         hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(HTML_ID_TIME_PICKER_OK_BUTTON);
     });
     document.getElementById(HTML_ID_EVENT_END_TIME_TEXT_INPUT).addEventListener("onOk", function () {
-        writeDateFromDatePickerToDateTextInput(endDatePicker, HTML_ID_EVENT_END_DATE_TEXT_INPUT);
-        writeTimeFromTimePickerToTimeTextInput(endTimePicker, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+        writeDateFromDatePickerToDateTextInput(datePicker, HTML_ID_EVENT_END_DATE_TEXT_INPUT);
+        writeTimeFromTimePickerToTimeTextInput(timePicker, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
     });
     document.getElementById(HTML_ID_CREATE_EVENT_BUTTON).addEventListener("click", function (event) {
         event.preventDefault();
