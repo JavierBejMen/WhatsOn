@@ -1,4 +1,4 @@
-const CACHE_NAME = "WhatsOnPWA-v1.0.3";
+const CACHE_NAME = "WhatsOnPWA-v1.0.4";
 var filesToCache = [
     "./",
     "./manifest.json",
@@ -69,42 +69,35 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
     console.log("[ServiceWorker] Fetch", event.request.url);
     event.respondWith(
-        // First server strategy
-        /*fetch(event.request).then((response) => 
-        {
-            console.log("[ServiceWorker] Fetched",event.request.url,"from server");
-            return response;
-        },
-        () => 
-        {
-            caches.match(event.request).then((response) =>
-            {
-                if(response)
-                {
-                    console.log("[ServiceWorker] Fetched",event.request.url,"from cache");
-                    return response;
-                }
-                return onFetchError(response);
-            })
-        })*/
-        // First cache strategy
-        caches.match(event.request).then((response) => {
-            if (response) {
-                console.log("[ServiceWorker] Fetched", event.request.url, "from cache");
-                return response;
-            }
-            return fetch(event.request).then((response) => {
-                console.log("[ServiceWorker] Fetched", event.request.url, "from server");
-                return response;
-            },
-                (response) => {
-                    return onFetchError(response);
-                });
-        })
+        alwaysServerStrategy(event.request)
+        //firstCacheThenServerStrategy(event.request)
     );
 });
 
-function onFetchError(response) {
-    console.log("[ServiceWorker] Fetch error", response);
-    return response;
+// Always Server strategy (Testing)
+function alwaysServerStrategy(request) {
+    return fetch(request).then((response) => {
+        console.log("[ServiceWorker] Fetched", request.url, "from server");
+        return response;
+    },
+        (error) => {
+            console.log("[ServiceWorker] Fetch error", error);
+        })
+}
+
+// First Cache, Then Server strategy (Production)
+function firstCacheThenServerStrategy(request) {
+    return caches.match(request).then((response) => {
+        if (response) {
+            console.log("[ServiceWorker] Fetched", request.url, "from cache");
+            return response;
+        }
+        return fetch(request).then((response) => {
+            console.log("[ServiceWorker] Fetched", request.url, "from server");
+            return response;
+        },
+            (error) => {
+                console.log("[ServiceWorker] Fetch error", error);
+            })
+    })
 }
