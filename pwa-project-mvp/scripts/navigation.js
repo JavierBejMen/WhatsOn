@@ -52,6 +52,7 @@ const HTML_ID_DATE_PICKER_OK_BUTTON = "mddtp-date__ok";
 const HTML_ID_TIME_PICKER = "mddtp-picker__time";
 const HTML_ID_TIME_PICKER_CANCEL_BUTTON = "mddtp-time__cancel";
 const HTML_ID_TIME_PICKER_OK_BUTTON = "mddtp-time__ok";
+const HTML_ID_EVENT_INFO_MAP_CONTAINER = "idEventInfoMapContainer";
 
 function loadEvents() {
     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_EVENTS_VIEW);

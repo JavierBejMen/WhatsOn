@@ -69,8 +69,11 @@
 </div>
 <div id="idCategoriesFilterContainerInEvents"></div>
 <script>
-    showMainMenuBar();
-    setIdsInEventsLists(HTML_CLASS_ALL_EVENTS_LIST);
-    loadEventsWeekCalendarComponentInHtmlElementById(HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS, 250);
-    loadCategoriesFilterComponentInHtmlElementById(HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_EVENTS);
+    window.addEventListener("DOMContentLoaded", function()
+    {
+        showMainMenuBar();
+        setIdsInEventsLists(HTML_CLASS_ALL_EVENTS_LIST);
+        loadEventsWeekCalendarComponentInHtmlElementById(HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS, 250);
+        loadCategoriesFilterComponentInHtmlElementById(HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_EVENTS);
+    });
 </script>

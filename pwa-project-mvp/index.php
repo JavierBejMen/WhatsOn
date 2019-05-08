@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    $_SESION["view"] = (!isset($_SESION["view"]))?"events":$_SESION["view"];
+?>
 <!doctype html>
 <html lang="es">
 
@@ -70,7 +74,19 @@
             </ul>
         </nav>
     </header>
-    <main role="main"></main>
+    <main role="main">
+        <?php
+            $filePathView = $_SERVER["DOCUMENT_ROOT"];
+            switch($_SESION["view"])
+            {
+                case "events":
+                default:
+                    $filePathView.="/views/events.php";
+                break;
+            }
+            require($filePathView);
+        ?>
+    </main>
     <!-- JQuery, Popper.js, Bootstrap JS and MDBootstrap JS-->
     <script src="./styles/material-design-for-bootstrap-free-4.7.7/js/jquery-3.3.1.min.js"></script>
     <script src="./styles/material-design-for-bootstrap-free-4.7.7/js/popper.min.js"></script>
@@ -98,7 +114,6 @@
     <script>
         // PWA feature: Service Worker
         registerServiceWorker(FILE_PATH_SERVICE_WORKER);
-        loadEvents();
     </script>
 </body>
 

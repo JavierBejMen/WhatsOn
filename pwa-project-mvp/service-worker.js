@@ -2,7 +2,7 @@ const CACHE_NAME = "WhatsOnPWA-v1.0.4";
 var filesToCache = [
     "./",
     "./manifest.json",
-    "./index.html",
+    "./index.php",
     "./assets/icons/icon-128x128.png",
     "./assets/icons/icon-144x144.png",
     "./assets/icons/icon-152x152.png",
@@ -34,7 +34,7 @@ var filesToCache = [
     "./styles/font-family-muli/muli.css",
     "./styles/font-family-muli/Muli.woff2",
     "./styles/stylesheet.css",
-    "./views/events.html",
+    "./views/events.php",
     "./views/event-info.html",
     "./views/login.html",
     "./views/admin-panel.html",

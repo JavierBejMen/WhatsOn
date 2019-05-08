@@ -1,4 +1,3 @@
-const HTML_ID_EVENT_INFO_MAP_CONTAINER = "idEventInfoMapContainer";
 const LOCAL_NAME = "Lemon Rock";
 const LOCAL_LATITUDE = 37.1770273;
 const LOCAL_LONGITUDE = -3.6045047;
@@ -17,8 +16,8 @@ function loadLocalDataInGoogleMapsApi() {
     });
 }
 
-function loadLocalDataInLeafletApi(localName, localLatitude, localLongitude, zoomLevel) {
-    var mapOfLocal = L.map(HTML_ID_EVENT_INFO_MAP_CONTAINER, { dragging: !L.Browser.mobile })
+function loadLocalDataInLeafletApi(htmlElementId, localName, localLatitude, localLongitude, zoomLevel) {
+    var mapOfLocal = L.map(htmlElementId, { dragging: !L.Browser.mobile })
         .setView([localLatitude, localLongitude], zoomLevel);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         {
