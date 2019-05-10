@@ -2,4 +2,6 @@
 .firebaserc
 firebase.json
 
+settings.json
+
 public/

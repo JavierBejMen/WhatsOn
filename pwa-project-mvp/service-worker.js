@@ -1,4 +1,4 @@
-const CACHE_NAME = "WhatsOnPWA-v1.0.4";
+const CACHE_NAME = "WhatsOnPWA-v1.0.5";
 var filesToCache = [
     "./",
     "./manifest.json",
@@ -14,10 +14,16 @@ var filesToCache = [
     "./assets/images/salir-con-arte.png",
     "./components/categories-filter.html",
     "./components/events-week-calendar.html",
-    "./scripts/categories-filter.js",
-    "./scripts/maps.js",
-    "./scripts/navigation.js",
-    "./scripts/worker.js",
+    "./js_scripts/categories-filter.js",
+    "./js_scripts/maps.js",
+    "./js_scripts/navigation.js",
+    "./js_scripts/worker.js",
+    "./php_classes/DataBaseHandler.php",
+    "./php_classes/DBEventHasTag.php",
+    "./php_classes/DBEvent.php",
+    "./php_classes/DBTag.php",
+    "./php_classes/Event.php",
+    "./php_classes/HelperDataBase.php",
     "./styles/material-design-for-bootstrap-free-4.7.7/css/bootstrap.min.css",
     "./styles/material-design-for-bootstrap-free-4.7.7/css/mdb.min.css",
     "./styles/material-design-for-bootstrap-free-4.7.7/font/roboto/Roboto-Bold.woff2",
