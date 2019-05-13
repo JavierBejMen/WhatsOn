@@ -38,7 +38,9 @@ final class DataBaseHandler extends PDO
     private const HOST = "localhost";
     private const PORT = "3306";
     private const DATABASE_NAME = "whats_on";
+    // private const DATABASE_NAME = "id9569129_whats_on";
     private const CHARSET = "utf8mb4";
     private const USER_NAME = "whats_on_user";
+    // private const USER_NAME = "id9569129_whats_on_user";
     private const PASSWORD = "whats_on_user";
 }

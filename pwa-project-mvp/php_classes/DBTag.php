@@ -6,7 +6,6 @@ final class DBTag
     {
         try {
             HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
-            // self::$dataBaseHandler = new DataBaseHandler();
             $statementHandler = self::$dataBaseHandler->prepare("SELECT * FROM whats_on."
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_TAG));
         } catch (PDOException $exception) {

@@ -3,23 +3,32 @@
     <div class="classAllEventsList">
         <h4 class="pt-4 mb-0">Hoy</h4>
         <?php
-        // $event = DBEvent::getEventFromId(2);
+        $event = DBEvent::getEventFromId(2);
         // $arrayOfEvents = DBEvent::getEventsWithMinimumDataFromDateOnwards(new DateTime("2019-06-07"));
         // $arrayOfTags1 = DBEventHasTag::getTagsFromEventId(1);
         // $arrayOfTags2 = DBEventHasTag::getTagsFromArrayOfEventIds([2, 3]);
         // $arrayOfTags3 = DBTag::getTags();
+        // $existsUser = DBUser::existsUserWithEncryptedPassword('user-mail@server.com', 'ldskfmgsdfgjngnj');
 
-        // echo '<div class="row">';
-        // echo var_dump($event) . '<br><br>';
+        echo '<div class="row">' . '<br><br>';
+        echo var_dump($event) . '<br><br>';
         // echo var_dump($arrayOfEvents) . '<br><br>';
         // echo var_dump($arrayOfTags1) . '<br><br>';
         // echo var_dump($arrayOfTags2) . '<br><br>';
         // echo var_dump($arrayOfTags3) . '<br><br>';
-        // echo '</div>';
+        // echo ($existsUser === true) ? 'El usuario existe.' : 'El usuario NO existe.' . '<br><br>';
+
+        $domDocument = new DOMDocument();
+        $domDocument->encoding = "utf-8";
+        $div = $domDocument->createElement("div");
+        $div->setAttribute("class", "col-12 col-lg-6 col-xl-6 pt-4 classAllEventsEventContainer");
+        $domDocument->appendChild($div);
+        echo $domDocument->saveHTML($div);
+        echo '</div>';
         ?>
         <div class="row">
             <div class="col-12 col-lg-6 col-xl-6 pt-4 classAllEventsEventContainer">
-                <div class="card" onclick="loadEventInfoView()" style="background-image: url('http://localhost/assets/images/salir-con-arte.png')" alt="Imagen del evento Salir con Arte" aria-label="Imagen del evento Salir con Arte">
+                <div class="card" onclick="loadEventInfoView()" style="background-image: url('./assets/images/salir-con-arte.png')" alt="Imagen del evento Salir con Arte" aria-label="Imagen del evento Salir con Arte">
                     <div class="row justify-content-end classEventPrice classCategoriesList mx-2 mt-1">
                         <span class="btn btn-elegant" disabled>Entrada Libre</span>
                     </div>
