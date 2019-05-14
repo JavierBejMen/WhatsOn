@@ -2,7 +2,7 @@
 
 final class DBEvent
 {
-    static public function getEventFromId(int $eventId)
+    public static function getEventFromId(int $eventId)
     {
         try {
             HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
@@ -16,7 +16,7 @@ final class DBEvent
         $statementHandler->execute();
         return self::getEventWithLinkedArrayOfTags($statementHandler->fetchObject("Event"), DBEventHasTag::getTagsFromEventId($eventId));
     }
-    static public function getEventsWithMinimumDataFromDateOnwards(DateTime $date = null)
+    public static function getEventsWithMinimumDataFromDateOnwards(DateTime $date = null)
     {
         $date = (is_null($date)) ? new DateTime() : $date;
         try {
@@ -34,18 +34,18 @@ final class DBEvent
         } catch (PDOException $exception) {
             print("Error: " . $exception->getMessage()); // Debugging Purposes
         }
-        $statementHandler->execute([":date" => $date->format('Y-m-d')]);
+        $statementHandler->execute([":date" => $date->format(HelperDateTime::$FORMAT_PHP_DATE_TIME_TO_DATABASE_DATE_TIME)]);
         //return self::getArrayOfEventsWithIterativeSqlQueriesForTags($statementHandler);
         return self::getArrayOfEventsWithSingleSqlQueryForTags($statementHandler);
     }
 
     // Private
-    static private function getEventWithLinkedArrayOfTags(Event &$event, array &$arrayOfTags)
+    private static function getEventWithLinkedArrayOfTags(Event $event, array $arrayOfTags)
     {
         $event->setArrayOfTags($arrayOfTags);
         return $event;
     }
-    static private function getArrayOfEventsWithIterativeSqlQueriesForTags(PDOStatement $statementHandler)
+    private static function getArrayOfEventsWithIterativeSqlQueriesForTags(PDOStatement $statementHandler)
     {
         $resultArrayOfEvents = array();
         while ($resultEvent = $statementHandler->fetchObject("Event")) {
@@ -54,7 +54,7 @@ final class DBEvent
         }
         return $resultArrayOfEvents;
     }
-    static private function getArrayOfEventsWithSingleSqlQueryForTags(PDOStatement $statementHandler)
+    private static function getArrayOfEventsWithSingleSqlQueryForTags(PDOStatement $statementHandler)
     {
         $arrayOfEventIds = array();
         $resultArrayOfEvents = array();

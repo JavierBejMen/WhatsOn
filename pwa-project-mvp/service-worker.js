@@ -1,4 +1,4 @@
-const CACHE_NAME = "WhatsOnPWA-v1.0.5";
+const CACHE_NAME = "WhatsOnPWA-v1.0.6";
 var filesToCache = [
     "./",
     "./manifest.json",
@@ -18,12 +18,6 @@ var filesToCache = [
     "./js_scripts/maps.js",
     "./js_scripts/navigation.js",
     "./js_scripts/worker.js",
-    "./php_classes/DataBaseHandler.php",
-    "./php_classes/DBEventHasTag.php",
-    "./php_classes/DBEvent.php",
-    "./php_classes/DBTag.php",
-    "./php_classes/Event.php",
-    "./php_classes/HelperDataBase.php",
     "./styles/material-design-for-bootstrap-free-4.7.7/css/bootstrap.min.css",
     "./styles/material-design-for-bootstrap-free-4.7.7/css/mdb.min.css",
     "./styles/material-design-for-bootstrap-free-4.7.7/font/roboto/Roboto-Bold.woff2",
@@ -40,12 +34,12 @@ var filesToCache = [
     "./styles/font-family-muli/muli.css",
     "./styles/font-family-muli/Muli.woff2",
     "./styles/stylesheet.css",
-    "./views/events.php",
-    "./views/event-info.html",
-    "./views/login.html",
     "./views/admin-panel.html",
-    "./views/admin-panel-subviews/create-event.html"
-];
+    "./views/admin-panel-subviews/create-event.html",
+    "./views/event-info.html",
+    // "./views/events.php",
+    "./views/login.html"
+].map(url => new Request(url, { credentials: "include" }));
 
 self.addEventListener("install", (event) => {
     console.log("[ServiceWorker] Install");

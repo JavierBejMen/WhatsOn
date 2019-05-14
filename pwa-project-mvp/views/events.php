@@ -1,31 +1,56 @@
 <div class="sticky-top" id="idEventsWeekCalendarContainerInAllEvents"></div>
 <div class="container-fluid px-md-5 classTertiaryBackgroundColor" id="idEventsMain">
+    <?php
+    $event = DBEvent::getEventFromId(2);
+    $arrayOfEvents1 = DBEvent::getEventsWithMinimumDataFromDateOnwards();
+    $arrayOfEvents2 = DBEvent::getEventsWithMinimumDataFromDateOnwards(new DateTime("2019-06-07"));
+    $arrayOfTags1 = DBEventHasTag::getTagsFromEventId(1);
+    $arrayOfTags2 = DBEventHasTag::getTagsFromArrayOfEventIds([2, 3]);
+    $arrayOfTags3 = DBTag::getTags();
+    $existsUser = DBUser::existsUserWithEncryptedPassword('user-mail@server.com', 'ldskfmgsdfgjngnj');
+
+    // echo '<div class="row">' . '<br><br>';
+    // echo (new DateTime(HelperDateTime::$FORMAT_PHP_NOW_DATE_TIME))->format("Y-m-d") . '<br><br>';
+    // echo var_dump($event) . '<br><br>';
+    // echo var_dump($arrayOfEvents1) . '<br><br>';
+    // echo var_dump($arrayOfEvents2) . '<br><br>';
+    // echo var_dump($arrayOfTags1) . '<br><br>';
+    // echo var_dump($arrayOfTags2) . '<br><br>';
+    // echo var_dump($arrayOfTags3) . '<br><br>';
+    // echo ($existsUser === true) ? 'El usuario existe.' : 'El usuario NO existe.' . '<br><br>';
+    // echo '</div>';
+
+    $domDocument = new DOMDocument();
+    $domDocument->encoding = "utf-8";
+    $div = $domDocument->createElement("div");
+    $div->setAttribute("class", "col-12 col-lg-6 col-xl-6 pt-4 classAllEventsEventContainer");
+    $domDocument->appendChild($div);
+    echo $domDocument->saveHTML($div);
+
+    if (count($arrayOfEvents1)) {
+        try {
+            $dateFormatter = new IntlDateFormatter("es_ES", IntlDateFormatter::FULL, NULL, NULL, NULL, NULL);
+            $oldDateTimeToCompare = HelperDateTime::getYesterday();
+            foreach ($arrayOfEvents1 as $event) {
+                $eventDate = new DateTime($event->getStartDate());
+                if ($oldDateTimeToCompare < $eventDate) {
+                    $currentDateFormatter = (HelperDateTime::isDateTimeFromCurrentYear($eventDate))
+                        ? $dateFormatter->setPattern("EEEE, d MMMM") : $dateFormatter->setPattern("EEEE, d MMMM yyyy");
+                    echo '<div class="classAllEventsList">';
+                    echo '<h4 class="pt-4 mb-0">' . $dateFormatter->format($eventDate) . '</h4>';
+                    echo '<div class="row"></div>';
+                    echo '</div>';
+                    $oldDateTimeToCompare = $eventDate;
+                }
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage() . '<br><br>';
+        }
+    }
+
+    ?>
     <div class="classAllEventsList">
         <h4 class="pt-4 mb-0">Hoy</h4>
-        <?php
-        $event = DBEvent::getEventFromId(2);
-        // $arrayOfEvents = DBEvent::getEventsWithMinimumDataFromDateOnwards(new DateTime("2019-06-07"));
-        // $arrayOfTags1 = DBEventHasTag::getTagsFromEventId(1);
-        // $arrayOfTags2 = DBEventHasTag::getTagsFromArrayOfEventIds([2, 3]);
-        // $arrayOfTags3 = DBTag::getTags();
-        // $existsUser = DBUser::existsUserWithEncryptedPassword('user-mail@server.com', 'ldskfmgsdfgjngnj');
-
-        echo '<div class="row">' . '<br><br>';
-        echo var_dump($event) . '<br><br>';
-        // echo var_dump($arrayOfEvents) . '<br><br>';
-        // echo var_dump($arrayOfTags1) . '<br><br>';
-        // echo var_dump($arrayOfTags2) . '<br><br>';
-        // echo var_dump($arrayOfTags3) . '<br><br>';
-        // echo ($existsUser === true) ? 'El usuario existe.' : 'El usuario NO existe.' . '<br><br>';
-
-        $domDocument = new DOMDocument();
-        $domDocument->encoding = "utf-8";
-        $div = $domDocument->createElement("div");
-        $div->setAttribute("class", "col-12 col-lg-6 col-xl-6 pt-4 classAllEventsEventContainer");
-        $domDocument->appendChild($div);
-        echo $domDocument->saveHTML($div);
-        echo '</div>';
-        ?>
         <div class="row">
             <div class="col-12 col-lg-6 col-xl-6 pt-4 classAllEventsEventContainer">
                 <div class="card" onclick="loadEventInfoView()" style="background-image: url('./assets/images/salir-con-arte.png')" alt="Imagen del evento Salir con Arte" aria-label="Imagen del evento Salir con Arte">

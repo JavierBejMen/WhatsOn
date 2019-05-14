@@ -2,7 +2,7 @@
 
 final class DBUser
 {
-    static public function existsUserWithEncryptedPassword(string $user, string $encryptedPassword)
+    public static function existsUserWithEncryptedPassword(string $user, string $encryptedPassword)
     {
         try {
             HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);

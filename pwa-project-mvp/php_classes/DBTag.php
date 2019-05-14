@@ -2,11 +2,11 @@
 
 final class DBTag
 {
-    static public function getTags()
+    public static function getTags()
     {
         try {
             HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
-            $statementHandler = self::$dataBaseHandler->prepare("SELECT * FROM whats_on."
+            $statementHandler = self::$dataBaseHandler->prepare("SELECT * FROM "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_TAG));
         } catch (PDOException $exception) {
             print("Error: " . $exception->getMessage()); // Debugging Purposes
@@ -16,7 +16,7 @@ final class DBTag
     }
 
     // Private
-    static private function getArrayOfTagsFromTagRows(array $tagRows)
+    private static function getArrayOfTagsFromTagRows(array $tagRows)
     {
         $resultArrayOfTags = array();
         foreach ($tagRows as $tagRow) {

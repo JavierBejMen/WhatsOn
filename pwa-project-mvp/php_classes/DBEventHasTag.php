@@ -2,7 +2,7 @@
 
 final class DBEventHasTag
 {
-    static public function getTagsFromEventId(int $eventId)
+    public static function getTagsFromEventId(int $eventId)
     {
         try {
             HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
@@ -17,7 +17,7 @@ final class DBEventHasTag
         $statementHandler->execute();
         return self::getArrayOfTagsFromEventHasTagRows($statementHandler->fetchAll(PDO::FETCH_ASSOC));
     }
-    static public function getTagsFromArrayOfEventIds(array $arrayOfEventIds)
+    public static function getTagsFromArrayOfEventIds(array $arrayOfEventIds)
     {
         try {
             HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
@@ -37,11 +37,11 @@ final class DBEventHasTag
     }
 
     // Private
-    static private function getStringWithQuotationMarksForBinding(int $numberOfEventIds)
+    private static function getStringWithQuotationMarksForBinding(int $numberOfEventIds)
     {
         return str_repeat("?,", $numberOfEventIds - 1) . "?";
     }
-    static private function getArrayOfTagsFromEventHasTagRows(array $eventHasTagRows)
+    private static function getArrayOfTagsFromEventHasTagRows(array $eventHasTagRows)
     {
         $resultArrayOfTags = array();
         foreach ($eventHasTagRows as $eventHasTagRow) {
@@ -49,7 +49,7 @@ final class DBEventHasTag
         }
         return $resultArrayOfTags;
     }
-    static private function getMultidimensionalArrayOfTagsByEventIdFromEventHasTagRows(array $arrayOfEventIds, array $eventHasTagRows)
+    private static function getMultidimensionalArrayOfTagsByEventIdFromEventHasTagRows(array $arrayOfEventIds, array $eventHasTagRows)
     {
         $resultArrayOfTags = array();
         foreach ($arrayOfEventIds as $eventId) {

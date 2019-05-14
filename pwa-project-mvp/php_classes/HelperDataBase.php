@@ -2,13 +2,13 @@
 
 final class HelperDataBase
 {
-    static public function initializeDataBaseHandler(&$dataBaseHandler)
+    public static function initializeDataBaseHandler(&$dataBaseHandler)
     {
         if (is_null($dataBaseHandler)) {
             $dataBaseHandler = new DataBaseHandler();
         }
     }
-    static public function formatIdStringToInsertIntoQueryString(string $id)
+    public static function formatIdStringToInsertIntoQueryString(string $id): string
     {
         return "`" . str_replace("`", "``", $id) . "`";
     }
