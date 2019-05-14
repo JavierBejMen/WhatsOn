@@ -2,18 +2,17 @@
 
 final class HelperDateTime
 {
-    public static function getYesterday(): DateTime
+    public static function getNowDateTime(): DateTime
     {
-        $resultDateTime = new DateTime(self::$FORMAT_PHP_NOW_DATE_TIME, new DateTimeZone(self::$FORMAT_PHP_TIME_ZONE));
-        $resultDateTime->sub(new DateInterval("P1D")); // Substract 1 day to now
-        return $resultDateTime;
+        return new DateTime(self::$CONSTANT_DATE_TIME_NOW, new DateTimeZone(self::$TIME_ZONE));
     }
     public static function isDateTimeFromCurrentYear(DateTime $dateTime): bool
     {
-        $currentDate = new DateTime(self::$FORMAT_PHP_NOW_DATE_TIME, new DateTimeZone(self::$FORMAT_PHP_TIME_ZONE));
+        $currentDate = self::getNowDateTime();
         return ($currentDate->format("Y") - $dateTime->format("Y")) === 0;
     }
-    public static $FORMAT_PHP_TIME_ZONE = "Europe/Madrid";
-    public static $FORMAT_PHP_NOW_DATE_TIME = "now";
+    public static $LOCALE = "es_ES";
+    public static $TIME_ZONE = "Europe/Madrid";
+    public static $CONSTANT_DATE_TIME_NOW = "now";
     public static $FORMAT_PHP_DATE_TIME_TO_DATABASE_DATE_TIME = "Y-m-d";
 }

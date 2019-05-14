@@ -81,7 +81,7 @@
     border-radius: 2rem;
 }
 
-.classAllEventsEventContainer .card {
+.classEventsPerDateEventContainer .card {
     height: var(--event-card-height);
     max-height: var(--event-card-height);
     background-position: 50% 0%;
@@ -94,7 +94,7 @@
     background-color: rgba(0, 0, 0, 0.65) !important;
 }
 
-.card .classAllEventsCardBody {
+.card .classEventsPerDateCardBody {
     position: absolute;
     top: calc(var(--event-card-height) - 148px);
     background-color: rgba(0, 0, 0, 0.65) !important;

@@ -73,7 +73,7 @@ final class Event
     {
         return $this->user_email;
     }
-    public function getArrayOfTags(): string
+    public function getArrayOfTags(): array
     {
         return $this->array_of_tags;
     }
