@@ -29,10 +29,6 @@ final class DataBaseHandler extends PDO
     {
         return self::CHARSET;
     }
-    public function __destruct()
-    {
-        parent::__destruct();
-    }
 
     private const DRIVER_NAME = "mysql";
     private const HOST = "localhost";

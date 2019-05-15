@@ -3,6 +3,17 @@ var filesToCache = [
     "./",
     "./manifest.json",
     "./index.php",
+    "./views/admin-panel.html",
+    "./views/admin-panel-subviews/create-event.html",
+    "./views/event-info.php",
+    // "./views/events.php",
+    "./views/login.html",
+    "./components/categories-filter.html",
+    "./components/events-week-calendar.html",
+    "./js_scripts/categories-filter.js",
+    "./js_scripts/maps.js",
+    "./js_scripts/navigation.js",
+    "./js_scripts/worker.js",
     "./assets/icons/icon-128x128.png",
     "./assets/icons/icon-144x144.png",
     "./assets/icons/icon-152x152.png",
@@ -12,12 +23,6 @@ var filesToCache = [
     "./assets/images/guillermo-crovetto.jpg",
     "./assets/images/lemon-jazz.jpg",
     "./assets/images/salir-con-arte.png",
-    "./components/categories-filter.html",
-    "./components/events-week-calendar.html",
-    "./js_scripts/categories-filter.js",
-    "./js_scripts/maps.js",
-    "./js_scripts/navigation.js",
-    "./js_scripts/worker.js",
     "./styles/material-design-for-bootstrap-free-4.7.7/css/bootstrap.min.css",
     "./styles/material-design-for-bootstrap-free-4.7.7/css/mdb.min.css",
     "./styles/material-design-for-bootstrap-free-4.7.7/font/roboto/Roboto-Bold.woff2",
@@ -33,13 +38,8 @@ var filesToCache = [
     "./styles/fontawesome-free-5.8.1-web/webfonts/fa-regular-400.woff2",
     "./styles/font-family-muli/muli.css",
     "./styles/font-family-muli/Muli.woff2",
-    "./styles/stylesheet.css",
-    "./views/admin-panel.html",
-    "./views/admin-panel-subviews/create-event.html",
-    "./views/event-info.html",
-    // "./views/events.php",
-    "./views/login.html"
-].map(url => new Request(url, { credentials: "include" }));
+    "./styles/stylesheet.css"
+];
 
 self.addEventListener("install", (event) => {
     console.log("[ServiceWorker] Install");

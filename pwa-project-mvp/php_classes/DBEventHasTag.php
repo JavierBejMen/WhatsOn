@@ -15,10 +15,17 @@ final class DBEventHasTag
         }
         $statementHandler->bindValue(":eventId", $eventId, PDO::PARAM_INT);
         $statementHandler->execute();
-        return self::getArrayOfTagsFromEventHasTagRows($statementHandler->fetchAll(PDO::FETCH_ASSOC));
+        $eventHasTagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC);
+        if (!$eventHasTagRows) {
+            return false;
+        }
+        return self::getArrayOfTagsFromEventHasTagRows($eventHasTagRows);
     }
     public static function getTagsFromArrayOfEventIds(array $arrayOfEventIds)
     {
+        if (!$arrayOfEventIds) {
+            return false;
+        }
         try {
             HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
             $statementHandler = self::$dataBaseHandler->prepare("SELECT * FROM "
@@ -30,10 +37,10 @@ final class DBEventHasTag
             print("Error: " . $exception->getMessage()); // Debugging Purposes
         }
         $statementHandler->execute($arrayOfEventIds);
-        return self::getMultidimensionalArrayOfTagsByEventIdFromEventHasTagRows(
-            $arrayOfEventIds,
-            $statementHandler->fetchAll(PDO::FETCH_ASSOC)
-        );
+        if (!($eventHasTagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC))) {
+            return false;
+        }
+        return self::getMultidimensionalArrayOfTagsByEventIdFromEventHasTagRows($arrayOfEventIds, $eventHasTagRows);
     }
 
     // Private

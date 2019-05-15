@@ -12,7 +12,11 @@ final class DBTag
             print("Error: " . $exception->getMessage()); // Debugging Purposes
         }
         $statementHandler->execute();
-        return self::getArrayOfTagsFromTagRows($statementHandler->fetchAll(PDO::FETCH_ASSOC));
+        $tagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC);
+        if (!$tagRows) {
+            return false;
+        }
+        return self::getArrayOfTagsFromTagRows($tagRows);
     }
 
     // Private

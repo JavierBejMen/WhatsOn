@@ -14,7 +14,10 @@ final class DBEvent
         }
         $statementHandler->bindValue(":eventId", $eventId, PDO::PARAM_INT);
         $statementHandler->execute();
-        return self::getEventWithLinkedArrayOfTags($statementHandler->fetchObject("Event"), DBEventHasTag::getTagsFromEventId($eventId));
+        if (!($resultEvent = $statementHandler->fetchObject("Event"))) {
+            return $resultEvent;
+        }
+        return self::getEventWithLinkedArrayOfTags($resultEvent, DBEventHasTag::getTagsFromEventId($eventId));
     }
     public static function getEventsWithMinimumDataFromDateOnwards(DateTime $date = null)
     {
@@ -35,8 +38,12 @@ final class DBEvent
             print("Error: " . $exception->getMessage()); // Debugging Purposes
         }
         $statementHandler->execute([":date" => $date->format(HelperDateTime::$FORMAT_PHP_DATE_TIME_TO_DATABASE_DATE_TIME)]);
-        //return self::getArrayOfEventsWithIterativeSqlQueriesForTags($statementHandler);
-        return self::getArrayOfEventsWithSingleSqlQueryForTags($statementHandler);
+        // $resultArrayOfEvents = self::getArrayOfEventsWithIterativeSqlQueriesForTags($statementHandler);
+        $resultArrayOfEvents = self::getArrayOfEventsWithSingleSqlQueryForTags($statementHandler);
+        if (!$resultArrayOfEvents) {
+            return false;
+        }
+        return $resultArrayOfEvents;
     }
 
     // Private
