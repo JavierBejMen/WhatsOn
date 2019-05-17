@@ -170,6 +170,7 @@ function hideHtmlDateTimePickerWrapperOnHtmlDateTimePickerButtonClick(htmlDateTi
     });
 }
 function getDatePicker(startDate = moment()) {
+    moment.locale(JS_DATE_TIME_PICKER_LOCALE);
     var datePicker = new mdDateTimePicker.default({
         type: JS_DATE_TIME_PICKER_DATE_TYPE, init: startDate,
         past: moment(startDate), future: moment(startDate).add(21, "years"),
@@ -180,6 +181,7 @@ function getDatePicker(startDate = moment()) {
     return datePicker;
 }
 function getTimePicker(startTime = moment()) {
+    moment.locale(JS_DATE_TIME_PICKER_LOCALE);
     var timePicker = new mdDateTimePicker.default({
         type: JS_DATE_TIME_PICKER_TIME_TYPE, init: startTime,
         orientation: JS_DATE_TIME_PICKER_ORIENTATION,

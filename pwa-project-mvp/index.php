@@ -92,22 +92,24 @@ $_SESSION["view"] = (isset($_GET["view"])) ? $_GET["view"] : "events";
         require($filePathView);
         ?>
     </main>
-    <!-- JQuery, Popper.js, Bootstrap JS and MDBootstrap JS-->
+    <!-- JQuery JS, Popper.js, Bootstrap JS and MDBootstrap JS-->
     <script src="./styles/material-design-for-bootstrap-free-4.7.7/js/jquery-3.3.1.min.js"></script>
     <script src="./styles/material-design-for-bootstrap-free-4.7.7/js/popper.min.js"></script>
     <script src="./styles/material-design-for-bootstrap-free-4.7.7/js/bootstrap.min.js"></script>
     <script src="./styles/material-design-for-bootstrap-free-4.7.7/js/mdb.min.js"></script>
     <!-- Leaflet -->
     <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
-    <!-- Moment.js 2.13.0 -->
+    <!-- Material Date & Time Picker Dependency: Moment.js 2.13.0 -->
     <!-- <script src="./components/md-date-time-picker-2.3.0/dist/js/moment.min.js"></script> -->
-    <!-- Moment.js 2.24.0 -->
+    <!-- Material Date & Time Picker Dependency: Moment.js 2.24.0 -->
     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <!-- Material Date & Time Picker Dependency: Scroll into view JS -->
     <script src="./components/md-date-time-picker-2.3.0/dist/js/scroll-into-view-if-needed.min.js"></script>
-    <!-- Draggabilly PACKAGED 2.1.0 -->
+    <!-- Material Date & Time Picker Dependency: Draggabilly PACKAGED JS 2.1.0 -->
     <!-- <script src="./components/md-date-time-picker-2.3.0/dist/js/draggabilly.pkgd.min.js"></script> -->
-    <!-- Draggabilly PACKAGED 2.2.0 -->
+    <!-- Material Date & Time Picker Dependency: Draggabilly PACKAGED JS 2.2.0 -->
     <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+    <!-- Material Date & Time Picker JS -->
     <script src="./components/md-date-time-picker-2.3.0/dist/js/mdDateTimePicker.js"></script>
     <!-- Custom scripts -->
     <script src="./js_scripts/maps.js"></script>

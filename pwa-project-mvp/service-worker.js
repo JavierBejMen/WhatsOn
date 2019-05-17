@@ -1,11 +1,21 @@
-const CACHE_NAME = "WhatsOnPWA-v1.0.6";
+/*
+    IMPORTANT: Only static asstets should be cached (HTML files, CSS files, JS files, Images, etc...)
+    Only "index.php" will be cached but no other PHP file will be cached.
+    Only static assests with an URL will be cached.
+    "index.php" is accessible via URL but not the others.
+
+    More info:
+
+    https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker-slides
+*/
+const CACHE_NAME = "WhatsOnPWA-v1.0.7";
 var filesToCache = [
     "./",
     "./manifest.json",
     "./index.php",
     "./views/admin-panel.html",
     "./views/admin-panel-subviews/create-event.html",
-    "./views/event-info.php",
+    // "./views/event-info.php",
     // "./views/events.php",
     "./views/login.html",
     "./components/categories-filter.html",
