@@ -4,12 +4,39 @@
     
     https://stackoverflow.com/questions/7229783/difference-between-serverdocument-root-and-serverhttp-host
 */
+
+// This method can not be refactored because it is not possible to use helper classes which are not yet loaded
 spl_autoload_register(function ($className) {
     require($_SERVER["DOCUMENT_ROOT"] . "/php_classes/$className.php");
 });
 
-session_start();
-$_SESSION["view"] = (isset($_GET["view"])) ? $_GET["view"] : "events";
+if (isset($_GET[HelperNavigator::QUERY_PARAMETER_VIEW])) {
+    $phpAbsoluteFilePathView = HelperNavigator::getPhpAbsoluteFilePathFromQueryParameterView($_GET[HelperNavigator::QUERY_PARAMETER_VIEW]);
+} else {
+    $phpAbsoluteFilePathView = HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::FILE_PATH_EVENTS_VIEW);
+}
+
+// echo '<div class="row">' . '<br><br>';
+// echo HelperDateTime::getNowDateTime()->format("Y-m-d") . '<br><br>';
+// echo var_dump(DBEvent::getEventFromId(2)) . '<br><br>';
+// echo var_dump(DBEvent::getEventFromId(299)) . '<br><br>';
+// echo var_dump(DBEvent::getEventsWithMinimumDataFromDateOnwards(new DateTime("2019-06-07"))) . '<br><br>';
+// echo var_dump(DBEvent::getEventsWithMinimumDataFromDateOnwards(new DateTime("2040-06-07"))) . '<br><br>';
+// echo var_dump(DBEventHasTag::getTagsFromEventId(1)) . '<br><br>';
+// echo var_dump(DBEventHasTag::getTagsFromEventId(199)) . '<br><br>';
+// echo var_dump(DBEventHasTag::getTagsFromArrayOfEventIds([2, 3])) . '<br><br>';
+// echo var_dump(DBEventHasTag::getTagsFromArrayOfEventIds(array())) . '<br><br>';
+// echo var_dump(DBEventHasTag::getTagsFromArrayOfEventIds([199, 399])) . '<br><br>';
+// echo var_dump(DBTag::getTags()) . '<br><br>';
+// echo (DBUser::existsUserWithEncryptedPassword('user-mail@server.com', 'ldskfmgsdfgjngnj')) ? 'El usuario existe.'
+//     : 'El usuario NO existe.' . '<br><br>';
+// echo (DBUser::existsUserWithEncryptedPassword('a', 'ldskfmgsdfgjngnj')) ? 'El usuario existe.'
+//     : 'El usuario NO existe.' . '<br><br>';
+// echo (DBUser::existsUserWithEncryptedPassword('user-mail@server.com', 'ls')) ? 'El usuario existe.'
+//     : 'El usuario NO existe.' . '<br><br>';
+// echo (DBUser::existsUserWithEncryptedPassword('', 'ldskfmgsdfgjngnj')) ? 'El usuario existe.'
+//     : 'El usuario NO existe.' . '<br><br>';
+// echo '</div>';
 ?>
 <!doctype html>
 <html lang="es">
@@ -79,17 +106,7 @@ $_SESSION["view"] = (isset($_GET["view"])) ? $_GET["view"] : "events";
     </header>
     <main role="main">
         <?php
-        $filePathView = $_SERVER["DOCUMENT_ROOT"];
-        switch ($_SESSION["view"]) {
-            case "event-info":
-                $filePathView .= "/views/event-info.php";
-                break;
-            case "events":
-            default:
-                $filePathView .= "/views/events.php";
-                break;
-        }
-        require($filePathView);
+        require($phpAbsoluteFilePathView);
         ?>
     </main>
     <!-- JQuery JS, Popper.js, Bootstrap JS and MDBootstrap JS-->

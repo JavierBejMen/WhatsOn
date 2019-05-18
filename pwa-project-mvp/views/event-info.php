@@ -1,22 +1,18 @@
 <?php
-if (isset($_GET["event-id"])) {
-    $_SESSION["event-id"] = $_GET["event-id"];
-    $event = DBEvent::getEventFromId($_SESSION["event-id"]);
-    if ($event === false) {
-        $url = "http://" . $_SERVER["HTTP_HOST"];
-        header("Location: $url");
+if (HelperNavigator::isValidUrlQueryForEventInfoView($_GET)) {
+    if (!($event = DBEvent::getEventFromId($_GET[HelperNavigator::QUERY_PARAMETER_EVENT_ID]))) {
+        HelperNavigator::redirectToUrlRoot();
         exit();
     }
 } else {
-    $url = "https://" . $_SERVER["HTTP_HOST"];
-    header("Location: $url");
+    HelperNavigator::redirectToUrlRoot();
     exit();
 }
 ?>
 <nav class="navbar navbar-expand fixed-top classPrimaryBackgroundColor text-white" id="idEventInfoMenuBar">
     <ul class="navbar-nav w-100 justify-content-between">
         <li class="nav-item">
-            <a class="nav-link text-white waves-effect waves-light classRoundNavigationLink" title="Volver atrás" aria-label="Volver atrás" href="/index.php">
+            <a class="nav-link text-white waves-effect waves-light classRoundNavigationLink" title="Volver atrás" aria-label="Volver atrás" href="<?php print(HelperNavigator::getUrlRoot()); ?>">
                 <i class="fas fa-arrow-left fa-sm"></i>
             </a>
         </li>
