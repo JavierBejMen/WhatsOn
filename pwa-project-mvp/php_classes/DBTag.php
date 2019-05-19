@@ -7,7 +7,8 @@ final class DBTag
         try {
             HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
             $statementHandler = self::$dataBaseHandler->prepare("SELECT * FROM "
-                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_TAG));
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_TAG) . " ORDER BY "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_NAME) . " ASC");
         } catch (PDOException $exception) {
             print("Error: " . $exception->getMessage()); // Debugging Purposes
         }

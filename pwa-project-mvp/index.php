@@ -20,13 +20,22 @@ if (isset($_GET[HelperNavigator::QUERY_PARAMETER_VIEW])) {
 // echo HelperDateTime::getNowDateTime()->format("Y-m-d") . '<br><br>';
 // echo var_dump(DBEvent::getEventFromId(2)) . '<br><br>';
 // echo var_dump(DBEvent::getEventFromId(299)) . '<br><br>';
-// echo var_dump(DBEvent::getEventsWithMinimumDataFromDateOnwards(new DateTime("2019-06-07"))) . '<br><br>';
-// echo var_dump(DBEvent::getEventsWithMinimumDataFromDateOnwards(new DateTime("2040-06-07"))) . '<br><br>';
+// echo var_dump(DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(new DateTime("2019-06-07"))) . '<br><br>';
+// echo var_dump(DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(new DateTime("2040-06-07"))) . '<br><br>';
+// echo var_dump(DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(new DateTime(), ["Rock"])) . '<br><br>';
+// echo var_dump(DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(new DateTime(), ["Arte", "Rock"])) . '<br><br>';
+// echo var_dump(DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(new DateTime(), ["Pop"])) . '<br><br>';
+// echo var_dump(DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(new DateTime("2019-06-14"), ["Rock"])) . '<br><br>';
+// echo var_dump(DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(new DateTime("2019-06-14"), ["Pop"])) . '<br><br>';
 // echo var_dump(DBEventHasTag::getTagsFromEventId(1)) . '<br><br>';
 // echo var_dump(DBEventHasTag::getTagsFromEventId(199)) . '<br><br>';
 // echo var_dump(DBEventHasTag::getTagsFromArrayOfEventIds([2, 3])) . '<br><br>';
 // echo var_dump(DBEventHasTag::getTagsFromArrayOfEventIds(array())) . '<br><br>';
 // echo var_dump(DBEventHasTag::getTagsFromArrayOfEventIds([199, 399])) . '<br><br>';
+// echo var_dump(DBEventHasTag::getEventIdsWhichHaveSomeTagInTagsArray(["Rock"])) . '<br><br>';
+// echo var_dump(DBEventHasTag::getEventIdsWhichHaveSomeTagInTagsArray(["Arte", "Rock", "En directo"])) . '<br><br>';
+// echo var_dump(DBEventHasTag::getEventIdsWhichHaveSomeTagInTagsArray(["BLABLA"])) . '<br><br>';
+// echo var_dump(DBEventHasTag::getEventIdsWhichHaveSomeTagInTagsArray([])) . '<br><br>';
 // echo var_dump(DBTag::getTags()) . '<br><br>';
 // echo (DBUser::existsUserWithEncryptedPassword('user-mail@server.com', 'ldskfmgsdfgjngnj')) ? 'El usuario existe.'
 //     : 'El usuario NO existe.' . '<br><br>';

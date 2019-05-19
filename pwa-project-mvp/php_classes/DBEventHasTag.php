@@ -9,7 +9,8 @@ final class DBEventHasTag
             $statementHandler = self::$dataBaseHandler->prepare("SELECT "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_TAG_NAME) . " FROM "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_EVENT_HAS_TAG) . " WHERE "
-                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID) . " = :eventId");
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID) . " = :eventId ORDER BY "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_TAG_NAME) . " ASC");
         } catch (PDOException $exception) {
             print("Error: " . $exception->getMessage()); // Debugging Purposes
         }
@@ -31,8 +32,9 @@ final class DBEventHasTag
             $statementHandler = self::$dataBaseHandler->prepare("SELECT * FROM "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_EVENT_HAS_TAG) . " WHERE "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID)
-                . " in (" . self::getStringWithQuotationMarksForBinding(count($arrayOfEventIds)) . ") ORDER BY "
-                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID) . " ASC");
+                . " IN (" . HelperDataBase::getStringWithQuotationMarksForBinding(count($arrayOfEventIds)) . ") ORDER BY "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID) . " ASC, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_TAG_NAME) . " ASC");
         } catch (PDOException $exception) {
             print("Error: " . $exception->getMessage()); // Debugging Purposes
         }
@@ -42,17 +44,43 @@ final class DBEventHasTag
         }
         return self::getMultidimensionalArrayOfTagsByEventIdFromEventHasTagRows($arrayOfEventIds, $eventHasTagRows);
     }
+    public static function getEventIdsWhichHaveSomeTagInTagsArray(array $arrayOfTags)
+    {
+        if (!$arrayOfTags) {
+            return false;
+        }
+        try {
+            HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
+            $statementHandler = self::$dataBaseHandler->prepare("SELECT "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID)
+                . " FROM " . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_EVENT_HAS_TAG)
+                . " WHERE " . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_TAG_NAME) . " IN ("
+                . HelperDataBase::getStringWithQuotationMarksForBinding(count($arrayOfTags)) . ") ORDER BY "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID) . " ASC");
+        } catch (PDOException $exception) {
+            print("Error: " . $exception->getMessage()); // Debugging Purposes}
+        }
+        $statementHandler->execute($arrayOfTags);
+        if (!($eventHasTagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC))) {
+            return false;
+        }
+        return array_unique(self::getArrayOfEventIdsFromEventHasTagRows($eventHasTagRows));
+    }
 
     // Private
-    private static function getStringWithQuotationMarksForBinding(int $numberOfEventIds)
-    {
-        return str_repeat("?,", $numberOfEventIds - 1) . "?";
-    }
     private static function getArrayOfTagsFromEventHasTagRows(array $eventHasTagRows)
     {
         $resultArrayOfTags = array();
         foreach ($eventHasTagRows as $eventHasTagRow) {
             array_push($resultArrayOfTags, $eventHasTagRow[self::COLUMN_NAME_TAG_NAME]);
+        }
+        return $resultArrayOfTags;
+    }
+    private static function getArrayOfEventIdsFromEventHasTagRows(array $eventHasTagRows)
+    {
+        $resultArrayOfTags = array();
+        foreach ($eventHasTagRows as $eventHasTagRow) {
+            array_push($resultArrayOfTags, $eventHasTagRow[self::COLUMN_NAME_EVENT_ID]);
         }
         return $resultArrayOfTags;
     }

@@ -1,8 +1,10 @@
 <?php
 if (HelperNavigator::isValidUrlQueryForEventsView($_GET)) {
-    $arrayOfEvents = DBEvent::getEventsWithMinimumDataFromDateOnwards(new DateTime($_GET[HelperNavigator::QUERY_PARAMETER_EVENTS_FROM_DATE]));
+    $arrayOfEvents = DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(
+        new DateTime($_GET[HelperNavigator::QUERY_PARAMETER_EVENTS_FROM_DATE])
+    );
 } else {
-    $arrayOfEvents = DBEvent::getEventsWithMinimumDataFromDateOnwards();
+    $arrayOfEvents = DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray();
 }
 ?>
 <div class="sticky-top" id="idEventsWeekCalendarContainerInAllEvents"></div>
