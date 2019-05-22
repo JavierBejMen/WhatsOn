@@ -47,7 +47,7 @@ final class ViewEvents
         string $eventArrayOfTags
     ): string {
         $nodeAsString = '
-            <div class="col-12 col-lg-6 col-xl-6 pt-4 classEventsPerDateEventContainer">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 pt-4 classEventsPerDateEventContainer mx-auto">
                 <a href="' . HelperNavigator::getUrlEventInfoViewFromEventId($eventId) . '">
                     <div class="card" style="background-image: url(\'' . $eventUrlHeaderImage . '\')" alt="Imagen del evento ' . $eventName . '" aria-label="Imagen del evento ' . $eventName . '">
                         <div class="row justify-content-end classEventPrice classCategoriesList mx-2 mt-1">

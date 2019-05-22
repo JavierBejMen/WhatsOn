@@ -103,7 +103,11 @@ if (HelperNavigator::isValidUrlQueryForEventInfoView($_GET)) {
     </div>
 </div>
 <div id="idEventInfoFooterImage" style="background-image: url('<?php print($event->getUrlHeaderImage()); ?>')" alt="Imagen de Lemon Jazz" aria-label="Imagen de Lemon Jazz"></div>
-<a class="btn btn-lg btn-default waves-effect w-100 classFloatingBottomButton" title="Comprar entradas" aria-label="Comprar entradas">COMPRAR ENTRADAS</a>
+<?php
+if ($ticketPrice > 0) {
+    print("<a class=\"btn btn-lg btn-default waves-effect w-100 classFloatingBottomButton\" title=\"Comprar entradas\" aria-label=\"Comprar entradas\">COMPRAR ENTRADAS</a>");
+}
+?>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcNyXtpE6iOxla32ptV-6SvCcANAmxM50&callback=loadLocalDataInGoogleMapsApi" 
     async defer></script> -->
 <script>
