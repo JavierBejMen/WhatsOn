@@ -142,16 +142,16 @@
     setHtmlBodyBackgroundColor(HTML_CLASS_WHITE_BACKGROUND_COLOR);
     hideMainMenuBar();
     // Event StartDate and StartTime Pickers
-    loadEventStartDateTimeButtonOnClickEventListener(HTML_ID_EVENT_START_DATE_TIME_BUTTON, HTML_ID_EVENT_START_DATE_TEXT_INPUT);
-    loadEventStartDateTextInputOnOkEventListener(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT);
-    loadEventStartTimeTextInputOnOkEventListener(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT,
-        HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+    onHtmlEventStartDateTimeButtonClickShowDatePicker(HTML_ID_EVENT_START_DATE_TIME_BUTTON, HTML_ID_EVENT_START_DATE_TEXT_INPUT);
+    onHtmlEventStartDateTextInputOkShowTimePicker(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT);
+    onHtmlEventStartTimeTextInputOkWriteStartDateTimeValuesAndClearEndDateTimeValues(HTML_ID_EVENT_START_DATE_TEXT_INPUT,
+        HTML_ID_EVENT_START_TIME_TEXT_INPUT, HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
     // Event EndDate and EndTime Pickers
-    loadEventEndDateTimeButtonOnClickEventListener(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT,
+    onHtmlEventEndDateTimeButtonClickShowDatePicker(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT,
         HTML_ID_EVENT_END_DATE_TIME_BUTTON, HTML_ID_EVENT_END_DATE_TEXT_INPUT);
-    loadEventEndDateTextInputOnOkEventListener(HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
-    loadEventEndTimeTextInputOnOkEventListener(HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
-    
+    onHtmlEventEndDateTextInputOkShowTimePicker(HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+    onHtmlEventEndTimeTextInputOkWriteEndDateTimeValues(HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+
     document.getElementById(HTML_ID_CREATE_EVENT_BUTTON).addEventListener("click", function (event) {
         event.preventDefault();
     });

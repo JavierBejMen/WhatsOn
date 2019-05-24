@@ -53,12 +53,55 @@ if (HelperNavigator::isValidUrlQueryForEventsView($_GET)) {
     }
     ?>
 </div>
-<div id="idCategoriesFilterContainerInEvents"></div>
+<?php
+require($_SERVER["DOCUMENT_ROOT"] . "/components/tags-filter.php");
+?>
 <script>
     window.addEventListener("DOMContentLoaded", function() {
         showMainMenuBar();
         setIdsInEventsLists(HTML_CLASS_EVENTS_PER_DATE_LIST);
         loadEventsWeekCalendarComponentInHtmlElementById(HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS, 250);
-        loadCategoriesFilterComponentInHtmlElementById(HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_EVENTS);
+
+        onHtmlFilterTagsShowModalButtonClickSaveDisabledFilterTagButtons(HTML_ID_FILTER_TAGS_SHOW_MODAL_BUTTON);
+        onHtmlFilterTagsCloseModalButtonClickLoadPreviousDisabledFilterTagButtons(HTML_ID_FILTER_TAGS_HIDE_MODAL_BUTTON);
+
+        document.getElementById(HTML_ID_FILTER_TAGS_SAVE_BUTTON).addEventListener("click", function() {
+            var arrayOfFilteredTags = new Array();
+            var htmlFilterTagButtons = document.querySelectorAll("." + HTML_CLASS_FILTER_TAG_BUTTON + ":not([" + HTML_ATTRIBUTE_DISABLED + "])");
+
+            if (htmlFilterTagButtons.length > 0) {
+                for (var htmlFilterTagButton of htmlFilterTagButtons) {
+                    arrayOfFilteredTags.push(htmlFilterTagButton.textContent);
+                };
+
+                var htmlEventsPerDateLists = document.getElementsByClassName(HTML_CLASS_EVENTS_PER_DATE_LIST);
+                for (var htmlEventsPerDateList of htmlEventsPerDateLists) {
+                    var numberOfHiddenEvents = 0;
+                    var htmlEventContainers = htmlEventsPerDateList.getElementsByClassName(HTML_CLASS_EVENTS_PER_DATE_EVENT_CONTAINER);
+                    for (var htmlEventContainer of htmlEventContainers) {
+                        var hideEventContainer = true;
+                        var htmlEventTags = htmlEventContainer.getElementsByClassName(HTML_CLASS_TAG_SPAN);
+                        for (var htmlEventTag of htmlEventTags) {
+                            if (arrayOfFilteredTags.includes(htmlEventTag.textContent)) {
+                                hideEventContainer = false;
+                            }
+                        };
+                        if (hideEventContainer) {
+                            htmlEventContainer.setAttribute(HTML_ATTRIBUTE_HIDDEN, HTML_EMPTY_STRING_VALUE)
+                            numberOfHiddenEvents++;
+                        } else {
+                            htmlEventContainer.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
+                        }
+                    };
+                    if (htmlEventContainers.length == numberOfHiddenEvents) {
+                        htmlEventsPerDateList.setAttribute(HTML_ATTRIBUTE_HIDDEN, HTML_EMPTY_STRING_VALUE);
+                    } else {
+                        htmlEventsPerDateList.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
+                    }
+                }
+            } else {
+                showHtmlEventsPerDateListsAndTheirEventContainers();
+            }
+        });
     });
 </script>

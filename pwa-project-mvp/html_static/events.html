@@ -7,14 +7,14 @@
                 <div class="card" onclick="loadEventInfoView()"
                     style="background-image: url('./assets/images/salir-con-arte.png')"
                     alt="Imagen del evento Salir con Arte" aria-label="Imagen del evento Salir con Arte">
-                    <div class="row justify-content-end classEventPrice classCategoriesList mx-2 mt-1">
+                    <div class="row justify-content-end classEventPrice classTagsList mx-2 mt-1">
                         <span class="btn btn-elegant" disabled>Entrada Libre</span>
                     </div>
                     <div class="card-body w-100 text-white classEventsPerDateCardBody">
                         <p class="card-title font-weight-bold">Taller de pintura - Salir con Arte</p>
                         <p class="card-text text-white">Lemon Rock - 17:00</p>
-                        <div class="card-subtitle row justify-content-start classCategoriesList"
-                            aria-label="Categorías de Lemon Rock">
+                        <div class="card-subtitle row justify-content-start classTagsList"
+                            aria-label="Etiquetas de Lemon Rock">
                             <span class="btn btn-elegant" disabled>Pintura</span>
                             <span class="btn btn-elegant" disabled>Arte</span>
                         </div>
@@ -25,14 +25,14 @@
                 <div class="card" onclick="loadEventInfoView()"
                     style="background-image: url('./assets/images/lemon-jazz.jpg')" alt="Imagen del evento Lemon Jazz"
                     aria-label="Imagen del evento Lemon Jazz">
-                    <div class="row justify-content-end classEventPrice classCategoriesList mx-2 mt-1">
+                    <div class="row justify-content-end classEventPrice classTagsList mx-2 mt-1">
                         <span class="btn btn-elegant" disabled>Entrada Libre</span>
                     </div>
                     <div class="card-body w-100 text-white classEventsPerDateCardBody">
                         <p class="card-title font-weight-bold">Lemon Jazz</p>
                         <p class="card-text text-white">Lemon Rock - 18:30</p>
-                        <div class="card-subtitle row justify-content-start classCategoriesList"
-                            aria-label="Categorías de Lemon Rock">
+                        <div class="card-subtitle row justify-content-start classTagsList"
+                            aria-label="Etiquetas de Lemon Rock">
                             <span class="btn btn-elegant" disabled>En directo</span>
                             <span class="btn btn-elegant" disabled>Jazz</span>
                             <span class="btn btn-elegant" disabled>Rock</span>
@@ -49,14 +49,14 @@
                 <div class="card" onclick="loadEventInfoView()"
                     style="background-image: url('./assets/images/guillermo-crovetto.jpg')"
                     alt="Imagen del evento Guillermo Crovetto" aria-label="Imagen del evento Guillermo Crovetto">
-                    <div class="row justify-content-end classEventPrice classCategoriesList mx-2 mt-1">
+                    <div class="row justify-content-end classEventPrice classTagsList mx-2 mt-1">
                         <span class="btn btn-elegant" disabled>16 €</span>
                     </div>
                     <div class="card-body w-100 text-white classEventsPerDateCardBody">
                         <p class="card-title font-weight-bold">Guillermo Crovetto</p>
                         <p class="card-text text-white">Lemon Rock - 17:00</p>
-                        <div class="card-subtitle row justify-content-start classCategoriesList"
-                            aria-label="Categorías de Lemon Rock">
+                        <div class="card-subtitle row justify-content-start classTagsList"
+                            aria-label="Etiquetas de Lemon Rock">
                             <span class="btn btn-elegant" disabled>En directo</span>
                             <span class="btn btn-elegant" disabled>Indie</span>
                             <span class="btn btn-elegant" disabled>Rock</span>
@@ -67,12 +67,12 @@
         </div>
     </div>
 </div>
-<div id="idCategoriesFilterContainerInEvents"></div>
+<div id="idTagsFilterContainerInEvents"></div>
 <script>
     window.addEventListener("DOMContentLoaded", function () {
         showMainMenuBar();
         setIdsInEventsLists(HTML_CLASS_EVENTS_PER_DATE_LIST);
         loadEventsWeekCalendarComponentInHtmlElementById(HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS, 250);
-        loadCategoriesFilterComponentInHtmlElementById(HTML_ID_CATEGORIES_FILTER_CONTAINER_IN_EVENTS);
+        loadTagsFilterComponentInHtmlElementById(HTML_ID_TAGS_FILTER_CONTAINER_IN_EVENTS);
     });
 </script>

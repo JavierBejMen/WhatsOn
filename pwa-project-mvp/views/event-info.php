@@ -28,7 +28,7 @@ if (HelperNavigator::isValidUrlQueryForEventInfoView($_GET)) {
 </nav>
 <div id="idEventInfoHeaderImage" style="background-image: url('<?php print($event->getUrlHeaderImage()); ?>')" alt="Imagen de Lemon Jazz" aria-label="Imagen de Lemon Jazz"></div>
 <div class="container mb-5" id="idEventInfoMain">
-    <div class="row justify-content-start my-4 classCategoriesList" aria-label="Categorías de Lemon Jazz">
+    <div class="row justify-content-start my-4 classTagsList" aria-label="Etiquetas de<?php print($event->getName()); ?>">
         <?php
         foreach ($event->getArrayOfTags() as $tag) {
             print("<span class=\"btn btn-elegant\" disabled>$tag</span>");

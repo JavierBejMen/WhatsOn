@@ -50,13 +50,13 @@ final class ViewEvents
             <div class="col-12 col-sm-10 col-md-8 col-lg-6 pt-4 classEventsPerDateEventContainer mx-auto">
                 <a href="' . HelperNavigator::getUrlEventInfoViewFromEventId($eventId) . '">
                     <div class="card" style="background-image: url(\'' . $eventUrlHeaderImage . '\')" alt="Imagen del evento ' . $eventName . '" aria-label="Imagen del evento ' . $eventName . '">
-                        <div class="row justify-content-end classEventPrice classCategoriesList mx-2 mt-1">
+                        <div class="row justify-content-end classEventPrice classTagsList mx-2 mt-1">
                             <span class="btn btn-elegant" disabled>' . $eventTicketPrice . '</span>
                         </div>
                         <div class="card-body w-100 text-white classEventsPerDateCardBody">
                             <p class="card-title font-weight-bold">' . $eventName . '</p>
                             <p class="card-text text-white">' . $eventLocalName . ' - ' . $eventStartTime . '</p>
-                            <div class="card-subtitle row justify-content-start classCategoriesList" aria-label="Categorías del evento ' . $eventName . '">
+                            <div class="card-subtitle row justify-content-start classTagsList" aria-label="Etiquetas del evento ' . $eventName . '">
                                 ' . $eventArrayOfTags . '
                             </div>
                         </div>
@@ -89,7 +89,7 @@ final class ViewEvents
     {
         $resultString = "";
         foreach ($arrayOfTags as $tag) {
-            $resultString .= "<span class=\"btn btn-elegant\" disabled>" . $tag . "</span>";
+            $resultString .= "<span class=\"btn btn-elegant classTagSpan\" disabled>" . $tag . "</span>";
         }
         return $resultString;
     }

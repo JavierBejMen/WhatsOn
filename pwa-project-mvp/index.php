@@ -103,7 +103,7 @@ if (isset($_GET[HelperNavigator::QUERY_PARAMETER_VIEW])) {
                             <i class="fas fa-ellipsis-v fa-sm"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="idMoreActionsDropdownButton">
-                            <a class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target="#idFilterCategoriesModal">Aplicar filtros</a>
+                            <a class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target="#idFilterTagsModal">Aplicar filtros</a>
                             <a class="dropdown-item waves-effect waves-light">Recomendar WhatsOn</a>
                             <a class="dropdown-item waves-effect waves-light" onclick="loadLoginView()">Crear
                                 evento</a>
@@ -140,7 +140,7 @@ if (isset($_GET[HelperNavigator::QUERY_PARAMETER_VIEW])) {
     <!-- Custom scripts -->
     <script src="./js_scripts/maps.js"></script>
     <script src="./js_scripts/navigation.js"></script>
-    <script src="./js_scripts/categories-filter.js"></script>
+    <script src="./js_scripts/tags-filter.js"></script>
     <script src="./js_scripts/worker.js"></script>
     <script>
         // PWA feature: Service Worker
