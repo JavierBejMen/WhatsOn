@@ -1,7 +1,7 @@
 const FILE_PATH_SERVICE_WORKER = "./service-worker.js";
 // const FILE_PATH_EVENTS_VIEW = "./views/events.html";
 // const FILE_PATH_EVENT_INFO_VIEW = "./views/event-info.html";
-const FILE_PATH_LOGIN_VIEW = "./views/login.html";
+// const FILE_PATH_LOGIN_VIEW = "./views/login.html";
 const FILE_PATH_ADMIN_PANEL_VIEW = "./views/admin-panel.html";
 const FILE_PATH_CREATE_EVENT_VIEW = "./views/admin-panel-subviews/create-event.html";
 const FILE_PATH_TAGS_FILTER_COMPONENT = "./components/tags-filter.html";
@@ -39,7 +39,9 @@ const HTML_CLASS_EVENTS_PER_DATE_EVENT_CONTAINER = "classEventsPerDateEventConta
 const HTML_CLASS_ROUNDED_BOTTOM_RIGHT_FLOATING_BUTTON = "classRoundedBottomRightFloatingButton";
 const HTML_CLASS_TAG_SPAN = "classTagSpan";
 const HTML_CLASS_FILTER_TAG_BUTTON = "classFilterTagButton";
+const HTML_CLASS_FORM_FIELD_WAS_VALIDATED = "was-validated";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
+const HTML_ID_LOGIN_FORM = "idLoginForm";
 const HTML_ID_EVENT_START_DATE_TIME_BUTTON = "idEventStartDateTimeButton";
 const HTML_ID_EVENT_START_DATE_TEXT_INPUT = "idEventStartDateTextInput";
 const HTML_ID_EVENT_START_TIME_TEXT_INPUT = "idEventStartTimeTextInput";
@@ -73,9 +75,9 @@ const HTML_ID_EVENT_INFO_MAP_CONTAINER = "idEventInfoMapContainer";
 // function loadEventInfoView() {
 //     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_EVENT_INFO_VIEW);
 // }
-function loadLoginView() {
-    loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_LOGIN_VIEW);
-}
+// function loadLoginView() {
+//     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_LOGIN_VIEW);
+// }
 function loadAdminPanelView() {
     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_ADMIN_PANEL_VIEW);
 }

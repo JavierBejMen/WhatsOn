@@ -1,6 +1,6 @@
 <?php
 if (HelperNavigator::isValidUrlQueryForEventInfoView($_GET)) {
-    if (!($event = DBEvent::getEventFromId($_GET[HelperNavigator::QUERY_PARAMETER_EVENT_ID]))) {
+    if (!($event = DBEvent::getEventFromId($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVENT_ID]))) {
         HelperNavigator::redirectToUrlRoot();
         exit();
     }

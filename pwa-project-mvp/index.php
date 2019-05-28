@@ -10,8 +10,8 @@ spl_autoload_register(function ($className) {
     require($_SERVER["DOCUMENT_ROOT"] . "/php_classes/$className.php");
 });
 
-if (isset($_GET[HelperNavigator::QUERY_PARAMETER_VIEW])) {
-    $phpAbsoluteFilePathView = HelperNavigator::getPhpAbsoluteFilePathFromQueryParameterView($_GET[HelperNavigator::QUERY_PARAMETER_VIEW]);
+if (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])) {
+    $phpAbsoluteFilePathView = HelperNavigator::getPhpAbsoluteFilePathFromQueryParameterView($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW]);
 } else {
     $phpAbsoluteFilePathView = HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::FILE_PATH_EVENTS_VIEW);
 }
@@ -52,7 +52,7 @@ if (isset($_GET[HelperNavigator::QUERY_PARAMETER_VIEW])) {
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no, user-scalable=no">
     <!-- Bootstrap CSS, MDBootstrap CSS and Font Awesome Icons -->
     <link rel="stylesheet" href="./styles/material-design-for-bootstrap-free-4.7.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./styles/material-design-for-bootstrap-free-4.7.7/css/mdb.min.css">
@@ -105,7 +105,7 @@ if (isset($_GET[HelperNavigator::QUERY_PARAMETER_VIEW])) {
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="idMoreActionsDropdownButton">
                             <a class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target="#idFilterTagsModal">Aplicar filtros</a>
                             <a class="dropdown-item waves-effect waves-light">Recomendar WhatsOn</a>
-                            <a class="dropdown-item waves-effect waves-light" onclick="loadLoginView()">Crear
+                            <a class="dropdown-item waves-effect waves-light" href="<?php print(HelperNavigator::getUrlLoginView()); ?>">Crear
                                 evento</a>
                         </div>
                     </li>
@@ -138,6 +138,7 @@ if (isset($_GET[HelperNavigator::QUERY_PARAMETER_VIEW])) {
     <!-- Material Date & Time Picker JS -->
     <script src="./components/md-date-time-picker-2.3.0/dist/js/mdDateTimePicker.js"></script>
     <!-- Custom scripts -->
+    <script src="./js_scripts/login.js"></script>
     <script src="./js_scripts/maps.js"></script>
     <script src="./js_scripts/navigation.js"></script>
     <script src="./js_scripts/tags-filter.js"></script>
