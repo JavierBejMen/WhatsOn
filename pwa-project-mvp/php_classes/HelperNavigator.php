@@ -28,6 +28,10 @@ final class HelperNavigator
     {
         return ((self::isSecureConnection()) ? "https://" : "http://") . $_SERVER["HTTP_HOST"];
     }
+    public static function getUrlReferer(): string
+    {
+        return $_SERVER["HTTP_REFERER"];
+    }
     public static function getUrlEventInfoViewFromEventId(string $eventId): string
     {
         $queryArray = array(self::URL_QUERY_PARAMETER_VIEW => self::URL_PARAMETER_VIEW_VALUE_EVENT_INFO, self::URL_QUERY_PARAMETER_EVENT_ID => $eventId);

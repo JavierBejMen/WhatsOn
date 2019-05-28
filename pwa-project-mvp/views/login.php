@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand fixed-top classPrimaryBackgroundColor text-white" id="idEventInfoMenuBar">
     <ul class="navbar-nav w-100 justify-content-between">
         <li class="nav-item">
-            <a class="nav-link text-white waves-effect waves-light classRoundNavigationLink" title="Volver atrás" aria-label="Volver atrás" href="<?php print(HelperNavigator::getUrlRoot()); ?>">
+            <a class="nav-link text-white waves-effect waves-light classRoundNavigationLink" title="Volver atrás" aria-label="Volver atrás" href="<?php print(HelperNavigator::getUrlReferer()); ?>">
                 <i class="fas fa-arrow-left fa-sm"></i>
             </a>
         </li>
