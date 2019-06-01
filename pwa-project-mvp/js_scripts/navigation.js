@@ -111,8 +111,7 @@ function showMainMenuBar() {
     document.getElementById(HTML_ID_MAIN_MENU_BAR).classList.remove(HTML_CLASS_INVISIBLE);
 }
 function toggleShowAndHideDescriptionButtons(htmlIdDescriptionContainer) {
-    var htmlListOfButtons = document.getElementById(htmlIdDescriptionContainer).
-        getElementsByClassName(HTML_CLASS_SHOW_HIDE_DESCRIPTION_BUTTON);
+    let htmlListOfButtons = document.getElementById(htmlIdDescriptionContainer).getElementsByClassName(HTML_CLASS_SHOW_HIDE_DESCRIPTION_BUTTON);
     if (!htmlListOfButtons[0].classList.contains(HTML_CLASS_INVISIBLE)) {
         htmlListOfButtons[0].classList.add(HTML_CLASS_INVISIBLE);
         htmlListOfButtons[1].classList.remove(HTML_CLASS_INVISIBLE);
@@ -123,28 +122,26 @@ function toggleShowAndHideDescriptionButtons(htmlIdDescriptionContainer) {
     }
 }
 function fillNumericDaysOfTheMonthRowInEventsWeekCalendarNavigationBar() {
-    var listOfNumericDaysOfTheMonth = document.getElementById(HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR)
-        .getElementsByTagName(HTML_TAG_NAVIGATION_ITEM);
-    var variableDate = new Date();
+    let listOfMonthDatesInCurrentWeek = Array.from(document.getElementById(HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR)
+        .getElementsByTagName(HTML_TAG_NAVIGATION_ITEM));
+    let variableDate = new Date();
     variableDate.setDate(variableDate.getDate() - getTodayAsNumericDayOfTheWeek());
-    for (var indexOfNumericDayOfTheWeek = 0; indexOfNumericDayOfTheWeek < 7;
-        indexOfNumericDayOfTheWeek++) {
-        listOfNumericDaysOfTheMonth[indexOfNumericDayOfTheWeek].innerText = variableDate.getDate();
+    listOfMonthDatesInCurrentWeek.map((monthDateInCurrentWeek) => {
+        monthDateInCurrentWeek.innerText = variableDate.getDate();
         variableDate.setDate(variableDate.getDate() + 1);
-    }
+    });
 }
 function setIdsInEventsLists(htmlClassEventsList) {
-    var todayAsNumericDayOfTheWeek = getTodayAsNumericDayOfTheWeek();
-    var eventsLists = document.getElementsByClassName(htmlClassEventsList);
-    for (var indexOfEventsLists = 0; indexOfEventsLists < eventsLists.length; indexOfEventsLists++) {
+    let todayAsNumericDayOfTheWeek = getTodayAsNumericDayOfTheWeek();
+    let htmlEventsLists = Array.from(document.getElementsByClassName(htmlClassEventsList));
+    htmlEventsLists.map((htmlEventList, indexOfEventsLists) => {
         if ((idForEventsList = todayAsNumericDayOfTheWeek + indexOfEventsLists) < 7) {
-            eventsLists[indexOfEventsLists].setAttribute(HTML_ATTRIBUTE_ID,
-                HTML_IDS_LIST_FOR_EVENTS_LISTS[idForEventsList]);
+            htmlEventList.setAttribute(HTML_ATTRIBUTE_ID, HTML_IDS_LIST_FOR_EVENTS_LISTS[idForEventsList]);
         }
-    }
+    });
 }
 function getTodayAsNumericDayOfTheWeek() {
-    var today = new Date();
+    let today = new Date();
     return (today.getDay() > 0) ? (today.getDay() - 1) : 6;
 }
 function setScrollspyInNavigationBarById(htmlIdNavigationBar, offsetValue) {
@@ -219,7 +216,7 @@ function writeEndDateTimeValues(htmlIdEventEndDateTextInput, htmlIdEventEndTimeT
 }
 function getDateTimePicker(startTime = moment(), dateTimePickerType = JS_DATE_TIME_PICKER_DATE_TYPE, htmlElemntForEventTrigger = null) {
     moment.locale(JS_DATE_TIME_PICKER_LOCALE);
-    var dateTimePicker = new mdDateTimePicker.default({
+    let dateTimePicker = new mdDateTimePicker.default({
         type: dateTimePickerType, init: startTime,
         past: moment(startTime), future: moment(startTime).add(21, "years"),
         orientation: JS_DATE_TIME_PICKER_ORIENTATION,
@@ -231,7 +228,7 @@ function getDateTimePicker(startTime = moment(), dateTimePickerType = JS_DATE_TI
 }
 function createHtmlDateTimePickerWrapperInHtmlBodyIfNotExists() {
     if (!document.getElementById(HTML_ID_DATE_TIME_PICKER_WRAPPER)) {
-        var datePickerWrapper = document.createElement(HTML_TAG_DIV);
+        let datePickerWrapper = document.createElement(HTML_TAG_DIV);
         datePickerWrapper.id = HTML_ID_DATE_TIME_PICKER_WRAPPER;
         document.body.appendChild(datePickerWrapper);
     }
@@ -249,9 +246,9 @@ function hideHtmlDateTimePickerWrapper() {
     document.getElementById(HTML_ID_DATE_TIME_PICKER_WRAPPER).style.display = CSS_PROPERTY_DISPLAY_VALUE_NONE;
 }
 function loadUrlEventsFromDateOnwards(dateTimePicker) {
-    var arrayOfDateValues = dateTimePicker.time.format("L").toString().split("/");
-    var stringDateFrom = arrayOfDateValues[2] + "-" + arrayOfDateValues[1] + "-" + arrayOfDateValues[0];
-    var destinationUrl = window.location.protocol + "//" + window.location.hostname + window.location.pathname + "?view=events&events-from-date="
+    let arrayOfDateValues = dateTimePicker.time.format("L").toString().split("/");
+    let stringDateFrom = arrayOfDateValues[2] + "-" + arrayOfDateValues[1] + "-" + arrayOfDateValues[0];
+    let destinationUrl = window.location.protocol + "//" + window.location.hostname + window.location.pathname + "?view=events&events-from-date="
         + stringDateFrom;
     window.location.assign(destinationUrl);
 }
@@ -260,7 +257,7 @@ function writeValuesFromDateTimePickersToDateTextInputAndTimeTextInput(jsDatePic
     document.getElementById(htmlIdTimeTextInput).value = getTimeAsStringFromTimePicker(jsTimePicker);
 }
 function getDateAsStringFromDatePicker(jsDatePicker) {
-    var resultString = jsDatePicker.time.format(JS_DATE_TIME_PICKER_DATE_STRING_FORMAT_TO_DISPLAY).toString();
+    let resultString = jsDatePicker.time.format(JS_DATE_TIME_PICKER_DATE_STRING_FORMAT_TO_DISPLAY).toString();
     return resultString.substring(0, resultString.lastIndexOf(" "));
 }
 function getTimeAsStringFromTimePicker(jsTimePicker) {
@@ -271,14 +268,14 @@ function clearHtmlEventEndDateTextInputAndEventEndTimeTextInputValues(htmlIdEven
     document.getElementById(htmlIdEventEndTimeTextInput).value = HTML_EMPTY_STRING_VALUE;
 }
 function showHtmlEventsPerDateListsAndTheirEventContainers() {
-    var htmlEventsPerDateLists = document.getElementsByClassName(HTML_CLASS_EVENTS_PER_DATE_LIST);
-    for (var htmlEventsPerDateList of htmlEventsPerDateLists) {
-        var htmlEventContainers = htmlEventsPerDateList.getElementsByClassName(HTML_CLASS_EVENTS_PER_DATE_EVENT_CONTAINER);
-        for (var htmlEventContainer of htmlEventContainers) {
-            htmlEventContainer.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
-        };
-        htmlEventsPerDateList.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
-    }
+    let htmlEventsPerDateLists = Array.from(document.getElementsByClassName(HTML_CLASS_EVENTS_PER_DATE_LIST));
+    htmlEventsPerDateLists.map((eventsPerDateList) => {
+        let htmlEventContainers = Array.from(eventsPerDateList.getElementsByClassName(HTML_CLASS_EVENTS_PER_DATE_EVENT_CONTAINER));
+        htmlEventContainers.map((eventContainer) => {
+            eventContainer.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
+        });
+        eventsPerDateList.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
+    });
 }
 function hideHtmlEventsPerDateListsAndTheirEventContainers(arrayOfEnabledFilteredTags) {
     let htmlEventsPerDateLists = Array.from(document.getElementsByClassName(HTML_CLASS_EVENTS_PER_DATE_LIST));

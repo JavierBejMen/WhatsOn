@@ -24,6 +24,10 @@ final class HelperNavigator
     {
         return $_SERVER["DOCUMENT_ROOT"] . $phpRelativeFilePath;
     }
+    public static function getUrlRefererOrRoot()
+    {
+        return ($_SERVER["HTTP_REFERER"]) ? self::getUrlReferer() : self::getUrlRoot();
+    }
     public static function getUrlRoot(): string
     {
         return ((self::isSecureConnection()) ? "https://" : "http://") . $_SERVER["HTTP_HOST"];
