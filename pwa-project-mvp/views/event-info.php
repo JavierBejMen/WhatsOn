@@ -108,15 +108,15 @@ if ($ticketPrice > 0) {
     print("<a class=\"btn btn-lg btn-default waves-effect w-100 classFloatingBottomButton\" title=\"Comprar entradas\" aria-label=\"Comprar entradas\">COMPRAR ENTRADAS</a>");
 }
 ?>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcNyXtpE6iOxla32ptV-6SvCcANAmxM50&callback=loadLocalDataInGoogleMapsApi" 
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcNyXtpE6iOxla32ptV-6SvCcANAmxM50&callback=HelperMap.loadLocalDataInGoogleMapsApi" 
     async defer></script> -->
 <script>
-    window.addEventListener("DOMContentLoaded", function() {
+    window.addEventListener("DOMContentLoaded", () => {
         setHtmlBodyBackgroundColor(HTML_CLASS_WHITE_BACKGROUND_COLOR);
         hideMainMenuBar();
 
         /* TODO -- Google Maps API */
-        loadLocalDataInLeafletApi(HTML_ID_EVENT_INFO_MAP_CONTAINER, "<?php print($event->getLocalName()); ?>",
+        HelperMap.loadLocalDataInLeafletApi(HTML_ID_EVENT_INFO_MAP_CONTAINER, "<?php print($event->getLocalName()); ?>",
             <?php print($event->getLocalLatitude()); ?>, <?php print($event->getLocalLongitude()); ?>, 17);
     });
 </script>

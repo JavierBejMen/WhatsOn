@@ -1,6 +1,5 @@
-function validateHtmlLoginForm(htmlIdLoginForm) {
-    var htmlLoginForm = document.getElementById(htmlIdLoginForm);
-    htmlLoginForm.addEventListener("submit", function (event) {
+class HelperLogin {
+    static validateHtmlLoginForm(htmlLoginForm) {
         if (htmlLoginForm.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
@@ -9,5 +8,5 @@ function validateHtmlLoginForm(htmlIdLoginForm) {
         else {
             htmlLoginForm.classList.remove(HTML_CLASS_FORM_FIELD_WAS_VALIDATED);
         }
-    }, false);
+    }
 }

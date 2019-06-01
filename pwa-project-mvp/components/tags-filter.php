@@ -22,7 +22,7 @@ $arrayOfTags = DBTag::getTags();
                         <?php
                         if ($arrayOfTags) {
                             foreach ($arrayOfTags as $tag) {
-                                print("<span class=\"btn btn-block btn-elegant waves-effect mb-2 classFilterTagButton\" onclick=\"toggleFilterButton(this)\" disabled>" . $tag . "</span>");
+                                print("<span class=\"btn btn-block btn-elegant waves-effect mb-2 classFilterTagButton\" onclick=\"HelperTagsFilter.toggleFilterTagButton(this)\" disabled>" . $tag . "</span>");
                             }
                         }
                         ?>

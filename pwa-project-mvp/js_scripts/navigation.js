@@ -2,9 +2,9 @@ const FILE_PATH_SERVICE_WORKER = "./service-worker.js";
 // const FILE_PATH_EVENTS_VIEW = "./views/events.html";
 // const FILE_PATH_EVENT_INFO_VIEW = "./views/event-info.html";
 // const FILE_PATH_LOGIN_VIEW = "./views/login.html";
-const FILE_PATH_ADMIN_PANEL_VIEW = "./views/admin-panel.html";
+// const FILE_PATH_ADMIN_PANEL_VIEW = "./views/admin-panel.html";
 const FILE_PATH_CREATE_EVENT_VIEW = "./views/admin-panel-subviews/create-event.html";
-const FILE_PATH_TAGS_FILTER_COMPONENT = "./components/tags-filter.html";
+// const FILE_PATH_TAGS_FILTER_COMPONENT = "./components/tags-filter.html";
 const FILE_PATH_EVENTS_WEEK_CALENDAR_COMPONENT = "./components/events-week-calendar.html";
 const CSS_CHAR_ID_SELECTOR = "#";
 const CSS_PROPERTY_DISPLAY_VALUE_INITIAL = "initial";
@@ -68,6 +68,7 @@ const HTML_ID_TIME_PICKER = "mddtp-picker__time";
 const HTML_ID_TIME_PICKER_CANCEL_BUTTON = "mddtp-time__cancel";
 const HTML_ID_TIME_PICKER_OK_BUTTON = "mddtp-time__ok";
 const HTML_ID_EVENT_INFO_MAP_CONTAINER = "idEventInfoMapContainer";
+const SESSION_STORAGE_KEY_ENABLED_FILTER_TAGS_VALUES = "EnabledFilterTagValues";
 
 // function loadEvents() {
 //     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_EVENTS_VIEW);
@@ -78,9 +79,9 @@ const HTML_ID_EVENT_INFO_MAP_CONTAINER = "idEventInfoMapContainer";
 // function loadLoginView() {
 //     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_LOGIN_VIEW);
 // }
-function loadAdminPanelView() {
-    loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_ADMIN_PANEL_VIEW);
-}
+// function loadAdminPanelView() {
+//     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_ADMIN_PANEL_VIEW);
+// }
 function loadCreateEventView() {
     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_CREATE_EVENT_VIEW);
 }
@@ -152,71 +153,69 @@ function setScrollspyInNavigationBarById(htmlIdNavigationBar, offsetValue) {
 function setHtmlBodyBackgroundColor(backgroundColor) {
     document.getElementsByTagName(HTML_TAG_BODY)[0].style.backgroundColor = backgroundColor;
 }
-function onHtmlEventsWeekCalendarButtonClickShowDatePicker(htmlIdEventsWeekCalendarButton) {
-    document.getElementById(htmlIdEventsWeekCalendarButton).addEventListener("click", function () {
-        createHtmlDateTimePickerWrapperInHtmlBodyIfNotExists();
-        startDatePicker = getDateTimePicker();
-        insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER);
+function showDatePickerForHtmlEventsWeekCalendarButton() {
+    createHtmlDateTimePickerWrapperInHtmlBodyIfNotExists();
+    startDatePicker = getDateTimePicker();
+    insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER);
+    showHtmlDateTimePickerWrapper();
+    startDatePicker.toggle();
+    document.getElementById(HTML_ID_DATE_PICKER_CANCEL_BUTTON).addEventListener("click", () => {
+        hideHtmlDateTimePickerWrapper();
+    });
+    document.getElementById(HTML_ID_DATE_PICKER_OK_BUTTON).addEventListener("click", () => {
+        hideHtmlDateTimePickerWrapper();
+        loadUrlEventsFromDateOnwards(startDatePicker);
+    });
+}
+function showDatePickerForHtmlEventStartDateTimeButton(htmlIdEventStartDateTextInput) {
+    createHtmlDateTimePickerWrapperInHtmlBodyIfNotExists();
+    startDatePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_DATE_TYPE, document.getElementById(htmlIdEventStartDateTextInput));
+    insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER);
+    showHtmlDateTimePickerWrapper();
+    startDatePicker.toggle();
+    document.getElementById(HTML_ID_DATE_PICKER_CANCEL_BUTTON).addEventListener("click", () => {
+        hideHtmlDateTimePickerWrapper();
+    });
+}
+function showTimePickerForHtmlEventStartDateTimeButton(htmlIdEventStartTimeTextInput) {
+    startTimePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_TIME_TYPE, document.getElementById(htmlIdEventStartTimeTextInput));
+    insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_TIME_PICKER);
+    startTimePicker.toggle();
+    document.getElementById(HTML_ID_TIME_PICKER_OK_BUTTON).addEventListener("click", () => {
+        hideHtmlDateTimePickerWrapper();
+    });
+    document.getElementById(HTML_ID_TIME_PICKER_CANCEL_BUTTON).addEventListener("click", () => {
+        hideHtmlDateTimePickerWrapper();
+    });
+}
+function writeStartDateTimeValuesAndClearEndDateTimeValues(htmlIdEventStartDateTextInput, htmlIdEventStartTimeTextInput,
+    htmlIdEventEndDateTextInput, htmlIdEventEndTimeTextInput) {
+    writeValuesFromDateTimePickersToDateTextInputAndTimeTextInput(startDatePicker, htmlIdEventStartDateTextInput, startTimePicker,
+        htmlIdEventStartTimeTextInput);
+    clearHtmlEventEndDateTextInputAndEventEndTimeTextInputValues(htmlIdEventEndDateTextInput, htmlIdEventEndTimeTextInput);
+}
+function showDatePickerForEventEndDateTimeButton(htmlIdEventStartDateTextInput, htmlIdEventStartTimeTextInput, htmlIdEventEndDateTextInput) {
+    if (document.getElementById(htmlIdEventStartDateTextInput).value && document.getElementById(htmlIdEventStartTimeTextInput).value) {
+        datePicker = getDateTimePicker(startDatePicker.time, JS_DATE_TIME_PICKER_DATE_TYPE, document.getElementById(htmlIdEventEndDateTextInput));
         showHtmlDateTimePickerWrapper();
-        startDatePicker.toggle();
-        onHtmlDateTimePickerButtonClickHideHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER_CANCEL_BUTTON);
-        onHtmlDateTimePickerButtonClickHideHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER_OK_BUTTON);
-        onHtmlDateTimePickerButtonClickLoadUrlEventsFromDateOnwards(startDatePicker, HTML_ID_DATE_PICKER_OK_BUTTON);
+        datePicker.toggle();
+        document.getElementById(HTML_ID_DATE_PICKER_CANCEL_BUTTON).addEventListener("click", () => {
+            hideHtmlDateTimePickerWrapper();
+        });
+    }
+}
+function showTimePickerForEventEndDateTimeButton(htmlIdEventEndTimeTextInput) {
+    timePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_TIME_TYPE, document.getElementById(htmlIdEventEndTimeTextInput));
+    timePicker.toggle();
+    document.getElementById(HTML_ID_TIME_PICKER_OK_BUTTON).addEventListener("click", () => {
+        hideHtmlDateTimePickerWrapper();
+    });
+    document.getElementById(HTML_ID_TIME_PICKER_CANCEL_BUTTON).addEventListener("click", () => {
+        hideHtmlDateTimePickerWrapper();
     });
 }
-function onHtmlEventStartDateTimeButtonClickShowDatePicker(htmlIdEventStartDateTimeButton, htmlIdEventStartDateTextInput) {
-    document.getElementById(htmlIdEventStartDateTimeButton).addEventListener("click", function () {
-        createHtmlDateTimePickerWrapperInHtmlBodyIfNotExists();
-        startDatePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_DATE_TYPE, document.getElementById(htmlIdEventStartDateTextInput));
-        insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER);
-        showHtmlDateTimePickerWrapper();
-        startDatePicker.toggle();
-        onHtmlDateTimePickerButtonClickHideHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER_CANCEL_BUTTON);
-    });
-}
-function onHtmlEventStartDateTextInputOkShowTimePicker(htmlIdEventStartDateTextInput, htmlIdEventStartTimeTextInput) {
-    document.getElementById(htmlIdEventStartDateTextInput).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, function () {
-        startTimePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_TIME_TYPE, document.getElementById(htmlIdEventStartTimeTextInput));
-        insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_TIME_PICKER);
-        startTimePicker.toggle();
-        onHtmlDateTimePickerButtonClickHideHtmlDateTimePickerWrapper(HTML_ID_TIME_PICKER_CANCEL_BUTTON);
-        onHtmlDateTimePickerButtonClickHideHtmlDateTimePickerWrapper(HTML_ID_TIME_PICKER_OK_BUTTON);
-    });
-}
-function onHtmlEventStartTimeTextInputOkWriteStartDateTimeValuesAndClearEndDateTimeValues(htmlIdEventStartDateTextInput,
-    htmlIdEventStartTimeTextInput, htmlIdEventEndDateTextInput,
-    htmlIdEventEndTimeTextInput) {
-    document.getElementById(htmlIdEventStartTimeTextInput).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, function () {
-        writeValuesFromDateTimePickersToDateTextInputAndTimeTextInput(startDatePicker, htmlIdEventStartDateTextInput, startTimePicker,
-            this.id);
-        clearHtmlEventEndDateTextInputAndEventEndTimeTextInputValues(htmlIdEventEndDateTextInput, htmlIdEventEndTimeTextInput);
-    });
-}
-function onHtmlEventEndDateTimeButtonClickShowDatePicker(htmlIdEventStartDateTextInput, htmlIdEventStartTimeTextInput,
-    htmlIdEventEndDateTimeButton, htmlIdEventEndDateTextInput) {
-    document.getElementById(htmlIdEventEndDateTimeButton).addEventListener("click", function () {
-        if (document.getElementById(htmlIdEventStartDateTextInput).value &&
-            document.getElementById(htmlIdEventStartTimeTextInput).value) {
-            datePicker = getDateTimePicker(startDatePicker.time, JS_DATE_TIME_PICKER_DATE_TYPE,
-                document.getElementById(htmlIdEventEndDateTextInput));
-            showHtmlDateTimePickerWrapper();
-            datePicker.toggle();
-            onHtmlDateTimePickerButtonClickHideHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER_CANCEL_BUTTON);
-        }
-    });
-}
-function onHtmlEventEndDateTextInputOkShowTimePicker(htmlIdEventEndDateTextInput, htmlIdEventEndTimeTextInput) {
-    document.getElementById(htmlIdEventEndDateTextInput).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, function () {
-        timePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_TIME_TYPE, document.getElementById(htmlIdEventEndTimeTextInput));
-        timePicker.toggle();
-        onHtmlDateTimePickerButtonClickHideHtmlDateTimePickerWrapper(HTML_ID_TIME_PICKER_CANCEL_BUTTON);
-        onHtmlDateTimePickerButtonClickHideHtmlDateTimePickerWrapper(HTML_ID_TIME_PICKER_OK_BUTTON);
-    });
-}
-function onHtmlEventEndTimeTextInputOkWriteEndDateTimeValues(htmlIdEventEndDateTextInput, htmlIdEventEndTimeTextInput) {
-    document.getElementById(htmlIdEventEndTimeTextInput).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, function () {
-        writeValuesFromDateTimePickersToDateTextInputAndTimeTextInput(datePicker, htmlIdEventEndDateTextInput, timePicker, this.id);
-    });
+function writeEndDateTimeValues(htmlIdEventEndDateTextInput, htmlIdEventEndTimeTextInput) {
+    writeValuesFromDateTimePickersToDateTextInputAndTimeTextInput(datePicker, htmlIdEventEndDateTextInput, timePicker, htmlIdEventEndTimeTextInput);
 }
 function getDateTimePicker(startTime = moment(), dateTimePickerType = JS_DATE_TIME_PICKER_DATE_TYPE, htmlElemntForEventTrigger = null) {
     moment.locale(JS_DATE_TIME_PICKER_LOCALE);
@@ -246,19 +245,15 @@ function insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(htmlDateTimePickerI
         document.getElementById(HTML_ID_DATE_TIME_PICKER_WRAPPER).appendChild(document.getElementById(htmlDateTimePickerId));
     }
 }
-function onHtmlDateTimePickerButtonClickHideHtmlDateTimePickerWrapper(htmlDateTimePickerButtonId) {
-    document.getElementById(htmlDateTimePickerButtonId).addEventListener("click", function () {
-        document.getElementById(HTML_ID_DATE_TIME_PICKER_WRAPPER).style.display = CSS_PROPERTY_DISPLAY_VALUE_NONE;
-    });
+function hideHtmlDateTimePickerWrapper() {
+    document.getElementById(HTML_ID_DATE_TIME_PICKER_WRAPPER).style.display = CSS_PROPERTY_DISPLAY_VALUE_NONE;
 }
-function onHtmlDateTimePickerButtonClickLoadUrlEventsFromDateOnwards(dateTimePicker, htmlDateTimePickerButtonId) {
-    document.getElementById(htmlDateTimePickerButtonId).addEventListener("click", function () {
-        var arrayOfDateValues = dateTimePicker.time.format("L").toString().split("/");
-        var stringDateFrom = arrayOfDateValues[2] + "-" + arrayOfDateValues[1] + "-" + arrayOfDateValues[0];
-        var destinationUrl = window.location.protocol + "//" + window.location.hostname + window.location.pathname
-            + "?view=events&events-from-date=" + stringDateFrom;
-        window.location.assign(destinationUrl);
-    });
+function loadUrlEventsFromDateOnwards(dateTimePicker) {
+    var arrayOfDateValues = dateTimePicker.time.format("L").toString().split("/");
+    var stringDateFrom = arrayOfDateValues[2] + "-" + arrayOfDateValues[1] + "-" + arrayOfDateValues[0];
+    var destinationUrl = window.location.protocol + "//" + window.location.hostname + window.location.pathname + "?view=events&events-from-date="
+        + stringDateFrom;
+    window.location.assign(destinationUrl);
 }
 function writeValuesFromDateTimePickersToDateTextInputAndTimeTextInput(jsDatePicker, htmlIdDateTextInput, jsTimePicker, htmlIdTimeTextInput) {
     document.getElementById(htmlIdDateTextInput).value = getDateAsStringFromDatePicker(jsDatePicker);
@@ -284,4 +279,29 @@ function showHtmlEventsPerDateListsAndTheirEventContainers() {
         };
         htmlEventsPerDateList.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
     }
+}
+function hideHtmlEventsPerDateListsAndTheirEventContainers(arrayOfEnabledFilteredTags) {
+    let htmlEventsPerDateLists = Array.from(document.getElementsByClassName(HTML_CLASS_EVENTS_PER_DATE_LIST));
+    htmlEventsPerDateLists.map((htmlEventsPerDateList) => {
+        let numberOfHiddenEvents = 0;
+        let htmlEventContainers = Array.from(htmlEventsPerDateList.getElementsByClassName(HTML_CLASS_EVENTS_PER_DATE_EVENT_CONTAINER));
+        htmlEventContainers.map((htmlEventContainer) => {
+            let hideEventContainer = true;
+            let htmlEventTags = Array.from(htmlEventContainer.getElementsByClassName(HTML_CLASS_TAG_SPAN));
+            htmlEventTags.map((htmlEventTag) => {
+                if (arrayOfEnabledFilteredTags.includes(htmlEventTag.textContent)) {
+                    hideEventContainer = false;
+                }
+            });
+            if (hideEventContainer) {
+                htmlEventContainer.setAttribute(HTML_ATTRIBUTE_HIDDEN, HTML_EMPTY_STRING_VALUE);
+                numberOfHiddenEvents++;
+            } else {
+                htmlEventContainer.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
+            }
+        });
+        (htmlEventContainers.length == numberOfHiddenEvents) ?
+            htmlEventsPerDateList.setAttribute(HTML_ATTRIBUTE_HIDDEN, HTML_EMPTY_STRING_VALUE) :
+            htmlEventsPerDateList.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
+    });
 }

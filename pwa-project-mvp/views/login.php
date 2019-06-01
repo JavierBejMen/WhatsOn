@@ -41,9 +41,12 @@
     </div>
 </div>
 <script>
-    window.addEventListener("DOMContentLoaded", function() {
+    window.addEventListener("DOMContentLoaded", () => {
         setHtmlBodyBackgroundColor(HTML_CLASS_TERTIARY_BACKGROUND_COLOR);
         hideMainMenuBar();
-        validateHtmlLoginForm(HTML_ID_LOGIN_FORM);
+        let htmlLoginForm = document.getElementById(HTML_ID_LOGIN_FORM);
+        htmlLoginForm.addEventListener("submit", () => {
+            HelperLogin.validateHtmlLoginForm(htmlLoginForm);
+        }, false);
     });
 </script>

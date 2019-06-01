@@ -29,7 +29,7 @@ if (!isset($_SESSION[HelperNavigator::SESSION_VARIABLE_USER_EMAIL])) {
     </a>
 </div>
 <script>
-    window.addEventListener("DOMContentLoaded", function() {
+    window.addEventListener("DOMContentLoaded", () => {
         setHtmlBodyBackgroundColor(HTML_CLASS_TERTIARY_BACKGROUND_COLOR);
         showMainMenuBar();
     });

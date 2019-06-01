@@ -142,16 +142,28 @@
     setHtmlBodyBackgroundColor(HTML_CLASS_WHITE_BACKGROUND_COLOR);
     hideMainMenuBar();
     // Event StartDate and StartTime Pickers
-    onHtmlEventStartDateTimeButtonClickShowDatePicker(HTML_ID_EVENT_START_DATE_TIME_BUTTON, HTML_ID_EVENT_START_DATE_TEXT_INPUT);
-    onHtmlEventStartDateTextInputOkShowTimePicker(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT);
-    onHtmlEventStartTimeTextInputOkWriteStartDateTimeValuesAndClearEndDateTimeValues(HTML_ID_EVENT_START_DATE_TEXT_INPUT,
-        HTML_ID_EVENT_START_TIME_TEXT_INPUT, HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+    document.getElementById(HTML_ID_EVENT_START_DATE_TIME_BUTTON).addEventListener("click", () => {
+        showDatePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_DATE_TEXT_INPUT);
+    });
+    document.getElementById(HTML_ID_EVENT_START_DATE_TEXT_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+        showTimePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_TIME_TEXT_INPUT);
+    });
+    document.getElementById(HTML_ID_EVENT_START_TIME_TEXT_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+        writeStartDateTimeValuesAndClearEndDateTimeValues(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT,
+            HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+    });
     // Event EndDate and EndTime Pickers
-    onHtmlEventEndDateTimeButtonClickShowDatePicker(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT,
-        HTML_ID_EVENT_END_DATE_TIME_BUTTON, HTML_ID_EVENT_END_DATE_TEXT_INPUT);
-    onHtmlEventEndDateTextInputOkShowTimePicker(HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
-    onHtmlEventEndTimeTextInputOkWriteEndDateTimeValues(HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
-
+    document.getElementById(HTML_ID_EVENT_END_DATE_TIME_BUTTON).addEventListener("click", () => {
+        showDatePickerForEventEndDateTimeButton(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT,
+            HTML_ID_EVENT_END_DATE_TEXT_INPUT);
+    });
+    document.getElementById(HTML_ID_EVENT_END_DATE_TEXT_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+        showTimePickerForEventEndDateTimeButton(HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+    });
+    document.getElementById(HTML_ID_EVENT_END_TIME_TEXT_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+        writeEndDateTimeValues(HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+    });
+    // TODO - Create Event
     document.getElementById(HTML_ID_CREATE_EVENT_BUTTON).addEventListener("click", function (event) {
         event.preventDefault();
     });

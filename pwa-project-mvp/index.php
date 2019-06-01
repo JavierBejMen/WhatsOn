@@ -138,14 +138,16 @@ if (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])) {
     <!-- Material Date & Time Picker JS -->
     <script src="./components/md-date-time-picker-2.3.0/dist/js/mdDateTimePicker.js"></script>
     <!-- Custom scripts -->
-    <script src="./js_scripts/login.js"></script>
-    <script src="./js_scripts/maps.js"></script>
+    <script src="./js_scripts/HelperLogin.js"></script>
+    <script src="./js_scripts/HelperMap.js"></script>
+    <script src="./js_scripts/HelperTagsFilter.js"></script>
+    <script src="./js_scripts/HelperServiceWorker.js"></script>
     <script src="./js_scripts/navigation.js"></script>
-    <script src="./js_scripts/tags-filter.js"></script>
-    <script src="./js_scripts/worker.js"></script>
     <script>
         // PWA feature: Service Worker
-        registerServiceWorker(FILE_PATH_SERVICE_WORKER);
+        window.addEventListener("load", () => {
+            HelperServiceWorker.registerServiceWorker(FILE_PATH_SERVICE_WORKER);
+        });
     </script>
 </body>
 
