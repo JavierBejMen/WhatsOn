@@ -1,11 +1,16 @@
 <?php
-if (HelperNavigator::isValidUrlQueryForEventsView($_GET)) {
-    $arrayOfEvents = DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(
+// if (HelperNavigator::isValidUrlQueryForEventsView($_GET)) {
+//     $arrayOfEvents = DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(
+//         new DateTime($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVENTS_FROM_DATE])
+//     );
+// } else {
+//     $arrayOfEvents = DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray();
+// }
+$arrayOfEvents = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVENTS_FROM_DATE])) ?
+    DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(
         new DateTime($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVENTS_FROM_DATE])
-    );
-} else {
-    $arrayOfEvents = DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray();
-}
+    )
+    : DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray();
 ?>
 <div class="sticky-top" id="idEventsWeekCalendarContainerInAllEvents"></div>
 <div class="container-fluid px-md-5 classTertiaryBackgroundColor" id="idEventsMain">

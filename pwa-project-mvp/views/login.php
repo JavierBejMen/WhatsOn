@@ -16,7 +16,7 @@
     </ul>
 </nav>
 <div class="container classTertiaryBackgroundColor mb-5" id="idLoginMain">
-    <form class="needs-validation mx-auto py-5" id="idLoginForm" method="post" action="<?php print(HelperNavigator::getUrlAdminPanelView()); ?>" novalidate>
+    <form class="needs-validation mx-auto py-5" id="idLoginForm" method="post" action="<?php print(HelperNavigator::getUrlLoginScript()); ?>" novalidate>
         <div class="form-group">
             <label for="idLoginEmail">Usuario</label>
             <input type="email" class="form-control classTertiaryBackgroundColor classOnlyBottomBorderInput" id="idLoginEmail" name="idLoginEmail" placeholder="Email" autocomplete="username" autofocus required>

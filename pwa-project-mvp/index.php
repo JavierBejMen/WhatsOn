@@ -9,12 +9,11 @@
 spl_autoload_register(function ($className) {
     require($_SERVER["DOCUMENT_ROOT"] . "/php_classes/$className.php");
 });
-
-if (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])) {
-    $phpAbsoluteFilePathView = HelperNavigator::getPhpAbsoluteFilePathFromQueryParameterView($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW]);
-} else {
-    $phpAbsoluteFilePathView = HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::FILE_PATH_EVENTS_VIEW);
-}
+session_start();
+HelperNavigator::redirectUrlBasedOnSessionVariableUserEmailAndQueryParameters();
+$phpAbsoluteFilePathView = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])) ?
+    HelperNavigator::getPhpAbsoluteFilePathFromQueryParameterView($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])
+    : HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::FILE_PATH_EVENTS_VIEW);
 
 // echo '<div class="row">' . '<br><br>';
 // echo HelperDateTime::getNowDateTime()->format("Y-m-d") . '<br><br>';
