@@ -4,7 +4,7 @@
     --tertiary-color: #EEEEEE;
     --main-menu-bar-height: 56px;
     --event-card-height: 360px;
-    --tags-filter-button-width: 150px;
+    --floating-filter-button-width: 150px;
     --main-navigation-bar-height: 71px;
     --local-navigation-bar-height: 61px;
 }
@@ -37,11 +37,12 @@
     text-transform: none;
 }
 
-.invisible {
+.classInvisible {
     height: 0 !important;
     width: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
+    border: 0 !important;
 }
 
 .classRoundNavigationLink {
@@ -132,12 +133,10 @@
     z-index: 2000;
 }
 
-.classFloatingFilterButtonWrap {
+.classShowModalForFilteringFloatingButtonWrap {
     position: fixed;
     bottom: 10px;
-    right: calc((100vw - var(--tags-filter-button-width))/2);
-    /*width: var(--tags-filter-button-width) !important;
-    height: 100px;*/
+    right: calc((100vw - var(--floating-filter-button-width))/2);
     border-radius: 5rem;
     background: linear-gradient(-45deg, #6EFA86, #EEF0F0, #3BEFF4);
     background-size: 400% 400%;
@@ -156,26 +155,26 @@
     }
 }
 
-.classFloatingFilterButtonWrap .classFloatingFilterButton {
+.classShowModalForFilteringFloatingButtonWrap .classShowModalForFilteringFloatingButton {
     font-size: 125%;
-    width: var(--tags-filter-button-width) !important;
+    width: var(--floating-filter-button-width) !important;
     border-radius: 5rem;
 }
 
-#idFilterTagsModal .modal-content {
+#idTagsModal .modal-content {
     background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
-#idFilterTagsModal .classFilterTagButton {
+#idTagsModal .classTagsModalTagSpan {
     border: 2px solid !important;
     border-radius: 0.5rem;
 }
 
-#idFilterTagsModal .classFilterTagButton[disabled] {
+#idTagsModal .classTagsModalTagSpan[disabled] {
     background-color: rgba(0, 0, 0, 0) !important;
 }
 
-#idFilterTagsModal .classFilterTagButton:not([disabled]) {
+#idTagsModal .classTagsModalTagSpan:not([disabled]) {
     color: #2e2e2e !important;
     background-color: white !important;
 }
@@ -235,7 +234,7 @@
     background-size: cover;
 }
 
-#idLoginMain, #idAdminProfileContainer, #idEditEventPictureContainer {
+#idLoginMain, #idAdminProfileContainer, #idEventPictureContainer {
     margin-top: var(--main-menu-bar-height);
 }
 
@@ -249,13 +248,8 @@
     max-width: 230px;
 }
 
-#idEditEventPictureContainer #idEditEventPictureButton {
+#idEventPictureContainer #idAddEventPictureButton {
     padding: 10px;
-    border-radius: 2rem;
-}
-
-#idCreateEventMain #idCreateEventForm #idAddTagsButton {
-    padding: 5px 10px;
     border-radius: 2rem;
 }
 

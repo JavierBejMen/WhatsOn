@@ -51,23 +51,28 @@ $arrayOfEvents = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVENTS_FROM_D
     }
     ?>
 </div>
+<!-- Button to activate tags modal window for filtering -->
+<div class="classShowModalForFilteringFloatingButtonWrap">
+    <button type="button" class="btn classSecondaryBackgroundColor text-white waves-effect waves-light classShowModalForFilteringFloatingButton" id="idEventsShowModalForFilteringTagsButton" data-toggle="modal" data-target="#idTagsModal" data-backdrop="false" title="Filtro de etiquetas" aria-label="Filtro de etiquetas">
+        FILTROS
+    </button>
+</div>
 <?php
-require($_SERVER["DOCUMENT_ROOT"] . "/components/tags-filter.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/components/tags-modal.php");
 ?>
 <script>
     window.addEventListener("DOMContentLoaded", () => {
         showMainMenuBar();
         setIdsInEventsLists(HTML_CLASS_EVENTS_PER_DATE_LIST);
         loadEventsWeekCalendarComponentInHtmlElementById(HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS, 250);
-        document.getElementById(HTML_ID_FILTER_TAGS_SHOW_MODAL_BUTTON).addEventListener("click", () => {
-            HelperTagsFilter.saveEnabledFilterTagButtons(SESSION_STORAGE_KEY_ENABLED_FILTER_TAGS_VALUES);
+        HelperTagsModal.clearEnabledTagValuesFromSessionStorage(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
+        document.getElementById(HTML_ID_EVENTS_SHOW_MODAL_FOR_FILTERING_TAGS_BUTTON).addEventListener("click", () => {
+            HelperTagsModal.loadPreviousEnabledTagValuesFromSessionStorageToHtmlFormModal(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
         });
-        document.getElementById(HTML_ID_FILTER_TAGS_HIDE_MODAL_BUTTON).addEventListener("click", () => {
-            HelperTagsFilter.loadPreviousEnabledFilterTagButtons(SESSION_STORAGE_KEY_ENABLED_FILTER_TAGS_VALUES);
-        });
-        document.getElementById(HTML_ID_FILTER_TAGS_SAVE_BUTTON).addEventListener("click", () => {
-            let arrayOfEnabledFilterTags = HelperTagsFilter.getArrayOfEnabledFilterTagsValuesFromHtmlFilterTagsModal();
-            (arrayOfEnabledFilterTags.length > 0) ? hideHtmlEventsPerDateListsAndTheirEventContainers(arrayOfEnabledFilterTags):
+        document.getElementById(HTML_ID_TAGS_MODAL_SAVE_BUTTON).addEventListener("click", () => {
+            HelperTagsModal.saveEnabledTagValuesFromHtmlModalFormToSessionStorage(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
+            let arrayOfEnabledTags = HelperTagsModal.getArrayOfEnabledTagValuesFromHtmlTagsModal();
+            (arrayOfEnabledTags.length > 0) ? hideHtmlEventsPerDateListsAndTheirEventContainers(arrayOfEnabledTags):
                 showHtmlEventsPerDateListsAndTheirEventContainers();
         });
     });

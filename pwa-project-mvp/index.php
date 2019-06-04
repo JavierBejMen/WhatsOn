@@ -10,6 +10,10 @@ spl_autoload_register(function ($className) {
     require($_SERVER["DOCUMENT_ROOT"] . "/php_classes/$className.php");
 });
 session_start();
+
+// REMOVE
+// $_SESSION[HelperNavigator::SESSION_VARIABLE_USER_EMAIL] = "user@server.com";
+
 HelperNavigator::redirectUrlBasedOnSessionVariableUserEmailAndQueryParameters();
 $phpAbsoluteFilePathView = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])) ?
     HelperNavigator::getPhpAbsoluteFilePathFromQueryParameterView($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])
@@ -103,7 +107,7 @@ $phpAbsoluteFilePathView = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIE
                             <i class="fas fa-ellipsis-v fa-sm"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="idMoreActionsDropdownButton">
-                            <a class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target="#idFilterTagsModal">Aplicar filtros</a>
+                            <a class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target="#idTagsModal">Aplicar filtros</a>
                             <a class="dropdown-item waves-effect waves-light">Recomendar WhatsOn</a>
                             <a class="dropdown-item waves-effect waves-light" href="<?php print(HelperNavigator::getUrlLoginView()); ?>">Crear
                                 evento</a>
@@ -140,7 +144,7 @@ $phpAbsoluteFilePathView = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIE
     <!-- Custom scripts -->
     <script src="./js_scripts/HelperForm.js"></script>
     <script src="./js_scripts/HelperMap.js"></script>
-    <script src="./js_scripts/HelperTagsFilter.js"></script>
+    <script src="./js_scripts/HelperTagsModal.js"></script>
     <script src="./js_scripts/HelperServiceWorker.js"></script>
     <script src="./js_scripts/navigation.js"></script>
     <script>

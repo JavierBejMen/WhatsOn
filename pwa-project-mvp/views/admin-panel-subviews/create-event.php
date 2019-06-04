@@ -15,11 +15,11 @@
         </li>
     </ul>
 </nav>
-<div class="container-fluid classTertiaryBackgroundColor text-black-50 text-center pt-4 pb-2" id="idEditEventPictureContainer">
+<div class="container-fluid classTertiaryBackgroundColor text-black-50 text-center pt-4 pb-2" id="idEventPictureContainer">
     <i class="fas fa-camera fa-7x"></i>
     <p class="pt-3">Imagen del evento</p>
     <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-sm classSecondaryBackgroundColor text-white waves-effect waves-light" id="idEditEventPictureButton" title="Añadir o actualizar imagen de evento" aria-label="Añadir o actualizar imagen de evento">
+        <button type="button" class="btn btn-sm classSecondaryBackgroundColor text-white waves-effect waves-light" id="idAddEventPictureButton" title="Añadir imagen de evento" aria-label="Añadir imagen de evento">
             <i class="fas fa-pen fa-2x"></i>
         </button>
     </div>
@@ -27,20 +27,33 @@
 <div class="container py-3" id="idCreateEventMain">
     <form class="needs-validation mx-auto" id="idCreateEventForm" novalidate>
         <div class="form-group">
-            <a role="button" class="btn classSecondaryBackgroundColor text-white waves-effect" id="idAddTagsButton" title="Añadir etiquetas" aria-label="Añadir etiquetas">Añadir etiquetas</a>
-        </div>
-        <div class="form-group">
-            <label for="idEventName">Qué <span class="text-danger">*</span></label>
-            <input class="form-control classOnlyBottomBorderInput" id="idEventName" type="text" minlength="5" placeholder="Nombre del evento" required>
+            <label for="idEventNameInput">Qué <span class="text-danger">*</span></label>
+            <input class="form-control classOnlyBottomBorderInput" id="idEventNameInput" type="text" minlength="5" placeholder="Nombre del evento" required>
             <div class="invalid-feedback">
                 Por favor, introduce un nombre válido.
             </div>
         </div>
         <div class="form-group">
-            <label for="idEventDescription">En qué consiste <span class="text-danger">*</span></label>
-            <textarea class="form-control classOnlyBottomBorderInput" id="idEventDescription" rows="5" minlength="5" placeholder="Descripción del evento" required></textarea>
+            <label for="idEventDescriptionInput">En qué consiste <span class="text-danger">*</span></label>
+            <textarea class="form-control classOnlyBottomBorderInput" id="idEventDescriptionInput" rows="5" minlength="5" placeholder="Descripción del evento" required></textarea>
             <div class="invalid-feedback">
                 Por favor, introduce una descripción válida.
+            </div>
+        </div>
+        <div class="d-flex mb-4">
+            <i class="text-primary fas fa-tags fa-lg mr-3"></i>
+            <div class="w-100">
+                <div class="form-group">
+                    <label for="idEventTagsInput">Etiquetas <span class="text-danger">*</span></label>
+                    <textarea class="form-control classInvisible" id="idEventTagsInput" required></textarea>
+                    <div class="row justify-content-start classTagsList" id="idEventTagsList"></div>
+                    <div class="invalid-feedback">
+                        Por favor, introduce una o más etiquetas.
+                    </div>
+                    <button class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2" type="button" id="idCreateEventShowModalForAddingTagsButton" title="Añadir etiquetas" aria-label="Añadir etiquetas" data-toggle="modal" data-target="#idTagsModal" data-backdrop="false" title="Filtro de etiquetas" aria-label="Filtro de etiquetas">
+                        <i class="fas fa-pen fa-lg"></i>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="d-flex mb-4">
@@ -110,15 +123,15 @@
             <i class="text-primary fas fa-map-marker-alt fa-lg mr-3"></i>
             <div class="w-100">
                 <div class="form-group">
-                    <label for="idEventLocal">Dónde <span class="text-danger">*</span></label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventLocal" type="text" minlength="5" placeholder="Bar, pub, discoteca o local" required>
+                    <label for="idEventLocalInput">Dónde <span class="text-danger">*</span></label>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventLocalInput" type="text" minlength="5" placeholder="Bar, pub, discoteca o local" required>
                     <div class="invalid-feedback">
                         Por favor, introduce el nombre del local.
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="idEventAddress">Dirección <span class="text-danger">*</span></label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventAddress" type="text" minlength="5" placeholder="Dirección del evento" required>
+                    <label for="idEventAddressInput">Dirección <span class="text-danger">*</span></label>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventAddressInput" type="text" minlength="5" placeholder="Dirección del evento" required>
                     <div class="invalid-feedback">
                         Por favor, introduce la dirección.
                     </div>
@@ -130,12 +143,24 @@
         </button>
     </form>
 </div>
+<?php
+require($_SERVER["DOCUMENT_ROOT"] . "/components/tags-modal.php");
+?>
 <script>
     window.addEventListener("DOMContentLoaded", () => {
         setHtmlBodyBackgroundColor(HTML_CLASS_WHITE_BACKGROUND_COLOR);
         hideMainMenuBar();
+        HelperTagsModal.clearEnabledTagValuesFromSessionStorage(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
+        document.getElementById(HTML_ID_CREATE_EVENT_SHOW_MODAL_FOR_ADDING_TAGS_BUTTON).addEventListener("click", () => {
+            HelperTagsModal.loadPreviousEnabledTagValuesFromSessionStorageToHtmlFormModal(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
+        });
+        document.getElementById(HTML_ID_TAGS_MODAL_SAVE_BUTTON).addEventListener("click", () => {
+            HelperTagsModal.saveEnabledTagValuesFromHtmlModalFormToSessionStorage(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
+            clearHtmlEventTagsInputAndFillWithEnabledTagValuesFromTagModal(HTML_ID_EVENT_TAGS_INPUT);
+            clearHtmlEventTagsListAndFillWithEnabledTagValuesFromTagModal(HTML_ID_EVENT_TAGS_LIST);
+        });
         // Event StartDate and StartTime Pickers
-        Array.from(document.getElementsByClassName("classStartDateTimeTextInput")).map((dateTimeTextInput) => {
+        Array.from(document.getElementsByClassName(HTML_CLASS_START_DATE_TIME_TEXT_INPUT)).map((dateTimeTextInput) => {
             dateTimeTextInput.addEventListener("focus", () => {
                 showDatePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_DATE_TEXT_INPUT);
             });
@@ -154,7 +179,7 @@
                 HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
         });
         // Event EndDate and EndTime Pickers
-        Array.from(document.getElementsByClassName("classEndDateTimeTextInput")).map((dateTimeTextInput) => {
+        Array.from(document.getElementsByClassName(HTML_CLASS_END_DATE_TIME_TEXT_INPUT)).map((dateTimeTextInput) => {
             dateTimeTextInput.addEventListener("focus", () => {
                 showDatePickerForEventEndDateTimeButton(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT,
                     HTML_ID_EVENT_END_DATE_TEXT_INPUT);

@@ -48,7 +48,7 @@ $event = DBEvent::getEventFromId($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVEN
                 <i class="fas fa-chevron-down"></i>
             </button>
             <button class="collapsed btn btn-mdb-color btn-sm waves-effect waves-light px-2 py-1 
-            classShowHideDescriptionButton invisible" type="button" data-toggle="collapse" href="#idEventInfoDescriptionParagraph" aria-expanded="false" aria-controls="idEventInfoDescriptionParagraph" title="Ocultar descripción" aria-label="Ocultar descripción" onclick="toggleShowAndHideDescriptionButtons('idEventInfoDescriptionContainer')">
+            classShowHideDescriptionButton classInvisible" type="button" data-toggle="collapse" href="#idEventInfoDescriptionParagraph" aria-expanded="false" aria-controls="idEventInfoDescriptionParagraph" title="Ocultar descripción" aria-label="Ocultar descripción" onclick="toggleShowAndHideDescriptionButtons('idEventInfoDescriptionContainer')">
                 <i class="fas fa-chevron-up"></i>
             </button>
         </div>

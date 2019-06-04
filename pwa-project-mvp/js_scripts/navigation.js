@@ -18,25 +18,34 @@ const HTML_TAG_MAIN = "main";
 const HTML_TAG_DIV = "div";
 const HTML_TAG_NAVIGATION_ITEM = "a";
 const HTML_TAG_MENU_BAR_TITLE = "h5";
+const HTML_TAG_SPAN = "span";
 const HTML_ATTRIBUTE_ID = "id";
 const HTML_ATTRIBUTE_DATA_TOGGLE = "data-toggle";
 const HTML_ATTRIBUTE_DATA_TARGET = "data-target";
 const HTML_ATTRIBUTE_HIDDEN = "hidden";
 const HTML_ATTRIBUTE_DISABLED = "disabled";
+const HTML_BOOTSTRAP_CLASS_BUTTON = "btn";
+const HTML_BOOTSTRAP_CLASS_BUTTON_ELEGANT = "btn-elegant";
 const HTML_CLASS_WHITE_BACKGROUND_COLOR = "#FFFFFF";
 const HTML_CLASS_TERTIARY_BACKGROUND_COLOR = "#EEEEEE";
-const HTML_CLASS_INVISIBLE = "invisible";
+const HTML_CLASS_INVISIBLE = "classInvisible";
 const HTML_CLASS_SELECTED_ITEM_IN_NAVIGATION_BAR = "classSelectedNavigationItem";
 const HTML_CLASS_SHOW_HIDE_DESCRIPTION_BUTTON = "classShowHideDescriptionButton";
 const HTML_CLASS_EVENTS_PER_DATE_LIST = "classEventsPerDateList";
 const HTML_CLASS_EVENTS_PER_DATE_EVENT_CONTAINER = "classEventsPerDateEventContainer";
 const HTML_CLASS_ROUNDED_BOTTOM_RIGHT_FLOATING_BUTTON = "classRoundedBottomRightFloatingButton";
 const HTML_CLASS_TAG_SPAN = "classTagSpan";
-const HTML_CLASS_FILTER_TAG_BUTTON = "classFilterTagButton";
+const HTML_CLASS_TAGS_MODAL_TAG_SPAN = "classTagsModalTagSpan";
 const HTML_CLASS_FORM_FIELD_WAS_VALIDATED = "was-validated";
+const HTML_CLASS_START_DATE_TIME_TEXT_INPUT = "classStartDateTimeTextInput";
+const HTML_CLASS_END_DATE_TIME_TEXT_INPUT = "classEndDateTimeTextInput";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
 const HTML_ID_LOGIN_FORM = "idLoginForm";
 const HTML_ID_CREATE_EVENT_LOGIN_FORM = "idCreateEventForm";
+const HTML_ID_CREATE_EVENT_SHOW_MODAL_FOR_ADDING_TAGS_BUTTON = "idCreateEventShowModalForAddingTagsButton";
+const HTML_ID_CREATE_EVENT_SUBMIT_BUTTON = "idCreateEventSubmitButton";
+const HTML_ID_EVENT_TAGS_INPUT = "idEventTagsInput";
+const HTML_ID_EVENT_TAGS_LIST = "idEventTagsList";
 const HTML_ID_EVENT_START_DATE_TIME_BUTTON = "idEventStartDateTimeButton";
 const HTML_ID_EVENT_START_DATE_TEXT_INPUT = "idEventStartDateTextInput";
 const HTML_ID_EVENT_START_TIME_TEXT_INPUT = "idEventStartTimeTextInput";
@@ -45,7 +54,6 @@ const HTML_ID_EVENT_END_DATE_TEXT_INPUT = "idEventEndDateTextInput";
 const HTML_ID_EVENT_END_TIME_TEXT_INPUT = "idEventEndTimeTextInput";
 const HTML_ID_EVENT_TICKET_PRICE_INPUT = "idEventTicketPriceInput";
 const HTML_ID_FREE_ENTRANCE_CHECK_INPUT = "idFreeEntranceCheckInput";
-const HTML_ID_CREATE_EVENT_SUBMIT_BUTTON = "idCreateEventSubmitButton";
 const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS =
     "idEventsWeekCalendarContainerInAllEvents";
 const HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR = "idEventsWeekCalendarNavigationBar";
@@ -53,10 +61,9 @@ const HTML_ID_EVENTS_WEEK_CALENDAR_BUTTON = "idEventsWeekCalendarButton";
 const HTML_IDS_LIST_FOR_EVENTS_LISTS = ["idEventsOnMonday", "idEventsOnTuesday",
     "idEventsOnWednesday", "idEventsOnThursday", "idEventsOnFriday", "idEventsOnSaturday",
     "idEventsOnSunday"];
-// const HTML_ID_TAGS_FILTER_CONTAINER_IN_EVENTS = "idTagsFilterContainerInEvents";
-const HTML_ID_FILTER_TAGS_SHOW_MODAL_BUTTON = "idFilterTagsShowModalButton";
-const HTML_ID_FILTER_TAGS_HIDE_MODAL_BUTTON = "idFilterTagsHideModalButton";
-const HTML_ID_FILTER_TAGS_SAVE_BUTTON = "idFilterTagsSaveButton";
+const HTML_ID_EVENTS_SHOW_MODAL_FOR_FILTERING_TAGS_BUTTON = "idEventsShowModalForFilteringTagsButton";
+const HTML_ID_TAGS_MODAL_CLOSE_BUTTON = "idTagsModalCloseButton";
+const HTML_ID_TAGS_MODAL_SAVE_BUTTON = "idTagsModalSaveButton";
 const HTML_ID_DATE_TIME_PICKER_WRAPPER = "idMddtpPickerWrapper";
 const HTML_ID_DATE_PICKER = "mddtp-picker__date";
 const HTML_ID_DATE_PICKER_CANCEL_BUTTON = "mddtp-date__cancel";
@@ -65,7 +72,7 @@ const HTML_ID_TIME_PICKER = "mddtp-picker__time";
 const HTML_ID_TIME_PICKER_CANCEL_BUTTON = "mddtp-time__cancel";
 const HTML_ID_TIME_PICKER_OK_BUTTON = "mddtp-time__ok";
 const HTML_ID_EVENT_INFO_MAP_CONTAINER = "idEventInfoMapContainer";
-const SESSION_STORAGE_KEY_ENABLED_FILTER_TAGS_VALUES = "EnabledFilterTagValues";
+const SESSION_STORAGE_KEY_ENABLED_TAG_VALUES = "EnabledTagValues";
 
 function loadEventsWeekCalendarComponentInHtmlElementById(htmlElementId, offsetValue) {
     loadHtmlFileInHtmlElementById(htmlElementId, FILE_PATH_EVENTS_WEEK_CALENDAR_COMPONENT);
@@ -253,7 +260,7 @@ function showHtmlEventsPerDateListsAndTheirEventContainers() {
         eventsPerDateList.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
     });
 }
-function hideHtmlEventsPerDateListsAndTheirEventContainers(arrayOfEnabledFilteredTags) {
+function hideHtmlEventsPerDateListsAndTheirEventContainers(arrayOfEnabledTags) {
     let htmlEventsPerDateLists = Array.from(document.getElementsByClassName(HTML_CLASS_EVENTS_PER_DATE_LIST));
     htmlEventsPerDateLists.map((htmlEventsPerDateList) => {
         let numberOfHiddenEvents = 0;
@@ -262,7 +269,7 @@ function hideHtmlEventsPerDateListsAndTheirEventContainers(arrayOfEnabledFiltere
             let hideEventContainer = true;
             let htmlEventTags = Array.from(htmlEventContainer.getElementsByClassName(HTML_CLASS_TAG_SPAN));
             htmlEventTags.map((htmlEventTag) => {
-                if (arrayOfEnabledFilteredTags.includes(htmlEventTag.textContent)) {
+                if (arrayOfEnabledTags.includes(htmlEventTag.textContent)) {
                     hideEventContainer = false;
                 }
             });
@@ -277,4 +284,26 @@ function hideHtmlEventsPerDateListsAndTheirEventContainers(arrayOfEnabledFiltere
             htmlEventsPerDateList.setAttribute(HTML_ATTRIBUTE_HIDDEN, HTML_EMPTY_STRING_VALUE) :
             htmlEventsPerDateList.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
     });
+}
+function clearHtmlEventTagsInputAndFillWithEnabledTagValuesFromTagModal(htmlIdEventTagsInput) {
+    let htmlEventTagsInput = document.getElementById(htmlIdEventTagsInput);
+    htmlEventTagsInput.textContent = HTML_EMPTY_STRING_VALUE;
+    HelperTagsModal.getArrayOfEnabledTagValuesFromHtmlTagsModal().map(tag => {
+        htmlEventTagsInput.textContent += tag + ",";
+    });
+}
+
+function clearHtmlEventTagsListAndFillWithEnabledTagValuesFromTagModal(htmlIdTagsList) {
+    let htmlTagsList = document.getElementById(htmlIdTagsList);
+    htmlTagsList.textContent = HTML_EMPTY_STRING_VALUE;
+    HelperTagsModal.getArrayOfEnabledTagValuesFromHtmlTagsModal().map(tag => {
+        htmlTagsList.appendChild(createHtmlEventTagSpan(tag));
+    });
+}
+function createHtmlEventTagSpan(tagValue) {
+    let resultHtmlSpan = document.createElement(HTML_TAG_SPAN);
+    resultHtmlSpan.classList.add(HTML_BOOTSTRAP_CLASS_BUTTON, HTML_BOOTSTRAP_CLASS_BUTTON_ELEGANT);
+    resultHtmlSpan.textContent = tagValue;
+    resultHtmlSpan.disabled = true;
+    return resultHtmlSpan;
 }
