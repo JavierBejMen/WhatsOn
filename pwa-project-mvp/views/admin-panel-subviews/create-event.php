@@ -45,7 +45,7 @@
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventTagsInput">Etiquetas <span class="text-danger">*</span></label>
-                    <textarea class="form-control classInvisible" id="idEventTagsInput" required></textarea>
+                    <input class="form-control classInvisible" id="idEventTagsInput" type="text" required>
                     <div class="row justify-content-start classTagsList" id="idEventTagsList"></div>
                     <div class="invalid-feedback">
                         Por favor, introduce una o más etiquetas.
