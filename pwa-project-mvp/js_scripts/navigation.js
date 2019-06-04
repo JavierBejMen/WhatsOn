@@ -43,8 +43,8 @@ const HTML_ID_EVENT_START_TIME_TEXT_INPUT = "idEventStartTimeTextInput";
 const HTML_ID_EVENT_END_DATE_TIME_BUTTON = "idEventEndDateTimeButton";
 const HTML_ID_EVENT_END_DATE_TEXT_INPUT = "idEventEndDateTextInput";
 const HTML_ID_EVENT_END_TIME_TEXT_INPUT = "idEventEndTimeTextInput";
-const HTML_ID_EVENT_TICKET_PRICE = "idEventTicketPrice";
-const HTML_ID_FREE_ENTRANCE_CHECK = "idFreeEntranceCheck";
+const HTML_ID_EVENT_TICKET_PRICE_INPUT = "idEventTicketPriceInput";
+const HTML_ID_FREE_ENTRANCE_CHECK_INPUT = "idFreeEntranceCheckInput";
 const HTML_ID_CREATE_EVENT_SUBMIT_BUTTON = "idCreateEventSubmitButton";
 const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS =
     "idEventsWeekCalendarContainerInAllEvents";

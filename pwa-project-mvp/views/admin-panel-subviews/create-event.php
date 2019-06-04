@@ -71,36 +71,36 @@
         <div class="mx-4 mb-3" id="idEventPricesContainer">
             <div class="d-flex">
                 <div class="form-group">
-                    <label for="idEventTicketPrice">Entrada <span class="text-danger">*</span></label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventTicketPrice" type="number" min="0" step="0.01" placeholder="Precio de la entrada" required>
+                    <label for="idEventTicketPriceInput">Entrada <span class="text-danger">*</span></label>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventTicketPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la entrada" required>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="idFreeEntranceCheck">
-                    <label class="form-check-label" for="idFreeEntranceCheck">
+                    <input class="form-check-input" type="checkbox" value="" id="idFreeEntranceCheckInput">
+                    <label class="form-check-label" for="idFreeEntranceCheckInput">
                         Entraba libre
                     </label>
                 </div>
             </div>
             <div class="d-flex">
                 <div class="form-group">
-                    <label for="idEventLongDrinkPrice">Copa</label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventLongDrinkPrice" type="number" min="0" step="0.01" placeholder="Precio de la copa">
+                    <label for="idEventLongDrinkPriceInput">Copa</label>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventLongDrinkPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la copa">
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="idMaxOrMinLongDrinkPriceCheck">
-                    <label class="form-check-label" for="idMaxOrMinLongDrinkPriceCheck">
+                    <input class="form-check-input" type="checkbox" value="" id="idMaxOrMinLongDrinkPriceCheckInput">
+                    <label class="form-check-label" for="idMaxOrMinLongDrinkPriceCheckInput">
                         Máx./mín.
                     </label>
                 </div>
             </div>
             <div class="d-flex">
                 <div class="form-group">
-                    <label for="idEventBeerPrice">Cerveza</label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventBeerPrice" type="number" min="0" step="0.01" placeholder="Precio de la cerveza">
+                    <label for="idEventBeerPriceInput">Cerveza</label>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventBeerPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la cerveza">
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="idMaxOrMinBeerPriceCheck">
-                    <label class="form-check-label" for="idMaxOrMinBeerPriceCheck">
+                    <input class="form-check-input" type="checkbox" value="" id="idMaxOrMinBeerPriceCheckInput">
+                    <label class="form-check-label" for="idMaxOrMinBeerPriceCheckInput">
                         Máx./mín.
                     </label>
                 </div>
@@ -173,9 +173,9 @@
         document.getElementById(HTML_ID_EVENT_END_TIME_TEXT_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
             writeEndDateTimeValues(HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
         });
-        // On HTML_ID_FREE_ENTRANCE_CHECK change, modify HTML_ID_EVENT_TICKET_PRICE
-        document.getElementById(HTML_ID_FREE_ENTRANCE_CHECK).addEventListener("change", () => {
-            HelperForm.toggleHtmlEventTicketPriceReadOnlyAndValue(HTML_ID_EVENT_TICKET_PRICE);
+        // On HTML_ID_FREE_ENTRANCE_CHECK_INPUT change, modify HTML_ID_EVENT_TICKET_PRICE_INPUT
+        document.getElementById(HTML_ID_FREE_ENTRANCE_CHECK_INPUT).addEventListener("change", () => {
+            HelperForm.toggleHtmlEventTicketPriceInputReadOnlyAndValue(HTML_ID_FREE_ENTRANCE_CHECK_INPUT, HTML_ID_EVENT_TICKET_PRICE_INPUT);
         });
         // Form validation
         let htmlCreateEventForm = document.getElementById(HTML_ID_CREATE_EVENT_LOGIN_FORM);

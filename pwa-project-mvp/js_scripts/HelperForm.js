@@ -9,15 +9,15 @@ class HelperForm {
             htmlForm.classList.remove(HTML_CLASS_FORM_FIELD_WAS_VALIDATED);
         }
     }
-    static toggleHtmlEventTicketPriceReadOnlyAndValue(htmlIdEventPrice) {
-        let htmlEventTicketPrice = document.getElementById(htmlIdEventPrice);
-        if (htmlFreeEntranceCheck.checked) {
-            htmlEventTicketPrice.readOnly = true;
-            htmlEventTicketPrice.value = 0;
+    static toggleHtmlEventTicketPriceInputReadOnlyAndValue(htmlIdFreeEntranceCheckInput, htmlIdEventPriceInput) {
+        let htmlEventPriceInput = document.getElementById(htmlIdEventPriceInput);
+        if (document.getElementById(htmlIdFreeEntranceCheckInput).checked) {
+            htmlEventPriceInput.readOnly = true;
+            htmlEventPriceInput.value = 0;
         }
         else {
-            htmlEventTicketPrice.readOnly = false;
-            htmlEventTicketPrice.value = HTML_EMPTY_STRING_VALUE;
+            htmlEventPriceInput.readOnly = false;
+            htmlEventPriceInput.value = HTML_EMPTY_STRING_VALUE;
         }
     }
 }
