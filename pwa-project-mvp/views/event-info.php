@@ -1,13 +1,4 @@
 <?php
-// if (HelperNavigator::isValidUrlQueryForEventInfoView($_GET)) {
-//     if (!($event = DBEvent::getEventFromId($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVENT_ID]))) {
-//         HelperNavigator::redirectToUrlRoot();
-//         exit();
-//     }
-// } else {
-//     HelperNavigator::redirectToUrlRoot();
-//     exit();
-// }
 $event = DBEvent::getEventFromId($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVENT_ID]);
 ?>
 <nav class="navbar navbar-expand fixed-top classPrimaryBackgroundColor text-white" id="idEventInfoMenuBar">

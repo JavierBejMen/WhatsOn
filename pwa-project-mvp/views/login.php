@@ -46,7 +46,7 @@
         hideMainMenuBar();
         let htmlLoginForm = document.getElementById(HTML_ID_LOGIN_FORM);
         htmlLoginForm.addEventListener("submit", () => {
-            HelperLogin.validateHtmlLoginForm(htmlLoginForm);
+            HelperForm.validateHtmlForm(htmlLoginForm);
         }, false);
     });
 </script>

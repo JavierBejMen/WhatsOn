@@ -15,6 +15,7 @@ $phpAbsoluteFilePathView = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIE
     HelperNavigator::getPhpAbsoluteFilePathFromQueryParameterView($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])
     : HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::FILE_PATH_EVENTS_VIEW);
 
+// REMOVE
 // echo '<div class="row">' . '<br><br>';
 // echo HelperDateTime::getNowDateTime()->format("Y-m-d") . '<br><br>';
 // echo var_dump(DBEvent::getEventFromId(2)) . '<br><br>';
@@ -137,7 +138,7 @@ $phpAbsoluteFilePathView = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIE
     <!-- Material Date & Time Picker JS -->
     <script src="./components/md-date-time-picker-2.3.0/dist/js/mdDateTimePicker.js"></script>
     <!-- Custom scripts -->
-    <script src="./js_scripts/HelperLogin.js"></script>
+    <script src="./js_scripts/HelperForm.js"></script>
     <script src="./js_scripts/HelperMap.js"></script>
     <script src="./js_scripts/HelperTagsFilter.js"></script>
     <script src="./js_scripts/HelperServiceWorker.js"></script>

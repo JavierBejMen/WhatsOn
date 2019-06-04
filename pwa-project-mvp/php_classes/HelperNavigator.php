@@ -6,7 +6,28 @@ final class HelperNavigator
         if (isset($_GET[self::URL_QUERY_PARAMETER_LOGOUT])) {
             unset($_SESSION[self::SESSION_VARIABLE_USER_EMAIL]);
         } else if (isset($_SESSION[self::SESSION_VARIABLE_USER_EMAIL])) {
-            if (!self::isValidUrlQueryForAdminPanelView($_GET)) {
+            if ($_GET && isset($_GET[self::URL_QUERY_PARAMETER_VIEW])) {
+                $isValidUrlQuery = true;
+                switch ($_GET[self::URL_QUERY_PARAMETER_VIEW]) {
+                    case self::URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL:
+                        if (!self::isValidUrlQueryForAdminPanelView($_GET)) {
+                            $isValidUrlQuery = false;
+                        }
+                        break;
+                    case self::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT:
+                        if (!self::isValidUrlQueryForCreateEventView($_GET)) {
+                            $isValidUrlQuery = false;
+                        }
+                        break;
+                    default:
+                        $isValidUrlQuery = false;
+                        break;
+                }
+                if (!$isValidUrlQuery) {
+                    self::redirectToUrlRoot();
+                    exit();
+                }
+            } else {
                 self::redirectToUrlAdminPanelView();
                 exit();
             }
@@ -48,8 +69,11 @@ final class HelperNavigator
             case self::URL_PARAMETER_VIEW_VALUE_LOGIN:
                 $relativeFilePathView = self::FILE_PATH_LOGIN_VIEW;
                 break;
-            case self::PARAMETER_VIEW_ADMIN_PANEL:
+            case self::URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL:
                 $relativeFilePathView = self::FILE_PATH_ADMIN_PANEL_VIEW;
+                break;
+            case self::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT:
+                $relativeFilePathView = self::FILE_PATH_CREATE_EVENT_VIEW;
                 break;
             case self::URL_PARAMETER_VIEW_VALUE_EVENTS:
             default:
@@ -86,7 +110,12 @@ final class HelperNavigator
     }
     public static function getUrlAdminPanelView(): string
     {
-        $queryArray = array(self::URL_QUERY_PARAMETER_VIEW => self::PARAMETER_VIEW_ADMIN_PANEL);
+        $queryArray = array(self::URL_QUERY_PARAMETER_VIEW => self::URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL);
+        return self::getUrlRoot() . self::FILE_PATH_INDEX_SCRIPT . "?" . http_build_query($queryArray);
+    }
+    public static function getUrlCreateEventView(): string
+    {
+        $queryArray = array(self::URL_QUERY_PARAMETER_VIEW => self::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT);
         return self::getUrlRoot() . self::FILE_PATH_INDEX_SCRIPT . "?" . http_build_query($queryArray);
     }
     public static function getUrlLogout(): string
@@ -129,7 +158,12 @@ final class HelperNavigator
     public static function isValidUrlQueryForAdminPanelView(array $arrayOfQueryParameters): bool
     {
         return isset($arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW])
-            && $arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW] === self::PARAMETER_VIEW_ADMIN_PANEL;
+            && $arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW] === self::URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL;
+    }
+    public static function isValidUrlQueryForCreateEventView(array $arrayOfQueryParameters): bool
+    {
+        return isset($arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW])
+            && $arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW] === self::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT;
     }
     public static function isSecureConnection()
     {
@@ -139,7 +173,7 @@ final class HelperNavigator
     public const FILE_PATH_EVENT_INFO_VIEW = "/views/event-info.php";
     public const FILE_PATH_LOGIN_VIEW = "/views/login.php";
     public const FILE_PATH_ADMIN_PANEL_VIEW = "/views/admin-panel.php";
-    // public const FILE_PATH_CREATE_EVENT_VIEW = "/views/admin-panel-subviews/create-event.html";
+    public const FILE_PATH_CREATE_EVENT_VIEW = "/views/admin-panel-subviews/create-event.php";
     public const FILE_PATH_INDEX_SCRIPT = "/index.php";
     public const FILE_PATH_LOGIN_SCRIPT = "/php_scripts/login.php";
     public const FILE_PATH_LOGOUT_SCRIPT = "/php_scripts/logout.php";
@@ -150,7 +184,8 @@ final class HelperNavigator
     public const URL_PARAMETER_VIEW_VALUE_EVENTS = "events";
     public const URL_PARAMETER_VIEW_VALUE_EVENT_INFO = "event-info";
     public const URL_PARAMETER_VIEW_VALUE_LOGIN = "login";
-    public const PARAMETER_VIEW_ADMIN_PANEL = "admin-panel";
+    public const URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL = "admin-panel";
+    public const URL_PARAMETER_VIEW_VALUE_CREATE_EVENT = "create-event";
     public const SESSION_VARIABLE_USER_EMAIL = "user_email";
     public const HTML_ID_LOGIN_EMAIL = "idLoginEmail";
     public const HTML_ID_LOGIN_PASSWORD = "idLoginPassword";

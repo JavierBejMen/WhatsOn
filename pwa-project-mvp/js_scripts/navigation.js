@@ -1,10 +1,4 @@
 const FILE_PATH_SERVICE_WORKER = "./service-worker.js";
-// const FILE_PATH_EVENTS_VIEW = "./views/events.html";
-// const FILE_PATH_EVENT_INFO_VIEW = "./views/event-info.html";
-// const FILE_PATH_LOGIN_VIEW = "./views/login.html";
-// const FILE_PATH_ADMIN_PANEL_VIEW = "./views/admin-panel.html";
-const FILE_PATH_CREATE_EVENT_VIEW = "./views/admin-panel-subviews/create-event.html";
-// const FILE_PATH_TAGS_FILTER_COMPONENT = "./components/tags-filter.html";
 const FILE_PATH_EVENTS_WEEK_CALENDAR_COMPONENT = "./components/events-week-calendar.html";
 const CSS_CHAR_ID_SELECTOR = "#";
 const CSS_PROPERTY_DISPLAY_VALUE_INITIAL = "initial";
@@ -42,13 +36,16 @@ const HTML_CLASS_FILTER_TAG_BUTTON = "classFilterTagButton";
 const HTML_CLASS_FORM_FIELD_WAS_VALIDATED = "was-validated";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
 const HTML_ID_LOGIN_FORM = "idLoginForm";
+const HTML_ID_CREATE_EVENT_LOGIN_FORM = "idCreateEventForm";
 const HTML_ID_EVENT_START_DATE_TIME_BUTTON = "idEventStartDateTimeButton";
 const HTML_ID_EVENT_START_DATE_TEXT_INPUT = "idEventStartDateTextInput";
 const HTML_ID_EVENT_START_TIME_TEXT_INPUT = "idEventStartTimeTextInput";
 const HTML_ID_EVENT_END_DATE_TIME_BUTTON = "idEventEndDateTimeButton";
 const HTML_ID_EVENT_END_DATE_TEXT_INPUT = "idEventEndDateTextInput";
 const HTML_ID_EVENT_END_TIME_TEXT_INPUT = "idEventEndTimeTextInput";
-const HTML_ID_CREATE_EVENT_BUTTON = "idCreateEventButton";
+const HTML_ID_EVENT_TICKET_PRICE = "idEventTicketPrice";
+const HTML_ID_FREE_ENTRANCE_CHECK = "idFreeEntranceCheck";
+const HTML_ID_CREATE_EVENT_SUBMIT_BUTTON = "idCreateEventSubmitButton";
 const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS =
     "idEventsWeekCalendarContainerInAllEvents";
 const HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR = "idEventsWeekCalendarNavigationBar";
@@ -70,30 +67,9 @@ const HTML_ID_TIME_PICKER_OK_BUTTON = "mddtp-time__ok";
 const HTML_ID_EVENT_INFO_MAP_CONTAINER = "idEventInfoMapContainer";
 const SESSION_STORAGE_KEY_ENABLED_FILTER_TAGS_VALUES = "EnabledFilterTagValues";
 
-// function loadEvents() {
-//     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_EVENTS_VIEW);
-// }
-// function loadEventInfoView() {
-//     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_EVENT_INFO_VIEW);
-// }
-// function loadLoginView() {
-//     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_LOGIN_VIEW);
-// }
-// function loadAdminPanelView() {
-//     loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_ADMIN_PANEL_VIEW);
-// }
-function loadCreateEventView() {
-    loadHtmlFileInHtmlElementByTag(HTML_TAG_MAIN, FILE_PATH_CREATE_EVENT_VIEW);
-}
-// function loadTagsFilterComponentInHtmlElementById(htmlElementId) {
-//     loadHtmlFileInHtmlElementById(htmlElementId, FILE_PATH_TAGS_FILTER_COMPONENT);
-// }
 function loadEventsWeekCalendarComponentInHtmlElementById(htmlElementId, offsetValue) {
     loadHtmlFileInHtmlElementById(htmlElementId, FILE_PATH_EVENTS_WEEK_CALENDAR_COMPONENT);
     setScrollspyInNavigationBarById(HTML_ID_EVENTS_WEEK_CALENDAR_NAVIGATION_BAR, offsetValue);
-}
-function loadHtmlFileInHtmlElementByTag(htmlElementTag, htmlFilePath) {
-    $(htmlElementTag).load(htmlFilePath);
 }
 function loadHtmlFileInHtmlElementById(htmlElementId, htmlFilePath) {
     $(CSS_CHAR_ID_SELECTOR + htmlElementId).load(htmlFilePath);
