@@ -3,9 +3,7 @@ final class HelperNavigator
 {
     public static function redirectUrlBasedOnSessionVariableUserEmailAndQueryParameters()
     {
-        if (isset($_GET[self::URL_QUERY_PARAMETER_LOGOUT])) {
-            unset($_SESSION[self::SESSION_VARIABLE_USER_EMAIL]);
-        } else if (isset($_SESSION[self::SESSION_VARIABLE_USER_EMAIL])) {
+        if (isset($_SESSION[self::SESSION_VARIABLE_USER_EMAIL])) {
             if ($_GET && isset($_GET[self::URL_QUERY_PARAMETER_VIEW])) {
                 $isValidUrlQuery = true;
                 switch ($_GET[self::URL_QUERY_PARAMETER_VIEW]) {
@@ -24,7 +22,7 @@ final class HelperNavigator
                         break;
                 }
                 if (!$isValidUrlQuery) {
-                    self::redirectToUrlRoot();
+                    self::redirectToUrlAdminPanelView();
                     exit();
                 }
             } else {
