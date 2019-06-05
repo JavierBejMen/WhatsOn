@@ -35,7 +35,7 @@
 <div class="container py-3" id="idCreateEventMain">
     <form class="needs-validation mx-auto" id="idCreateEventForm" method="post" enctype="multipart/form-data" action="<?php print(HelperNavigator::getUrlCreateEventScript()); ?>" novalidate>
         <div class="form-group">
-            <input type="hidden" name="MAX_FILE_SIZE" value="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_MAX_SIZE_IMAGE_FILE); ?>" />
+            <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_MAX_SIZE_IMAGE_FILE); ?>" />
             <input id="idEventImageFileInput" name="idEventImageFileInput" accept="image/*" type="file" hidden>
             <div class="invalid-feedback">
                 Por favor, introduce una imagen válida.

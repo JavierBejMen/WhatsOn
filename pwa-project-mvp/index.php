@@ -12,14 +12,14 @@ spl_autoload_register(function ($className) {
 session_start();
 
 // REMOVE - Testing
-// $_SESSION[HelperNavigator::SESSION_VARIABLE_USER_EMAIL] = "user@server.com";
+$_SESSION[HelperNavigator::SESSION_VARIABLE_USER_EMAIL] = "user@server.com";
 
 HelperNavigator::redirectUrlBasedOnSessionVariableUserEmailAndQueryParameters();
 $phpAbsoluteFilePathView = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])) ?
     HelperNavigator::getPhpAbsoluteFilePathFromQueryParameterView($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])
     : HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::FILE_PATH_EVENTS_VIEW);
 
-// REMOVE
+// REMOVE - Testing
 // echo '<div class="row">' . '<br><br>';
 // echo HelperDateTime::getNowDateTime()->format("Y-m-d") . '<br><br>';
 // echo var_dump(DBEvent::getEventFromId(2)) . '<br><br>';

@@ -25,7 +25,8 @@ class FormValidatorEvent
     public static function isValidEventImageFile(array $eventImageFile): bool
     {
         return (!$eventImageFile || empty($eventImageFile["name"])
-            || preg_match("/" . self::FORM_FIELD_RESTRICTION_PATTERN_TYPE_IMAGE_FILE . "/", $eventImageFile["type"]));
+            || (preg_match("/" . self::FORM_FIELD_RESTRICTION_PATTERN_TYPE_IMAGE_FILE . "/", $eventImageFile["type"])
+                && $eventImageFile['type'] <= self::FORM_FIELD_RESTRICTION_MAX_SIZE_IMAGE_FILE));
     }
     public static function isValidEventName(string $eventName): bool
     {
@@ -85,7 +86,7 @@ class FormValidatorEvent
     public const FORM_FIELD_NAME_MAX_OR_MIN_BEER_PRICE_CHECK = "idMaxOrMinBeerPriceCheckInput";
     public const FORM_FIELD_NAME_LOCAL = "idEventLocalInput";
     public const FORM_FIELD_NAME_ADDRESS = "idEventAddressInput";
-    public const FORM_FIELD_RESTRICTION_MAX_SIZE_IMAGE_FILE = 2097152;
+    public const FORM_FIELD_RESTRICTION_MAX_SIZE_IMAGE_FILE = 2097152; // bytes - 2 MB
     public const FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT = 5;
     public const FORM_FIELD_RESTRICTION_PATTERN_TYPE_IMAGE_FILE = "^image\/[a-zA-Z0-9\+\-]+$";
     public const FORM_FIELD_RESTRICTION_PATTERN_TAGS = "^([a-zA-ZáéíóúÁÉÍÓÚ \-]+,)+$";
