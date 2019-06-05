@@ -287,9 +287,9 @@ function hideHtmlEventsPerDateListsAndTheirEventContainers(arrayOfEnabledTags) {
 }
 function clearHtmlEventTagsInputAndFillWithEnabledTagValuesFromTagModal(htmlIdEventTagsInput) {
     let htmlEventTagsInput = document.getElementById(htmlIdEventTagsInput);
-    htmlEventTagsInput.textContent = HTML_EMPTY_STRING_VALUE;
+    htmlEventTagsInput.value = HTML_EMPTY_STRING_VALUE;
     HelperTagsModal.getArrayOfEnabledTagValuesFromHtmlTagsModal().map(tag => {
-        htmlEventTagsInput.textContent += tag + ",";
+        htmlEventTagsInput.value += tag + ",";
     });
 }
 

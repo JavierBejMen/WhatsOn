@@ -45,7 +45,7 @@
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventTagsInput">Etiquetas <span class="text-danger">*</span></label>
-                    <input class="form-control classInvisible" id="idEventTagsInput" type="text" required>
+                    <input class="form-control classInvisible" id="idEventTagsInput" type="text" pattern="^([a-zA-ZáéíóúÁÉÍÓÚ \-]+,)+$" required>
                     <div class="row justify-content-start classTagsList" id="idEventTagsList"></div>
                     <div class="invalid-feedback">
                         Por favor, introduce una o más etiquetas.
