@@ -128,6 +128,10 @@ final class HelperNavigator
     {
         return self::getUrlRoot() . self::FILE_PATH_LOGOUT_SCRIPT;
     }
+    public static function getUrlCreateEventScript(): string
+    {
+        return self::getUrlRoot() . self::FILE_PATH_CREATE_EVENT_SCRIPT;
+    }
     public static function redirectToUrlRoot()
     {
         header("Location: " . self::getUrlRoot());
@@ -175,6 +179,7 @@ final class HelperNavigator
     public const FILE_PATH_INDEX_SCRIPT = "/index.php";
     public const FILE_PATH_LOGIN_SCRIPT = "/php_scripts/login.php";
     public const FILE_PATH_LOGOUT_SCRIPT = "/php_scripts/logout.php";
+    public const FILE_PATH_CREATE_EVENT_SCRIPT = "/php_scripts/create-event.php";
     public const URL_QUERY_PARAMETER_VIEW = "view";
     public const URL_QUERY_PARAMETER_EVENT_ID = "event-id";
     public const URL_QUERY_PARAMETER_EVENTS_FROM_DATE = "events-from-date";

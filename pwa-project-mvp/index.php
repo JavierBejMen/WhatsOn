@@ -11,7 +11,7 @@ spl_autoload_register(function ($className) {
 });
 session_start();
 
-// REMOVE
+// REMOVE - Testing
 // $_SESSION[HelperNavigator::SESSION_VARIABLE_USER_EMAIL] = "user@server.com";
 
 HelperNavigator::redirectUrlBasedOnSessionVariableUserEmailAndQueryParameters();

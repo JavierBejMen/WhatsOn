@@ -1,3 +1,11 @@
+<!--
+    MAX_FILE_SIZE must preceed file input.
+
+    This form element should always be used as it saves users the trouble of waiting for a big file being transferred only to find 
+    that it was too large and the transfer failed.
+
+    More info: https://www.php.net/manual/en/features.file-upload.post-method.php
+-->
 <nav class="navbar navbar-expand fixed-top classPrimaryBackgroundColor text-white" id="idCreateEventMenuBar">
     <ul class="navbar-nav w-100 justify-content-between">
         <li class="nav-item">
@@ -25,23 +33,24 @@
     </button>
 </div>
 <div class="container py-3" id="idCreateEventMain">
-    <form class="needs-validation mx-auto" id="idCreateEventForm" novalidate>
+    <form class="needs-validation mx-auto" id="idCreateEventForm" method="post" enctype="multipart/form-data" action="<?php print(HelperNavigator::getUrlCreateEventScript()); ?>" novalidate>
         <div class="form-group">
-            <input id="idEventImageFileInput" accept="image/*" type="file" hidden>
+            <input type="hidden" name="MAX_FILE_SIZE" value="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_MAX_SIZE_IMAGE_FILE); ?>" />
+            <input id="idEventImageFileInput" name="idEventImageFileInput" accept="image/*" type="file" hidden>
             <div class="invalid-feedback">
                 Por favor, introduce una imagen válida.
             </div>
         </div>
         <div class="form-group">
             <label for="idEventNameInput">Qué <span class="text-danger">*</span></label>
-            <input class="form-control classOnlyBottomBorderInput" id="idEventNameInput" type="text" minlength="5" placeholder="Nombre del evento" required>
+            <input class="form-control classOnlyBottomBorderInput" id="idEventNameInput" name="idEventNameInput" type="text" minlength="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Nombre del evento" required>
             <div class="invalid-feedback">
                 Por favor, introduce un nombre válido.
             </div>
         </div>
         <div class="form-group">
             <label for="idEventDescriptionInput">En qué consiste <span class="text-danger">*</span></label>
-            <textarea class="form-control classOnlyBottomBorderInput" id="idEventDescriptionInput" rows="5" minlength="5" placeholder="Descripción del evento" required></textarea>
+            <textarea class="form-control classOnlyBottomBorderInput" id="idEventDescriptionInput" name="idEventDescriptionInput" rows="5" minlength="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Descripción del evento" required></textarea>
             <div class="invalid-feedback">
                 Por favor, introduce una descripción válida.
             </div>
@@ -51,7 +60,7 @@
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventTagsInput">Etiquetas <span class="text-danger">*</span></label>
-                    <input class="form-control" id="idEventTagsInput" type="text" pattern="^([a-zA-ZáéíóúÁÉÍÓÚ \-]+,)+$" required hidden>
+                    <input class="form-control" id="idEventTagsInput" name="idEventTagsInput" type="text" pattern="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_PATTERN_TAGS); ?>" required hidden>
                     <div class="row justify-content-start classTagsList" id="idEventTagsList"></div>
                     <div class="invalid-feedback">
                         Por favor, introduce una o más etiquetas.
@@ -67,8 +76,8 @@
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventStartDateTimeButton">Cuándo empieza <span class="text-danger">*</span></label>
-                    <input class="form-control classStartDateTimeTextInput mb-2" id="idEventStartDateTextInput" type="text" pattern="^(lunes|martes|miércoles|jueves|viernes|sábado|domingo), ([1-9]|[1-9][0-9]) de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre) de [2-9][0-9]{3}$" placeholder="Fecha" required>
-                    <input class="form-control classStartDateTimeTextInput" id="idEventStartTimeTextInput" type="text" pattern="^([0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" placeholder="Hora" required>
+                    <input class="form-control classStartDateTimeInput mb-2" id="idEventStartDateInput" name="idEventStartDateInput" type="text" pattern="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_PATTERN_DATE); ?>" placeholder="Fecha" required>
+                    <input class="form-control classStartDateTimeInput" id="idEventStartTimeInput" name="idEventStartTimeInput" type="text" pattern="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_PATTERN_TIME); ?>" placeholder="Hora" required>
                     <div class="invalid-feedback">
                         Por favor, introduce una fecha y hora de comienzo válida.
                     </div>
@@ -78,8 +87,8 @@
                 </div>
                 <div class="form-group">
                     <label for="idEventEndDateTimeButton">Cuándo termina</span></label>
-                    <input class="form-control classEndDateTimeTextInput mb-2" id="idEventEndDateTextInput" type="text" pattern="^(lunes|martes|miércoles|jueves|viernes|sábado|domingo), ([1-9]|[1-9][0-9]) de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre) de [2-9][0-9]{3}$" placeholder="Fecha">
-                    <input class="form-control classEndDateTimeTextInput" id="idEventEndTimeTextInput" type="text" pattern="^([0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" placeholder="Hora">
+                    <input class="form-control classEndDateTimeInput mb-2" id="idEventEndDateInput" name="idEventEndDateInput" type="text" pattern="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_PATTERN_DATE); ?>" placeholder="Fecha">
+                    <input class="form-control classEndDateTimeInput" id="idEventEndTimeInput" name="idEventEndTimeInput" type="text" pattern="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_PATTERN_TIME); ?>" placeholder="Hora">
                     <button class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2" type="button" id="idEventEndDateTimeButton" title="Elegir fecha y hora de fin" aria-label="Elegir fecha y hora del evento">
                         <i class="fas fa-calendar-day fa-lg"></i>
                     </button>
@@ -91,10 +100,10 @@
             <div class="d-flex">
                 <div class="form-group">
                     <label for="idEventTicketPriceInput">Entrada <span class="text-danger">*</span></label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventTicketPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la entrada" required>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventTicketPriceInput" name="idEventTicketPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la entrada" required>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="idFreeEntranceCheckInput">
+                    <input class="form-check-input" type="checkbox" value="" id="idFreeEntranceCheckInput" name="idFreeEntranceCheckInput">
                     <label class="form-check-label" for="idFreeEntranceCheckInput">
                         Entraba libre
                     </label>
@@ -103,10 +112,10 @@
             <div class="d-flex">
                 <div class="form-group">
                     <label for="idEventLongDrinkPriceInput">Copa</label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventLongDrinkPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la copa">
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventLongDrinkPriceInput" name="idEventLongDrinkPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la copa">
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="idMaxOrMinLongDrinkPriceCheckInput">
+                    <input class="form-check-input" type="checkbox" value="" id="idMaxOrMinLongDrinkPriceCheckInput" name="idMaxOrMinLongDrinkPriceCheckInput">
                     <label class="form-check-label" for="idMaxOrMinLongDrinkPriceCheckInput">
                         Máx./mín.
                     </label>
@@ -115,10 +124,10 @@
             <div class="d-flex">
                 <div class="form-group">
                     <label for="idEventBeerPriceInput">Cerveza</label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventBeerPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la cerveza">
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventBeerPriceInput" name="idEventBeerPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la cerveza">
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="idMaxOrMinBeerPriceCheckInput">
+                    <input class="form-check-input" type="checkbox" value="" id="idMaxOrMinBeerPriceCheckInput" name="idMaxOrMinBeerPriceCheckInput">
                     <label class="form-check-label" for="idMaxOrMinBeerPriceCheckInput">
                         Máx./mín.
                     </label>
@@ -130,14 +139,14 @@
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventLocalInput">Dónde <span class="text-danger">*</span></label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventLocalInput" type="text" minlength="5" placeholder="Bar, pub, discoteca o local" required>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventLocalInput" name="idEventLocalInput" type="text" minlength="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Bar, pub, discoteca o local" required>
                     <div class="invalid-feedback">
                         Por favor, introduce el nombre del local.
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="idEventAddressInput">Dirección <span class="text-danger">*</span></label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventAddressInput" type="text" minlength="5" placeholder="Dirección del evento" required>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventAddressInput" name="idEventAddressInput" type="text" minlength="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Dirección del evento" required>
                     <div class="invalid-feedback">
                         Por favor, introduce la dirección.
                     </div>
@@ -186,11 +195,11 @@ require($_SERVER["DOCUMENT_ROOT"] . "/components/tags-modal.php");
             clearHtmlEventTagsListAndFillWithEnabledTagValuesFromTagModal(HTML_ID_EVENT_TAGS_LIST);
         });
         // Event StartDate and StartTime Pickers
-        Array.from(document.getElementsByClassName(HTML_CLASS_START_DATE_TIME_TEXT_INPUT)).map((dateTimeTextInput) => {
-            dateTimeTextInput.addEventListener("focus", () => {
+        Array.from(document.getElementsByClassName(HTML_CLASS_START_DATE_TIME_INPUT)).map((dateTimeInput) => {
+            dateTimeInput.addEventListener("focus", () => {
                 showDatePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_DATE_TEXT_INPUT);
             });
-            dateTimeTextInput.addEventListener("keypress", (event) => {
+            dateTimeInput.addEventListener("keypress", (event) => {
                 event.preventDefault();
             });
         });
@@ -205,12 +214,12 @@ require($_SERVER["DOCUMENT_ROOT"] . "/components/tags-modal.php");
                 HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
         });
         // Event EndDate and EndTime Pickers
-        Array.from(document.getElementsByClassName(HTML_CLASS_END_DATE_TIME_TEXT_INPUT)).map((dateTimeTextInput) => {
-            dateTimeTextInput.addEventListener("focus", () => {
+        Array.from(document.getElementsByClassName(HTML_CLASS_END_DATE_TIME_INPUT)).map((dateTimeInput) => {
+            dateTimeInput.addEventListener("focus", () => {
                 showDatePickerForEventEndDateTimeButton(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT,
                     HTML_ID_EVENT_END_DATE_TEXT_INPUT);
             });
-            dateTimeTextInput.addEventListener("keypress", (event) => {
+            dateTimeInput.addEventListener("keypress", (event) => {
                 event.preventDefault();
             });
         });

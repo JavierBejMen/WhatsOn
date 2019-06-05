@@ -37,8 +37,8 @@ const HTML_CLASS_ROUNDED_BOTTOM_RIGHT_FLOATING_BUTTON = "classRoundedBottomRight
 const HTML_CLASS_TAG_SPAN = "classTagSpan";
 const HTML_CLASS_TAGS_MODAL_TAG_SPAN = "classTagsModalTagSpan";
 const HTML_CLASS_FORM_FIELD_WAS_VALIDATED = "was-validated";
-const HTML_CLASS_START_DATE_TIME_TEXT_INPUT = "classStartDateTimeTextInput";
-const HTML_CLASS_END_DATE_TIME_TEXT_INPUT = "classEndDateTimeTextInput";
+const HTML_CLASS_START_DATE_TIME_INPUT = "classStartDateTimeInput";
+const HTML_CLASS_END_DATE_TIME_INPUT = "classEndDateTimeInput";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
 const HTML_ID_LOGIN_FORM = "idLoginForm";
 const HTML_ID_CREATE_EVENT_LOGIN_FORM = "idCreateEventForm";
@@ -47,11 +47,11 @@ const HTML_ID_CREATE_EVENT_SUBMIT_BUTTON = "idCreateEventSubmitButton";
 const HTML_ID_EVENT_TAGS_INPUT = "idEventTagsInput";
 const HTML_ID_EVENT_TAGS_LIST = "idEventTagsList";
 const HTML_ID_EVENT_START_DATE_TIME_BUTTON = "idEventStartDateTimeButton";
-const HTML_ID_EVENT_START_DATE_TEXT_INPUT = "idEventStartDateTextInput";
-const HTML_ID_EVENT_START_TIME_TEXT_INPUT = "idEventStartTimeTextInput";
+const HTML_ID_EVENT_START_DATE_TEXT_INPUT = "idEventStartDateInput";
+const HTML_ID_EVENT_START_TIME_TEXT_INPUT = "idEventStartTimeInput";
 const HTML_ID_EVENT_END_DATE_TIME_BUTTON = "idEventEndDateTimeButton";
-const HTML_ID_EVENT_END_DATE_TEXT_INPUT = "idEventEndDateTextInput";
-const HTML_ID_EVENT_END_TIME_TEXT_INPUT = "idEventEndTimeTextInput";
+const HTML_ID_EVENT_END_DATE_TEXT_INPUT = "idEventEndDateInput";
+const HTML_ID_EVENT_END_TIME_TEXT_INPUT = "idEventEndTimeInput";
 const HTML_ID_EVENT_TICKET_PRICE_INPUT = "idEventTicketPriceInput";
 const HTML_ID_FREE_ENTRANCE_CHECK_INPUT = "idFreeEntranceCheckInput";
 const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS =
@@ -147,9 +147,9 @@ function showDatePickerForHtmlEventsWeekCalendarButton() {
         loadUrlEventsFromDateOnwards(startDatePicker);
     });
 }
-function showDatePickerForHtmlEventStartDateTimeButton(htmlIdEventStartDateTextInput) {
+function showDatePickerForHtmlEventStartDateTimeButton(htmlIdEventStartDateInput) {
     createHtmlDateTimePickerWrapperInHtmlBodyIfNotExists();
-    startDatePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_DATE_TYPE, document.getElementById(htmlIdEventStartDateTextInput));
+    startDatePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_DATE_TYPE, document.getElementById(htmlIdEventStartDateInput));
     insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_DATE_PICKER);
     showHtmlDateTimePickerWrapper();
     startDatePicker.toggle();
@@ -157,8 +157,8 @@ function showDatePickerForHtmlEventStartDateTimeButton(htmlIdEventStartDateTextI
         hideHtmlDateTimePickerWrapper();
     });
 }
-function showTimePickerForHtmlEventStartDateTimeButton(htmlIdEventStartTimeTextInput) {
-    startTimePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_TIME_TYPE, document.getElementById(htmlIdEventStartTimeTextInput));
+function showTimePickerForHtmlEventStartDateTimeButton(htmlIdEventStartTimeInput) {
+    startTimePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_TIME_TYPE, document.getElementById(htmlIdEventStartTimeInput));
     insertHtmlDateTimePickerInHtmlDateTimePickerWrapper(HTML_ID_TIME_PICKER);
     startTimePicker.toggle();
     document.getElementById(HTML_ID_TIME_PICKER_OK_BUTTON).addEventListener("click", () => {
@@ -168,15 +168,14 @@ function showTimePickerForHtmlEventStartDateTimeButton(htmlIdEventStartTimeTextI
         hideHtmlDateTimePickerWrapper();
     });
 }
-function writeStartDateTimeValuesAndClearEndDateTimeValues(htmlIdEventStartDateTextInput, htmlIdEventStartTimeTextInput,
-    htmlIdEventEndDateTextInput, htmlIdEventEndTimeTextInput) {
-    writeValuesFromDateTimePickersToDateTextInputAndTimeTextInput(startDatePicker, htmlIdEventStartDateTextInput, startTimePicker,
-        htmlIdEventStartTimeTextInput);
-    clearHtmlEventEndDateTextInputAndEventEndTimeTextInputValues(htmlIdEventEndDateTextInput, htmlIdEventEndTimeTextInput);
+function writeStartDateTimeValuesAndClearEndDateTimeValues(htmlIdEventStartDateInput, htmlIdEventStartTimeInput,
+    htmlIdEventEndDateInput, htmlIdEventEndTimeInput) {
+    writeValuesFromDateTimePickersToDateInputAndTimeInput(startDatePicker, htmlIdEventStartDateInput, startTimePicker, htmlIdEventStartTimeInput);
+    clearHtmlEventEndDateInputAndEventEndTimeInputValues(htmlIdEventEndDateInput, htmlIdEventEndTimeInput);
 }
-function showDatePickerForEventEndDateTimeButton(htmlIdEventStartDateTextInput, htmlIdEventStartTimeTextInput, htmlIdEventEndDateTextInput) {
-    if (document.getElementById(htmlIdEventStartDateTextInput).value && document.getElementById(htmlIdEventStartTimeTextInput).value) {
-        datePicker = getDateTimePicker(startDatePicker.time, JS_DATE_TIME_PICKER_DATE_TYPE, document.getElementById(htmlIdEventEndDateTextInput));
+function showDatePickerForEventEndDateTimeButton(htmlIdEventStartDateInput, htmlIdEventStartTimeInput, htmlIdEventEndDateInput) {
+    if (document.getElementById(htmlIdEventStartDateInput).value && document.getElementById(htmlIdEventStartTimeInput).value) {
+        datePicker = getDateTimePicker(startDatePicker.time, JS_DATE_TIME_PICKER_DATE_TYPE, document.getElementById(htmlIdEventEndDateInput));
         showHtmlDateTimePickerWrapper();
         datePicker.toggle();
         document.getElementById(HTML_ID_DATE_PICKER_CANCEL_BUTTON).addEventListener("click", () => {
@@ -184,8 +183,8 @@ function showDatePickerForEventEndDateTimeButton(htmlIdEventStartDateTextInput, 
         });
     }
 }
-function showTimePickerForEventEndDateTimeButton(htmlIdEventEndTimeTextInput) {
-    timePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_TIME_TYPE, document.getElementById(htmlIdEventEndTimeTextInput));
+function showTimePickerForEventEndDateTimeButton(htmlIdEventEndTimeInput) {
+    timePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_TIME_TYPE, document.getElementById(htmlIdEventEndTimeInput));
     timePicker.toggle();
     document.getElementById(HTML_ID_TIME_PICKER_OK_BUTTON).addEventListener("click", () => {
         hideHtmlDateTimePickerWrapper();
@@ -194,8 +193,8 @@ function showTimePickerForEventEndDateTimeButton(htmlIdEventEndTimeTextInput) {
         hideHtmlDateTimePickerWrapper();
     });
 }
-function writeEndDateTimeValues(htmlIdEventEndDateTextInput, htmlIdEventEndTimeTextInput) {
-    writeValuesFromDateTimePickersToDateTextInputAndTimeTextInput(datePicker, htmlIdEventEndDateTextInput, timePicker, htmlIdEventEndTimeTextInput);
+function writeEndDateTimeValues(htmlIdEventEndDateInput, htmlIdEventEndTimeInput) {
+    writeValuesFromDateTimePickersToDateInputAndTimeInput(datePicker, htmlIdEventEndDateInput, timePicker, htmlIdEventEndTimeInput);
 }
 function getDateTimePicker(startTime = moment(), dateTimePickerType = JS_DATE_TIME_PICKER_DATE_TYPE, htmlElemntForEventTrigger = null) {
     moment.locale(JS_DATE_TIME_PICKER_LOCALE);
@@ -235,9 +234,9 @@ function loadUrlEventsFromDateOnwards(dateTimePicker) {
         + stringDateFrom;
     window.location.assign(destinationUrl);
 }
-function writeValuesFromDateTimePickersToDateTextInputAndTimeTextInput(jsDatePicker, htmlIdDateTextInput, jsTimePicker, htmlIdTimeTextInput) {
-    document.getElementById(htmlIdDateTextInput).value = getDateAsStringFromDatePicker(jsDatePicker);
-    document.getElementById(htmlIdTimeTextInput).value = getTimeAsStringFromTimePicker(jsTimePicker);
+function writeValuesFromDateTimePickersToDateInputAndTimeInput(jsDatePicker, htmlIdDateInput, jsTimePicker, htmlIdTimeInput) {
+    document.getElementById(htmlIdDateInput).value = getDateAsStringFromDatePicker(jsDatePicker);
+    document.getElementById(htmlIdTimeInput).value = getTimeAsStringFromTimePicker(jsTimePicker);
 }
 function getDateAsStringFromDatePicker(jsDatePicker) {
     let resultString = jsDatePicker.time.format(JS_DATE_TIME_PICKER_DATE_STRING_FORMAT_TO_DISPLAY).toString();
@@ -246,9 +245,9 @@ function getDateAsStringFromDatePicker(jsDatePicker) {
 function getTimeAsStringFromTimePicker(jsTimePicker) {
     return jsTimePicker.time.format(JS_DATE_TIME_PICKER_TIME_STRING_FORMAT_TO_DISPLAY).toString();
 }
-function clearHtmlEventEndDateTextInputAndEventEndTimeTextInputValues(htmlIdEventEndDateTextInput, htmlIdEventEndTimeTextInput) {
-    document.getElementById(htmlIdEventEndDateTextInput).value = HTML_EMPTY_STRING_VALUE;
-    document.getElementById(htmlIdEventEndTimeTextInput).value = HTML_EMPTY_STRING_VALUE;
+function clearHtmlEventEndDateInputAndEventEndTimeInputValues(htmlIdEventEndDateInput, htmlIdEventEndTimeInput) {
+    document.getElementById(htmlIdEventEndDateInput).value = HTML_EMPTY_STRING_VALUE;
+    document.getElementById(htmlIdEventEndTimeInput).value = HTML_EMPTY_STRING_VALUE;
 }
 function showHtmlEventsPerDateListsAndTheirEventContainers() {
     let htmlEventsPerDateLists = Array.from(document.getElementsByClassName(HTML_CLASS_EVENTS_PER_DATE_LIST));
