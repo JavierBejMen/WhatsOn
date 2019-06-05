@@ -6,7 +6,7 @@
     --event-card-height: 360px;
     --floating-filter-button-width: 150px;
     --main-navigation-bar-height: 71px;
-    --local-navigation-bar-height: 61px;
+    --header-image-height: 365px;
 }
 
 * {
@@ -179,10 +179,6 @@
     background-color: white !important;
 }
 
-#idEventsWeekCalendarContainerInLocal {
-    top: calc(var(--main-menu-bar-height) + var(--local-navigation-bar-height));
-}
-
 #idEventsWeekCalendarNavigationBar a {
     color: black;
     text-decoration: none;
@@ -210,9 +206,8 @@
 /* Please keep this margin and do not try to perform with my-* Bootstrap classes */
 
 #idEventInfoHeaderImage {
-    margin-top: var(--main-menu-bar-height);
-    height: 365px;
-    max-height: 365px;
+    height: var(--header-image-height);
+    max-height: var(--header-image-height);
     background-position: 50% 0%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -234,7 +229,7 @@
     background-size: cover;
 }
 
-#idLoginMain, #idAdminProfileContainer, #idEventPictureContainer {
+#idEventInfoHeaderImage, #idLoginMain, #idAdminProfileContainer, #idEventImageContainer {
     margin-top: var(--main-menu-bar-height);
 }
 
@@ -248,7 +243,18 @@
     max-width: 230px;
 }
 
-#idEventPictureContainer #idAddEventPictureButton {
+#idEventImageContainer {
+    height: var(--header-image-height);
+    max-height: var(--header-image-height);
+    background-position: 50% 0%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#idEventImageContainer #idAddEventImageButton {
+    position: absolute;
+    top: var(--header-image-height);
+    right: 0;
     padding: 10px;
     border-radius: 2rem;
 }

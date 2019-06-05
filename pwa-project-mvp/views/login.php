@@ -47,6 +47,6 @@
         let htmlLoginForm = document.getElementById(HTML_ID_LOGIN_FORM);
         htmlLoginForm.addEventListener("submit", () => {
             HelperForm.validateHtmlForm(htmlLoginForm);
-        }, false);
+        });
     });
 </script>

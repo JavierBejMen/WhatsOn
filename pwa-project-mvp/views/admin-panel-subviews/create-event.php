@@ -15,17 +15,23 @@
         </li>
     </ul>
 </nav>
-<div class="container-fluid classTertiaryBackgroundColor text-black-50 text-center pt-4 pb-2" id="idEventPictureContainer">
-    <i class="fas fa-camera fa-7x"></i>
-    <p class="pt-3">Imagen del evento</p>
-    <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-sm classSecondaryBackgroundColor text-white waves-effect waves-light" id="idAddEventPictureButton" title="Añadir imagen de evento" aria-label="Añadir imagen de evento">
-            <i class="fas fa-pen fa-2x"></i>
-        </button>
+<div class="d-flex justify-content-center align-items-center classTertiaryBackgroundColor text-black-50 text-center pt-4 pb-2" id="idEventImageContainer">
+    <div id="idEventTemporaryImage">
+        <i class="fas fa-camera fa-7x"></i>
+        <p class="pt-3">Imagen del evento</p>
     </div>
+    <button type="button" class="btn btn-sm classSecondaryBackgroundColor text-white waves-effect waves-light" id="idAddEventImageButton" title="Añadir imagen de evento" aria-label="Añadir imagen de evento">
+        <i class="fas fa-pen fa-2x"></i>
+    </button>
 </div>
 <div class="container py-3" id="idCreateEventMain">
     <form class="needs-validation mx-auto" id="idCreateEventForm" novalidate>
+        <div class="form-group">
+            <input id="idEventImageFileInput" accept="image/*" type="file" hidden>
+            <div class="invalid-feedback">
+                Por favor, introduce una imagen válida.
+            </div>
+        </div>
         <div class="form-group">
             <label for="idEventNameInput">Qué <span class="text-danger">*</span></label>
             <input class="form-control classOnlyBottomBorderInput" id="idEventNameInput" type="text" minlength="5" placeholder="Nombre del evento" required>
@@ -45,7 +51,7 @@
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventTagsInput">Etiquetas <span class="text-danger">*</span></label>
-                    <input class="form-control classInvisible" id="idEventTagsInput" type="text" pattern="^([a-zA-ZáéíóúÁÉÍÓÚ \-]+,)+$" required>
+                    <input class="form-control" id="idEventTagsInput" type="text" pattern="^([a-zA-ZáéíóúÁÉÍÓÚ \-]+,)+$" required hidden>
                     <div class="row justify-content-start classTagsList" id="idEventTagsList"></div>
                     <div class="invalid-feedback">
                         Por favor, introduce una o más etiquetas.
@@ -61,7 +67,7 @@
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventStartDateTimeButton">Cuándo empieza <span class="text-danger">*</span></label>
-                    <input class="form-control classStartDateTimeTextInput mb-2" id="idEventStartDateTextInput" type="text" pattern="^(lunes|martes|miércoles|jueves|viernes), ([1-9]|[1-9][0-9]) de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre) de [2-9][0-9]{3}$" placeholder="Fecha" required>
+                    <input class="form-control classStartDateTimeTextInput mb-2" id="idEventStartDateTextInput" type="text" pattern="^(lunes|martes|miércoles|jueves|viernes|sábado|domingo), ([1-9]|[1-9][0-9]) de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre) de [2-9][0-9]{3}$" placeholder="Fecha" required>
                     <input class="form-control classStartDateTimeTextInput" id="idEventStartTimeTextInput" type="text" pattern="^([0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" placeholder="Hora" required>
                     <div class="invalid-feedback">
                         Por favor, introduce una fecha y hora de comienzo válida.
@@ -72,7 +78,7 @@
                 </div>
                 <div class="form-group">
                     <label for="idEventEndDateTimeButton">Cuándo termina</span></label>
-                    <input class="form-control classEndDateTimeTextInput mb-2" id="idEventEndDateTextInput" type="text" pattern="^(lunes|martes|miércoles|jueves|viernes), ([1-9]|[1-9][0-9]) de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre) de [2-9][0-9]{3}$" placeholder="Fecha">
+                    <input class="form-control classEndDateTimeTextInput mb-2" id="idEventEndDateTextInput" type="text" pattern="^(lunes|martes|miércoles|jueves|viernes|sábado|domingo), ([1-9]|[1-9][0-9]) de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre) de [2-9][0-9]{3}$" placeholder="Fecha">
                     <input class="form-control classEndDateTimeTextInput" id="idEventEndTimeTextInput" type="text" pattern="^([0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" placeholder="Hora">
                     <button class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2" type="button" id="idEventEndDateTimeButton" title="Elegir fecha y hora de fin" aria-label="Elegir fecha y hora del evento">
                         <i class="fas fa-calendar-day fa-lg"></i>
@@ -150,6 +156,26 @@ require($_SERVER["DOCUMENT_ROOT"] . "/components/tags-modal.php");
     window.addEventListener("DOMContentLoaded", () => {
         setHtmlBodyBackgroundColor(HTML_CLASS_WHITE_BACKGROUND_COLOR);
         hideMainMenuBar();
+
+        ////////////////////////////////// TODO - Refactor
+
+        document.getElementById("idAddEventImageButton").addEventListener("click", () => {
+            document.getElementById("idEventImageFileInput").click();
+        });
+        let htmlEventImageFileInput = document.getElementById("idEventImageFileInput");
+        htmlEventImageFileInput.addEventListener("input", () => {
+            if (htmlEventImageFileInput.files && htmlEventImageFileInput.files[0]) {
+                let fileReader = new FileReader();
+                fileReader.onload = (event) => {
+                    document.getElementById("idEventTemporaryImage").hidden = true;
+                    document.getElementById("idEventImageContainer").style.backgroundImage = "url('" + event.target.result + "')";
+                };
+                fileReader.readAsDataURL(htmlEventImageFileInput.files[0]);
+            }
+        });
+
+        //////////////////////////////////
+
         HelperTagsModal.clearEnabledTagValuesFromSessionStorage(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
         document.getElementById(HTML_ID_CREATE_EVENT_SHOW_MODAL_FOR_ADDING_TAGS_BUTTON).addEventListener("click", () => {
             HelperTagsModal.loadPreviousEnabledTagValuesFromSessionStorageToHtmlFormModal(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
@@ -206,6 +232,6 @@ require($_SERVER["DOCUMENT_ROOT"] . "/components/tags-modal.php");
         let htmlCreateEventForm = document.getElementById(HTML_ID_CREATE_EVENT_LOGIN_FORM);
         htmlCreateEventForm.addEventListener("submit", () => {
             HelperForm.validateHtmlForm(htmlCreateEventForm);
-        }, false);
+        });
     });
 </script>
