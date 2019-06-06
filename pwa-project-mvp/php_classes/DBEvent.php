@@ -84,7 +84,8 @@ final class DBEvent
     ) {
         try {
             HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
-            self::$dataBaseHandler->beginTransaction();
+            // TODO
+            // self::$dataBaseHandler->beginTransaction();
             $statementHandler = self::$dataBaseHandler->prepare("INSERT INTO "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_EVENT) . "("
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_NAME) . ", "

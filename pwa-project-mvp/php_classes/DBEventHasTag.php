@@ -69,6 +69,7 @@ final class DBEventHasTag
         }
         return array_unique(self::getArrayOfEventIdsFromEventHasTagRows($eventHasTagRows));
     }
+    // TODO
     // public static function insertTagsIntoEventId(array $arrayOfTags, int $eventId)
     // {
     //     try {
