@@ -171,6 +171,8 @@ final class HelperNavigator
     {
         return (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on");
     }
+    public const DIR_PATH_EVENTS_IMAGES = "/assets/images";
+    public const FILE_PATH_TAGS_MODAL_COMPONENT = "/components/tags-modal.php";
     public const FILE_PATH_EVENTS_VIEW = "/views/events.php";
     public const FILE_PATH_EVENT_INFO_VIEW = "/views/event-info.php";
     public const FILE_PATH_LOGIN_VIEW = "/views/login.php";

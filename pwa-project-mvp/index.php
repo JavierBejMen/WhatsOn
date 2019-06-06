@@ -12,7 +12,7 @@ spl_autoload_register(function ($className) {
 session_start();
 
 // REMOVE - Testing
-$_SESSION[HelperNavigator::SESSION_VARIABLE_USER_EMAIL] = "user@server.com";
+// $_SESSION[HelperNavigator::SESSION_VARIABLE_USER_EMAIL] = "user@server.com";
 
 HelperNavigator::redirectUrlBasedOnSessionVariableUserEmailAndQueryParameters();
 $phpAbsoluteFilePathView = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])) ?

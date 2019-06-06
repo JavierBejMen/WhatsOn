@@ -58,7 +58,7 @@ $arrayOfEvents = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVENTS_FROM_D
     </button>
 </div>
 <?php
-require($_SERVER["DOCUMENT_ROOT"] . "/components/tags-modal.php");
+require(HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::FILE_PATH_TAGS_MODAL_COMPONENT));
 ?>
 <script>
     window.addEventListener("DOMContentLoaded", () => {

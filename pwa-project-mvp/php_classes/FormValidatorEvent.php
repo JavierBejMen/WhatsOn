@@ -26,7 +26,7 @@ class FormValidatorEvent
     {
         return (!$eventImageFile || empty($eventImageFile["name"])
             || (preg_match("/" . self::FORM_FIELD_RESTRICTION_PATTERN_TYPE_IMAGE_FILE . "/", $eventImageFile["type"])
-                && $eventImageFile['type'] <= self::FORM_FIELD_RESTRICTION_MAX_SIZE_IMAGE_FILE));
+                && $eventImageFile["size"] <= self::FORM_FIELD_RESTRICTION_MAX_SIZE_IMAGE_FILE));
     }
     public static function isValidEventName(string $eventName): bool
     {
