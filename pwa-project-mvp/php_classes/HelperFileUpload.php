@@ -1,7 +1,8 @@
 <?php
-class HelperFileUpload
+
+final class HelperFileUpload
 {
-    public static function generateDestinationFileName(array $file): string
+    public static function createDestinationFileName(array $file): string
     {
         return basename($file["tmp_name"]) . $file["name"];
     }

@@ -57,7 +57,7 @@ $event = DBEvent::getEventFromId($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVEN
         <h5 class="font-weight-bold">Precios</h5>
         <?php
         $ticketPrice = $event->getTicketPrice();
-        $drinkPrice = $event->getDrinkPrice();
+        $drinkPrice = $event->getLongDrinkPrice();
         $beerPrice = $event->getBeerPrice();
         ($ticketPrice == 0) ? print("<p>Entrada libre</p>") : print("<p>Entrada: $ticketPrice &euro;</p>");
         if (!is_null($drinkPrice)) {

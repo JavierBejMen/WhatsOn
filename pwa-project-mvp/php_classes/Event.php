@@ -61,9 +61,9 @@ final class Event
     {
         return $this->ticket_price;
     }
-    public function getDrinkPrice(): string
+    public function getLongDrinkPrice(): string
     {
-        return $this->drink_price;
+        return $this->long_drink_price;
     }
     public function getBeerPrice(): string
     {
@@ -125,9 +125,9 @@ final class Event
     {
         $this->ticket_price = $ticketPrice;
     }
-    public function setDrinkPrice(string $drinkPrice)
+    public function setLongDrinkPrice(string $longDrinkPrice)
     {
-        $this->drink_price = $drinkPrice;
+        $this->long_drink_price = $longDrinkPrice;
     }
     public function setBeerPrice(string $beerPrice)
     {
@@ -154,7 +154,7 @@ final class Event
     private $local_latitude;
     private $local_longitude;
     private $ticket_price;
-    private $drink_price;
+    private $long_drink_price;
     private $beer_price;
     private $user_email;
     private $array_of_tags;

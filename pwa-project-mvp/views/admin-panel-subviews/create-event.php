@@ -138,15 +138,15 @@
             <i class="text-primary fas fa-map-marker-alt fa-lg mr-3"></i>
             <div class="w-100">
                 <div class="form-group">
-                    <label for="idEventLocalInput">Dónde <span class="text-danger">*</span></label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventLocalInput" name="idEventLocalInput" type="text" minlength="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Bar, pub, discoteca o local" required>
+                    <label for="idEventLocalNameInput">Dónde <span class="text-danger">*</span></label>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventLocalNameInput" name="idEventLocalNameInput" type="text" minlength="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Bar, pub, discoteca o local" required>
                     <div class="invalid-feedback">
                         Por favor, introduce el nombre del local.
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="idEventAddressInput">Dirección <span class="text-danger">*</span></label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventAddressInput" name="idEventAddressInput" type="text" minlength="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Dirección del evento" required>
+                    <label for="idEventLocalAddressInput">Dirección <span class="text-danger">*</span></label>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventLocalAddressInput" name="idEventLocalAddressInput" type="text" minlength="<?php print(FormValidatorEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Dirección del evento" required>
                     <div class="invalid-feedback">
                         Por favor, introduce la dirección.
                     </div>
@@ -191,8 +191,8 @@ require(HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNav
         });
         document.getElementById(HTML_ID_TAGS_MODAL_SAVE_BUTTON).addEventListener("click", () => {
             HelperTagsModal.saveEnabledTagValuesFromHtmlModalFormToSessionStorage(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
-            clearHtmlEventTagsInputAndFillWithEnabledTagValuesFromTagModal(HTML_ID_EVENT_TAGS_INPUT);
-            clearHtmlEventTagsListAndFillWithEnabledTagValuesFromTagModal(HTML_ID_EVENT_TAGS_LIST);
+            fillHtmlEventTagsInputWithEnabledTagValuesFromTagsModal(HTML_ID_EVENT_TAGS_INPUT);
+            fillHtmlEventTagsListWithEnabledTagValuesFromTagsModal(HTML_ID_EVENT_TAGS_LIST);
         });
         // Event StartDate and StartTime Pickers
         Array.from(document.getElementsByClassName(HTML_CLASS_START_DATE_TIME_INPUT)).map((dateTimeInput) => {

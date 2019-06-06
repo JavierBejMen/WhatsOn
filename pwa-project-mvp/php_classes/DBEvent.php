@@ -10,12 +10,13 @@ final class DBEvent
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_EVENT) . " WHERE "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_ID) . " = :eventId");
         } catch (PDOException $exception) {
-            print("Error: " . $exception->getMessage()); // Debugging Purposes
+            print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
+            return false;
         }
         $statementHandler->bindValue(":eventId", $eventId, PDO::PARAM_INT);
         $statementHandler->execute();
         if (!($resultEvent = $statementHandler->fetchObject("Event"))) {
-            return $resultEvent;
+            return false;
         }
         return self::getEventWithLinkedArrayOfTags($resultEvent, DBEventHasTag::getTagsFromEventId($eventId));
     }
@@ -41,7 +42,8 @@ final class DBEvent
                     . HelperDataBase::getStringWithQuotationMarksForBinding(count($arrayOfEventIds)) . ")" : "")
                 . " ORDER BY " . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_START_DATE) . " ASC");
         } catch (PDOException $exception) {
-            print("Error: " . $exception->getMessage()); // Debugging Purposes
+            print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
+            return false;
         }
         if ($arrayOfTags) {
             if ($arrayOfEventIds) {
@@ -61,6 +63,60 @@ final class DBEvent
             return false;
         }
         return $resultArrayOfEvents;
+    }
+    public static function insertEvent(
+        string $eventName,
+        string $eventDescription,
+        string $eventUrlHeaderImage,
+        string $eventStartDate,
+        string $eventStartTime,
+        string $eventEndDate,
+        string $eventEndTime,
+        string $eventLocalName,
+        string $eventLocalAddress,
+        string $eventLocalLatitude,
+        string $eventLocalLongitude,
+        string $eventTicketPrice,
+        string $eventLongDrinkPrice,
+        string $eventBeerPrice,
+        string $userEmail,
+        array $arrayOfTags
+    ) {
+        try {
+            HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
+            self::$dataBaseHandler->beginTransaction();
+            $statementHandler = self::$dataBaseHandler->prepare("INSERT INTO "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_EVENT) . "("
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_NAME) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_DESCRIPTION) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_URL_HEADER_IMAGE) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_START_DATE) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_START_TIME) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_END_DATE) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_END_TIME) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_LOCAL_NAME) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_LOCAL_ADDRESS) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_LOCAL_LATITUDE) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_LOCAL_LONGITUDE) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_TICKET_PRICE) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_LONG_DRINK_PRICE) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_BEER_PRICE) . ", "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_USER_EMAIL) . ") VALUES(:eventName, 
+                :eventDescription, :eventUrlHeaderImage, :eventStartDate, :eventStartTime, :eventEndDate, :eventEndTime, 
+                :eventLocalName, :eventLocalAddress, :eventLocalLatitude, :eventLocalLongitude, :eventTicketPrice, :eventLongDrinkPrice, 
+                :eventBeerPrice, :userEmail)");
+        } catch (PDOException $exception) {
+            print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
+            return false;
+        }
+        return $statementHandler->execute([
+            ":eventName" => $eventName, ":eventDescription" => $eventDescription, ":eventUrlHeaderImage" => $eventUrlHeaderImage,
+            ":eventStartDate" => $eventStartDate, ":eventStartTime" => $eventStartTime, ":eventEndDate" => $eventEndDate,
+            ":eventEndTime" => $eventEndTime, ":eventLocalName" => $eventLocalName, ":eventLocalAddress" => $eventLocalAddress,
+            ":eventLocalLatitude" => $eventLocalLatitude, ":eventLocalLongitude" => $eventLocalLongitude,
+            ":eventTicketPrice" => $eventTicketPrice, ":eventLongDrinkPrice" => $eventLongDrinkPrice, ":eventBeerPrice" => $eventBeerPrice,
+            ":userEmail" => $userEmail
+        ]);
     }
 
     // Private
@@ -97,9 +153,18 @@ final class DBEvent
     private const TABLE_NAME_EVENT = "event";
     private const COLUMN_NAME_ID = "id";
     private const COLUMN_NAME_NAME = "name";
+    private const COLUMN_NAME_DESCRIPTION = "description";
     private const COLUMN_NAME_URL_HEADER_IMAGE = "url_header_image";
     private const COLUMN_NAME_START_DATE = "start_date";
     private const COLUMN_NAME_START_TIME = "start_time";
+    private const COLUMN_NAME_END_DATE = "end_date";
+    private const COLUMN_NAME_END_TIME = "end_time";
     private const COLUMN_NAME_LOCAL_NAME = "local_name";
+    private const COLUMN_NAME_LOCAL_ADDRESS = "local_address";
+    private const COLUMN_NAME_LOCAL_LATITUDE = "local_latitude";
+    private const COLUMN_NAME_LOCAL_LONGITUDE = "local_longitude";
     private const COLUMN_NAME_TICKET_PRICE = "ticket_price";
+    private const COLUMN_NAME_LONG_DRINK_PRICE = "long_drink_price";
+    private const COLUMN_NAME_BEER_PRICE = "beer_price";
+    private const COLUMN_NAME_USER_EMAIL = "user_email";
 }

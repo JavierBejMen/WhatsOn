@@ -10,7 +10,8 @@ final class DBTag
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_TAG) . " ORDER BY "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_NAME) . " ASC");
         } catch (PDOException $exception) {
-            print("Error: " . $exception->getMessage()); // Debugging Purposes
+            print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
+            return false;
         }
         $statementHandler->execute();
         $tagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC);

@@ -284,15 +284,13 @@ function hideHtmlEventsPerDateListsAndTheirEventContainers(arrayOfEnabledTags) {
             htmlEventsPerDateList.removeAttribute(HTML_ATTRIBUTE_HIDDEN);
     });
 }
-function clearHtmlEventTagsInputAndFillWithEnabledTagValuesFromTagModal(htmlIdEventTagsInput) {
+function fillHtmlEventTagsInputWithEnabledTagValuesFromTagsModal(htmlIdEventTagsInput) {
     let htmlEventTagsInput = document.getElementById(htmlIdEventTagsInput);
     htmlEventTagsInput.value = HTML_EMPTY_STRING_VALUE;
-    HelperTagsModal.getArrayOfEnabledTagValuesFromHtmlTagsModal().map(tag => {
-        htmlEventTagsInput.value += tag + ",";
-    });
+    htmlEventTagsInput.value = HelperTagsModal.getArrayOfEnabledTagValuesFromHtmlTagsModal().join(",");
 }
 
-function clearHtmlEventTagsListAndFillWithEnabledTagValuesFromTagModal(htmlIdTagsList) {
+function fillHtmlEventTagsListWithEnabledTagValuesFromTagsModal(htmlIdTagsList) {
     let htmlTagsList = document.getElementById(htmlIdTagsList);
     htmlTagsList.textContent = HTML_EMPTY_STRING_VALUE;
     HelperTagsModal.getArrayOfEnabledTagValuesFromHtmlTagsModal().map(tag => {

@@ -1,4 +1,5 @@
 <?php
+
 final class ViewEvents
 {
     public static function isFirstEvent($previousDateTimeToCompare, $domDocumentForEventsPerDateList): bool

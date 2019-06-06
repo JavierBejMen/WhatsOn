@@ -7,7 +7,7 @@ final class DataBaseHandler extends PDO
         parent::__construct(self::DRIVER_NAME . ":host=" . self::HOST . ";port=" . self::PORT
             . ";dbname=" . self::DATABASE_NAME . ";charset=" . self::CHARSET, self::USER_NAME, self::PASSWORD);
         $this->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
-        $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Debugging Purposes
+        $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // REMOVE - Debugging Purposes
     }
     public function getDriverName()
     {

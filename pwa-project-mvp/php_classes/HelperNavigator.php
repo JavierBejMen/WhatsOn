@@ -1,4 +1,5 @@
 <?php
+
 final class HelperNavigator
 {
     public static function redirectUrlBasedOnSessionVariableUserEmailAndQueryParameters()
@@ -143,6 +144,10 @@ final class HelperNavigator
     public static function redirectToUrlAdminPanelView()
     {
         header("Location: " . self::getUrlAdminPanelView());
+    }
+    public static function createImageFileUrl(string $fileName): string
+    {
+        return self::getUrlRoot() . self::DIR_PATH_EVENTS_IMAGES . "/" . $fileName;
     }
     public static function isValidUrlQueryForEventsView(array $arrayOfQueryParameters): bool
     {

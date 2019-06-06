@@ -12,7 +12,8 @@ final class DBUser
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EMAIL) . " = :user AND "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_ENCRYPTED_PASSWORD) . " = :encryptedPassword");
         } catch (PDOException $exception) {
-            print("Error: " . $exception->getMessage()); // Debugging Purposes
+            print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
+            return false;
         }
         $statementHandler->execute([":user" => $user, ":encryptedPassword" => $encryptedPassword]);
         return ($statementHandler->fetch(PDO::FETCH_NUM)[0] === "1") ? true : false;

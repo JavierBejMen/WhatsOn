@@ -12,7 +12,8 @@ final class DBEventHasTag
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID) . " = :eventId ORDER BY "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_TAG_NAME) . " ASC");
         } catch (PDOException $exception) {
-            print("Error: " . $exception->getMessage()); // Debugging Purposes
+            print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
+            return false;
         }
         $statementHandler->bindValue(":eventId", $eventId, PDO::PARAM_INT);
         $statementHandler->execute();
@@ -36,7 +37,8 @@ final class DBEventHasTag
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID) . " ASC, "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_TAG_NAME) . " ASC");
         } catch (PDOException $exception) {
-            print("Error: " . $exception->getMessage()); // Debugging Purposes
+            print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
+            return false;
         }
         $statementHandler->execute($arrayOfEventIds);
         if (!($eventHasTagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC))) {
@@ -58,7 +60,8 @@ final class DBEventHasTag
                 . HelperDataBase::getStringWithQuotationMarksForBinding(count($arrayOfTags)) . ") ORDER BY "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID) . " ASC");
         } catch (PDOException $exception) {
-            print("Error: " . $exception->getMessage()); // Debugging Purposes}
+            print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
+            return false;
         }
         $statementHandler->execute($arrayOfTags);
         if (!($eventHasTagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC))) {
@@ -66,6 +69,16 @@ final class DBEventHasTag
         }
         return array_unique(self::getArrayOfEventIdsFromEventHasTagRows($eventHasTagRows));
     }
+    // public static function insertTagsIntoEventId(array $arrayOfTags, int $eventId)
+    // {
+    //     try {
+    //         HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
+    //         $statementHandler = self::$dataBaseHandler->prepare("INSERT INTO");
+    //     } catch (PDOException $exception) {
+    //         print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
+    //         return false;
+    //     }
+    // }
 
     // Private
     private static function getArrayOfTagsFromEventHasTagRows(array $eventHasTagRows)
