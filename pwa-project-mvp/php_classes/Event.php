@@ -2,8 +2,8 @@
 /*
     - IMPORTANT: Property names MUST have the same names as database column names in the events database table
 
-    - Properties are strings or strings array
-    - Id and user email properties can not be modified
+    - Properties are STRING, ARRAY OF STRING or NO TYPE (in case they can have NULL value in database)
+    - 'id' and 'user_email' properties can not be modified
 */
 final class Event
 {
