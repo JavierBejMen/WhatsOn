@@ -60,10 +60,10 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
         $drinkPrice = $event->getLongDrinkPrice();
         $beerPrice = $event->getBeerPrice();
         ($ticketPrice == 0) ? print("<p>Entrada libre</p>") : print("<p>Entrada: $ticketPrice &euro;</p>");
-        if (!is_null($drinkPrice)) {
+        if ($drinkPrice) {
             print("<p>Copa: $drinkPrice &euro;</p>");
         }
-        if (!is_null($beerPrice)) {
+        if ($beerPrice) {
             print("<p>Cerveza: $beerPrice &euro;</p>");
         }
         ?>

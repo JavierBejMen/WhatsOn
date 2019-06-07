@@ -12,7 +12,7 @@ final class HelperDataBase
     {
         return "`" . str_replace("`", "``", $id) . "`";
     }
-    public static function getStringWithQuotationMarksForBinding(int $numberOfParameters)
+    public static function createStringWithQuotationMarksForBinding(int $numberOfParameters)
     {
         return str_repeat("?,", $numberOfParameters - 1) . "?";
     }

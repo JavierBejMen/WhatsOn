@@ -8,7 +8,7 @@ final class DataRepresentationConversor
     }
     public static function DateValueFromUIStringToDataBaseString(string $UIDate): string
     {
-        if ($UIDate) {
+        if ($UIDate != "") {
             $partsOfDate = explode(" ", $UIDate);
             $resultArrayOfStrings = array();
             array_push($resultArrayOfStrings, $partsOfDate[5]);
@@ -20,7 +20,7 @@ final class DataRepresentationConversor
     }
     public static function TimeValueFromUIStringToDataBaseString(string $UITime): string
     {
-        if ($UITime) {
+        if ($UITime != "") {
             $partsOfTime = explode(":", $UITime);
             $partsOfTime[0] = (strlen($partsOfTime[0]) == 1) ? "0" . $partsOfTime[0] : $partsOfTime[0];
             array_push($partsOfTime, "00");
@@ -31,7 +31,7 @@ final class DataRepresentationConversor
     public static function FloatValueFromUIStringToDataBaseString(string $UIFloat): string
     {
 
-        return ($UIFloat) ? strval(floatval($UIFloat)) : "";
+        return ($UIFloat != "") ? strval(floatval($UIFloat)) : "";
     }
 
     // Private

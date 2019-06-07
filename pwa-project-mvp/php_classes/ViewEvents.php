@@ -73,7 +73,7 @@ final class ViewEvents
     }
     public static function getFormattedStringFromEventStartDate(DateTime $startDate): string
     {
-        $dateFormatter = new IntlDateFormatter(HelperDateTime::$LOCALE, IntlDateFormatter::FULL, NULL, NULL, NULL, NULL);
+        $dateFormatter = new IntlDateFormatter(HelperDateTime::$LOCALE, IntlDateFormatter::FULL, null, null, null, null);
         (HelperDateTime::isDateTimeFromCurrentYear($startDate)) ? $dateFormatter->setPattern("EEEE, d MMMM")
             : $dateFormatter->setPattern("EEEE, d MMMM yyyy");
         return $dateFormatter->format($startDate);

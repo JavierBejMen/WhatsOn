@@ -33,11 +33,11 @@ final class Event
     {
         return $this->start_time;
     }
-    public function getEndDate(): string
+    public function getEndDate()
     {
         return $this->end_date;
     }
-    public function getEndTime(): string
+    public function getEndTime()
     {
         return $this->end_time;
     }
@@ -49,11 +49,11 @@ final class Event
     {
         return $this->local_address;
     }
-    public function getLocalLatitude(): string
+    public function getLocalLatitude()
     {
         return $this->local_latitude;
     }
-    public function getLocalLongitude(): string
+    public function getLocalLongitude()
     {
         return $this->local_longitude;
     }
@@ -61,11 +61,11 @@ final class Event
     {
         return $this->ticket_price;
     }
-    public function getLongDrinkPrice(): string
+    public function getLongDrinkPrice()
     {
         return $this->long_drink_price;
     }
-    public function getBeerPrice(): string
+    public function getBeerPrice()
     {
         return $this->beer_price;
     }

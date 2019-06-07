@@ -30,7 +30,7 @@ final class DBEventHasTag
             $statementHandler = self::$dataBaseHandler->prepare("SELECT * FROM "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_EVENT_HAS_TAG) . " WHERE "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID)
-                . " IN (" . HelperDataBase::getStringWithQuotationMarksForBinding(count($arrayOfEventIds)) . ") ORDER BY "
+                . " IN (" . HelperDataBase::createStringWithQuotationMarksForBinding(count($arrayOfEventIds)) . ") ORDER BY "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID) . " ASC, "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_TAG_NAME) . " ASC");
         } catch (PDOException $exception) {
@@ -52,7 +52,7 @@ final class DBEventHasTag
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID)
                 . " FROM " . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_EVENT_HAS_TAG)
                 . " WHERE " . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_TAG_NAME) . " IN ("
-                . HelperDataBase::getStringWithQuotationMarksForBinding(count($arrayOfTags)) . ") ORDER BY "
+                . HelperDataBase::createStringWithQuotationMarksForBinding(count($arrayOfTags)) . ") ORDER BY "
                 . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_EVENT_ID) . " ASC");
         } catch (PDOException $exception) {
             print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
@@ -62,17 +62,18 @@ final class DBEventHasTag
         $eventHasTagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC);
         return ($eventHasTagRows) ? array_unique(self::getArrayOfEventIdsFromEventHasTagRows($eventHasTagRows)) : false;
     }
-    // TODO
-    // public static function insertTagsIntoEventId(array $arrayOfTags, int $eventId)
-    // {
-    //     try {
-    //         HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
-    //         $statementHandler = self::$dataBaseHandler->prepare("INSERT INTO");
-    //     } catch (PDOException $exception) {
-    //         print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
-    //         return false;
-    //     }
-    // }
+    public static function TransactionQueryInsertTagsIntoEventId($DBEventDataBaseHandler, int $eventId, array $arrayOfTags)
+    {
+        try {
+            $statementHandler = $DBEventDataBaseHandler->prepare("INSERT INTO "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_EVENT_HAS_TAG)
+                . " VALUES" . str_repeat("(?,?),", count($arrayOfTags) - 1) . "(?,?)");
+        } catch (PDOException $exception) {
+            print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
+            return false;
+        }
+        return $statementHandler->execute(self::createArrayOfParameterForQueryOnInsertTagsIntoEventId($eventId, $arrayOfTags));
+    }
 
     // Private
     private static function getArrayOfTagsFromEventHasTagRows(array $eventHasTagRows)
@@ -101,6 +102,15 @@ final class DBEventHasTag
             array_push($resultArrayOfTags[$eventHasTagRow[self::COLUMN_NAME_EVENT_ID]], $eventHasTagRow[self::COLUMN_NAME_TAG_NAME]);
         }
         return $resultArrayOfTags;
+    }
+    private static function createArrayOfParameterForQueryOnInsertTagsIntoEventId(int $eventId, array $arrayOfTags)
+    {
+        $resultParametersArray = array();
+        foreach ($arrayOfTags as $tag) {
+            array_push($resultParametersArray, $eventId);
+            array_push($resultParametersArray, $tag);
+        }
+        return $resultParametersArray;
     }
 
     private static $dataBaseHandler = null;

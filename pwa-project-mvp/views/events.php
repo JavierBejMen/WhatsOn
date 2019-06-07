@@ -9,8 +9,8 @@ $arrayOfEvents = (isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENTS_FROM
 <div class="container-fluid px-md-5 classTertiaryBackgroundColor" id="idEventsMain">
     <?php
     if ($arrayOfEvents) {
-        $previousDateTimeToCompare = NULL;
-        $domDocumentForEventsPerDateList = NULL;
+        $previousDateTimeToCompare = null;
+        $domDocumentForEventsPerDateList = null;
 
         foreach ($arrayOfEvents as $event) {
             $nodeEventsRow;
