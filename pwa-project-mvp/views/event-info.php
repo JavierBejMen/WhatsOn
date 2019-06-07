@@ -1,5 +1,5 @@
 <?php
-$event = DBEvent::getEventFromId($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVENT_ID]);
+$event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENT_ID]);
 ?>
 <nav class="navbar navbar-expand fixed-top classPrimaryBackgroundColor text-white" id="idEventInfoMenuBar">
     <ul class="navbar-nav w-100 justify-content-between">

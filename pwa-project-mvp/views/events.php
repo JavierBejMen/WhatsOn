@@ -1,7 +1,7 @@
 <?php
-$arrayOfEvents = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVENTS_FROM_DATE])) ?
+$arrayOfEvents = (isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENTS_FROM_DATE])) ?
     DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(
-        new DateTime($_GET[HelperNavigator::URL_QUERY_PARAMETER_EVENTS_FROM_DATE])
+        new DateTime($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENTS_FROM_DATE])
     )
     : DBEvent::getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray();
 ?>

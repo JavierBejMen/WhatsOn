@@ -5,16 +5,16 @@ final class HelperNavigator
     public static function redirectUrlBasedOnSessionVariableUserEmailAndQueryParameters()
     {
         if (isset($_SESSION[self::SESSION_VARIABLE_USER_EMAIL])) {
-            if ($_GET && isset($_GET[self::URL_QUERY_PARAMETER_VIEW])) {
+            if ($_GET && isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW])) {
                 $isValidUrlQuery = true;
-                switch ($_GET[self::URL_QUERY_PARAMETER_VIEW]) {
-                    case self::URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL:
-                        if (!self::isValidUrlQueryForAdminPanelView($_GET)) {
+                switch ($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW]) {
+                    case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL:
+                        if (!ValidatorUrlQuery::isValidUrlQueryForAdminPanelView($_GET)) {
                             $isValidUrlQuery = false;
                         }
                         break;
-                    case self::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT:
-                        if (!self::isValidUrlQueryForCreateEventView($_GET)) {
+                    case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT:
+                        if (!ValidatorUrlQuery::isValidUrlQueryForCreateEventView($_GET)) {
                             $isValidUrlQuery = false;
                         }
                         break;
@@ -30,21 +30,24 @@ final class HelperNavigator
                 self::redirectToUrlAdminPanelView();
                 exit();
             }
-        } else if ($_GET && isset($_GET[self::URL_QUERY_PARAMETER_VIEW])) {
+        } else if ($_GET && isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW])) {
             $isValidUrlQuery = true;
-            switch ($_GET[self::URL_QUERY_PARAMETER_VIEW]) {
-                case self::URL_PARAMETER_VIEW_VALUE_EVENTS:
-                    if (!self::isValidUrlQueryForEventsView($_GET)) {
+            switch ($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW]) {
+                case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_EVENTS:
+                    if (!ValidatorUrlQuery::isValidUrlQueryForEventsView($_GET)) {
                         $isValidUrlQuery = false;
                     }
                     break;
-                case self::URL_PARAMETER_VIEW_VALUE_EVENT_INFO:
-                    if (!(self::isValidUrlQueryForEventInfoView($_GET)
-                        && DBEvent::getEventFromId($_GET[self::URL_QUERY_PARAMETER_EVENT_ID]))) {
+                case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_EVENT_INFO:
+                    if (!(ValidatorUrlQuery::isValidUrlQueryForEventInfoView($_GET)
+                        && DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENT_ID]))) {
                         $isValidUrlQuery = false;
                     }
                     break;
-                case self::URL_PARAMETER_VIEW_VALUE_LOGIN:
+                case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_LOGIN:
+                    if (!ValidatorUrlQuery::isValidUrlQueryForLoginView($_GET)) {
+                        $isValidUrlQuery = false;
+                    }
                     break;
                 default:
                     $isValidUrlQuery = false;
@@ -54,7 +57,7 @@ final class HelperNavigator
                 self::redirectToUrlRoot();
                 exit();
             }
-        } else if ($_GET && !isset($_GET[self::URL_QUERY_PARAMETER_VIEW])) {
+        } else if ($_GET && !isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW])) {
             self::redirectToUrlRoot();
             exit();
         }
@@ -62,19 +65,19 @@ final class HelperNavigator
     public static function getPhpAbsoluteFilePathFromQueryParameterView(string $parameterViewValue): string
     {
         switch ($parameterViewValue) {
-            case self::URL_PARAMETER_VIEW_VALUE_EVENT_INFO:
+            case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_EVENT_INFO:
                 $relativeFilePathView = self::FILE_PATH_EVENT_INFO_VIEW;
                 break;
-            case self::URL_PARAMETER_VIEW_VALUE_LOGIN:
+            case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_LOGIN:
                 $relativeFilePathView = self::FILE_PATH_LOGIN_VIEW;
                 break;
-            case self::URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL:
+            case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL:
                 $relativeFilePathView = self::FILE_PATH_ADMIN_PANEL_VIEW;
                 break;
-            case self::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT:
+            case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT:
                 $relativeFilePathView = self::FILE_PATH_CREATE_EVENT_VIEW;
                 break;
-            case self::URL_PARAMETER_VIEW_VALUE_EVENTS:
+            case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_EVENTS:
             default:
                 $relativeFilePathView = self::FILE_PATH_EVENTS_VIEW;
                 break;
@@ -99,27 +102,26 @@ final class HelperNavigator
     }
     public static function getUrlEventInfoViewFromEventId(string $eventId): string
     {
-        $queryArray = array(self::URL_QUERY_PARAMETER_VIEW => self::URL_PARAMETER_VIEW_VALUE_EVENT_INFO, self::URL_QUERY_PARAMETER_EVENT_ID => $eventId);
+        $queryArray = array(
+            ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW => ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_EVENT_INFO,
+            ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENT_ID => $eventId
+        );
         return self::getUrlRoot() . self::FILE_PATH_INDEX_SCRIPT . "?" . http_build_query($queryArray);
     }
     public static function getUrlLoginView(): string
     {
-        $queryArray = array(self::URL_QUERY_PARAMETER_VIEW => self::URL_PARAMETER_VIEW_VALUE_LOGIN);
+        $queryArray = array(ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW => ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_LOGIN);
         return self::getUrlRoot() . self::FILE_PATH_INDEX_SCRIPT . "?" . http_build_query($queryArray);
     }
     public static function getUrlAdminPanelView(): string
     {
-        $queryArray = array(self::URL_QUERY_PARAMETER_VIEW => self::URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL);
+        $queryArray = array(ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW => ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL);
         return self::getUrlRoot() . self::FILE_PATH_INDEX_SCRIPT . "?" . http_build_query($queryArray);
     }
     public static function getUrlCreateEventView(): string
     {
-        $queryArray = array(self::URL_QUERY_PARAMETER_VIEW => self::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT);
+        $queryArray = array(ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW => ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT);
         return self::getUrlRoot() . self::FILE_PATH_INDEX_SCRIPT . "?" . http_build_query($queryArray);
-    }
-    public static function getUrlLogout(): string
-    {
-        return self::getUrlRoot() . self::FILE_PATH_INDEX_SCRIPT . "?" . self::URL_QUERY_PARAMETER_LOGOUT;
     }
     public static function getUrlLoginScript(): string
     {
@@ -149,29 +151,6 @@ final class HelperNavigator
     {
         return self::getUrlRoot() . self::DIR_PATH_EVENTS_IMAGES . "/" . $fileName;
     }
-    public static function isValidUrlQueryForEventsView(array $arrayOfQueryParameters): bool
-    {
-        $existsQueryParameterViewWithEventsValue = isset($arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW])
-            && $arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW] === self::URL_PARAMETER_VIEW_VALUE_EVENTS;
-        return (isset($arrayOfQueryParameters[self::URL_QUERY_PARAMETER_EVENTS_FROM_DATE]) && $existsQueryParameterViewWithEventsValue)
-            || $existsQueryParameterViewWithEventsValue;
-    }
-    public static function isValidUrlQueryForEventInfoView(array $arrayOfQueryParameters): bool
-    {
-        return isset($arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW])
-            && $arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW] === self::URL_PARAMETER_VIEW_VALUE_EVENT_INFO
-            && isset($arrayOfQueryParameters[self::URL_QUERY_PARAMETER_EVENT_ID]);
-    }
-    public static function isValidUrlQueryForAdminPanelView(array $arrayOfQueryParameters): bool
-    {
-        return isset($arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW])
-            && $arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW] === self::URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL;
-    }
-    public static function isValidUrlQueryForCreateEventView(array $arrayOfQueryParameters): bool
-    {
-        return isset($arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW])
-            && $arrayOfQueryParameters[self::URL_QUERY_PARAMETER_VIEW] === self::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT;
-    }
     public static function isSecureConnection()
     {
         return (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on");
@@ -187,15 +166,6 @@ final class HelperNavigator
     public const FILE_PATH_LOGIN_SCRIPT = "/php_scripts/login.php";
     public const FILE_PATH_LOGOUT_SCRIPT = "/php_scripts/logout.php";
     public const FILE_PATH_CREATE_EVENT_SCRIPT = "/php_scripts/create-event.php";
-    public const URL_QUERY_PARAMETER_VIEW = "view";
-    public const URL_QUERY_PARAMETER_EVENT_ID = "event-id";
-    public const URL_QUERY_PARAMETER_EVENTS_FROM_DATE = "events-from-date";
-    public const URL_QUERY_PARAMETER_LOGOUT = "logout";
-    public const URL_PARAMETER_VIEW_VALUE_EVENTS = "events";
-    public const URL_PARAMETER_VIEW_VALUE_EVENT_INFO = "event-info";
-    public const URL_PARAMETER_VIEW_VALUE_LOGIN = "login";
-    public const URL_PARAMETER_VIEW_VALUE_ADMIN_PANEL = "admin-panel";
-    public const URL_PARAMETER_VIEW_VALUE_CREATE_EVENT = "create-event";
     public const SESSION_VARIABLE_USER_EMAIL = "user_email";
     public const HTML_ID_LOGIN_EMAIL = "idLoginEmail";
     public const HTML_ID_LOGIN_PASSWORD = "idLoginPassword";

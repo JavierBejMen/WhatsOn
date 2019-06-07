@@ -42,6 +42,10 @@ const HTML_CLASS_END_DATE_TIME_INPUT = "classEndDateTimeInput";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
 const HTML_ID_LOGIN_FORM = "idLoginForm";
 const HTML_ID_CREATE_EVENT_LOGIN_FORM = "idCreateEventForm";
+const HTML_ID_EVENT_IMAGE_CONTAINER = "idEventImageContainer";
+const HTML_ID_EVENT_TEMPORARY_IMAGE = "idEventTemporaryImage";
+const HTML_ID_EVENT_IMAGE_FILE_INPUT = "idEventImageFileInput";
+const HTML_ID_ADD_EVENT_IMAGE_BUTTON = "idAddEventImageButton";
 const HTML_ID_CREATE_EVENT_SHOW_MODAL_FOR_ADDING_TAGS_BUTTON = "idCreateEventShowModalForAddingTagsButton";
 const HTML_ID_CREATE_EVENT_SUBMIT_BUTTON = "idCreateEventSubmitButton";
 const HTML_ID_EVENT_TAGS_INPUT = "idEventTagsInput";
@@ -303,4 +307,15 @@ function createHtmlEventTagSpan(tagValue) {
     resultHtmlSpan.textContent = tagValue;
     resultHtmlSpan.disabled = true;
     return resultHtmlSpan;
+}
+function setHtmlEventImageFileInputAsBackgroundImageInHtmlEventImageContainer(htmlIdEventImageFileInput, htmlIdEventImageContainer, htmlIdEventTemporaryImage) {
+    let htmlEventImageFileInput = document.getElementById(htmlIdEventImageFileInput);
+    if (htmlEventImageFileInput.files && htmlEventImageFileInput.files[0]) {
+        let fileReader = new FileReader();
+        fileReader.onload = (event) => {
+            document.getElementById(htmlIdEventTemporaryImage).hidden = true;
+            document.getElementById(htmlIdEventImageContainer).style.backgroundImage = "url('" + event.target.result + "')";
+        };
+        fileReader.readAsDataURL(htmlEventImageFileInput.files[0]);
+    }
 }

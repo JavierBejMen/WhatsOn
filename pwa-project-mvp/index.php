@@ -15,8 +15,8 @@ session_start();
 // $_SESSION[HelperNavigator::SESSION_VARIABLE_USER_EMAIL] = "user@server.com";
 
 HelperNavigator::redirectUrlBasedOnSessionVariableUserEmailAndQueryParameters();
-$phpAbsoluteFilePathView = (isset($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])) ?
-    HelperNavigator::getPhpAbsoluteFilePathFromQueryParameterView($_GET[HelperNavigator::URL_QUERY_PARAMETER_VIEW])
+$phpAbsoluteFilePathView = (isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW])) ?
+    HelperNavigator::getPhpAbsoluteFilePathFromQueryParameterView($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW])
     : HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::FILE_PATH_EVENTS_VIEW);
 
 // REMOVE - Testing
