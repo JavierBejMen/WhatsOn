@@ -17,22 +17,22 @@ spl_autoload_register(function ($className) {
 session_start();
 
 // REMOVE - Testing
-echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["name"]) . "<br><br>";
-echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["type"]) . "<br><br>";
-echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["size"]) . "<br><br>";
-echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["tmp_name"]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_NAME]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_DESCRIPTION]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_DATE]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_TIME]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_DATE]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_TIME]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TICKET_PRICE]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_LONG_DRINK_PRICE]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_BEER_PRICE]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_NAME]) . "<br><br>";
-echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_ADDRESS]) . "<br><br>";
+// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["name"]) . "<br><br>";
+// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["type"]) . "<br><br>";
+// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["size"]) . "<br><br>";
+// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["tmp_name"]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_NAME]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_DESCRIPTION]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_DATE]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_TIME]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_DATE]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_TIME]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TICKET_PRICE]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_LONG_DRINK_PRICE]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_BEER_PRICE]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_NAME]) . "<br><br>";
+// echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_ADDRESS]) . "<br><br>";
 
 // echo "Is valid event? " . var_dump(ValidatorFormEvent::isValidEvent(
 //     $_POST[ValidatorFormEvent::FORM_FIELD_NAME_NAME],
