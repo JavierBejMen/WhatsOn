@@ -15,10 +15,8 @@ final class DBEvent
         }
         $statementHandler->bindValue(":eventId", $eventId, PDO::PARAM_INT);
         $statementHandler->execute();
-        if (!($resultEvent = $statementHandler->fetchObject("Event"))) {
-            return false;
-        }
-        return self::getEventWithLinkedArrayOfTags($resultEvent, DBEventHasTag::getTagsFromEventId($eventId));
+        $resultEvent = $statementHandler->fetchObject("Event");
+        return ($resultEvent) ? self::getEventWithLinkedArrayOfTags($resultEvent, DBEventHasTag::getTagsFromEventId($eventId)) : false;
     }
     public static function getEventsWithMinimumDataFromDateOnwardsWhichHaveSomeTagInTagsArray(
         DateTime $date = NULL,
@@ -59,10 +57,7 @@ final class DBEvent
         }
         // $resultArrayOfEvents = self::getArrayOfEventsWithIterativeSqlQueriesForTags($statementHandler);
         $resultArrayOfEvents = self::getArrayOfEventsWithSingleSqlQueryForTags($statementHandler);
-        if (!$resultArrayOfEvents) {
-            return false;
-        }
-        return $resultArrayOfEvents;
+        return ($resultArrayOfEvents) ? $resultArrayOfEvents : false;
     }
     public static function insertEvent(
         string $eventName,

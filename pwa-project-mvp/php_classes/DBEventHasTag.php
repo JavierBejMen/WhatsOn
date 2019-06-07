@@ -18,10 +18,7 @@ final class DBEventHasTag
         $statementHandler->bindValue(":eventId", $eventId, PDO::PARAM_INT);
         $statementHandler->execute();
         $eventHasTagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC);
-        if (!$eventHasTagRows) {
-            return false;
-        }
-        return self::getArrayOfTagsFromEventHasTagRows($eventHasTagRows);
+        return ($eventHasTagRows) ? self::getArrayOfTagsFromEventHasTagRows($eventHasTagRows) : false;
     }
     public static function getTagsFromArrayOfEventIds(array $arrayOfEventIds)
     {
@@ -41,10 +38,8 @@ final class DBEventHasTag
             return false;
         }
         $statementHandler->execute($arrayOfEventIds);
-        if (!($eventHasTagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC))) {
-            return false;
-        }
-        return self::getMultidimensionalArrayOfTagsByEventIdFromEventHasTagRows($arrayOfEventIds, $eventHasTagRows);
+        $eventHasTagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC);
+        return ($eventHasTagRows) ? self::getMultidimensionalArrayOfTagsByEventIdFromEventHasTagRows($arrayOfEventIds, $eventHasTagRows) : false;
     }
     public static function getEventIdsWhichHaveSomeTagInTagsArray(array $arrayOfTags)
     {
@@ -64,10 +59,8 @@ final class DBEventHasTag
             return false;
         }
         $statementHandler->execute($arrayOfTags);
-        if (!($eventHasTagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC))) {
-            return false;
-        }
-        return array_unique(self::getArrayOfEventIdsFromEventHasTagRows($eventHasTagRows));
+        $eventHasTagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC);
+        return ($eventHasTagRows) ? array_unique(self::getArrayOfEventIdsFromEventHasTagRows($eventHasTagRows)) : false;
     }
     // TODO
     // public static function insertTagsIntoEventId(array $arrayOfTags, int $eventId)

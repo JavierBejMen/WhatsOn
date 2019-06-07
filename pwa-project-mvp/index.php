@@ -41,14 +41,14 @@ $phpAbsoluteFilePathView = (isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_V
 // echo var_dump(DBEventHasTag::getEventIdsWhichHaveSomeTagInTagsArray(["BLABLA"])) . '<br><br>';
 // echo var_dump(DBEventHasTag::getEventIdsWhichHaveSomeTagInTagsArray([])) . '<br><br>';
 // echo var_dump(DBTag::getTags()) . '<br><br>';
-// echo (DBUser::existsUserWithEncryptedPassword('user-mail@server.com', 'ldskfmgsdfgjngnj')) ? 'El usuario existe.'
-//     : 'El usuario NO existe.' . '<br><br>';
-// echo (DBUser::existsUserWithEncryptedPassword('a', 'ldskfmgsdfgjngnj')) ? 'El usuario existe.'
-//     : 'El usuario NO existe.' . '<br><br>';
-// echo (DBUser::existsUserWithEncryptedPassword('user-mail@server.com', 'ls')) ? 'El usuario existe.'
-//     : 'El usuario NO existe.' . '<br><br>';
-// echo (DBUser::existsUserWithEncryptedPassword('', 'ldskfmgsdfgjngnj')) ? 'El usuario existe.'
-//     : 'El usuario NO existe.' . '<br><br>';
+// echo (DBUser::existsUserWithEncryptedPassword('user@server.com', '1234')) ? 'El usuario existe.<br><br>'
+//     : 'El usuario NO existe.<br><br>';
+// echo (DBUser::existsUserWithEncryptedPassword('a', 'ldskfmgsdfgjngnj')) ? 'El usuario existe.<br><br>'
+//     : 'El usuario NO existe.<br><br>';
+// echo (DBUser::existsUserWithEncryptedPassword('user-mail@server.com', 'ls')) ? 'El usuario existe.<br><br>'
+//     : 'El usuario NO existe.<br><br>';
+// echo (DBUser::existsUserWithEncryptedPassword('', 'ldskfmgsdfgjngnj')) ? 'El usuario existe.<br><br>'
+//     : 'El usuario NO existe.<br><br>';
 // echo '</div>';
 ?>
 <!doctype html>

@@ -15,10 +15,7 @@ final class DBTag
         }
         $statementHandler->execute();
         $tagRows = $statementHandler->fetchAll(PDO::FETCH_ASSOC);
-        if (!$tagRows) {
-            return false;
-        }
-        return self::getArrayOfTagsFromTagRows($tagRows);
+        return ($tagRows) ? self::getArrayOfTagsFromTagRows($tagRows) : false;
     }
 
     // Private
