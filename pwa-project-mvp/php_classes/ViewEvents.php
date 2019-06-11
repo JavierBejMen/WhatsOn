@@ -12,11 +12,11 @@ final class ViewEvents
         &$nodeEventsRow,
         &$previousDateTimeToCompare
     ) {
-        $domDocumentForEventsPerDateList = self::getDomDocument(self::createNodeAsStringForEventsPerDateList($eventStartDate));
+        $domDocumentForEventsPerDateList = self::createDomDocument(self::createNodeAsStringForEventsPerDateList($eventStartDate));
         $nodeEventsRow = self::getNodeEventsRow($domDocumentForEventsPerDateList);
         $previousDateTimeToCompare = $eventStartDate;
     }
-    public static function getDomDocument(string $nodeAsString): DOMDocument
+    public static function createDomDocument(string $nodeAsString): DOMDocument
     {
         // Converting all special characters from 'UTF-8' to 'HTML-ENTITIES'
         $nodeAsString = mb_convert_encoding($nodeAsString, "HTML-ENTITIES", ["UTF-8", "ISO-8859-1"]);
@@ -71,7 +71,7 @@ final class ViewEvents
     {
         return $domDocument->getElementsByTagName("div")[1];
     }
-    public static function getHtmlStringFromEventArrayOfTags(array $arrayOfTags): string
+    public static function createHtmlStringFromEventArrayOfTags(array $arrayOfTags): string
     {
         $resultString = "";
         foreach ($arrayOfTags as $tag) {

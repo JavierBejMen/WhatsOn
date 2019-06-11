@@ -34,7 +34,7 @@ $arrayOfEvents = (isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENTS_FROM
                     );
                 }
             }
-            $domDocumentForEventsPerDateEventContainer = ViewEvents::getDomDocument(
+            $domDocumentForEventsPerDateEventContainer = ViewEvents::createDomDocument(
                 ViewEvents::createNodeAsStringForEventsPerDateEventContainer(
                     $event->getId(),
                     $event->getUrlHeaderImage(),
@@ -42,7 +42,7 @@ $arrayOfEvents = (isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENTS_FROM
                     $event->getName(),
                     $event->getLocalName(),
                     DataRepresentationConversor::TimeValueFromDataBaseStringToUIString($event->getStartTime()),
-                    ViewEvents::getHtmlStringFromEventArrayOfTags($event->getArrayOfTags())
+                    ViewEvents::createHtmlStringFromEventArrayOfTags($event->getArrayOfTags())
                 )
             );
             $nodeEventsRow->appendChild($domDocumentForEventsPerDateList->importNode($domDocumentForEventsPerDateEventContainer->getElementsByTagName("div")[0], true));
