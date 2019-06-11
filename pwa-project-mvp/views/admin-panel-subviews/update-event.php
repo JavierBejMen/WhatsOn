@@ -112,7 +112,7 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
                                                                                                                                                                                                                         if (!$ticketPrice) {
                                                                                                                                                                                                                             print("value=\"0\" readonly");
                                                                                                                                                                                                                         } else {
-                                                                                                                                                                                                                            print("value=\"" . DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($ticketPrice) . "\"");
+                                                                                                                                                                                                                            print("value=\"$ticketPrice\"");
                                                                                                                                                                                                                         }
                                                                                                                                                                                                                         ?>>
                 </div>
@@ -130,7 +130,12 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
             <div class="d-flex">
                 <div class="form-group">
                     <label for="idEventLongDrinkPriceInput">Copa</label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventLongDrinkPriceInput" name="idEventLongDrinkPriceInput" type="number" min="0" step="0.01" value="<?php print(DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($event->getLongDrinkPrice())); ?>" placeholder="Precio de la copa">
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventLongDrinkPriceInput" name="idEventLongDrinkPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la copa" <?php
+                                                                                                                                                                                                                $longDrinkPrice = $event->getLongDrinkPrice();
+                                                                                                                                                                                                                if ($longDrinkPrice !== null) {
+                                                                                                                                                                                                                    print("value=\"$longDrinkPrice\"");
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                                ?>>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="idMaxOrMinLongDrinkPriceCheckInput" name="idMaxOrMinLongDrinkPriceCheckInput">
@@ -142,7 +147,12 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
             <div class="d-flex">
                 <div class="form-group">
                     <label for="idEventBeerPriceInput">Cerveza</label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventBeerPriceInput" name="idEventBeerPriceInput" type="number" min="0" step="0.01" value="<?php print(DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($event->getBeerPrice())); ?>" placeholder="Precio de la cerveza">
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventBeerPriceInput" name="idEventBeerPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la cerveza" <?php
+                                                                                                                                                                                                        $beerPrice = $event->getBeerPrice();
+                                                                                                                                                                                                        if ($beerPrice !== null) {
+                                                                                                                                                                                                            print("value=\"$beerPrice\"");
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                        ?>>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="idMaxOrMinBeerPriceCheckInput" name="idMaxOrMinBeerPriceCheckInput">
