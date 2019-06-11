@@ -2,6 +2,9 @@ class HelperTagsModal {
     static saveEnabledTagValuesFromHtmlModalFormToSessionStorage(sessionStorageKeyName) {
         sessionStorage.setItem(sessionStorageKeyName, JSON.stringify(this.getArrayOfEnabledTagValuesFromHtmlTagsModal()));
     }
+    static saveTagValuesFromHtmlEventTagsInputToSessionStorage(htmlidEventTagsInput, sessionStorageKeyName) {
+        sessionStorage.setItem(sessionStorageKeyName, JSON.stringify(document.getElementById(htmlidEventTagsInput).value));
+    }
     static loadPreviousEnabledTagValuesFromSessionStorageToHtmlFormModal(sessionStorageKeyName) {
         let htmlTagSpans = Array.from(document.getElementsByClassName(HTML_CLASS_TAGS_MODAL_TAG_SPAN));
         let arrayOfEnabledTags = JSON.parse(sessionStorage.getItem(sessionStorageKeyName));

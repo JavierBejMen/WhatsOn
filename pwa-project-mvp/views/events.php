@@ -9,28 +9,28 @@ $arrayOfEvents = (isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENTS_FROM
 <div class="container-fluid px-md-5 classTertiaryBackgroundColor" id="idEventsMain">
     <?php
     if ($arrayOfEvents) {
-        $previousDateTimeToCompare = null;
+        $previousDateToCompare = null;
         $domDocumentForEventsPerDateList = null;
 
         foreach ($arrayOfEvents as $event) {
             $nodeEventsRow;
-            $eventDate = new DateTime($event->getStartDate());
-            if (ViewEvents::isFirstEvent($previousDateTimeToCompare, $domDocumentForEventsPerDateList)) {
+            $eventStartDate = $event->getStartDate();
+            if (ViewEvents::isFirstEvent($previousDateToCompare, $domDocumentForEventsPerDateList)) {
                 ViewEvents::InitializeDomDocumentAndNodesAndPreviousDateTimeToCompare(
-                    ViewEvents::getFormattedStringFromEventStartDate($eventDate),
+                    $eventStartDate,
                     $domDocumentForEventsPerDateList,
                     $nodeEventsRow,
-                    $previousDateTimeToCompare
+                    $previousDateToCompare
                 );
             } else {
-                if ($previousDateTimeToCompare != $eventDate) {
+                if ($previousDateToCompare != $eventStartDate) {
                     print($domDocumentForEventsPerDateList->saveHTML());
 
                     ViewEvents::InitializeDomDocumentAndNodesAndPreviousDateTimeToCompare(
-                        ViewEvents::getFormattedStringFromEventStartDate($eventDate),
+                        $eventStartDate,
                         $domDocumentForEventsPerDateList,
                         $nodeEventsRow,
-                        $previousDateTimeToCompare
+                        $previousDateToCompare
                     );
                 }
             }
@@ -38,10 +38,10 @@ $arrayOfEvents = (isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENTS_FROM
                 ViewEvents::createNodeAsStringForEventsPerDateEventContainer(
                     $event->getId(),
                     $event->getUrlHeaderImage(),
-                    ViewEvents::getFormattedStringFromEventTicketPrice($event->getTicketPrice()),
+                    DataRepresentationConversor::EventTicketPriceFromDataBaseStringToUIStringInEventsView($event->getTicketPrice()),
                     $event->getName(),
                     $event->getLocalName(),
-                    ViewEvents::getFormattedStringFromEventStartTime($event->getStartTime()),
+                    DataRepresentationConversor::TimeValueFromDataBaseStringToUIString($event->getStartTime()),
                     ViewEvents::getHtmlStringFromEventArrayOfTags($event->getArrayOfTags())
                 )
             );

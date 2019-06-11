@@ -7,14 +7,14 @@ final class ViewEvents
         return is_null($previousDateTimeToCompare) && is_null($domDocumentForEventsPerDateList);
     }
     public static function InitializeDomDocumentAndNodesAndPreviousDateTimeToCompare(
-        string $eventDate,
+        $eventStartDate,
         &$domDocumentForEventsPerDateList,
         &$nodeEventsRow,
         &$previousDateTimeToCompare
     ) {
-        $domDocumentForEventsPerDateList = self::getDomDocument(self::createNodeAsStringForEventsPerDateList($eventDate));
+        $domDocumentForEventsPerDateList = self::getDomDocument(self::createNodeAsStringForEventsPerDateList($eventStartDate));
         $nodeEventsRow = self::getNodeEventsRow($domDocumentForEventsPerDateList);
-        $previousDateTimeToCompare = $eventDate;
+        $previousDateTimeToCompare = $eventStartDate;
     }
     public static function getDomDocument(string $nodeAsString): DOMDocument
     {
@@ -27,11 +27,11 @@ final class ViewEvents
         $domDocument->loadHTML($nodeAsString, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         return $domDocument;
     }
-    public static function createNodeAsStringForEventsPerDateList(string $eventDate): string
+    public static function createNodeAsStringForEventsPerDateList(string $eventStartDate): string
     {
         $nodeAsString = '
             <div class="classEventsPerDateList">
-                <h4 class="pt-4 mb-0">' . $eventDate . '</h4>
+                <h4 class="pt-4 mb-0">' . DataRepresentationConversor::DateValueFromDataBaseStringToUIStringInEventsViewAndEventInfoView($eventStartDate) . '</h4>
                 <div class="row">
                 </div>
             </div>
@@ -70,21 +70,6 @@ final class ViewEvents
     public static function getNodeEventsRow(DOMDocument $domDocument): DOMNode
     {
         return $domDocument->getElementsByTagName("div")[1];
-    }
-    public static function getFormattedStringFromEventStartDate(DateTime $startDate): string
-    {
-        $dateFormatter = new IntlDateFormatter(HelperDateTime::$LOCALE, IntlDateFormatter::FULL, null, null, null, null);
-        (HelperDateTime::isDateTimeFromCurrentYear($startDate)) ? $dateFormatter->setPattern("EEEE, d MMMM")
-            : $dateFormatter->setPattern("EEEE, d MMMM yyyy");
-        return $dateFormatter->format($startDate);
-    }
-    public static function getFormattedStringFromEventTicketPrice(string $ticketPrice): string
-    {
-        return ($ticketPrice == 0) ? "Entrada libre" : $ticketPrice . " €";
-    }
-    public static function getFormattedStringFromEventStartTime(string $startTime): string
-    {
-        return (new DateTime($startTime))->format("H:i");
     }
     public static function getHtmlStringFromEventArrayOfTags(array $arrayOfTags): string
     {

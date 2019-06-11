@@ -20,7 +20,7 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
 </nav>
 <div id="idEventInfoHeaderImage" style="background-image: url('<?php print($event->getUrlHeaderImage()); ?>')" alt="Imagen de Lemon Jazz" aria-label="Imagen de Lemon Jazz"></div>
 <div class="container mb-5" id="idEventInfoMain">
-    <div class="row justify-content-start my-4 classTagsList" aria-label="Etiquetas de<?php print($event->getName()); ?>">
+    <div class="row justify-content-start my-4 classTagsList" aria-label="Etiquetas de <?php print($event->getName()); ?>">
         <?php
         foreach ($event->getArrayOfTags() as $tag) {
             print("<span class=\"btn btn-elegant\" disabled>$tag</span>");
@@ -31,9 +31,9 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
         <h5 class="font-weight-bold">Cuándo</h5>
         <p>
             <?php
-            print(ViewEvents::getFormattedStringFromEventStartDate(new DateTime($event->getStartDate())));
+            print(DataRepresentationConversor::DateValueFromDataBaseStringToUIStringInEventsViewAndEventInfoView($event->getStartDate()));
             print(" - ");
-            print(ViewEvents::getFormattedStringFromEventStartTime($event->getStartTime()));
+            print(DataRepresentationConversor::TimeValueFromDataBaseStringToUIString($event->getStartTime()));
             ?>
         </p>
     </div>
@@ -57,14 +57,14 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
         <h5 class="font-weight-bold">Precios</h5>
         <?php
         $ticketPrice = $event->getTicketPrice();
-        $drinkPrice = $event->getLongDrinkPrice();
+        $longDrinkPrice = $event->getLongDrinkPrice();
         $beerPrice = $event->getBeerPrice();
-        ($ticketPrice == 0) ? print("<p>Entrada libre</p>") : print("<p>Entrada: $ticketPrice &euro;</p>");
-        if ($drinkPrice) {
-            print("<p>Copa: $drinkPrice &euro;</p>");
+        print("<p>" . DataRepresentationConversor::EventTicketPriceFromDataBaseStringToUIStringInEventInfoView($ticketPrice) . "</p>");
+        if ($longDrinkPrice) {
+            print("<p>Copa: " . DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($longDrinkPrice) . " &euro;</p>");
         }
         if ($beerPrice) {
-            print("<p>Cerveza: $beerPrice &euro;</p>");
+            print("<p>Cerveza: " . DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($beerPrice) . " &euro;</p>");
         }
         ?>
     </div>

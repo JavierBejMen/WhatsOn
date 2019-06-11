@@ -191,7 +191,7 @@ if (ValidatorFormEvent::isValidEvent(
             $eventLongDrinkPrice,
             $eventBeerPrice,
             $_SESSION[HelperNavigator::SESSION_VARIABLE_USER_EMAIL],
-            DataRepresentationConversor::TagsStringValueFromUIStringToPhpArray($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS])
+            DataRepresentationConversor::TagsStringFromUIStringToPhpArray($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS])
         );
 
         // REMOVE - Testing
@@ -229,7 +229,7 @@ if (ValidatorFormEvent::isValidEvent(
     //     . "<br><br>";
     // echo "DB image URL: " . var_dump(HelperNavigator::createImageFileUrl($destinationImageFileName)) . "<br><br>";
     // echo "Tags array: "
-    //     . var_dump(DataRepresentationConversor::TagsStringValueFromUIStringToPhpArray($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS]))
+    //     . var_dump(DataRepresentationConversor::TagsStringFromUIStringToPhpArray($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS]))
     //     . "<br><br>";
 }
 header("Location: " . HelperNavigator::getUrlReferer());

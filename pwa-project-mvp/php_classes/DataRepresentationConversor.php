@@ -2,9 +2,13 @@
 
 final class DataRepresentationConversor
 {
-    public static function TagsStringValueFromUIStringToPhpArray(string $tagsString): array
+    public static function FloatValueFromUIStringToDataBaseString(string $UIFloat): string
     {
-        return explode(",", $tagsString);
+        return ($UIFloat != "") ? strval(floatval($UIFloat)) : "";
+    }
+    public static function FloatValueFromDataBaseStringToUIString(string $UIFloat): string
+    {
+        return ($UIFloat != "") ? str_replace(".", ",", $UIFloat) : "";
     }
     public static function DateValueFromUIStringToDataBaseString(string $UIDate): string
     {
@@ -18,20 +22,49 @@ final class DataRepresentationConversor
         }
         return "";
     }
-    public static function TimeValueFromUIStringToDataBaseString(string $UITime): string
+    public static function DateValueFromDataBaseStringToUIStringInEventsViewAndEventInfoView(string $dataBaseDate): string
     {
-        if ($UITime != "") {
-            $partsOfTime = explode(":", $UITime);
-            $partsOfTime[0] = (strlen($partsOfTime[0]) == 1) ? "0" . $partsOfTime[0] : $partsOfTime[0];
-            array_push($partsOfTime, "00");
-            return implode(":", $partsOfTime);
+        if ($dataBaseDate != "") {
+            $phpDate = new DateTime($dataBaseDate);
+            $dateFormatter = new IntlDateFormatter(HelperDateTime::$LOCALE, IntlDateFormatter::FULL, null, null, null, null);
+            (HelperDateTime::isDateTimeFromCurrentYear($phpDate)) ? $dateFormatter->setPattern("EEEE, d 'de' MMMM")
+                : $dateFormatter->setPattern("EEEE, d 'de' MMMM 'de' yyyy");
+            return $dateFormatter->format($phpDate);
         }
         return "";
     }
-    public static function FloatValueFromUIStringToDataBaseString(string $UIFloat): string
+    public static function DateValueFromDataBaseStringToUIStringInUpdateEventView(string $dataBaseDate): string
     {
-
-        return ($UIFloat != "") ? strval(floatval($UIFloat)) : "";
+        if ($dataBaseDate != "") {
+            $dateFormatter = new IntlDateFormatter(HelperDateTime::$LOCALE, IntlDateFormatter::FULL, null, null, null, null);
+            $dateFormatter->setPattern("EEEE, d 'de' MMMM 'de' yyyy");
+            return $dateFormatter->format(new DateTime($dataBaseDate));
+        }
+        return "";
+    }
+    public static function TimeValueFromUIStringToDataBaseString(string $UITime): string
+    {
+        return ($UITime != "") ? ($UITime . ":00") : "";
+    }
+    public static function TimeValueFromDataBaseStringToUIString(string $dataBaseTime): string
+    {
+        return ($dataBaseTime != "") ? (new DateTime($dataBaseTime))->format("H:i") : "";
+    }
+    public static function TagsStringFromUIStringToPhpArray(string $tagsString): array
+    {
+        return ($tagsString != "") ? explode(",", $tagsString) : "";
+    }
+    public static function TagsArrayFromPhpArrayToUIString(array $arrayOfTags): string
+    {
+        return ($arrayOfTags != "") ? implode(",", $arrayOfTags) : "";
+    }
+    public static function EventTicketPriceFromDataBaseStringToUIStringInEventsView(string $eventTicketPrice): string
+    {
+        return ($eventTicketPrice) ? self::FloatValueFromDataBaseStringToUIString($eventTicketPrice) . " €" : "Entrada libre";
+    }
+    public static function EventTicketPriceFromDataBaseStringToUIStringInEventInfoView(string $eventTicketPrice): string
+    {
+        return "Entrada" . (($eventTicketPrice) ? ": " . self::FloatValueFromDataBaseStringToUIString($eventTicketPrice) . " €" : " libre");
     }
 
     // Private

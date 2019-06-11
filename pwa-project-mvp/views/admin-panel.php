@@ -8,7 +8,7 @@
     <a class="btn btn-block text-body text-left waves-effect shadow-none border-top border-bottom m-0 py-4" href="<?php print(HelperNavigator::getUrlCreateEventView()); ?>">
         <i class="far fa-calendar-plus fa-lg pr-4"></i>Crear evento
     </a>
-    <a class="btn btn-block text-body text-left waves-effect shadow-none border-bottom m-0 py-4">
+    <a class="btn btn-block text-body text-left waves-effect shadow-none border-bottom m-0 py-4" href="<?php print(HelperNavigator::getUrlUpdateEventViewFromEventId("1")); ?>">
         <i class="fas fa-pen fa-lg pr-4"></i>Modificar evento
     </a>
     <a class="btn btn-block text-body text-left waves-effect shadow-none border-bottom m-0 py-4" href="<?php print(HelperNavigator::getUrlLogoutScript()); ?>">

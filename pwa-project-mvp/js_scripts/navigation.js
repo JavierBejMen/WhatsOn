@@ -42,12 +42,13 @@ const HTML_CLASS_END_DATE_TIME_INPUT = "classEndDateTimeInput";
 const HTML_ID_MAIN_MENU_BAR = "idMainMenuBar";
 const HTML_ID_LOGIN_FORM = "idLoginForm";
 const HTML_ID_CREATE_EVENT_LOGIN_FORM = "idCreateEventForm";
+const HTML_ID_UPDATE_EVENT_LOGIN_FORM = "idUpdateEventForm";
 const HTML_ID_EVENT_IMAGE_CONTAINER = "idEventImageContainer";
 const HTML_ID_EVENT_TEMPORARY_IMAGE = "idEventTemporaryImage";
 const HTML_ID_EVENT_IMAGE_FILE_INPUT = "idEventImageFileInput";
 const HTML_ID_ADD_EVENT_IMAGE_BUTTON = "idAddEventImageButton";
 const HTML_ID_CREATE_EVENT_SHOW_MODAL_FOR_ADDING_TAGS_BUTTON = "idCreateEventShowModalForAddingTagsButton";
-const HTML_ID_CREATE_EVENT_SUBMIT_BUTTON = "idCreateEventSubmitButton";
+const HTML_ID_UPDATE_EVENT_SHOW_MODAL_FOR_ADDING_TAGS_BUTTON = "idUpdateEventShowModalForAddingTagsButton";
 const HTML_ID_EVENT_TAGS_INPUT = "idEventTagsInput";
 const HTML_ID_EVENT_TAGS_LIST = "idEventTagsList";
 const HTML_ID_EVENT_START_DATE_TIME_BUTTON = "idEventStartDateTimeButton";
@@ -172,11 +173,6 @@ function showTimePickerForHtmlEventStartDateTimeButton(htmlIdEventStartTimeInput
         hideHtmlDateTimePickerWrapper();
     });
 }
-function writeStartDateTimeValuesAndClearEndDateTimeValues(htmlIdEventStartDateInput, htmlIdEventStartTimeInput,
-    htmlIdEventEndDateInput, htmlIdEventEndTimeInput) {
-    writeValuesFromDateTimePickersToDateInputAndTimeInput(startDatePicker, htmlIdEventStartDateInput, startTimePicker, htmlIdEventStartTimeInput);
-    clearHtmlEventEndDateInputAndEventEndTimeInputValues(htmlIdEventEndDateInput, htmlIdEventEndTimeInput);
-}
 function showDatePickerForEventEndDateTimeButton(htmlIdEventStartDateInput, htmlIdEventStartTimeInput, htmlIdEventEndDateInput) {
     if (document.getElementById(htmlIdEventStartDateInput).value && document.getElementById(htmlIdEventStartTimeInput).value) {
         datePicker = getDateTimePicker(startDatePicker.time, JS_DATE_TIME_PICKER_DATE_TYPE, document.getElementById(htmlIdEventEndDateInput));
@@ -196,9 +192,6 @@ function showTimePickerForEventEndDateTimeButton(htmlIdEventEndTimeInput) {
     document.getElementById(HTML_ID_TIME_PICKER_CANCEL_BUTTON).addEventListener("click", () => {
         hideHtmlDateTimePickerWrapper();
     });
-}
-function writeEndDateTimeValues(htmlIdEventEndDateInput, htmlIdEventEndTimeInput) {
-    writeValuesFromDateTimePickersToDateInputAndTimeInput(datePicker, htmlIdEventEndDateInput, timePicker, htmlIdEventEndTimeInput);
 }
 function getDateTimePicker(startTime = moment(), dateTimePickerType = JS_DATE_TIME_PICKER_DATE_TYPE, htmlElemntForEventTrigger = null) {
     moment.locale(JS_DATE_TIME_PICKER_LOCALE);
@@ -247,7 +240,11 @@ function getDateAsStringFromDatePicker(jsDatePicker) {
     return resultString.substring(0, resultString.lastIndexOf(" "));
 }
 function getTimeAsStringFromTimePicker(jsTimePicker) {
-    return jsTimePicker.time.format(JS_DATE_TIME_PICKER_TIME_STRING_FORMAT_TO_DISPLAY).toString();
+    let partsOfTime = jsTimePicker.time.format(JS_DATE_TIME_PICKER_TIME_STRING_FORMAT_TO_DISPLAY).toString().split(":");
+    if (partsOfTime[0].length == 1) {
+        partsOfTime[0] = "0" + partsOfTime[0];
+    }
+    return partsOfTime.join(":");
 }
 function clearHtmlEventEndDateInputAndEventEndTimeInputValues(htmlIdEventEndDateInput, htmlIdEventEndTimeInput) {
     document.getElementById(htmlIdEventEndDateInput).value = HTML_EMPTY_STRING_VALUE;
@@ -308,12 +305,11 @@ function createHtmlEventTagSpan(tagValue) {
     resultHtmlSpan.disabled = true;
     return resultHtmlSpan;
 }
-function setHtmlEventImageFileInputAsBackgroundImageInHtmlEventImageContainer(htmlIdEventImageFileInput, htmlIdEventImageContainer, htmlIdEventTemporaryImage) {
+function setHtmlEventImageFileInputAsBackgroundImageInHtmlEventImageContainer(htmlIdEventImageFileInput, htmlIdEventImageContainer) {
     let htmlEventImageFileInput = document.getElementById(htmlIdEventImageFileInput);
     if (htmlEventImageFileInput.files && htmlEventImageFileInput.files[0]) {
         let fileReader = new FileReader();
         fileReader.onload = (event) => {
-            document.getElementById(htmlIdEventTemporaryImage).hidden = true;
             document.getElementById(htmlIdEventImageContainer).style.backgroundImage = "url('" + event.target.result + "')";
         };
         fileReader.readAsDataURL(htmlEventImageFileInput.files[0]);

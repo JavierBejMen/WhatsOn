@@ -93,7 +93,7 @@ final class ValidatorFormEvent
     public const FORM_FIELD_RESTRICTION_PATTERN_TYPE_IMAGE_FILE = "^image\/[a-zA-Z0-9\+\-]+$";
     public const FORM_FIELD_RESTRICTION_PATTERN_TAGS = "^[a-zA-ZáéíóúÁÉÍÓÚ \-]+(,[a-zA-ZáéíóúÁÉÍÓÚ \-]+)*$";
     public const FORM_FIELD_RESTRICTION_PATTERN_DATE = "^(lunes|martes|miércoles|jueves|viernes|sábado|domingo), ([1-9]|[1-2][0-9]|3[0-1]) de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre) de [2-9][0-9]{3}$";
-    public const FORM_FIELD_RESTRICTION_PATTERN_TIME = "^([0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
+    public const FORM_FIELD_RESTRICTION_PATTERN_TIME = "^([0-1][0-9]|2[0-3]):[0-5][0-9]$";
     public const FORM_FIELD_RESTRICTION_PATTERN_PRICE = "^[0-9]+((\.|,)[0-9]{1,2})?$";
 
     // Private

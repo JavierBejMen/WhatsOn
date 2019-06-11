@@ -18,6 +18,11 @@ final class HelperNavigator
                             $isValidUrlQuery = false;
                         }
                         break;
+                    case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_UPDATE_EVENT:
+                        if (!ValidatorUrlQuery::isValidUrlQueryForUpdateEventView($_GET)) {
+                            $isValidUrlQuery = false;
+                        }
+                        break;
                     default:
                         $isValidUrlQuery = false;
                         break;
@@ -77,6 +82,9 @@ final class HelperNavigator
             case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT:
                 $relativeFilePathView = self::FILE_PATH_CREATE_EVENT_VIEW;
                 break;
+            case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_UPDATE_EVENT:
+                $relativeFilePathView = self::FILE_PATH_UPDATE_EVENT_VIEW;
+                break;
             case ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_EVENTS:
             default:
                 $relativeFilePathView = self::FILE_PATH_EVENTS_VIEW;
@@ -123,6 +131,14 @@ final class HelperNavigator
         $queryArray = array(ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW => ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_CREATE_EVENT);
         return self::getUrlRoot() . self::FILE_PATH_INDEX_SCRIPT . "?" . http_build_query($queryArray);
     }
+    public static function getUrlUpdateEventViewFromEventId(string $eventId): string
+    {
+        $queryArray = array(
+            ValidatorUrlQuery::URL_QUERY_PARAMETER_VIEW => ValidatorUrlQuery::URL_PARAMETER_VIEW_VALUE_UPDATE_EVENT,
+            ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENT_ID => $eventId
+        );
+        return self::getUrlRoot() . self::FILE_PATH_INDEX_SCRIPT . "?" . http_build_query($queryArray);
+    }
     public static function getUrlLoginScript(): string
     {
         return self::getUrlRoot() . self::FILE_PATH_LOGIN_SCRIPT;
@@ -162,6 +178,7 @@ final class HelperNavigator
     public const FILE_PATH_LOGIN_VIEW = "/views/login.php";
     public const FILE_PATH_ADMIN_PANEL_VIEW = "/views/admin-panel.php";
     public const FILE_PATH_CREATE_EVENT_VIEW = "/views/admin-panel-subviews/create-event.php";
+    public const FILE_PATH_UPDATE_EVENT_VIEW = "/views/admin-panel-subviews/update-event.php";
     public const FILE_PATH_INDEX_SCRIPT = "/index.php";
     public const FILE_PATH_LOGIN_SCRIPT = "/php_scripts/login.php";
     public const FILE_PATH_LOGOUT_SCRIPT = "/php_scripts/logout.php";

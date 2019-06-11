@@ -1,12 +1,7 @@
-<!--
-    MAX_FILE_SIZE must preceed file input.
-
-    This form element should always be used as it saves users the trouble of waiting for a big file being transferred only to find 
-    that it was too large and the transfer failed.
-
-    More info: https://www.php.net/manual/en/features.file-upload.post-method.php
--->
-<nav class="navbar navbar-expand fixed-top classPrimaryBackgroundColor text-white" id="idCreateEventMenuBar">
+<?php
+$event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EVENT_ID]);
+?>
+<nav class="navbar navbar-expand fixed-top classPrimaryBackgroundColor text-white" id="idUpdateEventMenuBar">
     <ul class="navbar-nav w-100 justify-content-between">
         <li class="nav-item">
             <a class="nav-link text-white waves-effect waves-light classRoundNavigationLink" title="Volver atrás" aria-label="Volver atrás" href="<?php print(HelperNavigator::getUrlAdminPanelView()); ?>">
@@ -14,7 +9,7 @@
             </a>
         </li>
         <li class="nav-item pt-2">
-            <h5>Crear evento</h5>
+            <h5>Modificar evento</h5>
         </li>
         <li class="nav-item">
             <a class="nav-link waves-effect waves-light classRoundNavigationLink" title="Más acciones" aria-label="Más acciones">
@@ -23,17 +18,13 @@
         </li>
     </ul>
 </nav>
-<div class="d-flex justify-content-center align-items-center classTertiaryBackgroundColor text-black-50 text-center pt-4 pb-2" id="idEventImageContainer">
-    <div id="idEventTemporaryImage">
-        <i class="fas fa-camera fa-7x"></i>
-        <p class="pt-3">Imagen del evento</p>
-    </div>
+<div class="d-flex justify-content-center align-items-center classTertiaryBackgroundColor text-black-50 text-center pt-4 pb-2" id="idEventImageContainer" style="background-image: url('<?php print($event->getUrlHeaderImage()); ?>')">
     <button type="button" class="btn btn-sm classSecondaryBackgroundColor text-white waves-effect waves-light" id="idAddEventImageButton" title="Añadir imagen de evento" aria-label="Añadir imagen de evento">
         <i class="fas fa-pen fa-2x"></i>
     </button>
 </div>
-<div class="container py-3" id="idCreateEventMain">
-    <form class="needs-validation mx-auto" id="idCreateEventForm" method="post" enctype="multipart/form-data" action="<?php print(HelperNavigator::getUrlCreateEventScript()); ?>" novalidate>
+<div class="container py-3" id="idUpdateEventMain">
+    <form class="needs-validation mx-auto" id="idUpdateEventForm" method="post" enctype="multipart/form-data" action="" novalidate>
         <div class="form-group">
             <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_MAX_SIZE_IMAGE_FILE); ?>" />
             <input id="idEventImageFileInput" name="idEventImageFileInput" accept="image/*" type="file" hidden>
@@ -43,14 +34,14 @@
         </div>
         <div class="form-group">
             <label for="idEventNameInput">Qué <span class="text-danger">*</span></label>
-            <input class="form-control classOnlyBottomBorderInput" id="idEventNameInput" name="idEventNameInput" type="text" minlength="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Nombre del evento" required>
+            <input class="form-control classOnlyBottomBorderInput" id="idEventNameInput" name="idEventNameInput" type="text" minlength="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Nombre del evento" value="<?php print($event->getName()); ?>" required>
             <div class="invalid-feedback">
                 Por favor, introduce un nombre válido.
             </div>
         </div>
         <div class="form-group">
             <label for="idEventDescriptionInput">En qué consiste <span class="text-danger">*</span></label>
-            <textarea class="form-control classOnlyBottomBorderInput" id="idEventDescriptionInput" name="idEventDescriptionInput" rows="5" minlength="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Descripción del evento" required></textarea>
+            <textarea class="form-control classOnlyBottomBorderInput" id="idEventDescriptionInput" name="idEventDescriptionInput" rows="5" minlength="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Descripción del evento" required><?php print($event->getDescription()); ?></textarea>
             <div class="invalid-feedback">
                 Por favor, introduce una descripción válida.
             </div>
@@ -60,12 +51,18 @@
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventTagsInput">Etiquetas <span class="text-danger">*</span></label>
-                    <input class="form-control" id="idEventTagsInput" name="idEventTagsInput" type="text" pattern="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_PATTERN_TAGS); ?>" required hidden>
-                    <div class="row justify-content-start classTagsList" id="idEventTagsList"></div>
+                    <input class="form-control" id="idEventTagsInput" name="idEventTagsInput" type="text" pattern="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_PATTERN_TAGS); ?>" value="<?php print(DataRepresentationConversor::TagsArrayFromPhpArrayToUIString($event->getArrayOfTags())); ?>" required hidden>
+                    <div class="row justify-content-start classTagsList" id="idEventTagsList" aria-label="Etiquetas de <?php print($event->getName()); ?>">
+                        <?php
+                        foreach ($event->getArrayOfTags() as $tag) {
+                            print("<span class=\"btn btn-elegant\" disabled>$tag</span>");
+                        }
+                        ?>
+                    </div>
                     <div class="invalid-feedback">
                         Por favor, introduce una o más etiquetas.
                     </div>
-                    <button class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2" type="button" id="idCreateEventShowModalForAddingTagsButton" title="Añadir etiquetas" aria-label="Añadir etiquetas" data-toggle="modal" data-target="#idTagsModal" data-backdrop="false" title="Filtro de etiquetas" aria-label="Filtro de etiquetas">
+                    <button class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2" type="button" id="idUpdateEventShowModalForAddingTagsButton" title="Añadir etiquetas" aria-label="Añadir etiquetas" data-toggle="modal" data-target="#idTagsModal" data-backdrop="false" title="Filtro de etiquetas" aria-label="Filtro de etiquetas">
                         <i class="fas fa-pen fa-lg"></i>
                     </button>
                 </div>
@@ -76,8 +73,8 @@
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventStartDateTimeButton">Cuándo empieza <span class="text-danger">*</span></label>
-                    <input class="form-control classStartDateTimeInput mb-2" id="idEventStartDateInput" name="idEventStartDateInput" type="text" pattern="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_PATTERN_DATE); ?>" placeholder="Fecha" required>
-                    <input class="form-control classStartDateTimeInput" id="idEventStartTimeInput" name="idEventStartTimeInput" type="text" pattern="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_PATTERN_TIME); ?>" placeholder="Hora" required>
+                    <input class="form-control classStartDateTimeInput mb-2" id="idEventStartDateInput" name="idEventStartDateInput" type="text" pattern="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_PATTERN_DATE); ?>" placeholder="Fecha" value="<?php print(DataRepresentationConversor::DateValueFromDataBaseStringToUIStringInUpdateEventView($event->getStartDate())); ?>" required>
+                    <input class="form-control classStartDateTimeInput" id="idEventStartTimeInput" name="idEventStartTimeInput" type="text" pattern="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_PATTERN_TIME); ?>" placeholder="Hora" value="<?php print(DataRepresentationConversor::TimeValueFromDataBaseStringToUIString($event->getStartTime())); ?>" required>
                     <div class="invalid-feedback">
                         Por favor, introduce una fecha y hora de comienzo válida.
                     </div>
@@ -88,7 +85,12 @@
                 <div class="form-group">
                     <label for="idEventEndDateTimeButton">Cuándo termina</span></label>
                     <input class="form-control classEndDateTimeInput mb-2" id="idEventEndDateInput" name="idEventEndDateInput" type="text" pattern="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_PATTERN_DATE); ?>" placeholder="Fecha">
-                    <input class="form-control classEndDateTimeInput" id="idEventEndTimeInput" name="idEventEndTimeInput" type="text" pattern="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_PATTERN_TIME); ?>" placeholder="Hora">
+                    <input class="form-control classEndDateTimeInput" id="idEventEndTimeInput" name="idEventEndTimeInput" type="text" pattern="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_PATTERN_TIME); ?>" placeholder="Hora" <?php
+                                                                                                                                                                                                                                            $endTime = $event->getEndTime();
+                                                                                                                                                                                                                                            if ($endTime) {
+                                                                                                                                                                                                                                                print("value=\"" . DataRepresentationConversor::TimeValueFromDataBaseStringToUIString($event->getEndTime()) . "\"");
+                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                            ?>>
                     <button class="btn classSecondaryBackgroundColor text-white waves-effect waves-light w-100 mx-auto mt-3 py-2" type="button" id="idEventEndDateTimeButton" title="Elegir fecha y hora de fin" aria-label="Elegir fecha y hora del evento">
                         <i class="fas fa-calendar-day fa-lg"></i>
                     </button>
@@ -100,10 +102,21 @@
             <div class="d-flex">
                 <div class="form-group">
                     <label for="idEventTicketPriceInput">Entrada <span class="text-danger">*</span></label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventTicketPriceInput" name="idEventTicketPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la entrada" required>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventTicketPriceInput" name="idEventTicketPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la entrada" required <?php
+                                                                                                                                                                                                                        $ticketPrice = $event->getTicketPrice();
+                                                                                                                                                                                                                        if (!$ticketPrice) {
+                                                                                                                                                                                                                            print("value=\"0\" readonly");
+                                                                                                                                                                                                                        } else {
+                                                                                                                                                                                                                            print("value=\"" . DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($ticketPrice) . "\"");
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                        ?>>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="idFreeEntranceCheckInput" name="idFreeEntranceCheckInput">
+                    <input class="form-check-input" type="checkbox" id="idFreeEntranceCheckInput" name="idFreeEntranceCheckInput" <?php
+                                                                                                                                    if (!$ticketPrice) {
+                                                                                                                                        print("checked");
+                                                                                                                                    }
+                                                                                                                                    ?>>
                     <label class="form-check-label" for="idFreeEntranceCheckInput">
                         Entraba libre
                     </label>
@@ -112,7 +125,7 @@
             <div class="d-flex">
                 <div class="form-group">
                     <label for="idEventLongDrinkPriceInput">Copa</label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventLongDrinkPriceInput" name="idEventLongDrinkPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la copa">
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventLongDrinkPriceInput" name="idEventLongDrinkPriceInput" type="number" min="0" step="0.01" value="<?php print(DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($event->getLongDrinkPrice())); ?>" placeholder="Precio de la copa">
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="idMaxOrMinLongDrinkPriceCheckInput" name="idMaxOrMinLongDrinkPriceCheckInput">
@@ -124,7 +137,7 @@
             <div class="d-flex">
                 <div class="form-group">
                     <label for="idEventBeerPriceInput">Cerveza</label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventBeerPriceInput" name="idEventBeerPriceInput" type="number" min="0" step="0.01" placeholder="Precio de la cerveza">
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventBeerPriceInput" name="idEventBeerPriceInput" type="number" min="0" step="0.01" value="<?php print(DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($event->getBeerPrice())); ?>" placeholder="Precio de la cerveza">
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="idMaxOrMinBeerPriceCheckInput" name="idMaxOrMinBeerPriceCheckInput">
@@ -139,22 +152,22 @@
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventLocalNameInput">Dónde <span class="text-danger">*</span></label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventLocalNameInput" name="idEventLocalNameInput" type="text" minlength="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Bar, pub, discoteca o local" required>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventLocalNameInput" name="idEventLocalNameInput" type="text" minlength="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Bar, pub, discoteca o local" value="<?php print($event->getLocalName()); ?>" required>
                     <div class="invalid-feedback">
                         Por favor, introduce el nombre del local.
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="idEventLocalAddressInput">Dirección <span class="text-danger">*</span></label>
-                    <input class="form-control classOnlyBottomBorderInput" id="idEventLocalAddressInput" name="idEventLocalAddressInput" type="text" minlength="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Dirección del evento" required>
+                    <input class="form-control classOnlyBottomBorderInput" id="idEventLocalAddressInput" name="idEventLocalAddressInput" type="text" minlength="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_MIN_LENGTH_TEXT); ?>" placeholder="Dirección del evento" value="<?php print($event->getLocalAddress()); ?>" required>
                     <div class="invalid-feedback">
                         Por favor, introduce la dirección.
                     </div>
                 </div>
             </div>
         </div>
-        <button id="idCreateEventSubmitButton" type="submit" class="btn btn-lg w-100 btn-default waves-effect mx-auto">
-            CREAR EVENTO
+        <button id="idUpdateEventSubmitButton" type="submit" class="btn btn-lg w-100 btn-default waves-effect mx-auto">
+            MODIFICAR EVENTO
         </button>
     </form>
 </div>
@@ -171,15 +184,12 @@ require(HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNav
             htmlEventImageFileInput.click();
         });
         htmlEventImageFileInput.addEventListener("input", () => {
-            document.getElementById(HTML_ID_EVENT_TEMPORARY_IMAGE).hidden = true;
-            setHtmlEventImageFileInputAsBackgroundImageInHtmlEventImageContainer(HTML_ID_EVENT_IMAGE_FILE_INPUT, HTML_ID_EVENT_IMAGE_CONTAINER);
-        });
-        htmlEventImageFileInput.addEventListener("change", () => {
             setHtmlEventImageFileInputAsBackgroundImageInHtmlEventImageContainer(HTML_ID_EVENT_IMAGE_FILE_INPUT, HTML_ID_EVENT_IMAGE_CONTAINER);
         });
         // Tags Modal
         HelperTagsModal.clearEnabledTagValuesFromSessionStorage(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
-        document.getElementById(HTML_ID_CREATE_EVENT_SHOW_MODAL_FOR_ADDING_TAGS_BUTTON).addEventListener("click", () => {
+        HelperTagsModal.saveTagValuesFromHtmlEventTagsInputToSessionStorage(HTML_ID_EVENT_TAGS_INPUT, SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
+        document.getElementById(HTML_ID_UPDATE_EVENT_SHOW_MODAL_FOR_ADDING_TAGS_BUTTON).addEventListener("click", () => {
             HelperTagsModal.loadPreviousEnabledTagValuesFromSessionStorageToHtmlFormModal(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
         });
         document.getElementById(HTML_ID_TAGS_MODAL_SAVE_BUTTON).addEventListener("click", () => {
@@ -231,9 +241,9 @@ require(HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNav
             HelperForm.toggleHtmlEventTicketPriceInputReadOnlyAndValue(HTML_ID_FREE_ENTRANCE_CHECK_INPUT, HTML_ID_EVENT_TICKET_PRICE_INPUT);
         });
         // Form validation
-        let htmlCreateEventForm = document.getElementById(HTML_ID_CREATE_EVENT_LOGIN_FORM);
-        htmlCreateEventForm.addEventListener("submit", () => {
-            HelperForm.validateHtmlForm(htmlCreateEventForm);
+        let htmlUpdateEventForm = document.getElementById(HTML_ID_UPDATE_EVENT_LOGIN_FORM);
+        htmlUpdateEventForm.addEventListener("submit", () => {
+            HelperForm.validateHtmlForm(htmlUpdateEventForm);
         });
     });
 </script>
