@@ -9,7 +9,10 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
             </a>
         </li>
         <li class="nav-item pt-2">
-            <h5><?php print($event->getName()); ?></h5>
+            <h5><?php
+                $eventName = $event->getName();
+                print($eventName);
+                ?></h5>
         </li>
         <li class="nav-item">
             <a class="nav-link waves-effect waves-light classRoundNavigationLink" title="Más acciones" aria-label="Más acciones">
@@ -18,16 +21,16 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
         </li>
     </ul>
 </nav>
-<div id="idEventInfoHeaderImage" style="background-image: url('<?php print($event->getUrlHeaderImage()); ?>')" alt="Imagen de Lemon Jazz" aria-label="Imagen de Lemon Jazz"></div>
+<div id="idEventInfoHeaderImage" style="background-image: url('<?php print($event->getUrlHeaderImage()); ?>')" alt="Imagen de <?php print($eventName); ?>" aria-label="Imagen de <?php print($eventName); ?>"></div>
 <div class="container mb-5" id="idEventInfoMain">
-    <div class="row justify-content-start my-4 classTagsList" aria-label="Etiquetas de <?php print($event->getName()); ?>">
+    <div class="row justify-content-start my-4 classTagsList" aria-label="Etiquetas de <?php print($eventName); ?>">
         <?php
         foreach ($event->getArrayOfTags() as $tag) {
             print("<span class=\"btn btn-elegant\" disabled>$tag</span>");
         }
         ?>
     </div>
-    <div aria-label="Fecha de Lemon Jazz">
+    <div aria-label="Fecha de <?php print($eventName); ?>">
         <h5 class="font-weight-bold">Cuándo</h5>
         <p>
             <?php
@@ -37,7 +40,7 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
             ?>
         </p>
     </div>
-    <div class="classDescriptionContainer" id="idEventInfoDescriptionContainer" aria-label="Descripción de Lemon Jazz">
+    <div class="classDescriptionContainer" id="idEventInfoDescriptionContainer" aria-label="Descripción de <?php print($eventName); ?>">
         <h5 class="font-weight-bold">Descripción</h5>
         <p class="collapse classDescriptionParagraph" id="idEventInfoDescriptionParagraph" aria-expanded="false">
             <?php print($event->getDescription()); ?>
@@ -53,22 +56,22 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
             </button>
         </div>
     </div>
-    <div class="mb-5" aria-label="Precios de Lemon Rock">
+    <div class="mb-5" aria-label="Precios de <?php print($eventName); ?>">
         <h5 class="font-weight-bold">Precios</h5>
         <?php
-        $ticketPrice = $event->getTicketPrice();
-        $longDrinkPrice = $event->getLongDrinkPrice();
-        $beerPrice = $event->getBeerPrice();
-        print("<p>" . DataRepresentationConversor::EventTicketPriceFromDataBaseStringToUIStringInEventInfoView($ticketPrice) . "</p>");
-        if ($longDrinkPrice) {
-            print("<p>Copa: " . DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($longDrinkPrice) . " &euro;</p>");
+        $eventTicketPrice = $event->getTicketPrice();
+        $eventLongDrinkPrice = $event->getLongDrinkPrice();
+        $eventBeerPrice = $event->getBeerPrice();
+        print("<p>" . DataRepresentationConversor::EventTicketPriceFromDataBaseStringToUIStringInEventInfoView($eventTicketPrice) . "</p>");
+        if ($eventLongDrinkPrice) {
+            print("<p>Copa: " . DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($eventLongDrinkPrice) . " &euro;</p>");
         }
-        if ($beerPrice) {
-            print("<p>Cerveza: " . DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($beerPrice) . " &euro;</p>");
+        if ($eventBeerPrice) {
+            print("<p>Cerveza: " . DataRepresentationConversor::FloatValueFromDataBaseStringToUIString($eventBeerPrice) . " &euro;</p>");
         }
         ?>
     </div>
-    <div aria-label="Ubicación de Lemon Jazz">
+    <div aria-label="Ubicación de <?php print($eventName); ?>">
         <h5 class="font-weight-bold">Ubicación</h5>
         <div class="mb-3" id="idEventInfoMapContainer"></div>
         <p>
@@ -77,8 +80,8 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
         </p>
     </div>
 </div>
-<div class="classTertiaryBackgroundColor" id="idEventInfoRecommendationContainer" aria-label="Recomienda Lemon Jazz">
-    <p class="font-weight-bold text-center pt-3">Recomienda Lemon Jazz a tus amigos</p>
+<div class="classTertiaryBackgroundColor" id="idEventInfoRecommendationContainer" aria-label="Recomienda <?php print($eventName); ?>">
+    <p class="font-weight-bold text-center pt-3">Recomienda <?php print($eventName); ?> a tus amigos</p>
     <div class="container d-flex justify-content-around" id="idEventInfoViewSocialButtonsList">
         <a class="btn text-body waves-effect px-3 border-0 z-depth-0" title="Compartir en WhatsApp" aria-label="WhatsApp">
             <i class="fab fa-whatsapp fa-3x"></i>
@@ -94,9 +97,9 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
         </a>
     </div>
 </div>
-<div id="idEventInfoFooterImage" style="background-image: url('<?php print($event->getUrlHeaderImage()); ?>')" alt="Imagen de Lemon Jazz" aria-label="Imagen de Lemon Jazz"></div>
+<div id="idEventInfoFooterImage" style="background-image: url('<?php print($event->getUrlHeaderImage()); ?>')" alt="Imagen de <?php print($eventName); ?>" aria-label="Imagen de <?php print($eventName); ?>"></div>
 <?php
-if ($ticketPrice > 0) {
+if ($eventTicketPrice > 0) {
     print("<a class=\"btn btn-lg btn-default waves-effect w-100 classFloatingBottomButton\" title=\"Comprar entradas\" aria-label=\"Comprar entradas\">COMPRAR ENTRADAS</a>");
 }
 ?>

@@ -16,7 +16,8 @@ final class DBUser
             return false;
         }
         $statementHandler->execute([":user" => $user, ":encryptedPassword" => $encryptedPassword]);
-        return ($statementHandler->fetch(PDO::FETCH_NUM)[0] === "1") ? true : false;
+        $resultRow = $statementHandler->fetch(PDO::FETCH_NUM);
+        return ($resultRow) ? ($resultRow[0] === "1") : false;
     }
 
     // Private

@@ -17,10 +17,10 @@ spl_autoload_register(function ($className) {
 session_start();
 
 // REMOVE - Testing
-// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["name"]) . "<br><br>";
-// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["type"]) . "<br><br>";
-// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["size"]) . "<br><br>";
-// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["tmp_name"]) . "<br><br>";
+// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE]["name"]) . "<br><br>";
+// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE]["type"]) . "<br><br>";
+// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE]["size"]) . "<br><br>";
+// echo var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE]["tmp_name"]) . "<br><br>";
 // echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_NAME]) . "<br><br>";
 // echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_DESCRIPTION]) . "<br><br>";
 // echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS]) . "<br><br>";
@@ -34,10 +34,11 @@ session_start();
 // echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_NAME]) . "<br><br>";
 // echo var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_ADDRESS]) . "<br><br>";
 
-// echo "Is valid event? " . var_dump(ValidatorFormEvent::isValidEvent(
+// REMOVE - Testing
+// echo "Is valid event? " . var_dump(ValidatorFormEvent::isValidEventForCreatingEvent(
 //     $_POST[ValidatorFormEvent::FORM_FIELD_NAME_NAME],
 //     $_POST[ValidatorFormEvent::FORM_FIELD_NAME_DESCRIPTION],
-//     $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE],
+//     $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE],
 //     $_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_DATE],
 //     $_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_TIME],
 //     $_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_DATE],
@@ -49,9 +50,9 @@ session_start();
 //     $_POST[ValidatorFormEvent::FORM_FIELD_NAME_BEER_PRICE],
 //     $_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS]
 // )) . "<br><br>";
-// echo "Is valid image '" . $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["name"] . "'? " .
-//     var_dump(ValidatorFormEvent::isValidEventImageFile($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE])) . "<br><br>";
-// echo "Is valid image empty array ([])? " . var_dump(ValidatorFormEvent::isValidEventImageFile([])) . "<br><br>";
+// echo "Is valid image '" . $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE]["name"] . "'? " .
+//     var_dump(ValidatorFormEvent::isValidEventHeaderImageFile($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE])) . "<br><br>";
+// echo "Is valid image empty array ([])? " . var_dump(ValidatorFormEvent::isValidEventHeaderImageFile([])) . "<br><br>";
 // echo "Is valid name '" . $_POST[ValidatorFormEvent::FORM_FIELD_NAME_NAME] . "'? " .
 //     var_dump(ValidatorFormEvent::isValidEventName($_POST[ValidatorFormEvent::FORM_FIELD_NAME_NAME])) . "<br><br>";
 // echo "Is valid name ''? " . var_dump(ValidatorFormEvent::isValidEventName("")) . "<br><br>";
@@ -128,77 +129,55 @@ session_start();
 // echo "Is valid address ''? " . var_dump(ValidatorFormEvent::isValidEventLocalAddress("")) . "<br><br>";
 // echo "Is valid address 'sd'? " . var_dump(ValidatorFormEvent::isValidEventLocalAddress("sd")) . "<br><br>";
 
-if (ValidatorFormEvent::isValidEvent(
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_NAME],
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_DESCRIPTION],
-    $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE],
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_DATE],
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_TIME],
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_DATE],
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_TIME],
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_NAME],
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_ADDRESS],
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_TICKET_PRICE],
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_LONG_DRINK_PRICE],
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_BEER_PRICE],
-    $_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS]
-)) {
-    if (
-        $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["tmp_name"]
-        && HelperFileUpload::isFileUploaded($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE])
-    ) {
-
-        // REMOVE - Testing
-        // echo "PHP current user: " . get_current_user() . "<br><br>";
-        // echo (ini_get("file_uploads")) ?  "file_uploads is set to 1. File uploads are allowed.<br><br>" : "Warning! file_uploads is set to 0. File uploads are NOT allowed.<br><br>";
-        // echo "Temporary directory for uploads: " . var_dump(ini_get("upload_tmp_dir")) . "<br><br>";
-        // echo "Uploaded image file? " . var_dump(HelperFileUpload::isFileUploaded($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE])) . "<br><br>";
-        // echo "Error? " . var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["error"]) . "<br><br>";
-        // echo "Uploaded file:  " . var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]["tmp_name"]) . "<br><br>";
-        // echo "Destination file:  " . var_dump(HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::DIR_PATH_EVENTS_IMAGES . "/" . HelperFileUpload::createDestinationFileName($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]))) . "<br><br>";
-        // echo "Was moved file to destination? " . var_dump(HelperFileUpload::moveUploadedFileToDestinationFilePath(
-        //     $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE],
-        //     HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::DIR_PATH_EVENTS_IMAGES . "/" . HelperFileUpload::createDestinationFileName($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]))
-        // )) . "<br><br>";
-
-        $destinationImageFileName = HelperFileUpload::createDestinationFileName($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE]);
-        HelperFileUpload::moveUploadedFileToDestinationFilePath(
-            $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_IMAGE_FILE],
-            HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::DIR_PATH_EVENTS_IMAGES
-                . "/" . $destinationImageFileName)
-        );
-        $eventEndDate = DataRepresentationConversor::DateValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_DATE]);
-        $eventEndDate = ($eventEndDate) ? $eventEndDate : null;
-        $eventEndTime = DataRepresentationConversor::TimeValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_TIME]);
-        $eventEndTime = ($eventEndTime) ? $eventEndTime : null;
-        $eventLongDrinkPrice = DataRepresentationConversor::FloatValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_LONG_DRINK_PRICE]);
-        $eventLongDrinkPrice = ($eventLongDrinkPrice) ? $eventLongDrinkPrice : null;
-        $eventBeerPrice = DataRepresentationConversor::FloatValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_BEER_PRICE]);
-        $eventBeerPrice = ($eventBeerPrice) ? $eventBeerPrice : null;
-        $wasCreated = DBEvent::insertEvent(
-            $_POST[ValidatorFormEvent::FORM_FIELD_NAME_NAME],
-            $_POST[ValidatorFormEvent::FORM_FIELD_NAME_DESCRIPTION],
-            HelperNavigator::createImageFileUrl($destinationImageFileName),
-            DataRepresentationConversor::DateValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_DATE]),
-            DataRepresentationConversor::TimeValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_TIME]),
-            $eventEndDate,
-            $eventEndTime,
-            $_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_NAME],
-            $_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_ADDRESS],
-            "0.0",
-            "0.0",
-            DataRepresentationConversor::FloatValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TICKET_PRICE]),
-            $eventLongDrinkPrice,
-            $eventBeerPrice,
-            $_SESSION[HelperNavigator::SESSION_VARIABLE_USER_EMAIL],
-            DataRepresentationConversor::TagsStringFromUIStringToPhpArray($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS])
-        );
-
-        // REMOVE - Testing
-        // echo "Was created event in DB? " . var_dump($wasCreated) . "<br><br>";
-    }
+if (
+    ValidatorFormEvent::isValidEventForCreatingEvent(
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_NAME],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_DESCRIPTION],
+        $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_DATE],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_TIME],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_DATE],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_TIME],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_NAME],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_ADDRESS],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_TICKET_PRICE],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_LONG_DRINK_PRICE],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_BEER_PRICE],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS]
+    )
+    && $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE]["tmp_name"]
+    && HelperFileUpload::isFileUploaded($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE])
+) {
+    $eventHeaderImageFileName = HelperNavigator::createFileNameForEventHeaderImage($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE]);
+    $eventEndDate = DataRepresentationConversor::DateValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_DATE]);
+    $eventEndDate = ($eventEndDate) ? $eventEndDate : null;
+    $eventEndTime = DataRepresentationConversor::TimeValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_TIME]);
+    $eventEndTime = ($eventEndTime) ? $eventEndTime : null;
+    $eventLongDrinkPrice = DataRepresentationConversor::FloatValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_LONG_DRINK_PRICE]);
+    $eventLongDrinkPrice = ($eventLongDrinkPrice) ? $eventLongDrinkPrice : null;
+    $eventBeerPrice = DataRepresentationConversor::FloatValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_BEER_PRICE]);
+    $eventBeerPrice = ($eventBeerPrice) ? $eventBeerPrice : null;
+    $eventIsCreatedInDataBase = DBEvent::insertEvent(
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_NAME],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_DESCRIPTION],
+        HelperNavigator::createUrlForEventHeaderImage($eventHeaderImageFileName),
+        DataRepresentationConversor::DateValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_DATE]),
+        DataRepresentationConversor::TimeValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_TIME]),
+        $eventEndDate,
+        $eventEndTime,
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_NAME],
+        $_POST[ValidatorFormEvent::FORM_FIELD_NAME_LOCAL_ADDRESS],
+        "0.0",
+        "0.0",
+        DataRepresentationConversor::FloatValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TICKET_PRICE]),
+        $eventLongDrinkPrice,
+        $eventBeerPrice,
+        $_SESSION[HelperNavigator::SESSION_VARIABLE_USER_EMAIL],
+        DataRepresentationConversor::TagsStringFromUIStringToPhpArray($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS])
+    );
 
     // REMOVE - Testing
+    // echo "Was created event in DB? " . var_dump($eventIsCreatedInDataBase) . "<br><br>";
     // echo "UI start date: " . var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_DATE]) . "<br><br>";
     // echo "UI start time: " . var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_START_TIME]) . "<br><br>";
     // echo "UI end date: " . var_dump($_POST[ValidatorFormEvent::FORM_FIELD_NAME_END_DATE]) . "<br><br>";
@@ -227,10 +206,31 @@ if (ValidatorFormEvent::isValidEvent(
     // echo "DB beer price: "
     //     . var_dump(DataRepresentationConversor::FloatValueFromUIStringToDataBaseString($_POST[ValidatorFormEvent::FORM_FIELD_NAME_BEER_PRICE]))
     //     . "<br><br>";
-    // echo "DB image URL: " . var_dump(HelperNavigator::createImageFileUrl($destinationImageFileName)) . "<br><br>";
+    // echo "DB image URL: " . var_dump(HelperNavigator::createUrlForEventHeaderImage($eventHeaderImageFileName)) . "<br><br>";
     // echo "Tags array: "
     //     . var_dump(DataRepresentationConversor::TagsStringFromUIStringToPhpArray($_POST[ValidatorFormEvent::FORM_FIELD_NAME_TAGS]))
     //     . "<br><br>";
+
+    if ($eventIsCreatedInDataBase) {
+        HelperFileUpload::moveUploadedFileToDestinationFilePath(
+            $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE],
+            HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::DIR_PATH_EVENTS_IMAGES
+                . "/" . $eventHeaderImageFileName)
+        );
+
+        // REMOVE - Testing
+        // echo "PHP current user: " . get_current_user() . "<br><br>";
+        // echo (ini_get("file_uploads")) ?  "file_uploads is set to 1. File uploads are allowed.<br><br>" : "Warning! file_uploads is set to 0. File uploads are NOT allowed.<br><br>";
+        // echo "Temporary directory for uploads: " . var_dump(ini_get("upload_tmp_dir")) . "<br><br>";
+        // echo "Uploaded image file? " . var_dump(HelperFileUpload::isFileUploaded($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE])) . "<br><br>";
+        // echo "Error? " . var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE]["error"]) . "<br><br>";
+        // echo "Uploaded file:  " . var_dump($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE]["tmp_name"]) . "<br><br>";
+        // echo "Destination file:  " . var_dump(HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::DIR_PATH_EVENTS_IMAGES . "/" . HelperFileUpload::createDestinationFileName($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE]))) . "<br><br>";
+        // echo "Was moved file to destination? " . var_dump(HelperFileUpload::moveUploadedFileToDestinationFilePath(
+        //     $_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE],
+        //     HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNavigator::DIR_PATH_EVENTS_IMAGES . "/" . HelperFileUpload::createDestinationFileName($_FILES[ValidatorFormEvent::FORM_FIELD_NAME_HEADER_IMAGE]))
+        // )) . "<br><br>";
+    }
 }
 header("Location: " . HelperNavigator::getUrlReferer());
 exit();

@@ -45,18 +45,18 @@ const HTML_ID_CREATE_EVENT_LOGIN_FORM = "idCreateEventForm";
 const HTML_ID_UPDATE_EVENT_LOGIN_FORM = "idUpdateEventForm";
 const HTML_ID_EVENT_IMAGE_CONTAINER = "idEventImageContainer";
 const HTML_ID_EVENT_TEMPORARY_IMAGE = "idEventTemporaryImage";
-const HTML_ID_EVENT_IMAGE_FILE_INPUT = "idEventImageFileInput";
+const HTML_ID_EVENT_HEADER_IMAGE_INPUT = "idEventHeaderImageInput";
 const HTML_ID_ADD_EVENT_IMAGE_BUTTON = "idAddEventImageButton";
 const HTML_ID_CREATE_EVENT_SHOW_MODAL_FOR_ADDING_TAGS_BUTTON = "idCreateEventShowModalForAddingTagsButton";
 const HTML_ID_UPDATE_EVENT_SHOW_MODAL_FOR_ADDING_TAGS_BUTTON = "idUpdateEventShowModalForAddingTagsButton";
 const HTML_ID_EVENT_TAGS_INPUT = "idEventTagsInput";
 const HTML_ID_EVENT_TAGS_LIST = "idEventTagsList";
 const HTML_ID_EVENT_START_DATE_TIME_BUTTON = "idEventStartDateTimeButton";
-const HTML_ID_EVENT_START_DATE_TEXT_INPUT = "idEventStartDateInput";
-const HTML_ID_EVENT_START_TIME_TEXT_INPUT = "idEventStartTimeInput";
+const HTML_ID_EVENT_START_DATE_INPUT = "idEventStartDateInput";
+const HTML_ID_EVENT_START_TIME_INPUT = "idEventStartTimeInput";
 const HTML_ID_EVENT_END_DATE_TIME_BUTTON = "idEventEndDateTimeButton";
-const HTML_ID_EVENT_END_DATE_TEXT_INPUT = "idEventEndDateInput";
-const HTML_ID_EVENT_END_TIME_TEXT_INPUT = "idEventEndTimeInput";
+const HTML_ID_EVENT_END_DATE_INPUT = "idEventEndDateInput";
+const HTML_ID_EVENT_END_TIME_INPUT = "idEventEndTimeInput";
 const HTML_ID_EVENT_TICKET_PRICE_INPUT = "idEventTicketPriceInput";
 const HTML_ID_FREE_ENTRANCE_CHECK_INPUT = "idFreeEntranceCheckInput";
 const HTML_ID_EVENTS_WEEK_CALENDAR_CONTAINER_IN_ALL_EVENTS =
@@ -305,13 +305,13 @@ function createHtmlEventTagSpan(tagValue) {
     resultHtmlSpan.disabled = true;
     return resultHtmlSpan;
 }
-function setHtmlEventImageFileInputAsBackgroundImageInHtmlEventImageContainer(htmlIdEventImageFileInput, htmlIdEventImageContainer) {
-    let htmlEventImageFileInput = document.getElementById(htmlIdEventImageFileInput);
-    if (htmlEventImageFileInput.files && htmlEventImageFileInput.files[0]) {
+function setHtmlEventHeaderImageInputAsBackgroundImageInHtmlEventImageContainer(htmlIdEventHeaderImageInput, htmlIdEventImageContainer) {
+    let htmlEventHeaderImageInput = document.getElementById(htmlIdEventHeaderImageInput);
+    if (htmlEventHeaderImageInput.files && htmlEventHeaderImageInput.files[0]) {
         let fileReader = new FileReader();
         fileReader.onload = (event) => {
             document.getElementById(htmlIdEventImageContainer).style.backgroundImage = "url('" + event.target.result + "')";
         };
-        fileReader.readAsDataURL(htmlEventImageFileInput.files[0]);
+        fileReader.readAsDataURL(htmlEventHeaderImageInput.files[0]);
     }
 }

@@ -124,6 +124,65 @@ final class DBEvent
         ($successfulTransaction) ? self::$dataBaseHandler->commit() : self::$dataBaseHandler->rollback();
         return $successfulTransaction;
     }
+    public static function updateEvent(
+        string $eventId,
+        string $eventName,
+        string $eventDescription,
+        string $eventStartDate,
+        string $eventStartTime,
+        $eventEndDate,
+        $eventEndTime,
+        string $eventLocalName,
+        string $eventLocalAddress,
+        $eventLocalLatitude,
+        $eventLocalLongitude,
+        string $eventTicketPrice,
+        $eventLongDrinkPrice,
+        $eventBeerPrice,
+        array $arrayOfTags
+    ) {
+        try {
+            HelperDataBase::initializeDataBaseHandler(self::$dataBaseHandler);
+            self::$dataBaseHandler->beginTransaction();
+            $statementHandler = self::$dataBaseHandler->prepare("UPDATE "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::TABLE_NAME_EVENT) . " SET "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_NAME) . " = :eventName, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_DESCRIPTION) . " = :eventDescription, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_START_DATE) . " = :eventStartDate, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_START_TIME) . " = :eventStartTime, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_END_DATE) . " = :eventEndDate, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_END_TIME) . " = :eventEndTime, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_LOCAL_NAME) . " = :eventLocalName, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_LOCAL_ADDRESS) . " = :eventLocalAddress, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_LOCAL_LATITUDE) . " = :eventLocalLatitude, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_LOCAL_LONGITUDE) . " = :eventLocalLongitude, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_TICKET_PRICE) . " = :eventTicketPrice, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_LONG_DRINK_PRICE) . " = :eventLongDrinkPrice, "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_BEER_PRICE) . " = :eventBeerPrice WHERE "
+                . HelperDataBase::formatIdStringToInsertIntoQueryString(self::COLUMN_NAME_ID) . " = :eventId");
+        } catch (PDOException $exception) {
+            print("Error: " . $exception->getMessage()); // REMOVE - Debugging Purposes
+            return false;
+        }
+        $successfulTransaction = $statementHandler->execute([
+            ":eventId" => $eventId, ":eventName" => $eventName, ":eventDescription" => $eventDescription,
+            ":eventStartDate" => $eventStartDate, ":eventStartTime" => $eventStartTime, ":eventEndDate" => $eventEndDate,
+            ":eventEndTime" => $eventEndTime, ":eventLocalName" => $eventLocalName, ":eventLocalAddress" => $eventLocalAddress,
+            ":eventLocalLatitude" => $eventLocalLatitude, ":eventLocalLongitude" => $eventLocalLongitude,
+            ":eventTicketPrice" => $eventTicketPrice, ":eventLongDrinkPrice" => $eventLongDrinkPrice, ":eventBeerPrice" => $eventBeerPrice
+        ]);
+        $successfulTransaction = $successfulTransaction && DBEventHasTag::TransactionQueryDeleteTagsFromEventId(
+            self::$dataBaseHandler,
+            intval($eventId)
+        );
+        $successfulTransaction = $successfulTransaction && DBEventHasTag::TransactionQueryInsertTagsIntoEventId(
+            self::$dataBaseHandler,
+            intval($eventId),
+            $arrayOfTags
+        );
+        ($successfulTransaction) ? self::$dataBaseHandler->commit() : self::$dataBaseHandler->rollback();
+        return $successfulTransaction;
+    }
 
     // Private
     private static function getEventWithLinkedArrayOfTags(Event $event, array $arrayOfTags)

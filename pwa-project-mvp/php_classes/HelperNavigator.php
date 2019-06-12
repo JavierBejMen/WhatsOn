@@ -151,6 +151,10 @@ final class HelperNavigator
     {
         return self::getUrlRoot() . self::FILE_PATH_CREATE_EVENT_SCRIPT;
     }
+    public static function getUrlUpdateEventScript(): string
+    {
+        return self::getUrlRoot() . self::FILE_PATH_UPDATE_EVENT_SCRIPT;
+    }
     public static function redirectToUrlRoot()
     {
         header("Location: " . self::getUrlRoot());
@@ -163,7 +167,15 @@ final class HelperNavigator
     {
         header("Location: " . self::getUrlAdminPanelView());
     }
-    public static function createImageFileUrl(string $fileName): string
+    public static function createFileNameForEventHeaderImage(array $file): string
+    {
+        return self::FILE_NAME_PATTERN_EVENT_IMAGE . basename($file["tmp_name"]) . "." . pathinfo($file["name"])["extension"];
+    }
+    public static function getFileNameFromEventUrlHeaderImage(string $eventUrlHeaderImage): string
+    {
+        return basename($eventUrlHeaderImage);
+    }
+    public static function createUrlForEventHeaderImage(string $fileName): string
     {
         return self::getUrlRoot() . self::DIR_PATH_EVENTS_IMAGES . "/" . $fileName;
     }
@@ -183,7 +195,9 @@ final class HelperNavigator
     public const FILE_PATH_LOGIN_SCRIPT = "/php_scripts/login.php";
     public const FILE_PATH_LOGOUT_SCRIPT = "/php_scripts/logout.php";
     public const FILE_PATH_CREATE_EVENT_SCRIPT = "/php_scripts/create-event.php";
+    public const FILE_PATH_UPDATE_EVENT_SCRIPT = "/php_scripts/update-event.php";
     public const SESSION_VARIABLE_USER_EMAIL = "user_email";
     public const HTML_ID_LOGIN_EMAIL = "idLoginEmail";
     public const HTML_ID_LOGIN_PASSWORD = "idLoginPassword";
+    public const FILE_NAME_PATTERN_EVENT_IMAGE = "image-event-";
 }

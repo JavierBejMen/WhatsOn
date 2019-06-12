@@ -2,10 +2,6 @@
 
 final class HelperFileUpload
 {
-    public static function createDestinationFileName(array $file): string
-    {
-        return basename($file["tmp_name"]) . $file["name"];
-    }
     public static function isFileUploaded(array $file): bool
     {
         return is_uploaded_file($file["tmp_name"]);

@@ -24,10 +24,13 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
     </button>
 </div>
 <div class="container py-3" id="idUpdateEventMain">
-    <form class="needs-validation mx-auto" id="idUpdateEventForm" method="post" enctype="multipart/form-data" action="" novalidate>
+    <form class="needs-validation mx-auto" id="idUpdateEventForm" method="post" enctype="multipart/form-data" action="<?php print(HelperNavigator::getUrlUpdateEventScript()); ?>" novalidate>
         <div class="form-group">
-            <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_MAX_SIZE_IMAGE_FILE); ?>" />
-            <input id="idEventImageFileInput" name="idEventImageFileInput" accept="image/*" type="file" hidden>
+            <input id="idEventIdInput" name="idEventIdInput" type="hidden" value="<?php print($event->getId()); ?>">
+        </div>
+        <div class="form-group">
+            <input id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" type="hidden" value="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_MAX_SIZE_IMAGE_FILE); ?>" />
+            <input id="idEventHeaderImageInput" name="idEventHeaderImageInput" accept="image/*" type="file" hidden>
             <div class="invalid-feedback">
                 Por favor, introduce una imagen válida.
             </div>
@@ -51,7 +54,7 @@ $event = DBEvent::getEventFromId($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_EV
             <div class="w-100">
                 <div class="form-group">
                     <label for="idEventTagsInput">Etiquetas <span class="text-danger">*</span></label>
-                    <input class="form-control" id="idEventTagsInput" name="idEventTagsInput" type="text" pattern="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_PATTERN_TAGS); ?>" value="<?php print(DataRepresentationConversor::TagsArrayFromPhpArrayToUIString($event->getArrayOfTags())); ?>" required hidden>
+                    <input class="form-control" id="idEventTagsInput" name="idEventTagsInput" type="hidden" pattern="<?php print(ValidatorFormEvent::FORM_FIELD_RESTRICTION_PATTERN_TAGS); ?>" value="<?php print(DataRepresentationConversor::TagsArrayFromPhpArrayToUIString($event->getArrayOfTags())); ?>" required>
                     <div class="row justify-content-start classTagsList" id="idEventTagsList" aria-label="Etiquetas de <?php print($event->getName()); ?>">
                         <?php
                         foreach ($event->getArrayOfTags() as $tag) {
@@ -194,12 +197,12 @@ require(HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNav
         setHtmlBodyBackgroundColor(HTML_CLASS_WHITE_BACKGROUND_COLOR);
         hideMainMenuBar();
         // File Image Input and Image Container Background
-        let htmlEventImageFileInput = document.getElementById(HTML_ID_EVENT_IMAGE_FILE_INPUT);
+        let htmlEventHeaderImageInput = document.getElementById(HTML_ID_EVENT_HEADER_IMAGE_INPUT);
         document.getElementById(HTML_ID_ADD_EVENT_IMAGE_BUTTON).addEventListener("click", () => {
-            htmlEventImageFileInput.click();
+            htmlEventHeaderImageInput.click();
         });
-        htmlEventImageFileInput.addEventListener("input", () => {
-            setHtmlEventImageFileInputAsBackgroundImageInHtmlEventImageContainer(HTML_ID_EVENT_IMAGE_FILE_INPUT, HTML_ID_EVENT_IMAGE_CONTAINER);
+        htmlEventHeaderImageInput.addEventListener("input", () => {
+            setHtmlEventHeaderImageInputAsBackgroundImageInHtmlEventImageContainer(HTML_ID_EVENT_HEADER_IMAGE_INPUT, HTML_ID_EVENT_IMAGE_CONTAINER);
         });
         // Tags Modal
         HelperTagsModal.clearEnabledTagValuesFromSessionStorage(SESSION_STORAGE_KEY_ENABLED_TAG_VALUES);
@@ -215,41 +218,41 @@ require(HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNav
         // Event StartDate and StartTime Pickers
         Array.from(document.getElementsByClassName(HTML_CLASS_START_DATE_TIME_INPUT)).map((dateTimeInput) => {
             dateTimeInput.addEventListener("focus", () => {
-                showDatePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_DATE_TEXT_INPUT);
+                showDatePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_DATE_INPUT);
             });
             dateTimeInput.addEventListener("keypress", (event) => {
                 event.preventDefault();
             });
         });
         document.getElementById(HTML_ID_EVENT_START_DATE_TIME_BUTTON).addEventListener("click", () => {
-            showDatePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_DATE_TEXT_INPUT);
+            showDatePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_DATE_INPUT);
         });
-        document.getElementById(HTML_ID_EVENT_START_DATE_TEXT_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
-            showTimePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_TIME_TEXT_INPUT);
+        document.getElementById(HTML_ID_EVENT_START_DATE_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+            showTimePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_TIME_INPUT);
         });
-        document.getElementById(HTML_ID_EVENT_START_TIME_TEXT_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
-            writeValuesFromDateTimePickersToDateInputAndTimeInput(startDatePicker, HTML_ID_EVENT_START_DATE_TEXT_INPUT, startTimePicker, HTML_ID_EVENT_START_TIME_TEXT_INPUT);
-            clearHtmlEventEndDateInputAndEventEndTimeInputValues(HTML_ID_EVENT_END_DATE_TEXT_INPUT, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+        document.getElementById(HTML_ID_EVENT_START_TIME_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+            writeValuesFromDateTimePickersToDateInputAndTimeInput(startDatePicker, HTML_ID_EVENT_START_DATE_INPUT, startTimePicker, HTML_ID_EVENT_START_TIME_INPUT);
+            clearHtmlEventEndDateInputAndEventEndTimeInputValues(HTML_ID_EVENT_END_DATE_INPUT, HTML_ID_EVENT_END_TIME_INPUT);
         });
         // Event EndDate and EndTime Pickers
         Array.from(document.getElementsByClassName(HTML_CLASS_END_DATE_TIME_INPUT)).map((dateTimeInput) => {
             dateTimeInput.addEventListener("focus", () => {
-                showDatePickerForEventEndDateTimeButton(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT,
-                    HTML_ID_EVENT_END_DATE_TEXT_INPUT);
+                showDatePickerForEventEndDateTimeButton(HTML_ID_EVENT_START_DATE_INPUT, HTML_ID_EVENT_START_TIME_INPUT,
+                    HTML_ID_EVENT_END_DATE_INPUT);
             });
             dateTimeInput.addEventListener("keypress", (event) => {
                 event.preventDefault();
             });
         });
         document.getElementById(HTML_ID_EVENT_END_DATE_TIME_BUTTON).addEventListener("click", () => {
-            showDatePickerForEventEndDateTimeButton(HTML_ID_EVENT_START_DATE_TEXT_INPUT, HTML_ID_EVENT_START_TIME_TEXT_INPUT,
-                HTML_ID_EVENT_END_DATE_TEXT_INPUT);
+            showDatePickerForEventEndDateTimeButton(HTML_ID_EVENT_START_DATE_INPUT, HTML_ID_EVENT_START_TIME_INPUT,
+                HTML_ID_EVENT_END_DATE_INPUT);
         });
-        document.getElementById(HTML_ID_EVENT_END_DATE_TEXT_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
-            showTimePickerForEventEndDateTimeButton(HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+        document.getElementById(HTML_ID_EVENT_END_DATE_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+            showTimePickerForEventEndDateTimeButton(HTML_ID_EVENT_END_TIME_INPUT);
         });
-        document.getElementById(HTML_ID_EVENT_END_TIME_TEXT_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
-            writeValuesFromDateTimePickersToDateInputAndTimeInput(datePicker, HTML_ID_EVENT_END_DATE_TEXT_INPUT, timePicker, HTML_ID_EVENT_END_TIME_TEXT_INPUT);
+        document.getElementById(HTML_ID_EVENT_END_TIME_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+            writeValuesFromDateTimePickersToDateInputAndTimeInput(datePicker, HTML_ID_EVENT_END_DATE_INPUT, timePicker, HTML_ID_EVENT_END_TIME_INPUT);
         });
         // Free Entrance Check Input and Event Ticket Price Input
         document.getElementById(HTML_ID_FREE_ENTRANCE_CHECK_INPUT).addEventListener("change", () => {
