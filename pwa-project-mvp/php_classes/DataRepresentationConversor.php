@@ -14,11 +14,11 @@ final class DataRepresentationConversor
     {
         if ($UIDate != "") {
             $partsOfDate = explode(" ", $UIDate);
-            $resultArrayOfStrings = array();
-            array_push($resultArrayOfStrings, $partsOfDate[5]);
-            array_push($resultArrayOfStrings, "0" . (array_search($partsOfDate[3], self::MONTHS_OF_YEAR) + 1));
-            array_push($resultArrayOfStrings, "0" . $partsOfDate[1]);
-            return implode("-", $resultArrayOfStrings);
+            $day = $partsOfDate[1];
+            $day = (strlen($day) === 1) ? ("0" . $day) : $day;
+            $month = array_search($partsOfDate[3], self::MONTHS_OF_YEAR) + 1;
+            $month = ($month < 10) ? ("0" . $month) : $month;
+            return $partsOfDate[5] . "-" . $month . "-" . $day;
         }
         return "";
     }

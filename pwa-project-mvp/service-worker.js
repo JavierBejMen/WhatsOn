@@ -8,7 +8,7 @@
 
     https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker-slides
 */
-const CACHE_NAME = "WhatsOnPWA-v1.0.9";
+const CACHE_NAME = "WhatsOnPWA-v0.1.1";
 let filesToCache = [
     "./",
     "./manifest.json",
@@ -20,10 +20,11 @@ let filesToCache = [
     // "./views/login.php",
     // "./components/tags-modal.php",
     "./components/events-week-calendar.html",
+    "./js_scripts/DataRepresentationConversor.js",
     "./js_scripts/HelperForm.js",
     "./js_scripts/HelperMap.js",
-    "./js_scripts/HelperTagsModal.js",
     "./js_scripts/HelperServiceWorker.js",
+    "./js_scripts/HelperTagsModal.js",
     "./js_scripts/navigation.js",
     "./assets/icons/icon-128x128.png",
     "./assets/icons/icon-144x144.png",

@@ -142,6 +142,7 @@ $phpAbsoluteFilePathView = (isset($_GET[ValidatorUrlQuery::URL_QUERY_PARAMETER_V
     <!-- Material Date & Time Picker JS -->
     <script src="./components/md-date-time-picker-2.3.0/dist/js/mdDateTimePicker.js"></script>
     <!-- Custom scripts -->
+    <script src="./js_scripts/DataRepresentationConversor.js"></script>
     <script src="./js_scripts/HelperForm.js"></script>
     <script src="./js_scripts/HelperMap.js"></script>
     <script src="./js_scripts/HelperTagsModal.js"></script>

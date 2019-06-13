@@ -196,6 +196,7 @@ require(HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNav
     window.addEventListener("DOMContentLoaded", () => {
         setHtmlBodyBackgroundColor(HTML_CLASS_WHITE_BACKGROUND_COLOR);
         hideMainMenuBar();
+        createHtmlDateTimePickerWrapperInHtmlBody();
         // File Image Input and Image Container Background
         let htmlEventHeaderImageInput = document.getElementById(HTML_ID_EVENT_HEADER_IMAGE_INPUT);
         document.getElementById(HTML_ID_ADD_EVENT_IMAGE_BUTTON).addEventListener("click", () => {
@@ -216,50 +217,65 @@ require(HelperNavigator::getPhpAbsoluteFilePathFromPhpRelativeFilePath(HelperNav
             fillHtmlEventTagsListWithEnabledTagValuesFromTagsModal(HTML_ID_EVENT_TAGS_LIST);
         });
         // Event StartDate and StartTime Pickers
+        let htmlEventStartDateInput = document.getElementById(HTML_ID_EVENT_START_DATE_INPUT);
+        let htmlEventStartTimeInput = document.getElementById(HTML_ID_EVENT_START_TIME_INPUT);
+        let htmlEventEndDateInput = document.getElementById(HTML_ID_EVENT_END_DATE_INPUT);
+        let htmlEventEndTimeInput = document.getElementById(HTML_ID_EVENT_END_TIME_INPUT);
+        let startDatePicker, startTimePicker, endDatePicker, endTimePicker;
         Array.from(document.getElementsByClassName(HTML_CLASS_START_DATE_TIME_INPUT)).map((dateTimeInput) => {
             dateTimeInput.addEventListener("focus", () => {
-                showDatePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_DATE_INPUT);
+                startDatePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_DATE_TYPE, htmlEventStartDateInput);
+                showDatePicker(startDatePicker);
             });
             dateTimeInput.addEventListener("keypress", (event) => {
                 event.preventDefault();
             });
         });
         document.getElementById(HTML_ID_EVENT_START_DATE_TIME_BUTTON).addEventListener("click", () => {
-            showDatePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_DATE_INPUT);
+            startDatePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_DATE_TYPE, htmlEventStartDateInput);
+            showDatePicker(startDatePicker);
         });
-        document.getElementById(HTML_ID_EVENT_START_DATE_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
-            showTimePickerForHtmlEventStartDateTimeButton(HTML_ID_EVENT_START_TIME_INPUT);
+        htmlEventStartDateInput.addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+            startTimePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_TIME_TYPE, htmlEventStartTimeInput);
+            showTimePicker(startTimePicker);
         });
-        document.getElementById(HTML_ID_EVENT_START_TIME_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
-            writeValuesFromDateTimePickersToDateInputAndTimeInput(startDatePicker, HTML_ID_EVENT_START_DATE_INPUT, startTimePicker, HTML_ID_EVENT_START_TIME_INPUT);
-            clearHtmlEventEndDateInputAndEventEndTimeInputValues(HTML_ID_EVENT_END_DATE_INPUT, HTML_ID_EVENT_END_TIME_INPUT);
+        htmlEventStartTimeInput.addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+            writeValuesFromDateTimePickersToDateInputAndTimeInput(startDatePicker, htmlEventStartDateInput, startTimePicker, htmlEventStartTimeInput);
+            clearHtmlEventEndDateInputAndEventEndTimeInputValues(htmlEventEndDateInput, htmlEventEndTimeInput);
         });
         // Event EndDate and EndTime Pickers
         Array.from(document.getElementsByClassName(HTML_CLASS_END_DATE_TIME_INPUT)).map((dateTimeInput) => {
             dateTimeInput.addEventListener("focus", () => {
-                showDatePickerForEventEndDateTimeButton(HTML_ID_EVENT_START_DATE_INPUT, HTML_ID_EVENT_START_TIME_INPUT,
-                    HTML_ID_EVENT_END_DATE_INPUT);
+                if (htmlEventStartDateInput.value && htmlEventStartTimeInput.value) {
+                    endDatePicker = getDateTimePicker(DataRepresentationConversor.DateValueFromUIStringToJsMoment(htmlEventStartDateInput.value),
+                        JS_DATE_TIME_PICKER_DATE_TYPE, htmlEventEndDateInput);
+                    showDatePicker(endDatePicker);
+                }
             });
             dateTimeInput.addEventListener("keypress", (event) => {
                 event.preventDefault();
             });
         });
         document.getElementById(HTML_ID_EVENT_END_DATE_TIME_BUTTON).addEventListener("click", () => {
-            showDatePickerForEventEndDateTimeButton(HTML_ID_EVENT_START_DATE_INPUT, HTML_ID_EVENT_START_TIME_INPUT,
-                HTML_ID_EVENT_END_DATE_INPUT);
+            if (htmlEventStartDateInput.value && htmlEventStartTimeInput.value) {
+                endDatePicker = getDateTimePicker(DataRepresentationConversor.DateValueFromUIStringToJsMoment(htmlEventStartDateInput.value),
+                    JS_DATE_TIME_PICKER_DATE_TYPE, htmlEventEndDateInput);
+                showDatePicker(endDatePicker);
+            }
         });
-        document.getElementById(HTML_ID_EVENT_END_DATE_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
-            showTimePickerForEventEndDateTimeButton(HTML_ID_EVENT_END_TIME_INPUT);
+        htmlEventEndDateInput.addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+            endTimePicker = getDateTimePicker(moment(), JS_DATE_TIME_PICKER_TIME_TYPE, htmlEventEndTimeInput);
+            showTimePicker(endTimePicker);
         });
-        document.getElementById(HTML_ID_EVENT_END_TIME_INPUT).addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
-            writeValuesFromDateTimePickersToDateInputAndTimeInput(datePicker, HTML_ID_EVENT_END_DATE_INPUT, timePicker, HTML_ID_EVENT_END_TIME_INPUT);
+        htmlEventEndTimeInput.addEventListener(JS_DATE_TIME_PICKER_ON_OK_EVENT, () => {
+            writeValuesFromDateTimePickersToDateInputAndTimeInput(endDatePicker, htmlEventEndDateInput, endTimePicker, htmlEventEndTimeInput);
         });
         // Free Entrance Check Input and Event Ticket Price Input
         document.getElementById(HTML_ID_FREE_ENTRANCE_CHECK_INPUT).addEventListener("change", () => {
             HelperForm.toggleHtmlEventTicketPriceInputReadOnlyAndValue(HTML_ID_FREE_ENTRANCE_CHECK_INPUT, HTML_ID_EVENT_TICKET_PRICE_INPUT);
         });
         // Form validation
-        let htmlUpdateEventForm = document.getElementById(HTML_ID_UPDATE_EVENT_LOGIN_FORM);
+        let htmlUpdateEventForm = document.getElementById(HTML_ID_UPDATE_EVENT_FORM);
         htmlUpdateEventForm.addEventListener("submit", () => {
             HelperForm.validateHtmlForm(htmlUpdateEventForm);
         });
