@@ -87,11 +87,12 @@ function loadHtmlFileInHtmlElementById(htmlElementId, htmlFilePath) {
     $(CSS_CHAR_ID_SELECTOR + htmlElementId).load(htmlFilePath);
 }
 function loadUrlEventsFromDateOnwards(jsDatePicker) {
-    // let arrayOfDateValues = jsDatePicker.time.format("L").toString().split("/");
-    // let stringDateFrom = arrayOfDateValues[2] + "-" + arrayOfDateValues[1] + "-" + arrayOfDateValues[0];
-    let destinationUrl = window.location.protocol + "//" + window.location.hostname + window.location.pathname + "?view=events&events-from-date="
+    let destinationUrl = getUrlRoot() + "?view=events&events-from-date="
         + DataRepresentationConversor.DateValueFromJsMomentToDataBaseString(jsDatePicker.time);
     window.location.assign(destinationUrl);
+}
+function getUrlRoot() {
+    return window.location.protocol + "//" + window.location.hostname + window.location.pathname;
 }
 
 /****************************************************************************/
